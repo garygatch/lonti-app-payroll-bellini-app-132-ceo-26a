@@ -1,0 +1,4260 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "entityType",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isLoadingTable",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "userId",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "workerId",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isWorker",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "referenceData",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "reloadTab",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isPanelOpen",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "classList": [],
+          "contentType": "html",
+          "html": {
+            "content": "(\n    $ctrl.isWorker && !$ctrl.workerId\n)\n    ? \"Worker record not found. Create one in Worker tab.\"\n    : \"User is not a Worker.\"",
+            "evaluate": true
+          },
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-worker-note",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n!$ctrl.workerId\n&&\n(\n    $ctrl.entityType !== \"user\"\n    &&\n    (   \n        $ctrl.isWorker\n        &&\n        $ctrl.entityType !== \"worker\"\n    )\n)\n||\n(\n    !$ctrl.isWorker\n    &&\n    $ctrl.entityType !== \"user\"\n)",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "text-align",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": true,
+              "name": "text",
+              "textContent": "$ctrl.helpers._getDisplayedNoData()"
+            }
+          ],
+          "classList": [],
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-data",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n$ctrl.isWorker\n&&\n(\n    (\n        $ctrl.uiState.displayedInfo.length === 0\n        &&\n        !$ctrl.tabConfig[$ctrl.entityType].isMultiple\n    )\n    ||\n    (\n        $ctrl.tabStore[$ctrl.entityType].data.length === 0\n        &&\n        $ctrl.tabConfig[$ctrl.entityType].isMultiple\n    )\n) \n&&\n(\n    $ctrl.workerId\n    ||\n    $ctrl.entityType === \"worker\"\n)",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "align-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "position",
+          "value": "absolute"
+        },
+        {
+          "enabled": true,
+          "property": "top",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "left",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "right",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "bottom",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "background-color",
+          "value": "rgba(255, 255, 255, 0.7)"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "add",
+              "displayExpression": "$ctrl.authService.isCurrentUserAdmin\n&&\n($ctrl.entityType !== \"worker_pay_component\")\n",
+              "expressions": [
+                {
+                  "expression": "\"primary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "false",
+                  "to": "showLoading"
+                },
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"plus\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                },
+                {
+                  "expression": "$ctrl.handlers.onFormOpen(\"add\")",
+                  "to": "onClick"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "manage-pay-components",
+              "displayExpression": "$ctrl.authService.isCurrentUserAdmin\n&&\n($ctrl.entityType === \"worker_pay_component\")",
+              "expressions": [
+                {
+                  "expression": "\"primary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.handlers.assignment.openComponentAssignment()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "$ctrl.uiState.isDeleting",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "\"Manage \" + $ctrl.uiState.payComponent.name[0].toUpperCase() + $ctrl.uiState.payComponent.name.slice(1) + \"s\"",
+                  "to": "tooltip"
+                },
+                {
+                  "expression": "$ctrl.uiState.payComponent.name === \"earning\"\n?\n({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"coins\",\n  \"position\": \"left\"\n})\n:\n({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"hand-holding-usd\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                },
+                {
+                  "expression": "$ctrl.uiState.assignments.position.earning.loading",
+                  "to": "showLoading"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "comments": "add-and-assignment-buttons",
+          "displayExpression": "$ctrl.authService.isCurrentUserAdmin\n&&\n(\n$ctrl.entityType === \"statutory_compliance\"\n||\n$ctrl.entityType === \"accrual_balance\"\n||\n$ctrl.entityType === \"worker_pay_component\"\n)",
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "display",
+              "value": "flex"
+            },
+            {
+              "enabled": true,
+              "property": "justify-content",
+              "value": "flex-end"
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "pay-component-tab-bar"
+          ],
+          "comments": "pay-component-tab-bar",
+          "displayExpression": "$ctrl.entityType === \"worker_pay_component\"",
+          "expressions": [
+            {
+              "expression": "[{\n        label: \"Earnings\",\n        closable: false\n    },\n    {\n        label: \"Benefits\",\n        closable: false\n    }\n]",
+              "to": "tabItems"
+            },
+            {
+              "expression": "$ctrl.uiState.payComponent.id",
+              "to": "selectedTab"
+            },
+            {
+              "expression": "$ctrl.handlers.onPayComponentTabChange(selectedTab)",
+              "to": "onSelectedTabChange"
+            }
+          ],
+          "name": "Tab Bar",
+          "nodeName": "bln-tab-bar",
+          "type": "core-component"
+        },
+        {
+          "children": [],
+          "classList": [],
+          "displayExpression": "$ctrl.authService.isCurrentUserAdmin",
+          "expressions": [
+            {
+              "expression": "$ctrl.uiState.currentFilter.quickSearchPlaceholder",
+              "to": "placeholder"
+            },
+            {
+              "expression": "$ctrl.entityType",
+              "to": "entityType"
+            },
+            {
+              "expression": "$ctrl.uiState.currentFilter.advancedFilters",
+              "to": "appliedFilters"
+            },
+            {
+              "expression": "$ctrl.filterOperationsService.onSearch($ctrl.uiState, $ctrl.tabConfig, $ctrl.loaders, newValue)",
+              "to": "onSearch"
+            },
+            {
+              "expression": "$ctrl.filterOperationsService.onChipUpdate($ctrl.uiState, $ctrl.tabConfig, $ctrl.referenceData, $ctrl.loaders, remainingStrings)",
+              "to": "onFilterUpdate"
+            },
+            {
+              "expression": "$ctrl.filterOperationsService.onReset($ctrl.uiState, $ctrl.loaders, true)",
+              "to": "onReset"
+            },
+            {
+              "expression": "$ctrl.uiState.currentFilter.currentFilterString",
+              "to": "searchText"
+            },
+            {
+              "expression": "$ctrl.filterOperationsService.openAdvancedFilterModal($ctrl.uiState, $ctrl.tabConfig, $ctrl.referenceData, $ctrl.loaders)",
+              "to": "onAdvancedClick"
+            },
+            {
+              "expression": "$ctrl.uiState.currentFilter.usingAdvancedFilters",
+              "to": "usingAdvancedFilters"
+            },
+            {
+              "expression": "$ctrl.uiState.currentFilter.chips",
+              "to": "filterChips"
+            }
+          ],
+          "name": "search-filter",
+          "ownerId": "6b07c72a48cd88e32d307a88",
+          "ownerType": "app",
+          "resourceIdentity": "components/shared/search-filter/search-filter",
+          "type": "custom-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "displayExpression": "!$ctrl.authService.isCurrentUserAdmin",
+          "expressions": [
+            {
+              "expression": "\"Filter\"",
+              "to": "placeholder"
+            },
+            {
+              "expression": "$ctrl.filterTarget",
+              "to": "value"
+            },
+            {
+              "expression": "\"\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.handlers.onFilterValueChange(newValue)",
+              "to": "onValueChange"
+            },
+            {
+              "expression": "500",
+              "to": "debounceDelay"
+            }
+          ],
+          "formControl": {
+            "modelName": "value"
+          },
+          "name": "Text Input",
+          "nodeName": "bln-text-input",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "100%"
+            }
+          ],
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "entities-table",
+              "expressions": [
+                {
+                  "expression": "$ctrl.tabStore[$ctrl.entityType].filteredData",
+                  "to": "data"
+                },
+                {
+                  "expression": "$ctrl.handlers.onSelectRow(row)",
+                  "to": "onSelection"
+                },
+                {
+                  "expression": "true",
+                  "to": "resizableColumns"
+                },
+                {
+                  "expression": "true",
+                  "to": "enablePagination"
+                },
+                {
+                  "expression": "$ctrl.tabStore[$ctrl.entityType].currentPage",
+                  "to": "currentPage"
+                },
+                {
+                  "expression": "false",
+                  "to": "enableFiltering"
+                },
+                {
+                  "expression": "false",
+                  "to": "enableCheckboxes"
+                },
+                {
+                  "expression": "true",
+                  "to": "enableRowSelection"
+                },
+                {
+                  "expression": "$ctrl.tabStore[$ctrl.entityType].columns",
+                  "to": "columns"
+                }
+              ],
+              "name": "Table",
+              "nodeName": "bln-table",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "--bln-table-height",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "--bln-table-secondary-bg-color",
+                  "value": "#f9f9f9"
+                }
+              ],
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "85%"
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "$ctrl.tabStore[$ctrl.entityType].currentPage",
+              "to": "currentPage"
+            },
+            {
+              "expression": "$ctrl.tabStore[$ctrl.entityType].pageCount",
+              "to": "totalPages"
+            },
+            {
+              "expression": "",
+              "to": "showFirstPageButton"
+            },
+            {
+              "expression": "",
+              "to": "showLastPageButton"
+            },
+            {
+              "expression": "$ctrl.handlers.onPageChange(currentPage)",
+              "to": "onPageChange"
+            }
+          ],
+          "name": "Pagination",
+          "nodeName": "bln-pagination",
+          "type": "core-component"
+        }
+      ],
+      "classList": [],
+      "comments": "multiple-entities",
+      "displayExpression": "$ctrl.isWorker && $ctrl.workerId",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100%"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "'Hide Side Panel'",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.handlers.onSidePanelClose()",
+              "to": "onClick"
+            },
+            {
+              "expression": "({\n              \"type\": \"font-icon\",\n              \"style\": \"solid\",\n              \"name\": \"times\",\n              \"position\": \"icon-only\"\n            })",
+              "to": "icon"
+            },
+            {
+              "expression": "'default'",
+              "to": "type"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "$ctrl.uiState.selectedEntityName"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "entity-name",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "comments": "view-formatted-pay-slip",
+                          "displayExpression": "!$ctrl.uiState.isViewingLegacyPaySlip",
+                          "expressions": [
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"receipt\",\n  \"position\": \"left\"\n})",
+                              "to": "icon"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onOpenFormattedPaySlipView()",
+                              "to": "onClick"
+                            },
+                            {
+                              "expression": "\"View Formatted Pay Slip\"",
+                              "to": "tooltip"
+                            },
+                            {
+                              "expression": "\"\"",
+                              "to": "label"
+                            }
+                          ],
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "type": "core-component"
+                        },
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "comments": "view-table",
+                          "displayExpression": "$ctrl.uiState.isViewingLegacyPaySlip",
+                          "expressions": [
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"table\",\n  \"position\": \"left\"\n})",
+                              "to": "icon"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onCloseFormattedPaySlipView()",
+                              "to": "onClick"
+                            },
+                            {
+                              "expression": "\"View Pay Slip Details in Table\"",
+                              "to": "tooltip"
+                            },
+                            {
+                              "expression": "\"\"",
+                              "to": "label"
+                            }
+                          ],
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "type": "core-component"
+                        },
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "comments": "export-payslip",
+                          "displayExpression": "$ctrl.uiState.isViewingLegacyPaySlip",
+                          "expressions": [
+                            {
+                              "expression": "\"Export Payslip\"",
+                              "to": "label"
+                            },
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onExportAsPDF()",
+                              "to": "onClick"
+                            }
+                          ],
+                          "layout": {},
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "pay-slip-buttons",
+                      "displayExpression": "$ctrl.entityType === \"pay_slip\"",
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.authService.isCurrentUserAdmin",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onFormOpen(\"edit\")",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "\"Edit\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"edit\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "delete",
+                      "displayExpression": "$ctrl.authService.isCurrentUserAdmin && $ctrl.entityType !== \"pay_slip\"",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onDelete()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "\"Delete\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"trash-alt\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-bg-color",
+                          "value": "#d10000"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-hovered-bg-color",
+                          "value": "#b10e00"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-active-bg-color",
+                          "value": "#9b0c00"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "right-panel-header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "right-panel-header-container"
+              ],
+              "comments": "right-panel-header",
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "displayExpression": "!$ctrl.uiState.isViewingLegacyPaySlip",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.detailsList",
+                      "to": "data"
+                    },
+                    {
+                      "expression": "false",
+                      "to": "showTableHeader"
+                    },
+                    {
+                      "expression": "false",
+                      "to": "enableSorting"
+                    },
+                    {
+                      "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                      "to": "columns"
+                    },
+                    {
+                      "expression": "[{\n    icon: {\n        name: \"eye\",\n        style: \"solid\",\n        type: \"font-icon\"\n    },\n    handler: $ctrl.handlers.onUnmaskSensitiveInfo,\n    tooltip: \"Show\",\n    visibleWhen: \"$ctrl.tabConfig[$ctrl.uiState.currentTab.name].sensitiveInfoFields.includes(rowData.originalKey)\"\n}]",
+                      "to": "rowActions"
+                    }
+                  ],
+                  "name": "Table",
+                  "nodeName": "bln-table",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-height",
+                      "value": "100%"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-secondary-bg-color",
+                      "value": "#f9f9f9"
+                    }
+                  ],
+                  "type": "core-component"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "evaluate": true,
+                                  "name": "text",
+                                  "textContent": "$ctrl.uiState.selectedEntityName"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "pay-period-display-name",
+                              "name": "h3",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "margin",
+                                  "value": "0"
+                                }
+                              ]
+                            },
+                            {
+                              "children": [
+                                {
+                                  "evaluate": true,
+                                  "name": "text",
+                                  "textContent": "$ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodStartDate).split(\" \")[0] + \" - \" + $ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodEndDate).split(\" \")[0]"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "pay-period-start-end",
+                              "name": "h4",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "margin",
+                                  "value": "0 0 1rem 0"
+                                }
+                              ]
+                            }
+                          ],
+                          "classList": [],
+                          "comments": "right-panel-header",
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "display",
+                              "value": "flex"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "flex-direction",
+                              "value": "column"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "width",
+                              "value": "100%"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "attributes": [
+                                {
+                                  "property": "ng-bind-html",
+                                  "value": "$ctrl.$sce.trustAsHtml($ctrl.uiState.selectedPaySlipDetails)"
+                                }
+                              ],
+                              "children": [
+                                {
+                                  "evaluate": true,
+                                  "name": "text",
+                                  "textContent": "$ctrl.uiState.selectedPaySlipDetails"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "entity-details",
+                              "elementId": "details",
+                              "name": "div",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "background-color",
+                                  "value": "#ffffff"
+                                }
+                              ]
+                            }
+                          ],
+                          "classList": [],
+                          "name": "div"
+                        }
+                      ],
+                      "classList": [],
+                      "elementId": "info-panel",
+                      "name": "div"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "formatted-pay-slip-view",
+                  "displayExpression": "$ctrl.uiState.selectedEntityName && !$ctrl.uiState.isFormOpen && $ctrl.uiState.isViewingLegacyPaySlip",
+                  "layout": {},
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "1rem"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "overflow-y",
+                      "value": "auto"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-style",
+                      "value": "solid"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-color",
+                      "value": "#cecece"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-width",
+                      "value": "thin"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "right-panel-body-container"
+              ],
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "right-panel-container"
+          ],
+          "comments": "right-panel",
+          "displayExpression": "$ctrl.uiState.selectedEntityName && !$ctrl.uiState.isFormOpen",
+          "layout": {},
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "90%"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form4"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Statutory Compliance\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "name",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Name\" : \"* Name\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form4.name",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.Name",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "number",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Number\" : \"* Number\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form4.number",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.Number ? \"*\".repeat($ctrl.uiState.selectedEntity?.Number.length) : $ctrl.uiState.selectedEntity?.Number",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"password\"",
+                          "to": "type"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "effective-from-date",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Effective From Date\" : \"* Effective From Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form4.effectiveFromDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.EffectiveFromDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "effective-to-date",
+                      "expressions": [
+                        {
+                          "expression": "\"Effective to Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form4.effectiveToDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.EffectiveToDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "!$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form4.name || !$ctrl.form4.number || !$ctrl.form4.effectiveFromDate",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "statutory-compliance",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"statutory_compliance\"",
+              "elementId": "form4",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form5"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Attendance\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "units-type",
+                  "expressions": [
+                    {
+                      "expression": "\"Units Type\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form5.unitsType",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "[{\n        label: \"DAY\",\n        value: \"DAY\"\n    },\n    {\n        label: \"HOUR\",\n        value: \"HOUR\"\n    },\n    {\n        label: \"UNIT\",\n        value: \"UNIT\"\n    }\n]",
+                      "to": "values"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.UnitsType",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Dropdown",
+                  "nodeName": "bln-dropdown",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "units-worked",
+                  "expressions": [
+                    {
+                      "expression": "\"Units Worked\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form5.unitsWorked",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"number\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.UnitsWorked",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "remarks",
+                  "expressions": [
+                    {
+                      "expression": "\"Remarks\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form5.remarks",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Remarks",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "attendance-summary",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"attendance_summary\"",
+              "elementId": "form5",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form6"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s \" + $ctrl.profileUiState.selectedEntityName : \"Add Pay Component\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "custom-employee-amount",
+                      "expressions": [
+                        {
+                          "expression": "\"Custom Employee Amount\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form6.customEmployeeAmount",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.CustomEmployeeAmount",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"number\"",
+                          "to": "type"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "custom-employer-amount",
+                      "displayExpression": "$ctrl.uiState.payComponent.name === \"benefit\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Custom Employer Amount\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form6.customEmployerAmount",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.CustomEmployerAmount",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"number\"",
+                          "to": "type"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "custom-values-container",
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "pay-component",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"worker_pay_component\"",
+              "elementId": "form6",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form7"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Leave Credit\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "accrual",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "expressions": [
+                    {
+                      "expression": "\"* Leave\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.accrualId",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.referenceData.accrualMap",
+                      "to": "values"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.AccrualId",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onAccrualBalanceAccrualFieldChange(value)",
+                      "to": "onValueChange"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Dropdown",
+                  "nodeName": "bln-dropdown",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "earning",
+                  "displayExpression": "$ctrl.uiState.accrualAllowsEncashment",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Earning\" : \"* Earning\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.earningId",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.referenceData.earningMap",
+                      "to": "values"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.EarningId",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Dropdown",
+                  "nodeName": "bln-dropdown",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "balance",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Balance\" : \"* Balance\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.balance",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"number\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Balance",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "used",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Used\" : \"* Used\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.used",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"number\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Used",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "effective-from-date",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Effective From Date\" : \"* Effective From Date\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.effectiveFromDate",
+                      "to": "dateValue"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.EffectiveFromDate",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Date Time Picker",
+                  "nodeName": "bln-date-time-picker",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "effective-to-date",
+                  "expressions": [
+                    {
+                      "expression": "\"Effective to Date\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.effectiveToDate",
+                      "to": "dateValue"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.EffectiveToDate",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Date Time Picker",
+                  "nodeName": "bln-date-time-picker",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "last-accrual-date",
+                  "expressions": [
+                    {
+                      "expression": "\"Last Accrual Date\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.lastAccrualDate",
+                      "to": "dateValue"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.LastAccrualDate",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Date Time Picker",
+                  "nodeName": "bln-date-time-picker",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "accrued-amount",
+                  "expressions": [
+                    {
+                      "expression": "\"Accrued Amount\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.accruedAmount",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"number\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.AccruedAmount",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "carry-over",
+                  "expressions": [
+                    {
+                      "expression": "\"Carry Over\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.carryOver",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"number\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.CarryOver",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "description",
+                  "expressions": [
+                    {
+                      "expression": "\"Description\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form7.description",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"text-area\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Description",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "!$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving \n||\n!$ctrl.form7.accrualId \n||\ntypeof $ctrl.form7.balance !== \"number\"\n||\ntypeof $ctrl.form7.used !== \"number\"\n||\n!$ctrl.form7.effectiveFromDate\n||\n(\n    $ctrl.uiState.accrualAllowsEncashment\n    &&\n    !$ctrl.form7.earningId\n)",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "accrual-balance",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"accrual_balance\"",
+              "elementId": "form7",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form8"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "\"Edit Payslip Status\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "status",
+                  "expressions": [
+                    {
+                      "expression": "\"Status\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form8.status",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Status",
+                      "to": "placeholder"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "pay-slip",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"pay_slip\"",
+              "elementId": "form8",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            }
+          ],
+          "classList": [],
+          "comments": "forms",
+          "displayExpression": "$ctrl.uiState.isFormOpen",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "0%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "100%"
+            },
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "90%"
+            }
+          ]
+        }
+      ],
+      "classList": [],
+      "layout": {
+        "container": {
+          "items": [],
+          "position": "right",
+          "type": "side-panel",
+          "visible": "$ctrl.sidePanelVisible",
+          "width": "35%",
+          "zIndex": 1
+        }
+      },
+      "name": "div"
+    }
+  ],
+  "modules": [],
+  "name": "dynamic-table",
+  "parentDirectoryId": "6dBwzCfV1ckz9mpRF36mm",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentRequestId",
+          "type": "property",
+          "value": "0"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "displayedInfo",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "isEditingTerminationInfo",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isFormOpen",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isSaving",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isDeleting",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isCreatingNewEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditingExistingEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "payComponent",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"earning\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"user\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "selectedRow",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "accrualAllowsEncashment",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isViewingLegacyPaySlip",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "selectedPaySlipDetails",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "reselectPostUpdate",
+          "type": "property",
+          "value": "false"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "const selectedTabName = $ctrl.payComponentTabItemsMap.get(selectedTab);\n\nif($ctrl.isPanelOpen) {\n    const discard = await $ctrl.handlers.onSidePanelClose();\n    if(!discard){\n        const tabBarCtrl = angular.element(document.querySelector('.pay-component-tab-bar')).isolateScope().$ctrl;\n        tabBarCtrl.selectedTab = $ctrl.uiState.payComponent.previousId;\n        return;\n    }\n}\n\n$ctrl.uiState.payComponent.previousId = selectedTab;\n$ctrl.sidePanelVisible = false;\n$ctrl.uiState.payComponent.name = selectedTabName;\n\n$ctrl.tabConfig.worker_pay_component.columnDefaultConfig = $ctrl.workerPayComponentService.getColumnDefaults(selectedTabName);\n\n$ctrl.helpers._resetProfileUiStateFilter();\n$ctrl.loaders.loadActiveTab();",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onPayComponentTabChange",
+          "parameters": [
+            "selectedTab"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.userId) {\n    return;\n}\n\nif(!$ctrl.isPanelOpen) {\n    $ctrl.sidePanelVisible = false;\n    $ctrl.formManagementService.onFormClose($ctrl.uiState);\n    $ctrl.uiState.isViewingLegacyPaySlip = false;\n    $ctrl.uiState.selectedPaySlipDetails = \"\";\n}\n\n$ctrl.uiState.currentTab.name = $ctrl.entityType;\n$ctrl.loaders.loadActiveTab();",
+          "description": "",
+          "invokeOnLoad": true,
+          "isAsync": false,
+          "name": "onInit",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.entityType",
+            "$ctrl.reloadTab"
+          ]
+        },
+        {
+          "body": "$ctrl.uiState.selectedRow = row;\nconst tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\nconst isEditing = $ctrl.uiState.isEditingExistingEntity;\nconst isAdding = $ctrl.uiState.isCreatingNewEntity;\nconst formStatus = isEditing || isAdding;\n\n// if ($ctrl.uiState.reselectPostUpdate) {\n//     $ctrl.uiState.reselectPostUpdate = false;\n//     return;\n// }\n\nif ((row && $ctrl.uiState.selectedEntity && row.Id === $ctrl.uiState.selectedEntity.Id) && !isAdding) {\n    if($ctrl.sidePanelVisible && !isEditing) {\n        $ctrl.sidePanelVisible = false;\n        $ctrl.isPanelOpen = false;\n    }\n    \n    return;\n}\n\nif (formStatus && $ctrl.isPanelOpen && !$ctrl.uiState.reselectPostUpdate) {\n    if (!row && isAdding) {\n        return;\n    }\n    \n    const discardChanges = await $ctrl.utils.handleUnsavedChanges(formStatus);\n\n    if (!discardChanges) {\n        if (isAdding) {\n            tableCtrl.gridApi.selection.clearSelectedRows();\n        } else {\n            const displayedData = tableCtrl?.tableConfig?.data ?? [];\n            const oldIndex = displayedData.findIndex(r => r.Id === $ctrl.uiState.selectedEntity.Id);\n\n            if (oldIndex !== -1) {\n                $ctrl.utils.setSelectedBelliniTableRow(oldIndex);\n            }\n        }\n\n        $ctrl.sidePanelVisible = true;\n        return;\n    } else {\n        if (isAdding) {\n            $ctrl.formManagementService.onFormClose($ctrl.uiState);\n            $ctrl.sidePanelVisible = false;\n            $ctrl.isPanelOpen = false;\n        }\n    }\n}\n\nif (!row) {\n    $ctrl.uiState.selectedEntity = {};\n    $ctrl.uiState.selectedEntityName = \"\";\n    $ctrl.uiState.detailsList = [];\n    $ctrl.$timeout(() => {\n        $ctrl.sidePanelVisible = false;\n        $ctrl.isPanelOpen = false;\n    });\n\n    if (isEditing) {\n        $ctrl.formManagementService.onFormClose($ctrl.uiState);\n    }\n    return;\n}\n\nconst currentEntityType = $ctrl.entityType;\nconst tabConfig = $ctrl.tabConfig[currentEntityType];\n\nlet hydratedEntity;\nif($ctrl.authService.isCurrentUserAdmin) {\n    hydratedEntity = await $ctrl.referenceDataService.hydrateEntity(row);\n} else {\n    hydratedEntity = row;\n}\n\n// Abort if the user switched tabs while hydrateEntity was in flight\nif ($ctrl.entityType !== currentEntityType) {\n    return;\n}\n\n// Abort if user switched rows while hydrateEntity was in flight\nif($ctrl.uiState.selectedRow !== row) {\n    return;\n}\n\n$ctrl.uiState.selectedEntity = hydratedEntity;\n$ctrl.uiState.selectedEntityName = row?.Name ?? row?.Earning ?? row?.Benefit ?? row?.EarningCode ?? row?.PayPeriodDisplayName ?? row?.AccrualName;\n\nlet detailsSourceEntity = hydratedEntity;\n\n// Hide extra payslip details on table view\nif ($ctrl.entityType === \"pay_slip\" && hydratedEntity) {\n    const excludedKeys = [\n        \"AccrualBalance\",\n        \"BankInfo\",\n        \"DeductionLogs\",\n        \"EarningLogs\",\n        \"EmploymentInfo\",\n        \"StatutoryCompliance\"\n    ];\n\n    detailsSourceEntity = Object.keys(hydratedEntity).reduce((acc, key) => {\n        const isExcluded = excludedKeys.some(excludedKey => key.includes(excludedKey));\n        if (!isExcluded) {\n            acc[key] = hydratedEntity[key];\n        }\n        return acc;\n    }, {});\n}\n\n$ctrl.uiState.detailsList = $ctrl.helpers._generateAndMaskDetailsList(detailsSourceEntity, tabConfig);\n$ctrl.sidePanelVisible = true\n\nif (isEditing) {\n    const formObj = $ctrl[tabConfig.form];\n    if (formObj) {\n        $ctrl.formManagementService.onFormOpen(\n            $ctrl.uiState,\n            formObj,\n            \"edit\",\n            undefined,\n            row\n        );\n    }\n}\n\n$ctrl.uiState.reselectPostUpdate = false;\n\nif ($ctrl.uiState.isViewingLegacyPaySlip) {\n    await $ctrl.handlers.onOpenFormattedPaySlipView();\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSelectRow",
+          "parameters": [
+            "row"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\n\nif($ctrl.uiState.isViewingLegacyPaySlip) {\n    $ctrl.uiState.isViewingLegacyPaySlip = false;\n    $ctrl.uiState.selectedPaySlipDetails = \"\"; \n    return;\n}\n\nif($ctrl.uiState.isCreatingNewEntity || $ctrl.uiState.isEditingExistingEntity) {\n    const discard = await $ctrl.utils.handleUnsavedChanges($ctrl.isPanelOpen);\n    if(discard) {\n        if($ctrl.uiState.isCreatingNewEntity) {\n            $ctrl.sidePanelVisible = false;    \n        }\n        \n        $ctrl.formManagementService.onFormClose($ctrl.uiState);\n        $ctrl.isPanelOpen = false;\n        if($ctrl.entityType === \"worker_pay_component\") {\n            return true;\n        }\n    }\n    \n    return;\n}\n\nif($ctrl.sidePanelVisible) {\n    $ctrl.sidePanelVisible = false;\n    $ctrl.uiState.selectedEntity = {};\n    $ctrl.uiState.selectedEntityName = \"\";\n    $ctrl.uiState.detailsList = [];\n    \n    if(tableCtrl.gridApi.selection) {\n        tableCtrl.gridApi.selection.clearSelectedRows();\n    }\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSidePanelClose",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\n$ctrl.formManagementService.onFormOpen(\n    $ctrl.uiState,\n    $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form],\n    \"edit\",\n    undefined,\n    $ctrl.uiState.selectedEntity\n);\n\n$ctrl.isPanelOpen = true;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onEdit",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const entityType = $ctrl.entityType;\nconst tabStore = $ctrl.tabStore[entityType];\nconst tabConfig = $ctrl.tabConfig[entityType];\nconst limit = tabStore.limit || 25;\n\nif (!tabStore) return;\n\nif (entityType === \"worker_pay_component\") {\n    tabStore.filteredData = tabStore.data;\n    return;\n}\n\nconst sourceData = tabStore.data || [];\n\nif (!filterValue) {\n    tabStore.filteredData = sourceData;\n    tabStore.totalCount = sourceData.length;\n    tabStore.currentPage = 1;\n    tabStore.pageCount = Math.max(1, Math.ceil(sourceData.length / limit));\n    tabStore.hasNextPage = tabStore.pageCount > 1;\n    return;\n}\n\nconst filterDefinitions = (tabConfig?.service?.getFilterDefinitions)\n    ? tabConfig.service.getFilterDefinitions()\n    : [];\n\nconst searchableKeys = filterDefinitions.length > 0\n    ? filterDefinitions.map((def) => def.value)\n    : Object.keys(sourceData[0] || {});\n\nconst normalizedFilter = String(filterValue).toLowerCase();\n\ntabStore.filteredData = sourceData.filter((row) =>\n    searchableKeys.some((key) => {\n        const value = row[key];\n        return value !== undefined && value !== null &&\n            String(value).toLowerCase().includes(normalizedFilter);\n    })\n);\n\ntabStore.totalCount = sourceData.length;\ntabStore.currentPage = 1;\ntabStore.pageCount = Math.max(1, Math.ceil(tabStore.filteredData.length / limit));\ntabStore.hasNextPage = tabStore.pageCount > 1;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onFilterValueChange",
+          "parameters": [
+            "filterValue"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if ($ctrl.authService.isCurrentUserAdmin) {\n    return $ctrl.tabManagementService.onPageChange(\n        $ctrl.uiState, $ctrl.tabStore, $ctrl.loaders, currentPage\n    );\n}\n\n// Pagination control for front end filter\nconst tabStore = $ctrl.tabStore[$ctrl.entityType];\nif (!tabStore) return;\n\ntabStore.previousPage = tabStore.currentPage;\ntabStore.currentPage = currentPage;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onPageChange",
+          "parameters": [
+            "currentPage"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nif (action === \"add\") {\n    $ctrl.uiState.selectedEntity = null;\n    $ctrl.uiState.selectedEntityName = \"\";\n\n    $ctrl.formManagementService.onFormOpen(\n        $ctrl.uiState,\n        $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form],\n        \"add\",\n        true\n    )\n\n    $ctrl.sidePanelVisible = true\n    $ctrl.isPanelOpen = true;\n    return;\n}\n\nif (action === \"edit\") {\n    $ctrl.formManagementService.onFormOpen(\n        $ctrl.uiState,\n        $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form],\n        \"edit\",\n        undefined,\n        $ctrl.uiState.selectedEntity\n    );\n\n    $ctrl.isPanelOpen = true;\n    return;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onFormOpen",
+          "parameters": [
+            "action"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "description": "",
+          "name": "assignment",
+          "properties": [
+            {
+              "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nconst workerId = $ctrl.workerId;\nconst componentTypeName = $ctrl.uiState.payComponent.name;\n\nif (!workerId || !componentTypeName) {\n    console.error(\"Cannot assign components: Missing WorkerID or Component Type selection.\");\n    return;\n}\n\nconst isEarning = componentTypeName === 'earning';\nconst componentClass = isEarning ? 'EARNING' : 'BENEFIT';\nconst foreignKey = isEarning ? 'EarningId' : 'BenefitId';\nconst titleCasedComponentType = isEarning ? 'Earning' : 'Benefit';\n\nconst currentList = $ctrl.tabStore['worker_pay_component']?.data || [];\n\n// assigned rows\nconst assignedItems = currentList.map(item => ({\n    Id: item[foreignKey],\n    _linkId: item.Id,\n    Name: item[titleCasedComponentType],\n    [foreignKey]: item[foreignKey],\n    CustomEmployeeAmount: item.CustomEmployeeAmount,\n    ...(!isEarning && { CustomEmployerAmount: item.CustomEmployerAmount })\n}));\n\nconst alreadyAssignedIds = assignedItems.map(x => x[foreignKey]);\n\n// baseline filters\nconst commonQueryParams = [`CompanyId=${$ctrl.globalSelectedCompany.companyId}`, `Active=1`];\nconst exclusionQueryKey = 'Id_notin';\nlet preloadQueryParams = [...commonQueryParams];\n\nif (alreadyAssignedIds.length > 0) {\n    preloadQueryParams.push(`${exclusionQueryKey}=${alreadyAssignedIds.join(\",\")}`);\n}\n\nconst mapUnassignedEntity = (e) => ({\n    Id: e.Id,\n    Name: e.Name,\n    [foreignKey]: e.Id\n});\n\nlet unassignedItems = []\nlet unassignedPageCount = 1;\n\ntry {\n    // baseline data pull\n    const res = await $ctrl.payrollApiService.get({\n        entity: componentTypeName,\n        query: preloadQueryParams.join(\"&\")\n    });\n\n    const entities = res.entities ?? res ?? [];\n    unassignedItems = entities.map(mapUnassignedEntity)\n    unassignedPageCount = res.metadata?.pageCount ?? 1;\n\n} catch (err) {\n    console.warn(`Skipping ${componentTypeName} preload due to API error`, err);\n}\n\nconst entityColumns = [{ name: \"Name\", valueKey: \"Name\", enableEditing: false }]\nconst amountColumns = [{ name: \"Custom Employee Amount\", valueKey: \"CustomEmployeeAmount\", enableEditing: true, type: \"number\" }]\nif (!isEarning) {\n    amountColumns.push({ name: \"Custom Employer Amount\", valueKey: \"CustomEmployerAmount\", enableEditing: true, type: \"number\" })\n}\nconst totalAssignedColumns = [...entityColumns, ...amountColumns]\n\n// call centralized helper method\nreturn $ctrl.assignmentUtilsService.openAssignmentModal({\n    title: `Assign ${titleCasedComponentType}s to Worker`,\n    assigned: {\n        columns: totalAssignedColumns,\n        items: assignedItems\n    },\n    unassigned: {\n        columns: [{ name: \"Name\", valueKey: \"Name\", enableEditing: false }],\n        items: unassignedItems,\n        totalPages: unassignedPageCount\n    },\n    api: {\n        entity: componentTypeName,\n        baseParams: commonQueryParams,\n        searchParamKey: \"Name_contains\",\n        searchProperty: \"Name\",\n        searchPlaceholder: isEarning ? \"Earning Name Contains\" : \"Benefit Name Contains\",\n        exclusionQueryKey: exclusionQueryKey,\n        exclusionItemKey: \"Id\"\n    },\n    mapEntityFn: mapUnassignedEntity,\n    onApply: (appliedItems) => {\n        // store original data for sync\n        const originalForSync = currentList.map(item => ({\n            ...item,\n            _linkId: item.Id\n        }));\n\n        const finalForSync = appliedItems.map(item => {\n            const original = currentList.find(o =>\n                o[foreignKey] === item[foreignKey] || o[foreignKey] === item.Id\n            );\n\n            return {\n                ...item,\n                _linkId: original ? original.Id : undefined\n            };\n        });\n\n        $ctrl.payComponentAssignmentService.syncPayComponentsByPositionOrWorker(\n            $ctrl.payrollApiService,\n            'worker',\n            workerId,\n            componentClass,\n            originalForSync,\n            finalForSync\n        ).then(() => {\n            $ctrl.loaders.loadActiveTab();\n        })\n    }\n})",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": true,
+              "name": "openComponentAssignment",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "body": "if (rowData.isMasked) {\n    rowData.value = rowData.originalValue;\n    rowData.isMasked = false;\n} else {\n    rowData.value = rowData.maskedValue;\n    rowData.isMasked = true;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onUnmaskSensitiveInfo",
+          "parameters": [
+            "rowData"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.accrualAllowsEncashment = $ctrl.referenceData.accrualMap.find(accrual => accrual.Id === ($ctrl.uiState.isEditingExistingEntity ? $ctrl.uiState.selectedEntity?.AccrualId : value)).AllowEncashment",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onAccrualBalanceAccrualFieldChange",
+          "parameters": [
+            "value"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const currentPaySlip = $ctrl.uiState.selectedEntity;\n\n$ctrl.helpers._legacyGeneratePaySlipView(currentPaySlip);\n$ctrl.uiState.isViewingLegacyPaySlip = true;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onOpenFormattedPaySlipView",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.isViewingLegacyPaySlip = false;\n$ctrl.uiState.selectedPaySlipDetails = \"\"; ",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onCloseFormattedPaySlipView",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nconst currentRequest = $ctrl.uiState.currentRequestId\nconst config = $ctrl.tabConfig[$ctrl.entityType];\nif (!config) {\n    console.error(\"No configuration found for current tab:\", $ctrl.entityType);\n    return;\n}\n\nconst isCreate = $ctrl.uiState.isCreatingNewEntity;\nconst isUpdate = $ctrl.uiState.isEditingExistingEntity;\nconst entityType = $ctrl.entityType;\n\nconst method = isCreate ? \"POST\" : \"PUT\";\nconst formData = $ctrl[config.form];\n\nlet displayName = \"Item\";\nif (config.getName) {\n    displayName = config.getName(formData);\n} else if (config.entityNameKey) {\n    displayName = formData[config.entityNameKey] || \"Item\";\n}\n\nconst additionalData = {};\nif (isCreate) {\n    if (config.isCompanyBound) {\n        additionalData.CompanyId = $ctrl.globalSelectedCompany.companyId;\n    }\n\n    if (config.isWorkerBound && $ctrl.workerId) {\n        additionalData.WorkerId = $ctrl.workerId;\n    }\n\n    if (config.isUserBound && $ctrl.userId) {\n        additionalData.UserId = $ctrl.userId;\n    }\n}\n\n$ctrl.uiState.isSaving = true;\n\nawait $ctrl.entityOperationsService.executeEntityOperation(\n    method,\n    (isUpdate) ? $ctrl.helpers._excludeFieldsOnSave(formData) : formData,\n    async (result) => {\n        if (isUpdate) {\n            if(currentRequest !== $ctrl.uiState.currentRequestId) {\n                return;\n            }\n\n            const selectedEntityId = $ctrl.uiState.selectedEntity.Id;\n\n            const preReloadIndex = $ctrl.tabStore[$ctrl.uiState.currentTab.name].data.findIndex(entity => entity.Id === selectedEntityId);\n            if (preReloadIndex === -1) {\n                $ctrl.loaders.loadActiveTab();\n                throw new Error(`Entity not found in table`);\n            }\n\n            const formToReset = document.querySelector('.form');\n            if (formToReset) {\n                formToReset.scrollTop = 0;\n            }\n\n            await $ctrl.loaders.loadActiveTab();\n\n            // Reselect row \n            const tableRowIndex = $ctrl.tabStore[$ctrl.uiState.currentTab.name].data.findIndex(entity => entity.Id === selectedEntityId);\n            if (tableRowIndex !== -1) {\n                const tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\n                if (tableCtrl.gridApi.selection) {\n                    $ctrl.$timeout(() => {\n                        $ctrl.uiState.reselectPostUpdate = true;\n                        $ctrl.utils.setSelectedBelliniTableRow(tableRowIndex);\n\n                    });\n                }\n            }\n\n            // Reopen panel\n            $ctrl.formManagementService.onFormOpen(\n                $ctrl.uiState,\n                $ctrl[config.form],\n                \"edit\",\n                undefined,\n                $ctrl.uiState.selectedEntity\n            );\n\n            $ctrl.isPanelOpen = true;\n            $ctrl.sidePanelVisible = true;\n\n        } else {\n            $ctrl.loaders.loadActiveTab();\n            $ctrl.formManagementService.onFormClose($ctrl.uiState);\n            $ctrl.sidePanelVisible = false;\n            $ctrl.isPanelOpen = false;\n            $ctrl.utils.resetForm(formData);\n        }\n    },\n    null,\n    () => {\n        $ctrl.uiState.isSaving = false;\n    },\n    $ctrl.entityType,\n    displayName,\n    $ctrl.uiState.selectedEntity,\n    additionalData\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSave",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nconst entityName = $ctrl.uiState.selectedEntityName || \"Item\";\nconst entityType = $ctrl.entityType;\nconst entityToDelete = $ctrl.uiState.selectedEntity;\n\nif (!entityToDelete) return;\n\nawait $ctrl.entityOperationsService.confirmDelete(entityToDelete, entityName)\n    .then(confirmed => {\n        if (!confirmed) return;\n\n        $ctrl.uiState.isDeleting = true;\n\n        return $ctrl.entityOperationsService.executeEntityOperation(\n            \"DELETE\",\n            null,\n            () => {\n                $ctrl.uiState.selectedEntity = null;\n                $ctrl.uiState.selectedEntityName = null;\n                $ctrl.sidePanelVisible = false\n                $ctrl.isPanelOpen = false;\n\n                $ctrl.loaders.loadActiveTab();\n            },\n            null,\n            () => {\n                $ctrl.uiState.isDeleting = false;\n            },\n            entityType,\n            entityName,\n            entityToDelete\n        );\n    });",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onDelete",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// importScripts([\"https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js\", \"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js\"]);\n\nconst { jsPDF } = window.jspdf;\nconst divId = \"info-panel\";\nconst fileName = $ctrl.uiState.selectedEntity.WorkerName + \" - \" + $ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodStartDate).split(\" \")[0].split(\"-\")[1] + \" \" + $ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodStartDate).split(\" \")[0].split(\"-\")[2] + \"-\" + $ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodEndDate).split(\" \")[0].split(\"-\")[2] + \" \" + $ctrl.utils.formatDate($ctrl.uiState.selectedEntity.PayPeriodStartDate).split(\" \")[0].split(\"-\")[0];\n\n// Bond paper dimensions in points (72 points per inch)\nconst BOND_PAPER_WIDTH = 8.5 * 72; // 612 points\nconst BOND_PAPER_HEIGHT = 11 * 72; // 792 points\n\n// Get the div element\nconst divElement = document.getElementById(divId);\nif (!divElement) {\n    console.error(`Div with ID '${divId}' not found`);\n    return;\n}\n\n// Save the original styles to restore later\nconst originalStyle = {\n    width: divElement.style.width,\n    margin: divElement.style.margin,\n};\n\ntry {\n    // Temporarily set the div to full width\n    divElement.style.width = '100%';\n    divElement.style.margin = '0 auto'; // Center the content horizontally if needed\n\n    // Use html2canvas to capture the div as a canvas\n    const canvas = await html2canvas(divElement, { scale: 2 }); // Higher scale for better resolution\n\n    // Get the canvas dimensions\n    const canvasWidth = canvas.width;\n    const canvasHeight = canvas.height;\n\n    // Calculate scale to fit the bond paper dimensions\n    const scale = Math.min(BOND_PAPER_WIDTH / canvasWidth, BOND_PAPER_HEIGHT / canvasHeight);\n\n    const imgWidth = canvasWidth * scale;\n    const imgHeight = canvasHeight * scale;\n\n    // Convert the canvas to an image\n    const imgData = canvas.toDataURL('image/png');\n\n    // Initialize jsPDF with bond paper size\n    const pdf = new jsPDF({\n        orientation: 'portrait',\n        unit: 'pt',\n        format: [BOND_PAPER_WIDTH, BOND_PAPER_HEIGHT],\n    });\n\n    // Center the image on the bond paper\n    const xOffset = (BOND_PAPER_WIDTH - imgWidth) / 2;\n    const yOffset = (BOND_PAPER_HEIGHT - imgHeight) / 2;\n\n    // Add the image to the PDF\n    pdf.addImage(imgData, 'PNG', xOffset, yOffset, imgWidth, imgHeight);\n\n    // Save the PDF\n    pdf.save(fileName || 'document.pdf');\n} catch (error) {\n    console.error('Error generating PDF:', error);\n} finally {\n    // Restore the original styles\n    divElement.style.width = originalStyle.width;\n    divElement.style.margin = originalStyle.margin;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onExportAsPDF",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "const tabConfig = $ctrl.tabConfig[$ctrl.entityType];\n$ctrl.uiState.displayedInfo = $ctrl.helpers._generateAndMaskDetailsList(data, tabConfig);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_setDisplayedInfo",
+          "parameters": [
+            "data"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!data) return [];\n\nconst detailsList = $ctrl.entityViewService.generateDetailsList(data);\n\nif (tabConfig?.containsSensitiveInfo && tabConfig?.sensitiveInfoFields) {\n    return $ctrl.helpers._maskSensitiveInfo(tabConfig.sensitiveInfoFields, detailsList);\n}\n\nreturn detailsList;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_generateAndMaskDetailsList",
+          "parameters": [
+            "data",
+            "tabConfig"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const sensitiveFieldsSet = new Set(sensitiveInfoFields);\nreturn detailsList.map(item => {\n    if (item.isSpacer || !sensitiveFieldsSet.has(item.originalKey)) {\n        return item;\n    }\n\n    const strValue = String(item.value || \"\");\n    const maskedValue = \"*\".repeat(strValue.length);\n\n    return {\n        ...item,\n        originalValue: item.value,\n        value: maskedValue, // Default to maskedValue for sensitive info\n        maskedValue: maskedValue,\n        isMasked: true\n    };\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_maskSensitiveInfo",
+          "parameters": [
+            "sensitiveInfoFields",
+            "detailsList"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.selectedEntity = null;\n$ctrl.uiState.selectedEntityName = \"\";\n\n$ctrl.uiState.displayedInfo = [];\n$ctrl.uiState.detailsList = [];\n\nif (resetTabStore && $ctrl.tabStore[$ctrl.entityType]) {\n    $ctrl.tabStore[$ctrl.entityType].data = [];\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_resetUiState",
+          "parameters": [
+            "resetTabStore"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tabConfig = $ctrl.tabConfig[entityType];\nconst workerId = $ctrl.workerId;\nconst isWorkerPayComponent = (entityType === \"worker_pay_component\");\n\nlet filtersToProcess = [...($ctrl.uiState.currentFilter.advancedFilters || [])];\nlet extraApiQuery = \"\";\n\nif (isWorkerPayComponent) {\n    const nameFilterIndex = filtersToProcess.findIndex(f => f.property === \"Name\");\n\n    if (nameFilterIndex > -1) {\n        const nameFilter = filtersToProcess[nameFilterIndex];\n        filtersToProcess.splice(nameFilterIndex, 1);\n\n        const targetSubEntity = $ctrl.uiState.payComponent.name;\n        try {\n            const lookupRes = await $ctrl.payrollApiService.get({\n                entity: targetSubEntity,\n                query: `Name_${nameFilter.operation}=${nameFilter.value}&select=Id`\n            });\n\n            const ids = (lookupRes.entities || []).map(e => e.Id);\n            const foreignKey = targetSubEntity === 'earning' ? 'EarningId' : 'BenefitId';\n\n            extraApiQuery += ids.length > 0\n                ? `&${foreignKey}_in=${ids.join(',')}`\n                : `&Id_eq=-1`;\n        } catch (err) {\n            console.warn(\"Failed to lookup pay component names\", err);\n            extraApiQuery += `&Id_eq=-1`;\n        }\n    }\n\n    const componentClass = $ctrl.uiState.payComponent.name.toUpperCase();\n    extraApiQuery += `&ComponentClass=${componentClass}`;\n}\n\nlet apiQuery = $ctrl.filterService.buildCombinedQuery({\n    advancedFilters: filtersToProcess\n});\n\nif (tabConfig?.isWorkerBound) {\n    apiQuery += workerId ? `&WorkerId_eq=${workerId}` : `&Id_eq=-1`;\n}\n\nif (entityType === \"worker\") {\n    apiQuery += workerId ? `&Id_eq=${workerId}` : `&Id_eq=-1`;\n}\n\nif (tabConfig?.containsSensitiveInfo) {\n    apiQuery += \"&maskSensitiveWorkerInfo=false\" // Request unmasked data and just do FE masking to reduce API roundtrips\n}\n\nreturn apiQuery + extraApiQuery;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_buildProfileTabQuery",
+          "parameters": [
+            "entityType"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "let msg = \"Looks like there's no data here. \";\n\nswitch ($ctrl.entityType) {\n    default:\n        if($ctrl.authService.isCurrentUserAdmin){\n            msg += \"Click + to get started.\";\n        }\n        \n        break;\n    case \"worker_pay_component\":\n        if($ctrl.authService.isCurrentUserAdmin){\n            msg += \"Click manage assignments button to get started.\";\n        }\n        \n        break;\n    case \"attendance_summary\":\n        if($ctrl.authService.isCurrentUserAdmin){\n            msg += \"Go to Attendance Summary page to get started.\";\n        }\n        \n        break;\n    case \"pay_slip\":\n        if($ctrl.authService.isCurrentUserAdmin){\n            msg += \"Go to Payroll Processing page to get started.\";\n        }\n        \n        break;\n}\n\nreturn msg;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getDisplayedNoData",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.currentFilter.advancedFilters = [];\n$ctrl.uiState.currentFilter.chips = [];\n$ctrl.uiState.currentFilter.chipMap = [];\n$ctrl.uiState.currentFilter.currentFilterString = \"\";\n$ctrl.uiState.currentFilter.usingAdvancedFilters = false;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_resetProfileUiStateFilter",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!row) {\n    $ctrl.uiState.selectedPaySlipDetails = \"\";\n    return;\n}\n\n$ctrl.uiState.selectedEntity = row;\n$ctrl.uiState.selectedEntityName = row.PayPeriodDisplayName;\n\nlet htmlContent = \"\";\n\nfunction appendHTML(html) {\n    htmlContent += html;\n}\n\nfor (const [key, value] of Object.entries(row)) {\n    if (key.startsWith(\"$$\") || (isExcludedKey(key, value) && key !== \"PayPeriodRate\")) continue;\n\n    switch (key) {\n        case \"PayPeriodRate\":\n            appendHTML(buildPayPeriodRate(row.Frequency, value, row));\n            break;\n        case \"WorkerName\":\n            appendHTML(`<div>${value}</div>`);\n            break;\n        case \"BankInfo\":\n            Object.entries(value).forEach(([k, v]) => {\n                if (k !== \"Id\") appendHTML(buildGeneralDetails(k, v));\n            });\n            break;\n        case \"CreatedDate\":\n            return finalizeView();\n        case \"AccrualBalance\":\n            if (value && value.length > 0) {\n                appendHTML(buildSectionTitle(\"Leave Credits\"));\n                appendHTML(buildAccrualBalances(value, row));\n            }\n            break;\n        case \"GrossPay\":\n        case \"TotalDeductions\":\n        case \"NetPay\":\n            appendHTML(buildTotals(key, value, row));\n            break;\n        default:\n            if (isStatutoryCompliance(key)) {\n                appendHTML(buildStatutoryCompliance(value));\n            } else if (isPayComponent(key)) {\n                appendHTML(buildPayComponents(key, value, row));\n            } else {\n                appendHTML(buildGeneralDetails(key, value));\n            }\n    }\n}\n\nfunction finalizeView() {\n    $ctrl.uiState.selectedPaySlipDetails = htmlContent;\n}\n\nfinalizeView();\n\n// --- Helper Functions (Pure functions returning HTML strings) ---\nfunction isExcludedKey(key, value) {\n    const excludedKeys = [\n        \"Id\", \"PayPeriod\", \"Payroll\", \"Department\", \"Position\",\n        \"Frequency\", \"GrossTaxable\", \"GrossNonTaxable\", \"PreTaxDeductions\", \"NetTaxable\", \"Taxes\",\n        \"PostTaxDeductions\", \"Ytd\"\n    ];\n    return excludedKeys.some(item => key.includes(item)) || value === undefined || value === null;\n}\n\nfunction isStatutoryCompliance(key) {\n    return key.includes(\"StatutoryCompliance\");\n}\n\nfunction isPayComponent(key) {\n    const relevantKeywords = [\"Earning\", \"Deduction\"];\n    return relevantKeywords.some(kw => key.includes(kw) && !key.includes(\"Tax\") && !key.includes(\"Total\"));\n}\n\nfunction formatFrequency(frequency) {\n    if (!frequency) return \"\";\n    return frequency\n        .toLowerCase()\n        .split(/[-\\s]/)\n        .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n        .join(frequency.includes(\"-\") ? \"-\" : \" \");\n}\n\nfunction formatCurrency(amount, fractionDigits = 2, isCurrency = true, currency) {\n    const symbol = isCurrency && currency?.CurrencySymbol ? currency.CurrencySymbol : '';\n    const precision = currency?.CurrencyPrecision || fractionDigits;\n    const formattedAmount = Number(amount || 0).toLocaleString(\"en-US\", {\n        minimumFractionDigits: precision,\n        maximumFractionDigits: precision\n    });\n    return `${symbol} ${formattedAmount}`.trim();\n}\n\n// --- HTML Builders ---\n\nfunction buildPayPeriodRate(frequency, value, row) {\n    return `\n        <div style=\"display: flex; width: 100%;\">\n            <div>${formatFrequency(frequency)} Rate</div>\n            <div style=\"flex-grow: 1;\"></div>\n            <div>${formatCurrency(value, 2, true, row.EarningLogs?.[0]?.Currency)}</div>\n        </div>\n        <br>`;\n}\n\nfunction buildSectionTitle(key) {\n    const title = key.toUpperCase().replace(\"LOGS\", \"S\");\n    return `\n        <br>\n        <div style=\"width: 100%; font-weight: bold; border: 1px solid black; padding: 0.5rem; text-align: center; box-sizing: border-box;\">\n            ${title}\n        </div>\n        <br>`;\n}\n\nfunction buildTotals(key, value, row) {\n    const labelMap = {\n        \"GrossPay\": \"GROSS PAY\",\n        \"TotalDeductions\": \"TOTAL DEDUCTIONS\",\n        \"NetPay\": \"NET PAY\"\n    };\n    const label = labelMap[key] || key;\n    const fontStyle = key === \"NetPay\" ? \"normal\" : \"italic\";\n    const currency = row.EarningLogs?.[0]?.Currency;\n\n    const colWidth = \"120px\";\n\n    const ytdValue = row?.Ytd?.[key] || 0;\n\n    const formattedYtd = formatCurrency(ytdValue, 2, true, currency);\n    const formattedCurrent = formatCurrency(value, 2, true, currency);\n\n    // Temporarily disabled YTD view\n    // <div style=\"width: ${colWidth}; text-align: right; font-style: ${fontStyle}; font-weight: bold;\">${formattedYtd}</div> \n\n    return `\n        <hr style=\"border: none; height: 0; border-top: 1px solid black; margin: 0;\">\n        <div style=\"display: flex; width: 100%; padding: 0.5rem 1rem; box-sizing: border-box;\">\n            <div style=\"flex-grow: 1; font-style: ${fontStyle}; font-weight: bold;\">${label}</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-style: ${fontStyle}; font-weight: bold;\">${formattedCurrent}</div>\n        </div>\n        <hr style=\"border: none; height: 0; border-top: 1px solid black; margin: 0;\">\n        ${key === \"NetPay\" ? `` : `<br>`}`;\n}\n\nfunction buildAccrualBalances(balances, row) {\n    let html = `\n        <div style=\"background-color: #F2F2F2; \">\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black; \">\n        <div style=\"padding: 1rem; \">`;\n\n    balances.forEach(({ AccrualName, Balance }) => {\n        html += `\n            <div style=\"display: flex; width: 100%; \">\n                <div>${AccrualName}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${formatCurrency(Balance, 3, false, row.EarningLogs?.[0]?.Currency)}</div>\n            </div>`;\n    });\n\n    html += `\n        </div>\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black; \">\n        </div>`;\n    return html;\n}\n\nfunction buildPayComponents(key, components, row) {\n    let html = buildSectionTitle(key);\n    const currency = row.EarningLogs?.[0]?.Currency;\n\n    if (key === \"DeductionLogs\") {\n        html += buildPayComponentCategory(\"Pre-tax\", components.filter(c => c.Type === \"PRETAX\"), row.PreTaxDeductions, currency);\n        html += buildTempNetTaxable(\"Net Taxable\", [{ Name: \"Gross Taxable\", EmployeeAmount: row.GrossTaxable }, { Name: \"Pre-tax Deductions\", EmployeeAmount: -Math.abs(row.PreTaxDeductions) }], row.NetTaxable, currency);\n        html += buildPayComponentCategory(\"Tax\", components.filter(c => c.ComponentClass === \"TAX\"), row.Taxes, currency);\n        html += buildPayComponentCategory(\"Post-tax\", components.filter(c => c.Type === \"POSTTAX\"), row.PostTaxDeductions, currency);\n    } else {\n        const nonTaxable = components.filter(comp => !comp.IsTaxable);\n        const taxable = components.filter(comp => comp.IsTaxable);\n        html += buildPayComponentCategory(\"Non-taxable\", nonTaxable, row.GrossNonTaxable, currency);\n        html += buildPayComponentCategory(\"Taxable\", taxable, row.GrossTaxable, currency);\n    }\n    return html;\n}\n\nfunction buildPayComponentCategory(category, components, total = null, currency) {\n    const validComponents = components.filter(c => typeof c.EmployeeAmount === \"number\");\n    if (!validComponents.length) return \"\";\n\n    const colWidth = \"120px\";\n\n    // Temporarily disabled YTD view\n    // <div style=\"width: ${colWidth}; text-align: right; font-size: 0.85em; color: #555; align-self: flex-end;\">YTD</div>\n\n    let html = `\n        <div style=\"background-color: #F2F2F2;\">\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        \n        <div style=\"display: flex; width: 100%; padding: 0 1rem; box-sizing: border-box;\">\n            <div style=\"flex-grow: 1; font-weight: bold;\">${category}</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-size: 0.85em; color: #555; align-self: flex-end;\">CURRENT</div>\n        </div>\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px dashed black;\">\n        <br>\n        <div style=\"padding: 0 1rem; \">`;\n\n    validComponents.forEach(({ Name, EmployeeAmount, Ytd }) => {\n        const formattedCurrent = formatCurrency(EmployeeAmount, 2, true, currency);\n        const formattedYtd = formatCurrency(Ytd?.EmployeeAmount || 0, 2, true, currency);\n\n        // Temporarily disabled YTD view\n        // <div style=\"width: ${colWidth}; text-align: right;\">${formattedYtd}</div>\n\n        html += `\n            <div style=\"display: flex; width: 100%; margin-bottom: 0.25rem;\">\n                <div style=\"flex-grow: 1;\">${Name}</div>\n                <div style=\"width: ${colWidth}; text-align: right;\">${formattedCurrent}</div>\n            </div>`;\n    });\n\n    html += `</div>`;\n\n    if (total !== null) {\n        const label = category === \"Taxable\" || category === \"Non-taxable\" ? \"Gross \" + category : category + \" Deductions\";\n\n        // Map the UI category name to the actual key in the row.Ytd object\n        const ytdKeyMap = {\n            \"Pre-tax\": \"PreTaxDeductions\",\n            \"Tax\": \"Taxes\",\n            \"Post-tax\": \"PostTaxDeductions\",\n            \"Non-taxable\": \"GrossNonTaxable\",\n            \"Taxable\": \"GrossTaxable\"\n        };\n\n        const ytdKey = ytdKeyMap[category];\n        const ytdValue = row?.Ytd?.[ytdKey] || 0;\n\n        // Temporarily disabled YTD view\n        // <div style=\"width: ${colWidth}; text-align: right; font-weight: bold;\">${formatCurrency(ytdValue, 2, true, currency)}</div>\n\n        html += `\n            <br>\n            <hr style=\"border: none; height: 0; border-bottom: 0.5px dashed black;\">\n            <div style=\"display: flex; width: 100%; padding: 0 1rem; box-sizing: border-box;\">\n                <div style=\"flex-grow: 1; font-weight: bold;\">${label}</div>\n                <div style=\"width: ${colWidth}; text-align: right; font-weight: bold;\">${formatCurrency(total, 2, true, currency)}</div>\n            </div>`;\n    }\n\n    html += `\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        </div>\n        <br>`;\n\n    return html;\n}\n\nfunction buildTempNetTaxable(category, components, total = null, currency) {\n    const validComponents = components.filter(c => typeof c.EmployeeAmount === \"number\");\n    if (!validComponents.length) return \"\";\n\n    let html = `\n        <div>\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        <div style=\"padding: 1rem 0; \">`;\n\n    validComponents.forEach(({ Name, EmployeeAmount }) => {\n        html += `\n            <div style=\"display: flex; width: 100%;\">\n                <div>${Name}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${formatCurrency(EmployeeAmount, 2, true, currency)}</div>\n            </div>`;\n    });\n\n    html += `</div>`;\n\n    if (total !== null) {\n        html += `\n            <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n            <div style=\"display: flex; width: 100%;\">\n                <div style=\"font-style: italic;\">${category.toUpperCase()}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div style=\"font-style: italic;\">${formatCurrency(total, 2, true, currency)}</div>\n            </div>`;\n    }\n\n    html += `\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        </div>\n        <br>`;\n    return html;\n}\n\nfunction buildStatutoryCompliance(complianceList) {\n    let html = \"\";\n\n    complianceList.forEach(({ Name, Number }) => {\n        const masked = \"*\".repeat(Number.length);\n\n        html += `\n      <div style=\"display: flex; width: 100%; align-items: center;\"> \n        <div style=\"min-width: 150px;\">${Name}</div>\n        <div style=\"flex-grow: 1;\"></div>\n        \n        <label style=\"display: flex; align-items: center; cursor: pointer; margin: 0;\">\n          <input type=\"checkbox\" class=\"ps-toggle-cb\">\n          <div class=\"ps-masked\" style=\"margin-right: 5px;\">${masked}</div>\n          <div class=\"ps-unmasked\" style=\"display: none; margin-right: 5px;\">${Number}</div>\n          <div class=\"ps-icon-wrapper\" style=\"border: none; padding: 0; background: transparent; color: inherit;\">\n            <i class=\"fas fa-eye\"></i>\n            <i class=\"fas fa-eye-slash\" style=\"display: none;\"></i>\n          </div>\n        </label>\n        \n      </div>`;\n    });\n\n    return html;\n}\n\nfunction buildGeneralDetails(key, value) {\n    const isNumberKey = key.includes(\"Number\");\n    const safeValue = String(value || \"\");\n\n    let html = \"\";\n\n    html += `\n    <div style=\"display: flex; width: 100%; align-items: center;\"> \n      <div style=\"min-width: 150px;\">${key}</div>\n      <div style=\"flex-grow: 1;\"></div>`;\n\n    if (isNumberKey) {\n        const masked = \"*\".repeat(safeValue.length);\n        html += `\n      <label style=\"display: flex; align-items: center; cursor: pointer; margin: 0;\">\n        <input type=\"checkbox\" class=\"ps-toggle-cb\">\n        <div class=\"ps-masked\" style=\"margin-right: 5px;\">${masked}</div>\n        <div class=\"ps-unmasked\" style=\"display: none; margin-right: 5px;\">${safeValue}</div>\n        <div class=\"ps-icon-wrapper\" style=\"border: none; padding: 0; background: transparent; color: inherit;\">\n          <i class=\"fas fa-eye\"></i>\n          <i class=\"fas fa-eye-slash\" style=\"display: none;\"></i>\n        </div>\n      </label>`;\n    } else {\n        html += `\n      <div style=\"display: flex; align-items: center;\">\n        <div style=\"margin-right: 5px;\">${safeValue}</div>\n      </div>`;\n    }\n\n    html += `</div>`;\n    return html;\n}",
+          "description": "Legacy setSelectedPaySlip function for displaying full Pay Slip details",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_legacyGeneratePaySlipView",
+          "parameters": [
+            "row"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!form) return {};\n\nconst FIELDS_TO_EXCLUDE = [\n    \"accrualId\",            // Update Accrual Balance\n    \"customAnnualRate\",     // Update Worker\n    \"positionId\",           // Update Worker\n    \"workerId\"              // Update Worker\n];\n\nconst sanitizedForm = { ...form };\n\nFIELDS_TO_EXCLUDE.forEach(field => {\n    if (Object.hasOwn(sanitizedForm, field)) {\n        delete sanitizedForm[field];\n    }\n});\n\nreturn sanitizedForm;",
+          "description": "Excludes fields on edit/update to prevent \"Attempted to add a property...\" warning on MR.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_excludeFieldsOnSave",
+          "parameters": [
+            "form"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!$ctrl.uiState.selectedEntity) {\n    console.warn(\"[_updatePositionData] uiState.selectedEntity is null — skipping position update.\");\n    return;\n}\n\nif (newPosId) {\n    const newPosInfo = $ctrl.referenceData.positionMap.find(p => p.Id === newPosId);\n    if (newPosInfo) {\n        $ctrl.uiState.selectedEntity.PositionId = newPosId;\n        $ctrl.uiState.selectedEntity.Department = newPosInfo.Department;\n        $ctrl.uiState.selectedEntity.Title = newPosInfo.Title;\n        $ctrl.uiState.selectedEntity.CustomAnnualRate = formData.customAnnualRate;\n    } else {\n        console.warn(\"[_updatePositionData] Could not find new Position data. This could be caused by data that is loaded from another Company.\");\n    }\n} else {\n    $ctrl.uiState.selectedEntity.PositionId = null;\n    $ctrl.uiState.selectedEntity.Department = null;\n    $ctrl.uiState.selectedEntity.Title = null;\n    $ctrl.uiState.selectedEntity.CustomAnnualRate = null;\n}\n\n$ctrl.uiState.displayedRole = $ctrl.helpers._getUserDisplayRole($ctrl.uiState.selectedEntity);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_updatePositionData",
+          "parameters": [
+            "newPosId",
+            "formData"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "if (!params) params = {};\n\nconst entityType = $ctrl.entityType;\n$ctrl.uiState.currentRequestId++;\nconst currentRequestId = $ctrl.uiState.currentRequestId;\n$ctrl.isLoadingTable = true;\n\n$ctrl.helpers._resetUiState(true);\n\nif (!$ctrl.isWorker || !$ctrl.workerId) {\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $ctrl.$timeout(() => {\n            if (currentRequestId === $ctrl.uiState.currentRequestId) {\n                $ctrl.isLoadingTable = false;\n            }\n        });\n    }\n    return;\n}\n\ntry {\n    const finalQuery = await $ctrl.helpers._buildProfileTabQuery(entityType);\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    params.currentRequestId = currentRequestId;\n    await $ctrl.loaders.loadGridData(entityType, finalQuery, params);\n} catch (err) {\n    // Only show the error if user is still on the tab that failed\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        console.error(err);\n        $ctrl.utils.toast(`Failed to load ${entityType} data`, \"ERROR\");\n    }\n\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadActiveTab",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const isUsrAdmin = $ctrl.authService.isCurrentUserAdmin;\nconst tabStore = $ctrl.tabStore[entityType];\nconst tabConfig = $ctrl.tabConfig[entityType];\nconst isWorkerPayComponent = (entityType === \"worker_pay_component\");\nconst { page = tabStore.currentPage, currentRequestId } = params;\n\n// Fetch limit for front end filtering\nconst FETCH_ALL_LIMIT = 1000;\nconst apiPage = (isWorkerPayComponent || isUsrAdmin)  ? (params.page ?? tabStore.currentPage) : 1;\n\ntry {\n    const serviceOptions = {\n        entityType: entityType,\n        query: query,\n        columnDefs: tabConfig?.columnDefaultConfig ?? [],\n        customEntityKey: tabConfig?.customEntityKey,\n        page: apiPage,\n        limit: isUsrAdmin ? tabStore.limit : FETCH_ALL_LIMIT,\n        hydrateOnLoad: isWorkerPayComponent,\n        resetUiState: false,\n        touchLoadingStates: false,\n        reloadColumns: isWorkerPayComponent\n    };\n\n    if(isUsrAdmin) {\n        await $ctrl.baseGridControllerService.loadGridData($ctrl, serviceOptions);\n    } else {\n        await $ctrl.workerGridControllerService.loadWorkerGridData($ctrl, serviceOptions);\n    }\n\n    // After Grid Data Load, check if the user switched tabs while the grid was fetching, abort before processing single-record logic\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    // Reset filteredData for table display\n    if (!isUsrAdmin) {\n        //Set pagination that works with front end filtering\n        const limit = tabStore.limit || 25;\n        tabStore.filteredData = tabStore.data;\n        tabStore.totalCount = tabStore.data.length;\n        tabStore.totalFiltered = tabStore.data.length;\n        tabStore.currentPage = 1;\n        tabStore.pageCount = Math.max(1, Math.ceil(tabStore.data.length / limit));\n        tabStore.hasNextPage = tabStore.pageCount > 1;\n    } else {\n        tabStore.filteredData = tabStore.data;\n    }\n\n    if (!isUsrAdmin) {\n        $ctrl.handlers.onFilterValueChange($ctrl.filterTarget);\n    } else {\n        tabStore.filteredData = tabStore.data;\n    }\n\n    $ctrl.filterTarget = $ctrl.filterTarget || \"\";\n\n    if (!tabConfig?.isMultiple && tabStore.data && tabStore.data.length > 0) {\n        const entity = tabStore.data[0];\n\n        const hydratedEntity = await $ctrl.referenceDataService.hydrateEntity(entity);\n\n        if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n        $ctrl.helpers._setDisplayedInfo(hydratedEntity);\n        $ctrl.uiState.selectedEntity = hydratedEntity;\n    }\n\n} finally {\n    // Manual loading state reset\n    // Only turn off the spinner if this request is still the most recent request\n    // If a new request started, let its 'true state persist so the spinner doesn't flicker\n    $ctrl.$timeout(() => {\n        if (currentRequestId === $ctrl.uiState.currentRequestId) {\n            $ctrl.isLoadingTable = false;\n        }\n    });\n}\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadGridData",
+          "parameters": [
+            "entityType",
+            "query",
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const workerId = $ctrl.workerId;\n\nif (!workerId || !targetPaySlipId) return null;\n\nconst limit = 25;\nlet offset = 0;\nlet hasNextPage = true;\n\n$ctrl.uiState.isLoadingDetails = true;\n\ntry {\n    while (hasNextPage) {\n        const res = await $ctrl.payrollApiService.get({\n            entity: `pay_slip/worker/${workerId}`,\n            limit: limit,\n            offset: offset,\n            query: \"maskSensitiveWorkerInfo=false\",\n            customEntityKey: \"pay_slip\"\n        });\n\n        const payslips = res.entities ?? res.pay_slip ?? res ?? [];\n        const foundPayslip = payslips.find(p => p.Id === targetPaySlipId);\n\n        if (foundPayslip) {\n            return foundPayslip;\n        }\n\n        if (res.metadata) { // Since we do not have metadata yet on that endpoint, it will skip this.\n            hasNextPage = res.metadata.hasNextPage;\n            // Alternatively: hasNextPage = offset + limit < res.metadata.totalCount;\n        } else {\n            hasNextPage = payslips.length === limit;\n        }\n\n        offset += limit;\n    }\n\n    // In case the Pay Slip is not found, though unlikely.\n    console.warn(`Detailed Payslip ${targetPaySlipId} not found in legacy endpoint for Worker ${workerId}.`);\n    return null;\n\n} catch (err) {\n    console.error(\"Failed to fetch detailed legacy payslip\", err);\n    $ctrl.utils.toast(\"Failed to load detailed payslip information.\", \"ERROR\");\n    return null;\n} finally {\n    $ctrl.uiState.isLoadingDetails = false;\n}",
+          "description": "Retrieves the full details of a specific pay slip by querying the `/pay_slip/worker/{workerId}` endpoint. Because it can be found in a different page, this function implements an automated pagination loop to traverse until the specific record is located.\n\n- **targetPaySlipId**: The unique identifier of the specific pay slip selected.\n- **Logic**:\n    - **Recursive/Iterative Search**: Executes sequential API requests.\n    - **Identification**: Compares the IDs within each returned batch against the `targetPaySlipId`.\n    - **Termination**: Stops and returns the object once found, or returns `null` if all pages are exhausted without a match.\n- **Returns**: A `Promise` resolving to the detailed payslip object, or `null` if the record cannot be located.",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadLegacyPaySlip",
+          "parameters": [
+            "targetPaySlipId"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [
+        {
+          "description": "",
+          "name": "statutory_compliance",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "filteredData",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker_pay_component",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "attendance_summary",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "filteredData",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "pay_slip",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "filteredData",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "accrual_balance",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "filteredData",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "statutory_compliance",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.statutoryComplianceService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"statutorycompliance\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form4\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.statutoryComplianceService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.statutoryComplianceService"
+            },
+            {
+              "description": "",
+              "name": "isMultiple",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "containsSensitiveInfo",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Number\""
+                }
+              ],
+              "description": "",
+              "name": "sensitiveInfoFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker_pay_component",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.workerPayComponentService.getColumnDefaults($ctrl.uiState.payComponent.name)"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"workerpaycomponent\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form6\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.workerPayComponentService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.workerPayComponentService"
+            },
+            {
+              "description": "",
+              "name": "isMultiple",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "attendance_summary",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"attendancesummary\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form5\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService"
+            },
+            {
+              "description": "",
+              "name": "isMultiple",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "pay_slip",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.paySlipService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"payslip\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form8\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.paySlipService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.paySlipService"
+            },
+            {
+              "description": "",
+              "name": "isMultiple",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "containsSensitiveInfo",
+              "type": "property",
+              "value": "true"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "accrual_balance",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.accrualBalanceService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"accrualbalance\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form7\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.accrualBalanceService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.accrualBalanceService"
+            },
+            {
+              "description": "",
+              "name": "isMultiple",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "accrualBalanceService",
+      "resourceIdentity": "services/entities/accrual-balance-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "attendanceSummaryService",
+      "resourceIdentity": "services/entities/attendance-summary-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "paySlipService",
+      "resourceIdentity": "services/entities/pay-slip-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "workerPayComponentService",
+      "resourceIdentity": "services/entities/worker-pay-component-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "statutoryComplianceService",
+      "resourceIdentity": "services/entities/statutory-compliance-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "payComponentTabItemsMap",
+      "type": "property",
+      "value": "new Map([\n    [1, \"earning\"],\n    [2, \"benefit\"]\n]);"
+    },
+    {
+      "id": "service",
+      "name": "filterOperationsService",
+      "resourceIdentity": "services/core/ui/filter-operations-service",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "tabManagementService",
+      "resourceIdentity": "services/core/ui/tab-management-service",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "description": "The visibility of the side panel.",
+      "name": "sidePanelVisible",
+      "type": "property",
+      "value": "false"
+    },
+    {
+      "id": "service",
+      "name": "formManagementService",
+      "resourceIdentity": "services/core/ui/form-management-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "form8",
+      "properties": [
+        {
+          "description": "",
+          "name": "status",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form7",
+      "properties": [
+        {
+          "description": "",
+          "name": "accrualId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "earningId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "accruedAmount",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "balance",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "lastAccrualDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "used",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "description",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveFromDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveToDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "carryOver",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form6",
+      "properties": [
+        {
+          "description": "",
+          "name": "customEmployeeAmount",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "customEmployerAmount",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form5",
+      "properties": [
+        {
+          "description": "",
+          "name": "unitsType",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "unitsWorked",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "remarks",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form4",
+      "properties": [
+        {
+          "description": "",
+          "name": "name",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "number",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveFromDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveToDate",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "workerGridControllerService",
+      "resourceIdentity": "services/core/worker-ui/worker-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "filterTarget",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "assignmentUtilsService",
+      "resourceIdentity": "services/core/logic/assignment/assignment-utils-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payComponentAssignmentService",
+      "resourceIdentity": "services/core/logic/assignment/pay-component-assignment-service",
+      "type": "service"
+    },
+    {
+      "name": "$sce",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityOperationsService",
+      "resourceIdentity": "services/core/logic/entity-operations-service",
+      "type": "service"
+    }
+  ]
+}

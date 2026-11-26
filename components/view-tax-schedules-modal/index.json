@@ -1,0 +1,198 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "() => {}",
+      "description": "This function should be called to close the modal.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onClose",
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "The result of the modal that is returned after the modal is closed.",
+      "enumOptions": [
+        {
+          "value": "ok"
+        },
+        {
+          "value": "cancel"
+        }
+      ],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "result",
+      "propertyType": "enum",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "props",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "Tax Schedules"
+            }
+          ],
+          "classList": [
+            "modal-title"
+          ],
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "×"
+            }
+          ],
+          "classList": [
+            "modal-close"
+          ],
+          "events": {
+            "click": "$ctrl.onCancelClick()"
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [
+        "modal-header"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "$ctrl.props.TaxSchedules",
+              "to": "data"
+            }
+          ],
+          "name": "Table",
+          "nodeName": "bln-table",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "--bln-table-secondary-bg-color",
+              "value": "#f9f9f9"
+            }
+          ],
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-body"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-cancel"
+          ],
+          "expressions": [
+            {
+              "expression": "\"secondary\"",
+              "to": "type"
+            },
+            {
+              "expression": "\"Close\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onCancelClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-footer"
+      ],
+      "name": "div"
+    }
+  ],
+  "description": null,
+  "formControl": null,
+  "localStylesheets": [
+    {
+      "path": "index.css"
+    }
+  ],
+  "modules": [],
+  "name": "view-tax-schedules-modal",
+  "nodeName": null,
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "body": "$ctrl.result = 'ok'\n$ctrl.onClose()",
+      "description": "This function is called when OK button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onOkClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.result = 'cancel'\n$ctrl.onClose()",
+      "description": "This function is called when Cancel button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onCancelClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ]
+}

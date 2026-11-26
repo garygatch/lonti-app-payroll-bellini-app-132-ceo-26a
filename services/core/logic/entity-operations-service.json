@@ -1,0 +1,200 @@
+{
+  "description": "",
+  "name": "entity-operations-service",
+  "parentDirectoryId": "-l8Dc962A69QwbOyG9aAq",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "children": [
+        {
+          "description": "",
+          "name": "0",
+          "type": "property",
+          "value": "\"employerContribution\""
+        },
+        {
+          "description": "",
+          "name": "1",
+          "type": "property",
+          "value": "\"includeInBasicSalary\""
+        }
+      ],
+      "description": "",
+      "name": "BOOLEAN_FIELDS",
+      "type": "array"
+    },
+    {
+      "children": [
+        {
+          "description": "",
+          "name": "0",
+          "type": "property",
+          "value": "\"isWorker\""
+        },
+        {
+          "description": "",
+          "name": "1",
+          "type": "property",
+          "value": "\"isPayrollAdmin\""
+        }
+      ],
+      "description": "Fields to exclude regardless of context",
+      "name": "EXCLUDE_FIELDS",
+      "type": "array"
+    },
+    {
+      "description": "",
+      "name": "_helpers",
+      "properties": [
+        {
+          "body": "const result = {};\n\nfor (const key in form) {\n    if (this.EXCLUDE_FIELDS.includes(key)) continue; // Exclude these fields regardless of context\n    if (form.hasOwnProperty(key) && form[key] !== \"\") {\n        const titleCaseKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n        if (this._helpers._isBooleanField(key) && method === \"POST\") {\n            result[titleCaseKey] = form[key] || false;\n        } else if (key.includes(\"Date\") && form[key]) {\n            result[titleCaseKey] = this.utils.formatDate(form[key]);\n        } else if (key === \"workingDays\" && form[key] && Object.values(form[key]).find(day => day)) {\n            result[titleCaseKey] = this._helpers._convertWorkingDaysToString(form[key]);\n        } else {\n            result[titleCaseKey] = form[key];\n        }\n    }\n}\n\nreturn result;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_buildRequestBody",
+          "parameters": [
+            "form",
+            "method"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const actionMap = {\n    \"POST\": \"added\",\n    \"PUT\": \"updated\",\n    \"DELETE\": \"deleted\"\n};\n\nreturn actionMap[method] ?? \"processed\";",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getActionText",
+          "parameters": [
+            "method"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!workingDays || typeof workingDays !== 'object') {\n    return \"\";\n}\n\nreturn Object.entries(workingDays)\n    .filter(([day, isActive]) => isActive)\n    .map(([day]) => day)\n    .join(\", \");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_convertWorkingDaysToString",
+          "parameters": [
+            "workingDays"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const booleanPrefixes = /^(is|need|with|can|allow|active|salaried|enabled|final)/i;\nreturn booleanPrefixes.test(fieldName) || this.BOOLEAN_FIELDS.includes(fieldName);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_isBooleanField",
+          "parameters": [
+            "fieldName"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const methodActionConfig = {\n    \"POST\": \"Insert\",\n    \"PUT\": \"Update\",\n    \"DELETE\": \"Delete\"\n};\n\nconst action = methodActionConfig[method];\nconst titleCased = entityTitle || entityType\n    .split('_')\n    .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n    .join('');\n\nreturn `lonti_app_payroll_service_${entityType}_${action}${titleCased}`;",
+          "description": "Constructs a fully qualified API method name dynamically based on the operation and entity type. This helper ensures consistent naming conventions when interacting with the payroll service layer by automating the conversion of technical keys into the expected PascalCase format.\n\n- **action**: The CRUD operation to perform (e.g., `'Select'`, `'Insert'`, `'Update'`, `'Delete'`).\n- **entityType**: The base name of the entity in `snake_case` (e.g., `'earning'`, `'tax_schedule'`).\n- **entityTitle**: *Optional.* An override string used as the suffix. If omitted, the function automatically converts the `entityType` from `snake_case` to `TitleCase`.\n- **Logic**: \n    - **String Formatting**: Splits the entity type by underscores and capitalizes each segment to create a valid suffix.\n    - **Pattern Matching**: Interpolates the segments into the standard service pattern: `lonti_app_payroll_service_[entity]_[Action][Suffix]`.\n- **Returns**: A string representing the exact method name to be called on the API service (e.g., `lonti_app_payroll_service_tax_schedule_InsertTaxSchedule`).",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_buildApiMethodName",
+          "parameters": [
+            "method",
+            "entityType",
+            "entityTitle"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "try {\n    const requestBody = {\n        ...this._helpers._buildRequestBody(form, method),\n        ...(method === \"PUT\" ? { \"Id\": selectedEntity.Id } : {}),\n        ...additionalData\n    };\n\n    const endpoint = this._helpers._buildApiMethodName(method, entityType);\n    const apiParams = method === \"DELETE\" ? { id: selectedEntity.Id } : {};\n    const apiBody = method === \"DELETE\" ? undefined : requestBody;\n    const headers = {\n        \"X-Authorization\": this.$cookies.get(\"id_token\")\n    }\n\n    let result;\n\n    if (method === \"DELETE\") {\n        result = await this.payrollAppApi[endpoint](apiParams, { headers });\n    } else {\n        result = await this.payrollAppApi[endpoint](apiParams, apiBody, { headers });\n    }\n\n    if (onSuccess) {\n        try {\n            await onSuccess(result);\n        } catch (uiError) {\n            console.error('onSuccess handler failed after successful operation', uiError);\n        }\n    }\n\n    const actionText = this._helpers._getActionText(method);\n    this.utils.toast(`Successfully ${actionText} ${entityName}`, result.status);\n\n    return result;\n\n} catch (reason) {\n    if (onError) {\n        onError(reason);\n    }\n\n    const errorMessage = reason.data?.message || `Failed to ${this._helpers._getActionText(method)} ${entityName}`;\n    this.utils.toast(errorMessage, reason.data?.result || reason.status);\n\n    throw reason;\n\n} finally {\n    if (onFinally) {\n        onFinally();\n    }\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "executeEntityOperation",
+      "parameters": [
+        "method",
+        "form",
+        "onSuccess",
+        "onError",
+        "onFinally",
+        "entityType",
+        "entityName",
+        "selectedEntity",
+        "additionalData"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!selectedEntity || !selectedEntityName) {\n    this.utils.toast(\"No entity selected for deletion\", \"ERROR\");\n    return false;\n}\n\nconst entityDetails = this.utils.legacyGenerateEntityDetails({\n    entity: selectedEntity,\n    utils: this.utils\n});\n\ntry {\n    const response = await this.$modal.open(\"delete-entity-modal\", {\n        props: {\n            EntityName: selectedEntityName,\n            EntityDetails: entityDetails\n        }\n    });\n\n    return response.result === \"ok\";\n\n} catch (error) {\n    return false;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "confirmDelete",
+      "parameters": [
+        "selectedEntity",
+        "selectedEntityName"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "buildRequestBody",
+    "executeEntityOperation",
+    "confirmDelete",
+    "getActionText",
+    "convertWorkingDaysToString",
+    "isBooleanField",
+    "EXCLUDE_FIELDS"
+  ]
+}

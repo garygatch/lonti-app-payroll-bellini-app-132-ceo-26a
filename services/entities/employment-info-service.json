@@ -1,0 +1,25 @@
+{
+  "description": "",
+  "name": "employment-info-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "const displayColumnNames = [\n\n];\n\nconst displayColumnOptions = {\n    type: {\n        \"EmploymentStartDate\": \"date\",\n        \"EmploymentEndDate\": \"date\",\n        \"FirstDay\": \"date\",\n        \"LastDateWorked\": \"date\",\n        \"TerminationDate\": \"date\",\n        \"EffectiveFromDate\": \"date\",\n        \"EffectiveToDate\": \"date\",\n        \"FinalPayEligible\": \"boolean\",\n        \"FinalPayEligibleDate\": \"date\",\n        \"FinalPayProcessed\": \"boolean\"\n    }\n}\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getColumnDefaults"
+  ]
+}

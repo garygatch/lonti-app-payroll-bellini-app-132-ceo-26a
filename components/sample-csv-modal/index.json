@@ -1,0 +1,691 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "() => {}",
+      "description": "This function should be called to close the modal.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onClose",
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "The result of the modal that is returned after the modal is closed.",
+      "enumOptions": [
+        {
+          "value": "ok"
+        },
+        {
+          "value": "cancel"
+        }
+      ],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "result",
+      "propertyType": "enum",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "Sample CSV File Content"
+            }
+          ],
+          "classList": [
+            "modal-title"
+          ],
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "font-weight",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "×"
+            }
+          ],
+          "classList": [
+            "modal-close"
+          ],
+          "events": {
+            "click": "$ctrl.onCancelClick()"
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [
+        "modal-header"
+      ],
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "space-between"
+        },
+        {
+          "enabled": true,
+          "property": "align-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "padding",
+          "value": "1rem"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "FirstName,LastName,EarningCode,UnitsWorked,UnitsType,Remarks"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Marie,Curie,NORMAL_DAY,9.808,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Marie,Curie,UNWORKED_LH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Marie,Curie,WORKED_SH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Marie,Curie,LEAVE,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,NORMAL_DAY,9.808,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,NIGHT_SHIFT,4.904,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,UNWORKED_SH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,UNWORKED_LH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,WORKED_SH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,WORKED_LH,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,WORKED_SH_NS,2.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,WORKED_LH_NS,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,SICK_LEAVE_1_15,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,SICK_LEAVE_16_EOM,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,VACATION_LEAVE_1_15,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,VACATION_LEAVE_16_EOM,1.000,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Albert,Einstein,UNUSED_VL,4.904,DAY,"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Grace,Hopper,NORMAL_DAY,6.500,DAY,Holiday Swap: May 1 swap to May 3"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Grace,Hopper,NIGHT_SHIFT,4.469,DAY,Holiday Swap: May 1 swap to May 3"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Grace,Hopper,WORKED_SH,0.500,DAY,SH: Jose Abad Santos Day"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Grace,Hopper,WORKED_SH_NS,0.500,DAY,SH: Jose Abad Santos Day"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Grace,Hopper,UNWORKED_LH,1.000,DAY,LH: Labor Day"
+                }
+              ],
+              "classList": [],
+              "name": "p",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "margin",
+                  "value": "0"
+                }
+              ]
+            }
+          ],
+          "classList": [],
+          "elementId": "sample-csv",
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "margin",
+              "value": "1rem"
+            },
+            {
+              "enabled": true,
+              "property": "border-style",
+              "value": "solid"
+            },
+            {
+              "enabled": true,
+              "property": "border-width",
+              "value": "thin"
+            },
+            {
+              "enabled": true,
+              "property": "padding",
+              "value": "0.5rem"
+            }
+          ]
+        }
+      ],
+      "classList": [
+        "modal-body"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-cancel"
+          ],
+          "expressions": [
+            {
+              "expression": "\"secondary\"",
+              "to": "type"
+            },
+            {
+              "expression": "\"Close\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onCancelClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-ok"
+          ],
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "\"Download\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onOkClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-footer"
+      ],
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "align-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "center"
+        }
+      ]
+    }
+  ],
+  "description": null,
+  "formControl": null,
+  "localStylesheets": [
+    {
+      "path": "index.css"
+    }
+  ],
+  "modules": [],
+  "name": "sample-csv-modal",
+  "nodeName": "sample-csv-modal",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "body": "$ctrl.exportAsCSV();\n$ctrl.result = 'ok'\n$ctrl.onClose()",
+      "description": "This function is called when OK button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onOkClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.result = 'cancel'\n$ctrl.onClose()",
+      "description": "This function is called when Cancel button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onCancelClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "exportDivAsCSV(\"sample-csv\", \"sample-attendance\");\n\nfunction exportDivAsCSV(divId, fileName) {\n    // Get the div element\n    const divElement = document.getElementById(divId);\n    if (!divElement) {\n        console.error(`Div with ID '${divId}' not found`);\n        return;\n    }\n\n    // Collect text content from <p> elements\n    const paragraphs = divElement.querySelectorAll('p');\n    const csvRows = [];\n    paragraphs.forEach((p) => {\n        // Add the text content of each <p> to a new row in the CSV (no quotes)\n        csvRows.push(p.textContent.trim());\n    });\n\n    // Combine rows into a single CSV string\n    const csvContent = csvRows.join('\\n');\n\n    // Create a Blob from the CSV string\n    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });\n\n    // Create a download link\n    const link = document.createElement('a');\n    const url = URL.createObjectURL(blob);\n    link.setAttribute('href', url);\n    link.setAttribute('download', `${fileName || 'data'}.csv`);\n    document.body.appendChild(link);\n\n    // Trigger the download and clean up\n    link.click();\n    document.body.removeChild(link);\n    URL.revokeObjectURL(url);\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "exportAsCSV",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ]
+}

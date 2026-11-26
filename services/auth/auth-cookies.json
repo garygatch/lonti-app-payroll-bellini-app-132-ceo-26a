@@ -1,0 +1,79 @@
+{
+  "description": "",
+  "name": "auth-cookies",
+  "parentDirectoryId": "plukWBhIlQsdGDE67dxNA",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "this.setServerUrl();\nreturn Promise.resolve();",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "getAuthToken",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "serverUrl",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "const currentEnv = this.$env.current.name;\nconst localEndpoint = \"http://localhost:8080\";\nconst stagingEndpoint = \"https://toro292.et.martiniserver.com\";\nconst prodEndpoint = \"https://toro287.et.martiniserver.com\";\nconst payrollAppApiPath = \"/api/lonti_app_payroll/1.0\";\n\nconst getApiUrl = (base) => base.concat(payrollAppApiPath);\n\nif (currentEnv === \"staging\") {\n  this.serverUrl = getApiUrl(stagingEndpoint);\n  this.payrollAppApi.setServerUrl(this.serverUrl);\n} else if (currentEnv === \"prod\") {\n  this.serverUrl = getApiUrl(prodEndpoint);\n  this.payrollAppApi.setServerUrl(this.serverUrl);\n} else {\n  this.serverUrl = getApiUrl(localEndpoint);\n  this.payrollAppApi.setServerUrl(this.serverUrl);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setServerUrl",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "body": "return {\n    \"X-Authorization\": this.$cookies.get(\"id_token\")\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setHeaders",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "login",
+    "userManager",
+    "cognitoAuthConfig",
+    "setServerUrl",
+    "activeUserTokens",
+    "setHeaders",
+    "serverUrl",
+    "activeUser",
+    "test"
+  ]
+}

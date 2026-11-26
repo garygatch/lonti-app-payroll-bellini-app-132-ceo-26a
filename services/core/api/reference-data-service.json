@@ -1,0 +1,1089 @@
+{
+  "description": "",
+  "name": "reference-data-service",
+  "parentDirectoryId": "D8D3o8N9R8U4NB4va4vap",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "ENTITY_CONFIG",
+      "properties": [
+        {
+          "description": "",
+          "name": "Accrual",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"accruals\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"accrual\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"AllowEncashment\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Benefit",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"benefits\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"benefit\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "CalculationMethod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"calculation_methods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"calculation_method\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"calculationmethod\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Method\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Method\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Company",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"companies\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"company\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"LegalName\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"LegalName\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"TradeName\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Country",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"countries\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"country\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"WithStates\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Currency",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"currencies\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"currency\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"CurrencyName\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"CurrencyName\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Earning",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"earnings\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"earning\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "EmployeeCalculationMethod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"calculation_methods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"calculation_method\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Method\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"calculationmethod\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Method\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "EmployerCalculationMethod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"calculation_methods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"calculation_method\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"calculationmethod\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Method\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Method\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "PayPeriod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"pay_periods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"pay_period\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"payperiod\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"DisplayName\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"DisplayName\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"OffCycle\""
+                },
+                {
+                  "description": "",
+                  "name": "2",
+                  "type": "property",
+                  "value": "\"PayScheduleId\""
+                },
+                {
+                  "description": "",
+                  "name": "3",
+                  "type": "property",
+                  "value": "\"CompanyId\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "PaySchedule",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"pay_schedules\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"pay_schedule\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"payschedule\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"DisplayName\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"DisplayName\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"CompanyId\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Position",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"positions\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"position\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Title\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Department\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"Title\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "SDCalculationMethod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"calculation_methods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"calculation_method\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"calculationmethod\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Method\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Method\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "State",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"states\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"state\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"CountryId\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Tax",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"taxes\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"tax\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Name\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "TaxCalculationMethod",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"calculation_methods\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"calculation_method\""
+            },
+            {
+              "description": "",
+              "name": "customKey",
+              "type": "property",
+              "value": "\"calculationmethod\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Method\""
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"Method\""
+                }
+              ],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "Worker",
+          "properties": [
+            {
+              "description": "",
+              "name": "listKey",
+              "type": "property",
+              "value": "\"workers\""
+            },
+            {
+              "description": "",
+              "name": "apiEntity",
+              "type": "property",
+              "value": "\"worker\""
+            },
+            {
+              "description": "",
+              "name": "label",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "selectFields",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "_cache",
+      "properties": [],
+      "type": "object"
+    },
+    {
+      "body": "const config = Object.values(this.ENTITY_CONFIG).find(c => c.apiEntity === entityName);\nconst isCompanyBound = config ? config.isCompanyBound : false;\nconst currentCompanyId = this.globalSelectedCompany?.companyId || null;\n\n// 3. Generate Cache Key\n// If it's company-bound, the cache key MUST include the company ID.\n// e.g. \"pay_schedules\" becomes \"pay_schedules_55\"\nlet cacheKey = key;\nif (isCompanyBound) {\n    if (!currentCompanyId) {\n        console.warn(`Cannot load ${entityName}: No Company ID selected.`);\n        return Promise.resolve({});\n    }\n    cacheKey = `${key}_${currentCompanyId}`;\n}\n\nif (this._cache[cacheKey]) {\n    return this._cache[cacheKey];\n}\n\nconst fields = this.helpers._getFieldsToSelect(entityName);\nconst uniqueFields = [...new Set(fields)];\n\nconst queryParts = [`select=${uniqueFields.join(\",\")}`];\n\nif (isCompanyBound && currentCompanyId) {\n    queryParts.push(`CompanyId=${currentCompanyId}`);\n}\n\nconst query = queryParts.join(\"&\");\n\nthis._cache[cacheKey] = this.payrollApiService.get({\n    entity: entityName,\n    page: 1,\n    limit: 1000,\n    query,\n    customEntityKey\n}).then(res => {\n    const list = res.entities || res || [];\n\n    return list.reduce((acc, item) => {\n        acc[item.Id] = item;\n        return acc;\n    }, {});\n}).catch(err => {\n    console.error(`Failed to load ${entityName}`, err);\n    this._cache[cacheKey] = null;\n    throw err;\n});\n\nreturn this._cache[cacheKey];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "_ensureStaticList",
+      "parameters": [
+        "key",
+        "entityName",
+        "customEntityKey"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "const map = await this._ensureStaticList(key, entityType, customEntityKey);\nconst items = Object.values(map);\n\n// Build the base options array\nconst options = items.map(item => ({\n    label: item[labelField], // Will be undefined for workers initially\n    value: item.Id,\n    ...item\n}));\n\n// Hydrate Worker Names\nif (entityType === 'worker') {\n    const workerIds = options.map(opt => opt.value);\n\n    // Leverage the existing batch resolver to get the users linked to these workers\n    const users = await this.resolvers.batch.resolveUsersByWorkerId(workerIds);\n\n    options.forEach((opt, index) => {\n        const user = users[index];\n        // Format the full name, fallback to \"Worker [ID]\" if orphaned\n        const fullName = user ? `${user.FirstName || ''} ${user.LastName || ''}`.trim() : `Worker ${opt.value}`;\n\n        opt.label = fullName;\n        opt.Name = fullName; // Populate the Name field just in case future forms expect it\n    });\n}\n\n// 3. Return alphabetically sorted options for better UI experience\nreturn options.sort((a, b) => (a.label || '').localeCompare(b.label || ''));",
+          "description": "Generic helper to get a list formatted for Bellini dropdowns `{label, value}`.",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_getDropdownOptions",
+          "parameters": [
+            "key",
+            "entityType",
+            "labelField",
+            "customEntityKey"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const defaultFields = [\"Id\"];\nconst configEntry = Object.values(this.ENTITY_CONFIG).find(\n    c => c.apiEntity === apiEntityName\n);\n\nif (configEntry && configEntry.selectFields) {\n    return defaultFields.concat(configEntry.selectFields);\n}\n\nreturn defaultFields.concat([\"Name\"]);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getFieldsToSelect",
+          "parameters": [
+            "apiEntityName"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "resolvers",
+      "properties": [
+        {
+          "body": "const config = this.ENTITY_CONFIG[entityType];\n\nif (!config) {\n    console.warn(`No configuration found for entity type: ${entityType}`);\n    return Promise.resolve(null);\n}\nif (!id) return Promise.resolve(null);\n\nreturn this._ensureStaticList(config.listKey, config.apiEntity, config.customKey)\n    .then(map => map[id] || null);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "resolveEntity",
+          "parameters": [
+            "entityType",
+            "id"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "idField = idField ?? \"Id\";\n\nif (!idArr || !Array.isArray(idArr) || idArr.length === 0) {\n    return Promise.resolve([]);\n}\n\nconst currentCompanyId = this.globalSelectedCompany?.companyId;\nif (!currentCompanyId) {\n    console.warn(`Cannot resolve ${entity}: No Company ID selected.`);\n    return Promise.resolve([]);\n}\n\n// 1. Generate Field and Company-Scoped Cache Key (e.g. user_by_WorkerId_55 vs user_by_Id_55)\nconst cacheKey = `${entity}_by_${idField}_${currentCompanyId}`;\nif (!this._cache[cacheKey]) this._cache[cacheKey] = {};\nconst companyCache = this._cache[cacheKey];\n\nconst uniqueIds = [...new Set(idArr.filter(id => id !== null && id !== undefined))];\nconst missingIds = uniqueIds.filter(id => !companyCache[id]);\n\n// 2. Batch Fetch with Chunking & Scoping\nif (missingIds.length > 0) {\n    const CHUNK_SIZE = 50;\n    const chunks = [];\n\n    for (let i = 0; i < missingIds.length; i += CHUNK_SIZE) {\n        chunks.push(missingIds.slice(i, i + CHUNK_SIZE));\n    }\n\n    const fetchPromises = chunks.map(chunk => {\n        const query = `${idField}_in=${chunk.join(',')}&CompanyId=${currentCompanyId}`;\n        return this.payrollApiService.get({\n            entity: entity,\n            limit: chunk.length,\n            query: query\n        }).then(res => res.entities || (Array.isArray(res) ? res : []));\n    });\n\n    const batchFetchPromise = Promise.all(fetchPromises)\n        .then(results => results.flat())\n        .catch(err => {\n            console.warn(`Batch resolve ${entity} failed`, err);\n            missingIds.forEach(id => delete companyCache[id]);\n            return [];\n        });\n\n    missingIds.forEach(id => {\n        companyCache[id] = batchFetchPromise.then(list => {\n            return list.find(item => String(item[idField]) === String(id)) || null;\n        });\n    });\n}\n\n// 3. Return Order-Preserved Promises\nconst promiseList = idArr.map(id => {\n    if (!id) return Promise.resolve(null);\n    return companyCache[id] || Promise.resolve(null);\n});\n\nreturn Promise.all(promiseList);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "batchResolveById",
+          "parameters": [
+            "entity",
+            "idArr",
+            "idField"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "return this.resolvers.batch.resolveUsers([id]).then(result => result[0]);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "resolveUser",
+          "parameters": [
+            "id"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "description": "",
+          "name": "batch",
+          "properties": [
+            {
+              "body": "// 1. Validation & Setup\nif (!idArr || !Array.isArray(idArr) || idArr.length === 0) {\n    return Promise.resolve([]);\n}\n\nif (!this._cache.users) this._cache.users = {};\n\n// Filter out nulls/undefined and deduplicate\nconst uniqueIds = [...new Set(idArr.filter(id => id !== null && id !== undefined))];\n\n// 2. Identify Missing IDs\nconst missingIds = uniqueIds.filter(id => !this._cache.users[id]);\n\n// 3. Batch Fetch Missing Items\nif (missingIds.length > 0) {\n    const query = `Id_in=${missingIds.join(',')}`;\n\n    // Create ONE shared promise for the network request\n    const batchFetchPromise = this.payrollApiService.get({\n        entity: 'user', // Hits the collection endpoint (e.g. /api/user?Id_in=...)\n        query: query\n    }).then(res => {\n        // Handle various backend response shapes ({ entities: [...] } vs [...])\n        const users = res.entities || (Array.isArray(res) ? res : []);\n        return users;\n    }).catch(err => {\n        console.warn(\"Batch resolveUsers failed\", err);\n        // Invalidate the failed IDs so they can be retried later\n        missingIds.forEach(id => delete this._cache.users[id]);\n        return [];\n    });\n\n    // 4. Update Cache (The \"Split\" Strategy)\n    // Map the SINGLE batch promise to specific promises for each ID.\n    missingIds.forEach(id => {\n        this._cache.users[id] = batchFetchPromise.then(allUsers => {\n            // Find this specific user in the batch results\n            // Using loose equality (==) handles string/number mismatches (e.g. \"5\" vs 5)\n            const match = allUsers.find(u => u.Id == id);\n            return match || null;\n        });\n    });\n}\n\n// 5. Return Results in Order\n// Map the original input array to the cached promises\nconst promiseList = idArr.map(id => {\n    if (!id) return Promise.resolve(null);\n    return this._cache.users[id] || Promise.resolve(null);\n});\n\nreturn Promise.all(promiseList);",
+              "description": "Resolves an array of User IDs into full User objects using a \"Cache-Aside\" pattern. To optimize performance, it retrieves known users from a local cache and performs a single batch network request for any missing IDs.\n- **idArr**: An array of User IDs to be resolved (e.g., `[1, 2, 5]`).\n- **Returns**: A `Promise` that resolves to an array of User objects, maintaining the exact same order as the input array.",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "resolveUsers",
+              "parameters": [
+                "idArr"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "if (!workerIdArr || !Array.isArray(workerIdArr) || workerIdArr.length === 0) {\n    return Promise.resolve([]);\n}\n\n// 1. Dedicated Cache for Worker Lookups\nif (!this._cache.usersByWorkerId) this._cache.usersByWorkerId = {};\n\nconst uniqueIds = [...new Set(workerIdArr.filter(id => id !== null && id !== undefined))];\n\n// 2. Identify Missing Worker IDs\nconst missingIds = uniqueIds.filter(id => !this._cache.usersByWorkerId[id]);\n\n// 3. Batch Fetch with Chunking and Explicit Limits\nif (missingIds.length > 0) {\n    const CHUNK_SIZE = 50; // Safe threshold for URL length limits\n    const chunks = [];\n    \n    // Split missingIds into bite-sized arrays\n    for (let i = 0; i < missingIds.length; i += CHUNK_SIZE) {\n        chunks.push(missingIds.slice(i, i + CHUNK_SIZE));\n    }\n\n    // Map chunks to parallel API request promises\n    const fetchPromises = chunks.map(chunk => {\n        const query = `WorkerId_in=${chunk.join(',')}`;\n        // Explicitly pass limit matching the chunk size to bypass the default 25 limit\n        return this.payrollApiService.get({\n            entity: 'user',\n            limit: chunk.length,\n            query: query\n        }).then(res => {\n            return res.entities || (Array.isArray(res) ? res : []);\n        });\n    });\n\n    // Combine all chunk requests into a single master resolution promise\n    const batchFetchPromise = Promise.all(fetchPromises)\n        .then(results => {\n            // Flatten the array of arrays into a single array of user objects\n            return results.flat();\n        })\n        .catch(err => {\n            console.warn(\"Batch resolveUsersByWorkerId failed\", err);\n            // Evict from cache on failure so a retry can occur later\n            missingIds.forEach(id => delete this._cache.usersByWorkerId[id]);\n            return [];\n        });\n\n    // 4. Update Cache\n    missingIds.forEach(wId => {\n        this._cache.usersByWorkerId[wId] = batchFetchPromise.then(allUsers => {\n            return allUsers.find(u => String(u.WorkerId) === String(wId)) || null;\n        });\n    });\n}\n\n// 5. Return Results\nconst promiseList = workerIdArr.map(wId => {\n    if (!wId) return Promise.resolve(null);\n    return this._cache.usersByWorkerId[wId] || Promise.resolve(null);\n});\n\nreturn Promise.all(promiseList);",
+              "description": "Resolves User entities based on their linked WorkerId.\nEssential for bridging Worker_Position -> User (Name).",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "resolveUsersByWorkerId",
+              "parameters": [
+                "workerIdArr"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "getters",
+      "properties": [
+        {
+          "body": "return this._ensureStaticList(\"companies\", \"company\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "getCompaniesMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "return this._ensureStaticList(\"currencies\", \"currency\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "getCurrenciesMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "return this._ensureStaticList(\"countries\", \"country\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "getCountriesMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "return this._ensureStaticList(\"states\", \"state\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "getStatesMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "return this._ensureStaticList(\"pay_schedules\", \"pay_schedule\", \"payschedule\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "getPaySchedulesMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "dropdownOptionsGetters",
+      "properties": [
+        {
+          "body": "const config = this.ENTITY_CONFIG[entityType];\n\nif (!config) {\n    console.warn(`[ReferenceData] No configuration found for entity: ${entityType}`);\n    return Promise.resolve([]);\n}\n\nreturn this.helpers._getDropdownOptions(\n    config.listKey,\n    config.apiEntity,\n    config.label,\n    config.customKey\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "getOptions",
+          "parameters": [
+            "entityType"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "if (!entity) return null;\n\nconst hydrated = { ...entity };\nconst tasks = [];\n\nObject.keys(hydrated).forEach(key => {\n    if (key.endsWith(\"Id\") && key.length > 2) {\n\n        const entityType = key.slice(0, -2);\n        const id = hydrated[key];\n\n        if (entityType.includes(\"CalculationMethod\") && id != null) {\n            // Hardcode resolution to avoid backend calls\n            if (id == 1) hydrated[entityType] = \"FLAT\";\n            else if (id == 2) hydrated[entityType] = \"PERCENT\";\n            else hydrated[entityType] = id; // Fallback\n\n            return;\n        }\n\n        // --- Skip WorkerId in the standard loop ---\n        if (entityType === \"Worker\") {\n            return; // Handled below in special logic\n        }\n\n        // --- Standard Resolution ---\n        const config = this.ENTITY_CONFIG[entityType];\n\n        if (config && id != null) {\n            const promise = this.resolvers.resolveEntity(entityType, id)\n                .then(item => {\n                    hydrated[entityType] = item ? item[config.label] : id;\n                });\n            tasks.push(promise);\n        }\n    }\n});\n\n// Handle Users (Special Logic for CreatedBy/UpdatedBy)\n['CreatedBy', 'UpdatedBy'].forEach(key => {\n    const userId = hydrated[key];\n    if (userId != null) {\n        tasks.push(\n            this.resolvers.resolveUser(userId).then(user => {\n                hydrated[key] = user ? `${user.FirstName || ''} ${user.LastName || ''}`.trim() : userId;\n            })\n        );\n    }\n});\n\n// Handle Worker Name Hydration (Special Logic for WorkerId)\n// A Worker's name comes from the User table, so we use the batch resolver\nif (hydrated.WorkerId != null) {\n    tasks.push(\n        this.resolvers.batch.resolveUsersByWorkerId([hydrated.WorkerId]).then(users => {\n            const user = users[0]; // The batch resolver returns an array matching the input order\n            hydrated.Worker = user ? `${user.FirstName || ''} ${user.LastName || ''}`.trim() : hydrated.WorkerId;\n        })\n    );\n}\n\nawait Promise.all(tasks);\nreturn hydrated;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "hydrateEntity",
+      "parameters": [
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (key) {\n    this._cache[key] = null;\n} else {\n    Object.keys(this._cache).forEach(k => this._cache[k] = null);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "clearCache",
+      "parameters": [
+        "key"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "hydrateEntity",
+    "getCompaniesMap",
+    "getStatesMap",
+    "getCountriesMap",
+    "getters",
+    "clearCache",
+    "dropdownOptionsGetters",
+    "resolvers",
+    "ENTITY_SELECT_FIELDS_CONFIG"
+  ]
+}

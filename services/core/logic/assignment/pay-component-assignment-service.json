@@ -1,0 +1,189 @@
+{
+  "description": "",
+  "name": "pay-component-assignment-service",
+  "parentDirectoryId": "1NBsPZByP0dbRboEFYU0f",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "_config",
+      "properties": [
+        {
+          "description": "",
+          "name": "position",
+          "properties": [
+            {
+              "description": "",
+              "name": "endpoint",
+              "type": "property",
+              "value": "\"position_pay_component/batch\""
+            },
+            {
+              "description": "",
+              "name": "foreignKey",
+              "type": "property",
+              "value": "\"PositionId\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker",
+          "properties": [
+            {
+              "description": "",
+              "name": "endpoint",
+              "type": "property",
+              "value": "\"worker_pay_component/batch\""
+            },
+            {
+              "description": "",
+              "name": "foreignKey",
+              "type": "property",
+              "value": "\"WorkerId\""
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "if (!payload || payload.length === 0) return Promise.resolve();\nreturn apiService.send(`${endpoint}/insert`, \"POST\", payload, false);",
+      "description": "Takes a pre-formatted payload and sends it to the /insert endpoint.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_batchInsert",
+      "parameters": [
+        "apiService",
+        "endpoint",
+        "payload"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!payload || payload.length === 0) return Promise.resolve();\nreturn apiService.send(`${endpoint}/update`, \"PUT\", payload, false);",
+      "description": "Takes a pre-formatted payload and sends it to the /update endpoint.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_batchUpdate",
+      "parameters": [
+        "apiService",
+        "endpoint",
+        "payload"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!payload || payload.length === 0) return Promise.resolve();\nreturn apiService.send(`${endpoint}/delete`, \"POST\", payload, false);",
+      "description": "Takes a pre-formatted payload (usually `[{ Id: 1 }, ...]`) and sends it to the /delete endpoint.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_batchDelete",
+      "parameters": [
+        "apiService",
+        "endpoint",
+        "payload"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const finalSet = new Set(finalItems.map(idGetter));\nconst originalSet = new Set(originalItems.map(idGetter));\nconst originalMap = new Map(originalItems.map(i => [idGetter(i), i]));\n\n// Inserts: Item exists in Final but not Original\nconst toInsert = finalItems.filter(item => !originalSet.has(idGetter(item)));\n\n// Deletes: Item exists in Original but not Final\nconst toDelete = originalItems.filter(item => !finalSet.has(idGetter(item)));\n\n// Updates: Item exists in Both, but values changed\nconst toUpdate = [];\nfinalItems.forEach(newItem => {\n    const oldItem = originalMap.get(idGetter(newItem));\n    if (oldItem) {\n        const hasChanged =\n            newItem.CustomEmployeeAmount != oldItem.CustomEmployeeAmount ||\n            newItem.CustomEmployerAmount != oldItem.CustomEmployerAmount;\n\n        if (hasChanged) {\n            newItem._linkId = oldItem._linkId;\n            toUpdate.push(newItem);\n        }\n    }\n});\n\nreturn { toInsert, toUpdate, toDelete }",
+      "description": "Logic to compare two lists and find Inserts, Updates, and Deletes.\n * - Final Set vs Original Set -> Inserts / Deletes\n * - Final Map vs Original Map -> Updates (based on custom amount changes)",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_diffLists",
+      "parameters": [
+        "originalItems",
+        "finalItems",
+        "idGetter"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const { toInsert, toUpdate, toDelete } = this._diffLists(originalItems, finalItems, getIdFn);\n\nconst insertPayload = toInsert.map(createInsertPayloadFn);\nconst updatePayload = toUpdate.map(item => ({\n    Id: item._linkId,\n    CustomEmployeeAmount: item.CustomEmployeeAmount || null,\n    CustomEmployerAmount: item.CustomEmployerAmount || null\n}));\nconst deletePayload = toDelete.map(item => ({ Id: item._linkId }));\n\nconst promises = [];\nif (insertPayload.length > 0) promises.push(this._batchInsert(apiService, endpoint, insertPayload));\nif (updatePayload.length > 0) promises.push(this._batchUpdate(apiService, endpoint, updatePayload));\nif (deletePayload.length > 0) promises.push(this._batchDelete(apiService, endpoint, deletePayload));\n\nawait Promise.all(promises);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "_executeComponentSync",
+      "parameters": [
+        "apiService",
+        "endpoint",
+        "originalItems",
+        "finalItems",
+        "getIdFn",
+        "createInsertPayloadFn"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!componentId) throw new Error(\"Component ID is missing\");\n\nconst config = this._config[targetType];\nif (!config) throw new Error(`Configuration for ${targetType} not found`);\n\nconst componentForeignKey = componentType === 'earning' ? 'EarningId' : 'BenefitId';\nconst compClass = componentType.toUpperCase();\n\nconst getId = (item) => item.Id;\n\nconst mapInsert = (item) => ({\n    [componentForeignKey]: componentId,\n    [config.foreignKey]: item.Id,\n    ComponentClass: compClass,\n    CustomEmployeeAmount: item.CustomEmployeeAmount || null,\n    CustomEmployerAmount: item.CustomEmployerAmount || null\n});\n\nreturn this._executeComponentSync(\n    apiService,\n    config.endpoint,\n    originalItems,\n    finalItems,\n    getId,\n    mapInsert\n);",
+      "description": "Orchestrates the bulk assignment of a single Earning or Benefit to multiple target entities (Positions or Workers). This function reverses the typical assignment flow by treating the payroll component as the primary anchor and synchronizing the list of entities associated with it.\n\n- **apiService**: The service instance used to communicate with the backend assignment endpoints.\n- **targetType**: The category of the entity being assigned (e.g., `'position'` or `'worker'`).\n- **componentType**: Specifies whether the component is an `'earning'` or a `'benefit'`.\n- **componentId**: The unique identifier of the specific Earning or Benefit being distributed.\n- **originalItems**: The set of target entities previously persisted in the database.\n- **finalItems**: The new set of target entities selected in the UI.\n- **Logic**:\n    - Performs a \"diffing\" operation to isolate entities that need to be newly linked (Inserts) versus those that need to be unlinked (Deletes).\n    - Triggers the appropriate API methods for the `targetType` and `componentType` combination.\n    - Ensures that the backend state matches the final selection made by the user.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "syncPayComponentsByEarningOrBenefit",
+      "parameters": [
+        "apiService",
+        "targetType",
+        "componentType",
+        "componentId",
+        "originalItems",
+        "finalItems"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!targetId) throw new Error(`${targetType} ID is missing`);\n\nconst config = this._config[targetType];\nif (!config) throw new Error(`Configuration for ${targetType} not found`);\n\nconst getId = (item) => componentType === 'EARNING' ? item.EarningId : item.BenefitId;\n\nconst mapInsert = (item) => ({\n    [config.foreignKey]: targetId,\n    ComponentClass: componentType,\n    ...(componentType === 'EARNING' ? { EarningId: item.EarningId } : { BenefitId: item.BenefitId }),\n    CustomEmployeeAmount: item.CustomEmployeeAmount || null,\n    CustomEmployerAmount: item.CustomEmployerAmount || null\n});\n\nreturn this._executeComponentSync(\n    apiService,\n    config.endpoint,\n    originalItems,\n    finalItems,\n    getId,\n    mapInsert\n);",
+      "description": "Manages the bulk assignment of earnings or benefits to a specific position. It identifies differences between the current selection and the original state to perform the necessary additions and removals in the system.\n\n- **apiService**: The service instance responsible for executing the assignment/de-assignment API calls.\n- **targetType**: The type of entity receiving the components (typically `'position'`).\n- **targetId**: The unique identifier of the target position.\n- **componentType**: Specifies the type of component being processed, either `'EARNING'` or `'BENEFIT'`.\n- **originalItems**: The existing list of earnings or benefits prior to modification.\n- **finalItems**: The updated list of earnings or benefits selected by the user.\n- **Logic**:\n    - Compares `finalItems` against `originalItems` to detect new additions.\n    - Compares `originalItems` against `finalItems` to detect removals.\n    - Executes batch operations to synchronize the backend state with the UI state.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "syncPayComponentsByPositionOrWorker",
+      "parameters": [
+        "apiService",
+        "targetType",
+        "targetId",
+        "componentType",
+        "originalItems",
+        "finalItems"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "saveEarningAssignments",
+    "saveBenefitAssignments",
+    "_prepareInserts",
+    "syncPayComponentsByEarningOrBenefit",
+    "syncPayComponentsByPositionOrWorker"
+  ]
+}

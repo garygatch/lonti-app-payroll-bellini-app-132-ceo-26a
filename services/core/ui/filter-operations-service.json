@@ -1,0 +1,161 @@
+{
+  "description": "",
+  "name": "filter-operations-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "uiState.currentFilter.currentFilterString = newValue;\n\nif (newValue.trim()) {\n    const quickSearchConfig = tabConfig[uiState.currentTab.name].quickSearchDefaultConfig;\n    uiState.currentFilter.advancedFilters = [{\n        property: quickSearchConfig.property,\n        operation: quickSearchConfig.operation,\n        value: newValue\n    }];\n} else {\n    uiState.currentFilter.advancedFilters = [];\n}\n\nloaders.loadActiveTab({ page: 1 });",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onSearch",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "loaders",
+        "newValue"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const filters = newFilters || [];\n\nuiState.currentFilter.currentFilterString = \"\";\nuiState.currentFilter.advancedFilters = filters;\nuiState.currentFilter.usingAdvancedFilters = filters.length > 0;\n\nthis.updateFilterChips(uiState, tabConfig, referenceData, additionalData);\n\nloaders?.loadActiveTab({ page: 1 });",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onAdvancedFilterUpdate",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "referenceData",
+        "loaders",
+        "newFilters",
+        "additionalData"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "referenceData = referenceData ?? {};\n\nconst entityType = uiState.currentTab.name;\nconst service = tabConfig[entityType].service;\nconst definitions = service?.getFilterDefinitions ? service.getFilterDefinitions(additionalData?.requestingPage) : [];\n\n// Process referenceData to flatten the stateMap\nconst processedReferenceData = {\n    ...referenceData,\n    stateMap: referenceData.stateMap\n        ? Object.values(referenceData.stateMap).flat()\n        : []\n};\n\nconst result = await this.$modal.open(\"advanced-filter-modal\", {\n    resolve: {\n        definitions: definitions,\n        currentFilters: angular.copy(uiState.currentFilter.advancedFilters),\n        referenceData: processedReferenceData\n    }\n});\n\nif (result.result === \"ok\") {\n    this.onAdvancedFilterUpdate(uiState, tabConfig, processedReferenceData, loaders, result.resolve.filters, additionalData);\n}\n\nreturn result;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "openAdvancedFilterModal",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "referenceData",
+        "loaders",
+        "additionalData"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "referenceData = referenceData ?? {};\n\nconst currentTabName = uiState.currentTab.name;\nconst service = tabConfig?.[currentTabName]?.service;\nconst definitions = service?.getFilterDefinitions ? service.getFilterDefinitions(additionalData?.requestingPage) : [];\n\nconst result = this.filterService.generateChips(\n    uiState.currentFilter.advancedFilters,\n    definitions,\n    referenceData,\n    Object.fromEntries(\n        this.en.modals.advancedFilterModal.dropdowns.FILTER_OPERATION.values\n            .map(op => [op.value, op.label])\n    )\n);\n\nuiState.currentFilter.chips = result.strings;\nuiState.currentFilter.chipMap = result.map;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "updateFilterChips",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "referenceData",
+        "additionalData"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!Array.isArray(remainingStrings)) {\n    return;\n}\n\nconst newFilterState = remainingStrings\n    .map(label => uiState.currentFilter.chipMap[label])\n\nthis.onAdvancedFilterUpdate(uiState, tabConfig, referenceData, loaders, newFilterState, additionalData);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onChipUpdate",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "referenceData",
+        "loaders",
+        "remainingStrings",
+        "additionalData"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "uiState.currentFilter.currentFilterString = \"\";\nuiState.currentFilter.advancedFilters = [];\nuiState.currentFilter.usingAdvancedFilters = false;\n\nthis.updateFilterChips(uiState);\n\nif (reload) {\n    loaders.loadActiveTab({ page: 1 });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onReset",
+      "parameters": [
+        "uiState",
+        "loaders",
+        "reload"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return uiState.currentFilter.advancedFilters?.length ?? 0;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getActiveFilterCount",
+      "parameters": [
+        "uiState"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "openAdvancedFilterModal",
+    "updateFilterChips",
+    "getActiveFilterCount",
+    "onSearch",
+    "onAdvancedFilterUpdate",
+    "onChipUpdate",
+    "onReset"
+  ]
+}

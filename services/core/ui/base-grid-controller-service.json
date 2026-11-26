@@ -1,0 +1,62 @@
+{
+  "description": "",
+  "name": "base-grid-controller-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "uiState.selectedEntity = null;\nuiState.selectedEntityName = \"\";\nuiState.detailsList = [];\nif (Object.hasOwn(uiState, 'isFormOpen')) {\n    uiState.isFormOpen = false;\n}\n\nif (Object.hasOwn(uiState, 'isAdding')) {\n    uiState.isAdding = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditing')) {\n    uiState.isEditing = false;\n}\n\nif (Object.hasOwn(uiState, 'isCreatingNewEntity')) {\n    uiState.isCreatingNewEntity = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditingExistingEntity')) {\n    uiState.isEditingExistingEntity = false;\n}\n\n\n\n\n\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetState",
+      "parameters": [
+        "uiState"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const {\n    uiState,          // The page's UI state object\n    utils,            // The Utils service\n    referenceService, // The ReferenceDataService\n    viewService,      // The EntityViewService\n    gridData,         // The array of data for the grid (to handle revert)\n    config            // Page specific config (mappers, exclusions)\n} = options;\n\nconst tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\nconst targetId = uiState.selectedEntity?.Id ?? row.Id;\nconst oldIndex = gridData.findIndex(r => r.Id === targetId);\nconst isEditing = uiState.isEditing || (uiState.isFormOpen && uiState.isEditingExistingEntity);\nconst isAdding = uiState.isAdding || (uiState.isFormOpen && uiState.isCreatingNewEntity);\n\nconst canSwitch = await viewService.checkUnsavedChanges(\n    isEditing,\n    uiState.selectedEntity?.Id,\n    row?.Id,\n    utils,\n    isAdding,\n);\n\nif (!row) {\n    if (isEditing) {\n        if (!canSwitch) {\n            utils.setSelectedBelliniTableRow(oldIndex);\n            return;\n        }\n    }\n    this.resetState(uiState);\n    return;\n}\n\nif (Object.hasOwn(row, \"Custom\") && isEditing) {\n    if (row.Custom === 0) {\n        utils.toast(\"Cannot edit System Entities.\", \"INFO\");\n        utils.setSelectedBelliniTableRow(oldIndex);\n        return;\n    }\n}\n\nif (!canSwitch) {\n    if (isAdding) {\n        tableCtrl.gridApi.selection.clearSelectedRows();\n    } else utils.setSelectedBelliniTableRow(oldIndex);\n    return;\n} else {\n    if (isAdding) {\n        const formKey = context.tabConfig[uiState.currentTab.name].form;\n        if (Object.hasOwn(uiState, 'isAdding')) {\n            uiState.isAdding = false;    \n        }\n        if (Object.hasOwn(uiState, 'isCreatingNewEntity')) {\n            uiState.isCreatingNewEntity = false;\n        }\n        if (Object.hasOwn(uiState, 'isFormOpen')) {\n            uiState.isFormOpen = false;\n        }\n        context.utils.resetForm(context[formKey]);\n    }\n}\n\nuiState.isLoadingDetails = true;\nuiState.detailsList = viewService.generateDetailsList(row, config);\nuiState.selectedEntity = row;\n\nconst tabConfig = context.tabConfig[uiState.currentTab.name];\nuiState.selectedEntityName = (typeof tabConfig.getName === \"function\") \n    ? tabConfig.getName(row) \n    : row[tabConfig.entityNameKey];\n\nif (isEditing) {\n    if (typeof context.handlers?.setInputValues === 'function') {\n        context.handlers.setInputValues();\n    } else {\n        const formObj = context[tabConfig.form];\n        context.formManagementService.populateFormForEdit(uiState, formObj);\n    }\n}\n\ntry {\n    let fullEntity = row;\n    if (options.hydrateFn) {\n        fullEntity = await options.hydrateFn(row);\n    } else if (referenceService) {\n        fullEntity = await referenceService.hydrateEntity(row);\n    }\n\n    uiState.selectedEntity = fullEntity;\n\n    uiState.detailsList = viewService.generateDetailsList(fullEntity, config);\n\n    if (options.onFormInit && typeof options.onFormInit === 'function') {\n        options.onFormInit(fullEntity);\n    }\n\n} catch (error) {\n    console.error(\"BaseGridController: Selection Error\", error);\n    utils.toast(\"Failed to load details.\", \"ERROR\");\n} finally {\n    uiState.isLoadingDetails = false;\n    if (context.$timeout) context.$timeout(0);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "handleRowSelection",
+      "parameters": [
+        "context",
+        "row",
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const {\n    entityType,\n    customEntityKey,\n    columnDefs,\n    page = 1,\n    limit = 25,\n    query = \"\",\n    hydrateOnLoad = false,\n    resetUiState = true,\n    touchLoadingStates = true,\n    reloadColumns = false\n} = options;\n\nconst store = context.tabStore[entityType];\nif (!store) return;\n\n// Create unique request ID for each call\n// Attach it to each store so each tab tracks its own requests\nstore.currentRequestId = (store.currentRequestId ?? 0) + 1;\nconst currentRequestId = store.currentRequestId;\n\n// Prepare the UI\nif (touchLoadingStates) context.uiState.isLoadingTable = true;\nif (resetUiState) this.resetState(context.uiState);\n\ntry {\n    // Fetch Data\n    const result = await context.payrollApiService.get({\n        entity: entityType,\n        page,\n        limit,\n        query,\n        customEntityKey\n    });\n\n    // Abort if newer reequest was triggered\n    if (store.currentRequestId !== currentRequestId) return; // Exit silently. Do not update data, do not touch the loader\n\n    // Normalize Data\n    const booleanKeys = context.utils.extractBooleanKeys(columnDefs);\n    const cleanEntities = context.utils.normalizeBooleans(result.entities, booleanKeys);\n\n    let finalData = cleanEntities;\n\n    if (context.referenceDataService && context.referenceDataService.hydrateEntity && hydrateOnLoad) {\n        finalData = await Promise.all(\n            cleanEntities.map(entity => context.referenceDataService.hydrateEntity(entity))\n        );\n\n\n        // Await Promise.all takes time, so need to check again\n        if (store.currentRequestId !== currentRequestId) return;\n    }\n\n    // Update Tab Store\n    store.data = finalData;\n    store.totalFiltered = result.metadata?.totalFiltered;\n    store.totalCount = result.metadata?.totalCount;\n    store.pageCount = (result.metadata?.pageCount && result.metadata?.pageCount > 0) ? result.metadata?.pageCount : 1;\n    store.currentPage = result.metadata?.currentPage;\n    store.hasNextPage = result.metadata?.hasNextPage;\n\n    // Lazy-load Column Definitions\n    if (!store.columns || store.columns.length === 0 || reloadColumns) {\n        store.columns = context.utils.generateColumnDefinitions(columnDefs);\n    }\n\n    return finalData;\n} catch (error) {\n    // Only log errors and show toasts if this is still the active request\n    if (store.currentRequestId === currentRequestId) {\n        console.error(`[BaseGridController] Error loading ${entityType}`, error);\n        context.utils.toast(`Failed to load ${entityType}`, \"ERROR\");\n        throw error;\n    }\n} finally {\n    // Prevent premature spinner hiding\n    // Only turn off loading state if no newer reqest has taken over\n    if (store.currentRequestId === currentRequestId && touchLoadingStates) {\n        context.uiState.isLoadingTable = false;\n    }\n}",
+      "description": "Centralized Grid Loader\nHandles API fetching, boolean normalization, and store updates.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "loadGridData",
+      "parameters": [
+        "context",
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "handleRowSelection",
+    "resetState",
+    "loadGridData"
+  ]
+}

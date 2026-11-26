@@ -150,6 +150,38 @@
     ],
     "stylesheets": []
   },
+  "externalScripts": [
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
+    },
+    {
+      "order": 1,
+      "properties": {
+        "crossorigin": "anonymous",
+        "executionMode": "default",
+        "referrerpolicy": "default",
+        "type": "default"
+      },
+      "url": "https://js.sentry-cdn.com/787ce4a8fc1a06aa0461d08913745169.min.js"
+    }
+  ],
+  "localScripts": [
+    {
+      "order": 5,
+      "path": "sentry.js"
+    }
+  ],
+  "localStylesheets": [
+    {
+      "path": "styles.css"
+    }
+  ],
   "name": "lonti-app-payroll",
   "type": "app"
 }

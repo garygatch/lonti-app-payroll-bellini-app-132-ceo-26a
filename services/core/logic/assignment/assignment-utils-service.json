@@ -1,0 +1,89 @@
+{
+  "description": "",
+  "name": "assignment-utils-service",
+  "parentDirectoryId": "1NBsPZByP0dbRboEFYU0f",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "const {\n    assigned,\n    query,\n    api\n} = options;\n\nconst itemKey = api.exclusionItemKey || 'Id';\nconst initialAssignedSnapshot = this.helpers._processInitialAssignedSnapshot({\n    assigned,\n    itemKey\n});\n\nlet params = [...api.baseParams];\n\nif (query && api.searchParamKey) params.push(`${api.searchParamKey}=${query}`);\n\nif (api.exclusionQueryKey) {\n    const liveAssignedIds = assigned.items.map(item => item[itemKey]).filter(id => id);\n    const dynamicExclusions = liveAssignedIds.filter(id => initialAssignedSnapshot.includes(id));\n    const totalExclusions = [...dynamicExclusions, ...(api.staticExclusions || [])];\n\n    if (totalExclusions.length > 0) {\n        params.push(`${api.exclusionQueryKey}=${totalExclusions.join(\",\")}`);\n    }\n}\n\nreturn params.join(\"&\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_buildAssignmentQueryString",
+          "parameters": [
+            "options"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const {\n    assigned,\n    api,\n    currentPage = 1\n} = options;\n\nconst itemKey = api.exclusionItemKey || 'Id';\nconst initialAssignedSnapshot = this.helpers._processInitialAssignedSnapshot({\n    assigned,\n    itemKey\n});\n\nconst limit = 25;\nconst baseOffset = (currentPage - 1) * limit;\n\nconst liveAssignedIds = assigned.items.map(item => item[itemKey]).filter(id => id);\nconst newAssignmentsCount = liveAssignedIds.filter(id => !initialAssignedSnapshot.includes(id)).length;\n\n// Slide the offset backward by the number of missing items to prevent overshooting\nconst adjustedOffset = Math.max(0, baseOffset - newAssignmentsCount);\n\nreturn adjustedOffset;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_calculateElasticOffset",
+          "parameters": [
+            "options"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const {\n    assigned,\n    itemKey = \"Id\"\n} = options;\n\nreturn assigned.items.map(item => item[itemKey]).filter(id => id);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_processInitialAssignedSnapshot",
+          "parameters": [
+            "options"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "const {\n    title,\n    assigned,     // { columns: [], items: [] }\n    unassigned,   // { columns: [], items: [], totalPages: 1 }\n    api,          // { entity: \"\", baseParams: [], searchParamKey: \"\", searchProperty: \"\" }\n    mapEntityFn,\n    onApply\n} = config;\n\nreturn this.$modal.open(\"assignment-modal\", {\n    resolve: {\n        title: title,\n        assigned: assigned,\n        unassigned: {\n            columns: unassigned.columns,\n            items: unassigned.items,\n            pagination: {\n                totalPages: unassigned.totalPages,\n                fn: async (currentPage, query, assigned) => {\n                    try {\n                        const res = await this.payrollApiService.get({\n                            entity: api.entity,\n                            page: currentPage,\n                            offset: this.helpers._calculateElasticOffset({\n                                assigned,\n                                api,\n                                currentPage\n                            }),\n                            query: this.helpers._buildAssignmentQueryString({\n                                assigned,\n                                query,\n                                api\n                            }) // Re-evaluates live state\n                        });\n                        const entities = res.entities ?? res ?? [];\n                        return {\n                            entities: entities.map(mapEntityFn),\n                            metadata: { \n                                currentPage: res.metadata?.currentPage || 1,\n                                pageCount: res.metadata?.pageCount || 1\n                            }\n                        };\n                    } catch (err) {\n                        console.error(`Pagination failed:`, err);\n                        return { entities: [], metadata: { pageCount: unassigned.totalPages } };\n                    }\n                }\n            }\n        },\n        search: {\n            property: api.searchProperty || \"Name\",\n            operation: \"contains\",\n            placeholder: api.searchPlaceholder || `Search by: contains ${api.searchProperty}`,\n            fn: async (query, assigned) => {\n                try {\n                    const res = await this.payrollApiService.get({\n                        entity: api.entity,\n                        query: this.helpers._buildAssignmentQueryString({\n                            assigned,\n                            query,\n                            api\n                        }) // Re-evaluates live state\n                    });\n                    const entities = res.entities ?? res ?? [];\n                    return {\n                        entities: entities.map(mapEntityFn),\n                        metadata: { pageCount: res.metadata?.pageCount ?? 1 }\n                    };\n                } catch (err) {\n                    console.error(\"Search failed:\", err);\n                    return { entities: [], metadata: { pageCount: 1 } };\n                }\n            }\n        }\n    }\n}).then(res => {\n    if (res.applied && typeof onApply === \"function\") {\n        onApply(res.resolve?.assignedItems);\n    }\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "openAssignmentModal",
+      "parameters": [
+        "config"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "openAssignmentModal"
+  ]
+}

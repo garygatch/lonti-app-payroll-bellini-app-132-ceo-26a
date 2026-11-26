@@ -1,0 +1,62 @@
+{
+  "description": "",
+  "name": "company-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"LegalName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Legal Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"LegalName\",\n    \"TradeName\",\n    \"Active\",\n    \"Email\",\n    \"Phone\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Email\": \"PrimaryContactEmail\",\n        \"Phone\": \"PrimaryContactPhone\"\n    },\n    type: {\n        \"Active\": \"boolean\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        // operators: [\"eq\"] // IDs usually only support exact match\n    },\n\n    // --- Core Identity ---\n    {\n        label: \"Legal Name\",\n        value: \"LegalName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\", \"endswith\"]\n    },\n    {\n        label: \"Trade Name\",\n        value: \"TradeName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\", \"endswith\"]\n    },\n    {\n        label: \"Active\",\n        value: \"Active\",\n        type: \"boolean\",\n        operators: [\"eq\"] // True/False\n    },\n\n    // --- Contact & Location ---\n    {\n        label: \"Address\",\n        value: \"PrimaryAddressLocation\",\n        type: \"string\",\n        // operators: [\"contains\"]\n    },\n    {\n        label: \"Email\",\n        value: \"PrimaryContactEmail\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\"]\n    },\n    {\n        label: \"Phone\",\n        value: \"PrimaryContactPhone\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\"]\n    },\n    {\n        label: \"Website (URL)\",\n        value: \"PrimaryContactUrl\",\n        type: \"string\",\n        // operators: [\"contains\"]\n    },\n\n    // --- Geographic References (Dropdowns) ---\n    // Note: 'source' keys match the map variables\n    {\n        label: \"Country\",\n        value: \"CountryId\",\n        type: \"dropdown\",\n        source: \"countryMap\",\n        operators: [\"eq\"]\n    },\n    {\n        label: \"State\",\n        value: \"StateId\",\n        type: \"dropdown\",\n        source: \"stateMap\",\n        operators: [\"eq\"]\n    },\n    {\n        label: \"Fiscal Year Start\",\n        value: \"FiscalYearStart\",\n        type: \"string\",\n        placeholder: \"MM-DD\",\n        // operators: [\"eq\"]\n    },\n    {\n        label: \"Fiscal Year End\",\n        value: \"FiscalYearEnd\",\n        type: \"string\",\n        placeholder: \"MM-DD\",\n        // operators: [\"eq\"]\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "companies",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "companies",
+    "getAllCompanies",
+    "quickSearch",
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "getQuickSearchDefaults"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "description": "",
+  "name": "entity-view-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "children": [
+        {
+          "description": "",
+          "name": "0",
+          "type": "property",
+          "value": "\"$$hashKey\""
+        },
+        {
+          "description": "",
+          "name": "1",
+          "type": "property",
+          "value": "\"Deleted\""
+        },
+        {
+          "description": "",
+          "name": "2",
+          "type": "property",
+          "value": "\"Custom\""
+        }
+      ],
+      "description": "",
+      "name": "GLOBAL_EXCLUSIONS",
+      "type": "array"
+    },
+    {
+      "body": "const KEY_OVERRIDES = {\n    \"PayDateOnBD\": \"Pay Date on Business Day\",\n    \"Accrual\": \"Leave\",\n    \"AccrualId\": \"Leave Id\",\n    \"AccrualName\": \"Leave Name\",\n    \"AccrualCode\": \"Leave Code\",\n    \"AccrualRate\": \"Leave Rate\",\n    \"AccrualRateUnit\": \"Leave Rate Unit\",\n    \"AccrualCycleDay\": \"Leave Cycle Day\",\n    \"AccrualCycleMonth\": \"Leave Cycle Month\"\n};\n\nif (KEY_OVERRIDES[key]) return KEY_OVERRIDES[key];\n\nreturn key\n    // 1. Insert space between lowercase and uppercase\n    .replace(/([a-z])([A-Z])/g, '$1 $2')\n    // 2. Insert space after an acronym (e.g., SSSDeduction -> SSS Deduction)\n    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')\n    // Capitalize the first letter\n    .replace(/^./, str => str.toUpperCase())\n    .trim();",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_formatLabel",
+      "parameters": [
+        "key"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!entity) return [];\nif (!config) config = {};\n\nconst list = [];\nconst excludeKeys = [...this.GLOBAL_EXCLUSIONS, ...(config.exclude || [])];\n\n// Define the metadata keys that should be pushed to the bottom\nconst metaKeys = [\n    'CreatedDate', 'CreatedBy',\n    'UpdatedDate', 'UpdatedBy',\n    'DeletedDate', 'DeletedBy'\n];\n\nlet keys = Object.keys(entity);\n\n// SORTING LOGIC: \n// 1. Non-meta keys first (alphabetical, putting 'Tax' before 'TaxId')\n// 2. Meta keys last (in the exact order defined above)\nkeys.sort((a, b) => {\n    const indexA = metaKeys.indexOf(a);\n    const indexB = metaKeys.indexOf(b);\n    const isMetaA = indexA !== -1;\n    const isMetaB = indexB !== -1;\n\n    if (isMetaA && !isMetaB) return 1;\n    if (!isMetaA && isMetaB) return -1;\n    if (isMetaA && isMetaB) return indexA - indexB;\n\n    return a.localeCompare(b);\n});\n\nlet metaStarted = false;\n\nkeys.forEach(key => {\n    if (excludeKeys.includes(key)) return;\n\n    let value = entity[key];\n    if (value === undefined || value === null || value === \"\") return;\n\n    // --- INSERT SPACER BEFORE METADATA ---\n    const isMeta = metaKeys.includes(key);\n    if (isMeta && !metaStarted) {\n        metaStarted = true;\n        if (list.length > 0) {\n            list.push({\n                key: \"\", // Renders blank label\n                originalKey: \"__spacer__\",\n                value: \"\", // Renders blank value\n                isSpacer: true // Optional flag for UI logic (e.g., ng-class)\n            });\n        }\n    }\n\n    let displayValue = value;\n\n    // 1. Explicit Mappers\n    if (config.mappers && config.mappers[key]) {\n        displayValue = config.mappers[key](value);\n    }\n    // 2. Boolean Logic\n    else if (\n        typeof value === \"boolean\" ||\n        ((value === 0 || value === 1) && (key.match(/^(Is|Has|Need|Can|Active|Deleted)/)))\n    ) {\n        displayValue = value ? 'YES' : 'NO';\n    }\n    // 3. Date Logic\n    else if ((key.includes(\"Date\") || key.endsWith(\"At\")) && !key.includes(\"Rate\") && key !== \"PayDateOnBD\") {\n        const parsed = this.utils.parseDate(value);\n        displayValue = parsed ?? new Date(value).toLocaleDateString();\n    }\n\n    // 4. Handle Special YTD Object with value & value2 ---\n    if (typeof displayValue === \"object\" && displayValue !== null && 'value' in displayValue) {\n        list.push({\n            key: this._formatLabel(key),\n            originalKey: key,\n            value: displayValue.value,\n            value2: displayValue.value2\n        });\n        return; // Skip standard push\n    }\n\n    // Standard push for flat values\n    list.push({\n        key: this._formatLabel(key),\n        originalKey: key,\n        value: displayValue\n    });\n});\n\nreturn list;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "generateDetailsList",
+      "parameters": [
+        "entity",
+        "config"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "body": "if (isAdding || (isEditing && currentId !== newId)) {\n    return await utilsService.handleUnsavedChanges(true);\n}\n\nreturn true;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "checkUnsavedChanges",
+      "parameters": [
+        "isEditing",
+        "currentId",
+        "newId",
+        "utilsService",
+        "isAdding"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "generateDetailsList",
+    "checkUnsavedChanges",
+    "mergeDetailsList",
+    "setLoadingState"
+  ]
+}

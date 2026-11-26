@@ -1,0 +1,521 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "autocomplete": [],
+      "default": "\"\"",
+      "description": "",
+      "example": "",
+      "group": "",
+      "includeAssets": false,
+      "label": "",
+      "name": "placeholder",
+      "propertyType": "text",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "autocomplete": [],
+      "default": "\"\"",
+      "description": "",
+      "example": "",
+      "group": "",
+      "includeAssets": false,
+      "label": "",
+      "name": "entityType",
+      "propertyType": "text",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "[]",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "appliedFilters",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "[]",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "appliedSorts",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onSearch",
+      "parameters": [
+        "value",
+        "config"
+      ],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onFilterUpdate",
+      "parameters": [
+        "remainingStrings"
+      ],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onReset",
+      "parameters": [],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "autocomplete": [],
+      "default": "\"\"",
+      "description": "",
+      "example": "",
+      "group": "",
+      "includeAssets": false,
+      "label": "",
+      "name": "searchText",
+      "propertyType": "text",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onAdvancedClick",
+      "parameters": [],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "false",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "usingAdvancedFilters",
+      "propertyType": "boolean",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "filterChips",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "configure-table-and-quick-search",
+          "displayExpression": "false",
+          "expressions": [
+            {
+              "expression": "$ctrl.en.components.filterComponent.buttons.CONFIGURE_TABLE_AND_QUICK_SEARCH.label",
+              "to": "label"
+            },
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"cog\",\n  \"position\": \"left\"\n})",
+              "to": "icon"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.buttons.CONFIGURE_TABLE_AND_QUICK_SEARCH.tooltip",
+              "to": "tooltip"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "advanced-filters-and-sorts",
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"filter\",\n  \"position\": \"left\"\n})",
+              "to": "icon"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.buttons.ADVANCED_FILTERS.tooltip",
+              "to": "tooltip"
+            },
+            {
+              "expression": "\"Filters \" + \"(\" + $ctrl.privateStateVars.appliedFiltersCount + \")\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onAdvancedClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "quick-search",
+          "displayExpression": "!$ctrl.usingAdvancedFilters",
+          "expressions": [
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.QUICK_SEARCH.label",
+              "to": "label"
+            },
+            {
+              "expression": "500",
+              "to": "debounceDelay"
+            },
+            {
+              "expression": "$ctrl.handlers.onInput()",
+              "to": "onValueChange"
+            },
+            {
+              "expression": "$ctrl.placeholder",
+              "to": "placeholder"
+            },
+            {
+              "expression": "$ctrl.searchText",
+              "to": "value"
+            }
+          ],
+          "formControl": {
+            "modelName": "value"
+          },
+          "name": "Text Input",
+          "nodeName": "bln-text-input",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "applied-advanced-filters",
+          "displayExpression": "$ctrl.usingAdvancedFilters\n",
+          "expressions": [
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_ADVANCED_FILTERS.label",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_ADVANCED_FILTERS.placeholder",
+              "to": "placeholder"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_ADVANCED_FILTERS.tooltip",
+              "to": "tooltip"
+            },
+            {
+              "expression": "false",
+              "to": "textInputEditable"
+            },
+            {
+              "expression": "false",
+              "to": "allowMoveChip"
+            },
+            {
+              "expression": "false",
+              "to": "allowEditChip"
+            },
+            {
+              "expression": "false",
+              "to": "allowTransferChip"
+            },
+            {
+              "expression": "250",
+              "to": "debounceDelay"
+            },
+            {
+              "expression": "$ctrl.filterChips",
+              "to": "values"
+            },
+            {
+              "expression": "$ctrl.onFilterUpdate({\n    remainingStrings: newValues\n})",
+              "to": "onValuesChange"
+            }
+          ],
+          "formControl": {
+            "modelName": "values"
+          },
+          "name": "Chip List",
+          "nodeName": "bln-chip-list",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "applied-sorts",
+          "displayExpression": "$ctrl.sortsAppliedCount\n&&\n$ctrl.isUsingSorts",
+          "expressions": [
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_SORTS.label",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_SORTS.placeholder",
+              "to": "placeholder"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.fields.APPLIED_SORTS.tooltip",
+              "to": "tooltip"
+            },
+            {
+              "expression": "false",
+              "to": "textInputEditable"
+            },
+            {
+              "expression": "false",
+              "to": "allowMoveChip"
+            },
+            {
+              "expression": "false",
+              "to": "allowEditChip"
+            },
+            {
+              "expression": "false",
+              "to": "allowTransferChip"
+            },
+            {
+              "expression": "250",
+              "to": "debounceDelay"
+            }
+          ],
+          "formControl": {
+            "modelName": "values"
+          },
+          "name": "Chip List",
+          "nodeName": "bln-chip-list",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "clear-filters",
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.buttons.RESET_FILTER.label",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.en.components.filterComponent.buttons.RESET_FILTER.tooltip",
+              "to": "tooltip"
+            },
+            {
+              "expression": "({\n  \"type\": \"image-icon\",\n  \"url\": \"assets/apps/lonti-app-payroll/button/reset-filter/filter-circle-xmark-solid-full-white.svg\",\n  \"position\": \"left\"\n})",
+              "to": "icon"
+            },
+            {
+              "expression": "$ctrl.onReset()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [],
+      "elementId": "search-filter-container",
+      "name": "div"
+    }
+  ],
+  "localStylesheets": [
+    {
+      "path": "search-filter.css"
+    }
+  ],
+  "modules": [],
+  "name": "search-filter",
+  "parentDirectoryId": "KduFRaC4OxguxOdfYSKQg",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "privateStateVars",
+      "properties": [
+        {
+          "description": "",
+          "name": "isAdvancedOpen",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "appliedFiltersCount",
+          "type": "property",
+          "value": "0"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "$ctrl.onSearch({\n    newValue: $ctrl.searchText\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onInput",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// Clear Search Text\n$ctrl.searchText = \"\";\n\n// Clear Chips\n$ctrl.appliedFilters = [];\n$ctrl.appliedSorts = [];\n\n// Emit empty search to reload grid\n$ctrl.onSearch({\n    value: \"\"\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onClear",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "watchers",
+      "properties": [
+        {
+          "body": "$ctrl.privateStateVars.appliedFiltersCount = $ctrl.appliedFilters.length;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "watchAppliedFilters",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.appliedFilters"
+          ]
+        }
+      ],
+      "type": "object"
+    }
+  ]
+}

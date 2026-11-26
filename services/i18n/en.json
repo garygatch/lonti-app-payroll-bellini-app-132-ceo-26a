@@ -1,0 +1,882 @@
+{
+  "description": "",
+  "name": "en",
+  "parentDirectoryId": "kcdUV1Sa8bi6_YmNRXnUB",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "global",
+      "properties": [
+        {
+          "description": "",
+          "name": "buttons",
+          "properties": [
+            {
+              "description": "",
+              "name": "SAVE",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "label",
+                  "type": "property",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "name": "tooltip",
+                  "type": "property",
+                  "value": ""
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "description": "",
+              "name": "CANCEL",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "label",
+                  "type": "property",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "name": "tooltip",
+                  "type": "property",
+                  "value": ""
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "description": "",
+              "name": "DELETE",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "label",
+                  "type": "property",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "name": "tooltip",
+                  "type": "property",
+                  "value": ""
+                }
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "notifications",
+          "properties": [
+            {
+              "description": "",
+              "name": "payrollRun",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "initiateReview",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "confirm",
+                      "properties": [
+                        {
+                          "description": "",
+                          "name": "title",
+                          "type": "property",
+                          "value": "\"Encash Leave Credits?\""
+                        },
+                        {
+                          "description": "",
+                          "name": "body",
+                          "type": "property",
+                          "value": "\"Do you want to encash Leave Credits for all Workers for this Payroll Run Review?\""
+                        }
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "description": "",
+                      "name": "info",
+                      "properties": [
+                        {
+                          "body": "return `Preparing review for '${displayName}'. We'll notify you when it's ready.`",
+                          "description": "",
+                          "invokeOnLoad": false,
+                          "isAsync": false,
+                          "name": "INITIATE",
+                          "parameters": [
+                            "displayName"
+                          ],
+                          "returnType": {
+                            "name": "any"
+                          },
+                          "type": "method",
+                          "watch": []
+                        }
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "description": "",
+                      "name": "error",
+                      "properties": [
+                        {
+                          "description": "",
+                          "name": "console",
+                          "properties": [
+                            {
+                              "body": "return `An error occurred while initiating the Payroll Run Review for '${displayName}': `",
+                              "description": "",
+                              "invokeOnLoad": false,
+                              "isAsync": false,
+                              "name": "FAILED",
+                              "parameters": [
+                                "displayName"
+                              ],
+                              "returnType": {
+                                "name": "any"
+                              },
+                              "type": "method",
+                              "watch": []
+                            },
+                            {
+                              "description": "",
+                              "name": "NOT_FOUND",
+                              "type": "property",
+                              "value": "\"Cannot review Payroll Run: Entity ID is missing.\""
+                            },
+                            {
+                              "description": "",
+                              "name": "UNEXPECTED_JOB_DATA",
+                              "type": "property",
+                              "value": "\"API response did not contain the expected Payroll Run Review Job data.\""
+                            }
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "description": "",
+                          "name": "toast",
+                          "properties": [
+                            {
+                              "body": "return `Failed to start the review for '${displayName}'. Please try again.`;",
+                              "description": "",
+                              "invokeOnLoad": false,
+                              "isAsync": false,
+                              "name": "FAILED",
+                              "parameters": [
+                                "displayName"
+                              ],
+                              "returnType": {
+                                "name": "any"
+                              },
+                              "type": "method",
+                              "watch": []
+                            },
+                            {
+                              "description": "",
+                              "name": "NOT_FOUND",
+                              "type": "property",
+                              "value": "\"Please select a Payroll Run to start a Review.\""
+                            }
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "pages",
+      "properties": [
+        {
+          "description": "",
+          "name": "attendanceSummary",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Attendance Summary\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Import, review, and refine workforce attendance records to ensure time-tracking data before processing payroll.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "dashboard",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Dashboard\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Monitor active payroll runs, track upcoming deadlines, and stay on top of critical processing timelines from a single central overview.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "globalManagement",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Global Management\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Centralized administration for core organizational entities, including companies, currencies, and geographical settings.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "payConfiguration",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Pay Configuration\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Define and assign core pay components—including earning, leaves, benefits, and tax rules—to establish precise compensation logic for workers and positions.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "payrollManagement",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Payroll Management\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Manage labor structures and payment cycles, including position definitions and recurring pay schedule configurations.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "payrollProcessing",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"Payroll Processing\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Execute and monitor the end-to-end payroll cycle, from managing pay periods and calculating runs to performing final reviews and generating employee payslips.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "payrollReport",
+          "properties": [],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "peopleManagement",
+          "properties": [
+            {
+              "description": "",
+              "name": "title",
+              "type": "property",
+              "value": "\"People Management\""
+            },
+            {
+              "description": "",
+              "name": "description",
+              "type": "property",
+              "value": "\"Manage the complete employee lifecycle by overseeing worker profiles, employment details, statutory compliance, and individual financial configurations—from bank info to leave credits.\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "reviewPayroll",
+          "properties": [],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "userLogin",
+          "properties": [],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "components",
+      "properties": [
+        {
+          "description": "",
+          "name": "filterComponent",
+          "properties": [
+            {
+              "description": "",
+              "name": "buttons",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "RESET_FILTER",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Clear Filter and Reload Data\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "ADVANCED_FILTERS",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Filters & Sorts\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Open advanced filtering and sorting options\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "CONFIGURE_TABLE_AND_QUICK_SEARCH",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Choose which columns to show or hide and configure quick search\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "description": "",
+              "name": "fields",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "QUICK_SEARCH",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Enter the value to filter against\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Search by: \""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "APPLIED_ADVANCED_FILTERS",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Displays current applied advanced filters and allows removal\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Advanced filters applied will show up here\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "APPLIED_SORTS",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Displays current applied sorts and allows removal\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Sorts applied will show up here\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "modals",
+      "properties": [
+        {
+          "description": "",
+          "name": "advancedFilterModal",
+          "properties": [
+            {
+              "description": "",
+              "name": "dropdowns",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "FILTER_PROPERTY",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Select the property to filter by\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Property\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "FILTER_OPERATION",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Choose how the selected property should be compared\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Operation\""
+                    },
+                    {
+                      "description": "",
+                      "name": "values",
+                      "type": "property",
+                      "value": "[{\n        label: \"EQUALS\",\n        value: \"eq\"\n    },\n    {\n        label: \"NOT EQUALS\",\n        value: \"noteq\"\n    },\n    {\n        label: \"CONTAINS\",\n        value: \"contains\"\n    },\n    {\n        label: \"STARTS WITH\",\n        value: \"startswith\"\n    },\n    {\n        label: \"ENDS WITH\",\n        value: \"endswith\"\n    },\n    {\n        label: \"GREATER THAN\",\n        value: \"gt\"\n    },\n    {\n        label: \"LESS THAN\",\n        value: \"lt\"\n    },\n    {\n        label: \"BETWEEN\",\n        value: \"between\"\n    },\n    {\n        label: \"BEFORE\",\n        value: \"before\"\n    },\n    {\n        label: \"AFTER\",\n        value: \"after\"\n    },\n    {\n        label: \"IS EMPTY\",\n        value: \"isnull\"\n    },\n    {\n        label: \"IS NOT EMPTY\",\n        value: \"isnotnull\"\n    },\n    {\n        label: \"IN\",\n        value: \"in\"\n    },\n    {\n        label: \"NOT IN\",\n        value: \"notin\"\n    }\n]"
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "SORT_PROPERTY",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Select the property to sort by\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Property\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "SORT_ORDER",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Choose how the selected property should be sorted\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Order\""
+                    },
+                    {
+                      "description": "",
+                      "name": "values",
+                      "type": "property",
+                      "value": "[\n    {\n        label: \"ASCENDING\",\n        value: \"ASC\"\n    },\n    {\n        label: \"DESCENDING\",\n        value: \"DESC\"\n    }\n]"
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "description": "",
+              "name": "fields",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "FILTER_VALUE",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Enter the value to filter against\""
+                    },
+                    {
+                      "description": "",
+                      "name": "placeholder",
+                      "type": "property",
+                      "value": "\"Value\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "description": "",
+              "name": "buttons",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "ADD_FILTER",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Add a new filter to refine results\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "REMOVE_FILTER",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Remove this filter\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "ADD_SORT",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Add a new sort to order results\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "REMOVE_SORT",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Remove this sort\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "CANCEL",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Cancel\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Discard filters and close the modal\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "CLEAR",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Clear\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Remove all applied filters\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "APPLY",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Apply\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Apply filters and view results\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "assignmentModal",
+          "properties": [
+            {
+              "description": "",
+              "name": "buttons",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "CANCEL",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Cancel\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Discard changes and close the modal\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "CLEAR",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Clear\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Remove all assigned items\""
+                    }
+                  ],
+                  "type": "object"
+                },
+                {
+                  "description": "",
+                  "name": "APPLY",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"Apply\""
+                    },
+                    {
+                      "description": "",
+                      "name": "tooltip",
+                      "type": "property",
+                      "value": "\"Apply assignments\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    }
+  ],
+  "visible": [
+    "global",
+    "pages",
+    "components",
+    "modals",
+    "title"
+  ]
+}

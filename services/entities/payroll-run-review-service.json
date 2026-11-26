@@ -1,0 +1,116 @@
+{
+  "description": "",
+  "name": "payroll-run-review-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "_jobsCache",
+      "properties": [],
+      "type": "object"
+    },
+    {
+      "body": "if (!payrollRunId || !jobObject || !jobObject.jobId) {\n    console.error(\"Cannot cache job: Missing Run ID or Job ID.\");\n    return;\n}\n\nif (!this._jobsCache[payrollRunId]) {\n    this._jobsCache[payrollRunId] = { jobs: {} };\n}\n\nconst jobId = jobObject.jobId;\nconst existingData = this._jobsCache[payrollRunId].jobs[jobId] || {};\n\nthis._jobsCache[payrollRunId].jobs[jobId] = {\n    ...existingData,\n    ...jobObject\n};\n\nconst shortJobId = jobId.split('-').at(0);\n\nif (jobObject.status === \"COMPLETED\") {\n    this.utils.toast(`Review ready (Job: ${shortJobId})`, \"INFO\");\n} else if (jobObject.status === \"FAILED\") {\n    this.utils.toast(`Review generation failed (Job: ${shortJobId})`, \"ERROR\");\n}",
+      "description": "Updates the internal state with the latest status of a specific payroll job and triggers user notifications based on the result. It uses a structured cache indexed by the Payroll Run ID and merges new data into existing job records to ensure data continuity.\n\n- **payrollRunId**: The unique identifier for the specific payroll run.\n- **jobObject**: The job data object containing at least a `jobId` and a `status`.\n- **Logic**:\n    - **Validation**: Logs an error and exits if required identifiers are missing.\n    - **Caching**: Ensures the `_jobsCache` is initialized for the specific run and merges new job updates with existing cached data.\n    - **UI Feedback**: Parses the `jobId` to display a shortened version in a toast notification.\n    - **Status Handling**: \n        - Displays an **INFO** toast if the status is `\"COMPLETED\"`.\n        - Displays an **ERROR** toast if the status is `\"FAILED\"`.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "cacheJobDetails",
+      "parameters": [
+        "payrollRunId",
+        "jobObject"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return this._jobsCache[payrollRunId]?.jobs ?? {};",
+      "description": "Retrieves all cached jobs for a specific run.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getCachedJobs",
+      "parameters": [
+        "payrollRunId"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!payrollRunId) throw new Error(\"Payroll Run ID is required.\");\n\nconst response = await this.payrollAppApi.lonti_app_payroll_service_payroll_run_InitiateReviewPayrollRun(\n    {\n        id: payrollRunId,\n        maskSensitiveWorkerInfo: false,\n        encashAccrualBalances\n    },\n    {},\n    {\n        headers: {\n            \"X-Authorization\": this.$cookies.get(\"id_token\")\n        }\n    }\n);\n\nconst jobData = response?.data?.PayrollRunReviewJob;\nif (!jobData) throw new Error(\"Unexpected response: Job data missing.\");\n\njobData.encashAccrualBalances = encashAccrualBalances;\n\nreturn jobData;",
+      "description": "Initiates a payroll review by triggering a background job via the API. This function handles the validation of input parameters, the retrieval of authorization tokens from cookies, and the enrichment of the resulting job data for downstream tracking.\n\n- **payrollRunId**: The unique identifier for the payroll run to be processed. (Required)\n- **encashAccrualBalances**: A boolean flag indicating if accrual balances should be cashed out during the run.\n- **Logic**:\n    - **Validation**: Throws an error if the `payrollRunId` is falsy.\n    - **Authorization**: Dynamically injects an `X-Authorization` header using the `id_token` retrieved from the user's cookies.\n    - **API Integration**: Calls the `lonti_app_payroll_service_payroll_run_InitiateReviewPayrollRun` endpoint.\n    - **Response Handling**: Extracts the `PayrollRunReviewJob` from the response and manually attaches the `encashAccrualBalances` flag to ensure the job object carries the user's original intent.\n- **Returns**: A `Promise` resolving to the enriched job data object.\n- **Throws**: An error if the `payrollRunId` is missing or if the API returns an empty job data set.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "initiateReview",
+      "parameters": [
+        "payrollRunId",
+        "encashAccrualBalances"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const jobsMap = this.getCachedJobs(payrollRunId);\nif (!jobsMap) return;\n\nlet prunedCount = 0;\nconst now = new Date();\n\nObject.keys(jobsMap).forEach(jobId => {\n    const job = jobsMap[jobId];\n    if (job.expiresAt && new Date(job.expiresAt) < now) {\n        delete jobsMap[jobId];\n        prunedCount++;\n    }\n});\n\nif (prunedCount > 0) {\n    console.log(`Pruned ${prunedCount} expired jobs for run ${payrollRunId}`);\n}",
+      "description": "Cleans up old jobs from the cache.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "pruneExpiredJobs",
+      "parameters": [
+        "payrollRunId"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "body": "try {\n    const response = await this.payrollAppApi.lonti_app_payroll_service_payroll_run_GetCachedPayrollRunReviewJob(\n        { id: payrollRunId, jobId: jobId },\n        { headers: {\n            \"X-Authorization\": this.$cookies.get(\"id_token\")\n        } }\n    );\n\n    const jobData = response?.data?.PayrollRunReviewJob;\n\n    if (jobData) {\n        this.cacheJobDetails(payrollRunId, jobData);\n        return true;\n    }\n    return false;\n} catch (error) {\n    console.warn(`Failed to refresh job ${jobId}`, error);\n    return false;\n}",
+      "description": "Retrieves the latest details for a specific payroll job from the server and synchronizes the local cache. It handles authorization automatically and provides a safe execution flow that prevents background refresh failures from interrupting the main application thread.\n\n- **payrollRunId**: The unique identifier for the specific payroll run.\n- **jobId**: The unique identifier for the job to be refreshed.\n- **Logic**:\n    - **API Integration**: Calls the `GetCachedPayrollRunReviewJob` endpoint using the provided IDs.\n    - **Authorization**: Utilizes `authCookies.setHeaders()` to inject the necessary security credentials into the request.\n    - **Synchronization**: If valid job data is returned, it invokes `cacheJobDetails` to update the internal state and trigger any relevant UI notifications.\n    - **Error Handling**: Catches and logs a warning if the network request fails, ensuring the function returns a boolean status rather than throwing.\n- **Returns**: A `Promise` resolving to `true` if the job was successfully retrieved and cached, or `false` if the job data was missing or the request failed.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "refreshJobStatus",
+      "parameters": [
+        "payrollRunId",
+        "jobId"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getCachedJobs",
+    "pruneExpiredJobs",
+    "cacheJobDetails",
+    "initiateReview",
+    "refreshJobStatus"
+  ]
+}

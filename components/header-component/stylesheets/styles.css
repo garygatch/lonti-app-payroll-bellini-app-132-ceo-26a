@@ -1,0 +1,19 @@
+header-component {
+
+    #temporary-fields-container {
+        display: flex;
+        align-items: center;
+    }
+
+    #user-profile-container {
+        --bln-dropdown-menu-border-radius: 32px;
+        --bln-dropdown-menu-button-margin: 1rem;
+        --bln-dropdown-menu-button-bg-color: var(--bln-button-primary-bg-color);
+        --bln-dropdown-menu-button-text-color: var(--bln-button-primary-text-color);
+        --bln-dropdown-menu-icon-color: var(--bln-button-primary-text-color);
+        --bln-dropdown-menu-button-hovered-bg-color: var(--bln-button-primary-hovered-bg-color);
+        --bln-dropdown-menu-button-hovered-text-color: var(--bln-button-primary-hovered-text-color);
+        --bln-dropdown-menu-button-active-bg-color: var(--bln-button-primary-active-bg-color);
+        --bln-dropdown-menu-button-active-text-color: var(--bln-button-primary-active-text-color);
+    }
+}

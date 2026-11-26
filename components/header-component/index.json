@@ -1,0 +1,239 @@
+{
+  "bindings": [],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "Lonti Payroll"
+            }
+          ],
+          "classList": [],
+          "name": "h3"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "elementId": "user-profile-container",
+              "expressions": [
+                {
+                  "expression": "[{\n    label: \"Log out\",\n    evaluateLabel: false,\n    icon: {\n        name: \"sign-out-alt\",\n        style: \"solid\",\n        type: \"font-icon\",\n        position: \"left\"\n    },\n    onClick: \"function\",\n    function: $ctrl.handlers.onLogOut\n}]",
+                  "to": "menuItems"
+                },
+                {
+                  "expression": "$ctrl.uiState.displayedInfo",
+                  "to": "label"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"user\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Dropdown Menu",
+              "nodeName": "bln-dropdown-menu",
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "elementId": "temporary-fields-container",
+          "name": "div"
+        }
+      ],
+      "classList": [],
+      "displayExpression": "true",
+      "events": {
+        "click": ""
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "space-between"
+        },
+        {
+          "enabled": true,
+          "property": "place-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "padding",
+          "value": "0.1rem 0.5rem"
+        },
+        {
+          "enabled": true,
+          "property": "border-style",
+          "value": "solid"
+        },
+        {
+          "enabled": true,
+          "property": "border-color",
+          "value": "#cecece"
+        },
+        {
+          "enabled": true,
+          "property": "border-width",
+          "value": "1px"
+        },
+        {
+          "enabled": true,
+          "property": "background-color",
+          "value": "white"
+        },
+        {
+          "enabled": true,
+          "property": "position",
+          "value": "fixed"
+        },
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100%"
+        },
+        {
+          "enabled": true,
+          "property": "top",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "50px"
+        },
+        {
+          "enabled": true,
+          "property": "z-index",
+          "value": "1087"
+        }
+      ]
+    }
+  ],
+  "description": null,
+  "formControl": null,
+  "localStylesheets": [
+    {
+      "path": "styles.css"
+    }
+  ],
+  "modules": [],
+  "name": "header-component",
+  "nodeName": "header-component",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "userInfo",
+          "properties": [
+            {
+              "description": "",
+              "name": "email",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "enabled",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "fullname",
+              "type": "property",
+              "value": "\"\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "displayedInfo",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "name": "$auth",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "setters",
+      "properties": [
+        {
+          "body": "$ctrl.uiState.displayedInfo = $ctrl.uiState.userInfo?.fullname ?? $ctrl.uiState.userInfo?.email ?? \"User\"",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "setDisplayedInfo",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "$ctrl.$auth.logout();",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onLogOut",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "$ctrl.uiState.userInfo = await $ctrl.$auth.getUserInfo();\n$ctrl.setters.setDisplayedInfo();",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "onInit",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": [
+        "$ctrl.authCookies.activeUser"
+      ]
+    }
+  ]
+}

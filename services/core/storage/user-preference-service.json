@@ -1,0 +1,117 @@
+{
+  "description": "",
+  "name": "user-preference-service",
+  "parentDirectoryId": "QVbFpH5KyEMuegmOjEpLN",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "Use a single master key. 'v1' allows for future breaking changes without crashes.",
+      "name": "STORAGE_KEY",
+      "type": "property",
+      "value": "\"lonti_app_payroll_user_prefs_v1\""
+    },
+    {
+      "description": "",
+      "name": "_cache",
+      "type": "property",
+      "value": "null"
+    },
+    {
+      "body": "if (this._cache) return this._cache;\n\ntry {\n    const json = window.localStorage.getItem(this.STORAGE_KEY);\n    this._cache = json ? JSON.parse(json) : {};\n} catch (e) {\n    console.error(\"[UserPreferenceService] Parse error\", e);\n    this._cache = {};\n}\n\nreturn this._cache;",
+      "description": "Internal helper that loads data from `localStorage` into memory. It ensures disk reads only happen once per session or until the cache is cleared. Includes error handling for corrupted JSON.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_load",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "try {\n    window.localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this._cache));\n} catch (e) {\n    console.error(\"[UserPreferenceService] Save error\", e);\n}",
+      "description": "Internal helper that synchronizes the current memory cache state to `localStorage`. Logs an error if the write operation fails.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_persist",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const allPrefs = this._load();\n\n// Check if category exists, then check if key exists\nif (allPrefs[category] && allPrefs[category][key] !== undefined) {\n    return allPrefs[category][key];\n}\n\nreturn defaultValue;",
+      "description": "Generic getter to retrieve a specific configuration value. \n- **category**: The type of config (e.g. 'gridColumns').\n- **key**: The specific entity (e.g. 'company').\n- **defaultValue**: Fallback value if the path does not exist.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "get",
+      "parameters": [
+        "category",
+        "key",
+        "defaultValue"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "this._load(); // Ensure cache is warm\n\n// Initialize category namespace if it doesn't exist\nif (!this._cache[category]) {\n    this._cache[category] = {};\n}\n\nthis._cache[category][key] = value;\nthis._persist();",
+      "description": "Generic setter that updates a configuration. It initializes the category namespace if missing, updates the memory cache, and persists the change to disk.\n- **category**: The type of config (e.g., 'gridColumns').\n- **key**: The specific page or entity (e.g., 'company').\n- **value**: The data object or value to be saved.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "set",
+      "parameters": [
+        "category",
+        "key",
+        "value"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "this._load();\nif (this._cache[category] && this._cache[category][key]) {\n    delete this._cache[category][key];\n    this._persist();\n}",
+      "description": "Removes a specific setting from the cache and persists the change to disk.\n- **category**: The type of config containing the key.\n- **key**: The specific identifier to be deleted.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "remove",
+      "parameters": [
+        "category",
+        "key"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "this._cache = {};\nwindow.localStorage.removeItem(this.STORAGE_KEY);",
+      "description": "Wipes all stored preferences from both the memory cache and `localStorage`. Crucial for protecting user privacy on shared machines during logout.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "clearAll",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "constructor",
+    "get",
+    "set",
+    "remove",
+    "clearAll"
+  ]
+}

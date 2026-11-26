@@ -1,0 +1,60 @@
+{
+  "description": "",
+  "name": "tax-applicability-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Id\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"ID\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"Tax\",    \n    \"Country\",\n    \"State\"   \n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Id\": \"Id\",\n        \"TaxId\": \"TaxId\",\n        \"CountryId\": \"CountryId\",\n        \"StateId\": \"StateId\"\n    },\n    type: {\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "    return [\n        // --- Identifiers ---\n        {\n            label: \"ID\",\n            value: \"Id\",\n            type: \"number\",\n            operators: [\"eq\"]\n        },\n\n        // --- Relationships (The core of this entity) ---\n        {\n            label: \"Tax\",\n            value: \"TaxId\",\n            type: \"dropdown\",\n            source: \"taxMap\", // Requires loading taxMap\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Country\",\n            value: \"CountryId\",\n            type: \"dropdown\",\n            source: \"countryMap\", // Requires loading countryMap\n            operators: [\"eq\"]\n        },\n        {\n            label: \"State\",\n            value: \"StateId\",\n            type: \"dropdown\",\n            source: \"stateMap\", // Requires loading stateMap\n            operators: [\"eq\"]\n        }\n    ];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "taxApplicabilities",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "taxApplicabilities",
+    "getQuickSearchDefaults"
+  ]
+}

@@ -1,0 +1,1906 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "0",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.dashboard.title"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.dashboard.description"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-description",
+                      "name": "p",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "type-select",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId && $ctrl.storedTab === 2",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.selectedType",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "\"Select Run Type\"",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handleRunTypeChange()",
+                          "to": "onValueChange"
+                        },
+                        {
+                          "expression": "$ctrl.runTypeMap",
+                          "to": "values"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "pay-schedule-select",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId && $ctrl.selectedType === \"REGULAR\" && $ctrl.storedTab === 2",
+                      "expressions": [
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.selectedPaySchedule",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.payScheduleMap.filter(paySchedule => {\n    const relatedPaySchedule = $ctrl.paySchedules.find(\n        schedule => schedule.Id === paySchedule.value\n    );\n\n    return relatedPaySchedule && relatedPaySchedule.CompanyId === $ctrl.globalSelectedCompany.companyId;\n});",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "\"Select a Pay Schedule\"",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.handlePayScheduleChange()",
+                          "to": "onValueChange"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "pay-period-select",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId && $ctrl.selectedPaySchedule && $ctrl.storedTab === 2",
+                      "expressions": [
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.selectedPayPeriod",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.payPeriodMap.filter(payPeriod => {\n    // 1. Resolve full pay period entity from map value ID\n    const relatedPayPeriod = $ctrl.payPeriods?.find(\n        period => period.Id === payPeriod.value\n    );\n\n    if (!relatedPayPeriod) return false;\n\n    const runType = $ctrl.selectedType;\n    const currentCompanyId = $ctrl.globalSelectedCompany?.companyId;\n\n    // 2. REGULAR run, OR OFFCYCLE run scoped to a specific Pay Schedule\n    if (runType === \"REGULAR\" || (runType === \"OFFCYCLE\" && $ctrl.selectedPaySchedule)) {\n        return relatedPayPeriod.PayScheduleId === $ctrl.selectedPaySchedule &&\n            $ctrl.paySchedules?.some(\n                schedule => schedule.Id === relatedPayPeriod.PayScheduleId &&\n                    schedule.CompanyId === currentCompanyId\n            );\n    }\n\n    // Resolve companyId with fallback to PaySchedule for OFFCYCLE/TERMINATION\n    const scheduleCompanyId = $ctrl.paySchedules?.find(s => s.Id === relatedPayPeriod.PayScheduleId)?.CompanyId;\n    const effectiveCompanyId = relatedPayPeriod.CompanyId ?? scheduleCompanyId;\n\n    // 3. OFFCYCLE run without a selected Pay Schedule\n    if (runType === \"OFFCYCLE\" && !$ctrl.selectedPaySchedule) {\n        return Boolean(relatedPayPeriod.OffCycle) &&\n            effectiveCompanyId === currentCompanyId;\n    }\n\n    // 4. TERMINATION run\n    if (runType === \"TERMINATION\") {\n        return Boolean(relatedPayPeriod.OffCycle) &&\n            effectiveCompanyId === currentCompanyId;\n    }\n\n    return false;\n});",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "\"Select a Pay Period\"",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.handlePayPeriodChange()",
+                          "to": "onValueChange"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting || $ctrl.isGettingEntities",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.getAllEntities($ctrl.storedTab)",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-header-container"
+              ],
+              "comments": "section-header",
+              "layout": {},
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.entityUiStateService.initializationError"
+                }
+              ],
+              "classList": [],
+              "comments": "initialization-error",
+              "displayExpression": "$ctrl.entityUiStateService.initializationError",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [],
+                      "layout": {},
+                      "name": "Spinner",
+                      "nodeName": "bln-spinner",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-spinner-size",
+                          "value": "5rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "spinner",
+                  "displayExpression": "$ctrl.isGettingEntities",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "justify-content",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "align-items",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "height",
+                      "value": "100%"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "\"Please select a Company from the Drop-down to view the Data.\""
+                        }
+                      ],
+                      "classList": [],
+                      "name": "p"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "select-company-or-worker-info",
+                  "displayExpression": "(!$ctrl.globalSelectedCompany.companyId && !$ctrl.isGettingEntities)",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "justify-content",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "align-items",
+                      "value": "center"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "displayExpression": "true",
+                      "expressions": [
+                        {
+                          "expression": "[{\n        label: \"Upcoming Deadlines\",\n        closable: false\n    },\n    {\n        label: \"Payroll Runs\",\n        closable: false\n    }\n]",
+                          "to": "tabItems"
+                        },
+                        {
+                          "expression": "$ctrl.setTable(selectedTab)",
+                          "to": "onSelectedTabChange"
+                        },
+                        {
+                          "expression": "$ctrl.storedTab",
+                          "to": "selectedTab"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Tab Bar",
+                      "nodeName": "bln-tab-bar",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "attributes": [
+                                {
+                                  "property": "core",
+                                  "value": ""
+                                }
+                              ],
+                              "children": [],
+                              "classList": [],
+                              "comments": "keyword-filter",
+                              "displayExpression": "true",
+                              "expressions": [
+                                {
+                                  "expression": "\"\"",
+                                  "to": "label"
+                                },
+                                {
+                                  "expression": "\"Filter\"",
+                                  "to": "placeholder"
+                                },
+                                {
+                                  "expression": "$ctrl.filterTarget",
+                                  "to": "value"
+                                },
+                                {
+                                  "expression": "$ctrl.handleFilterData()",
+                                  "to": "onValueChange"
+                                },
+                                {
+                                  "expression": "false",
+                                  "to": "disabled"
+                                },
+                                {
+                                  "expression": "500",
+                                  "to": "debounceDelay"
+                                },
+                                {
+                                  "expression": "\"search\"",
+                                  "to": "type"
+                                }
+                              ],
+                              "formControl": {
+                                "modelName": "value"
+                              },
+                              "name": "Text Input",
+                              "nodeName": "bln-text-input",
+                              "type": "core-component"
+                            }
+                          ],
+                          "classList": [],
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "display",
+                              "value": "flex"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "evaluate": false,
+                                  "name": "text",
+                                  "textContent": "No Data"
+                                }
+                              ],
+                              "classList": [],
+                              "name": "h3"
+                            },
+                            {
+                              "evaluate": false,
+                              "name": "text",
+                              "textContent": ""
+                            }
+                          ],
+                          "classList": [],
+                          "comments": "no-data-info",
+                          "displayExpression": "$ctrl.filteredTableData.length === 0 || $ctrl.filteredTableData === undefined",
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "display",
+                              "value": "flex"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "justify-content",
+                              "value": "center"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "align-items",
+                              "value": "center"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "attributes": [
+                                {
+                                  "property": "core",
+                                  "value": ""
+                                }
+                              ],
+                              "children": [],
+                              "classList": [],
+                              "displayExpression": "$ctrl.filteredTableData.length > 0",
+                              "expressions": [
+                                {
+                                  "expression": "$ctrl.filteredTableData",
+                                  "to": "data"
+                                },
+                                {
+                                  "expression": "$ctrl.tableColumns",
+                                  "to": "columns"
+                                },
+                                {
+                                  "expression": "true",
+                                  "to": "enableRowSelection"
+                                },
+                                {
+                                  "expression": "$ctrl.setSelectedEntity(row)",
+                                  "to": "onSelection"
+                                },
+                                {
+                                  "expression": "true",
+                                  "to": "enablePagination"
+                                },
+                                {
+                                  "expression": "$ctrl.currentPage",
+                                  "to": "currentPage"
+                                }
+                              ],
+                              "name": "Table",
+                              "nodeName": "bln-table",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "--bln-table-height",
+                                  "value": "100%"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "--bln-table-secondary-bg-color",
+                                  "value": "#f9f9f9"
+                                }
+                              ],
+                              "type": "core-component"
+                            }
+                          ],
+                          "classList": [
+                            "table-container"
+                          ],
+                          "name": "div"
+                        },
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "displayExpression": "$ctrl.filteredTableData.length > 0",
+                          "expressions": [
+                            {
+                              "expression": "$ctrl.currentPage",
+                              "to": "currentPage"
+                            },
+                            {
+                              "expression": "Math.ceil($ctrl.filteredTableData.length / 25)",
+                              "to": "totalPages"
+                            }
+                          ],
+                          "name": "Pagination",
+                          "nodeName": "bln-pagination",
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [
+                        "filter-table-pagination-container"
+                      ],
+                      "name": "div"
+                    }
+                  ],
+                  "classList": [
+                    "tabs-filter-table-pagination-container"
+                  ],
+                  "comments": "tabs-filter-table-pagination",
+                  "displayExpression": "(!$ctrl.isGettingEntities && $ctrl.globalSelectedCompany.companyId)",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "flex-direction",
+                      "value": "column"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-body-container-legacy"
+              ],
+              "displayExpression": "!$ctrl.entityUiStateService.initializationError",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "table",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "height": "",
+              "mainSize": "100%",
+              "minimumHeight": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "$ctrl.selectedEntityName"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "entity-name",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "payroll-report",
+                      "displayExpression": "$ctrl.storedTab === 2",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.selectedEntity.Status !== \"PROCESSED\" ? \"Payroll has not been processed yet\" : \"Payroll Report\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"file-invoice\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "$ctrl.redirectToPayrollReport()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.isDeleting || $ctrl.selectedEntity.Status !== \"PROCESSED\"",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "review-payroll",
+                      "displayExpression": "$ctrl.storedTab === 2",
+                      "expressions": [
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"search-dollar\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"Review Payroll\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.payroll_run.handleReviewPayrollRunJobsButtonClick()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.isDeleting",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "right-panel-header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [],
+              "comments": "right-panel-header",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "space-between"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "ng-bind-html",
+                      "value": "$ctrl.$sce.trustAsHtml($ctrl.selectedEntityDetails)"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "$ctrl.selectedEntityDetails"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "entity-details",
+                  "elementId": "details",
+                  "name": "div"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "evaluate": true,
+                                      "name": "text",
+                                      "textContent": "key"
+                                    }
+                                  ],
+                                  "classList": [],
+                                  "comments": "key",
+                                  "name": "div",
+                                  "styles": [
+                                    {
+                                      "enabled": true,
+                                      "property": "font-weight",
+                                      "value": "bold"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "evaluate": true,
+                                      "name": "text",
+                                      "textContent": "value === true ? \"YES\" : value === false ? \"NO\" : value"
+                                    }
+                                  ],
+                                  "classList": [],
+                                  "comments": "value",
+                                  "conditionalClasses": [
+                                    {
+                                      "className": "status-indicator",
+                                      "condition": "value === true || value === false"
+                                    },
+                                    {
+                                      "className": "yes",
+                                      "condition": "value === true"
+                                    },
+                                    {
+                                      "className": "no",
+                                      "condition": "value === false"
+                                    }
+                                  ],
+                                  "name": "div"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "line",
+                              "name": "div",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "display",
+                                  "value": "flex"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "justify-content",
+                                  "value": "space-between"
+                                }
+                              ]
+                            },
+                            {
+                              "children": [],
+                              "classList": [],
+                              "displayExpression": "key !== \"Deleted\"",
+                              "name": "hr"
+                            }
+                          ],
+                          "classList": [],
+                          "displayExpression": "key !== \"Deleted\" && !key.includes(\"Id\") && !key.includes(\"YesNo\")",
+                          "iterate": {
+                            "array": "$ctrl.selectedEntity.Detail",
+                            "variable": "(key, value)"
+                          },
+                          "name": "div"
+                        }
+                      ],
+                      "classList": [],
+                      "layout": {
+                        "cell": {
+                          "expanded": "false",
+                          "label": "'Details'",
+                          "type": "accordion-folder"
+                        }
+                      },
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "max-height",
+                          "value": "fit-content"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "details",
+                  "displayExpression": "$ctrl.storedTab === 1",
+                  "layout": {
+                    "container": {
+                      "items": [],
+                      "type": "accordion"
+                    }
+                  },
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "width",
+                      "value": "100% !important"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "overflow-x",
+                      "value": "auto"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "right-panel-body-container"
+              ],
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "right-panel",
+          "displayExpression": "!(!$ctrl.selectedEntityName || $ctrl.isEditingEmployment || $ctrl.isEditingBank || $ctrl.isEditingStatutoryCompliance)",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "50%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "padding",
+              "value": "1rem"
+            },
+            {
+              "enabled": true,
+              "property": "border-style",
+              "value": "solid"
+            },
+            {
+              "enabled": true,
+              "property": "border-width",
+              "value": "thin"
+            },
+            {
+              "enabled": true,
+              "property": "border-color",
+              "value": "#cecece"
+            },
+            {
+              "enabled": true,
+              "property": "overflow-y",
+              "value": "auto"
+            }
+          ]
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "displayExpression": "true",
+      "layout": {
+        "container": {
+          "gap": "0rem",
+          "items": [],
+          "orientation": "row",
+          "type": "box"
+        }
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "expressions": [
+                {
+                  "expression": "'Hide Side Panel'",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.uiState.isViewingPayrollRunReviews = false",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "({\n              \"type\": \"font-icon\",\n              \"style\": \"solid\",\n              \"name\": \"times\",\n              \"position\": \"icon-only\"\n            })",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "\"Prepare Payroll Run Review\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"search-dollar\",\n  \"position\": \"left\"\n})",
+                      "to": "icon"
+                    },
+                    {
+                      "expression": "\"Prepare the Payroll Run Review for later viewing\"",
+                      "to": "tooltip"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.payroll_run.handlePreparePayrollRunReviewButtonClick()",
+                      "to": "onClick"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                }
+              ]
+            }
+          ],
+          "classList": [
+            "right-panel-header-container"
+          ],
+          "layout": {},
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.payroll_run.jobs",
+                      "to": "data"
+                    },
+                    {
+                      "expression": "[{\n        name: \"Job Id\",\n        hide: false,\n        valueKey: \"jobId\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"js-expression\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: \"value.split(\\'-\\').at(0)\"\n    },\n    {\n        name: \"Status\",\n        hide: false,\n        valueKey: \"status\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"Expires In\",\n        hide: false,\n        valueKey: \"expiresAt\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"js-expression\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: \"$ctrl.utils.formatTimeRemaining(value)\"\n    },\n    {\n        name: \"Encash Leave Credits\",\n        hide: false,\n        valueKey: \"encashAccrualBalances\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"boolean\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                      "to": "columns"
+                    },
+                    {
+                      "expression": "true",
+                      "to": "enableRowSelection"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.payroll_run.handleViewReviewPayrollRunReviewButtonClick(row)",
+                      "to": "onSelection"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Table",
+                  "nodeName": "bln-table",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-height",
+                      "value": "100%"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-secondary-bg-color",
+                      "value": "#f9f9f9"
+                    }
+                  ],
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "table-container"
+              ],
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "right-panel-body-container"
+          ],
+          "layout": {},
+          "name": "div"
+        }
+      ],
+      "classList": [],
+      "comments": "payroll-run-review-jobs",
+      "layout": {
+        "container": {
+          "items": [],
+          "position": "right",
+          "type": "side-panel",
+          "visible": "$ctrl.uiState.isViewingPayrollRunReviews\n&&\n$ctrl.storedTab === 2\n",
+          "width": "600px",
+          "zIndex": 1
+        }
+      },
+      "name": "div"
+    }
+  ],
+  "name": "dashboard",
+  "params": {},
+  "type": "page",
+  "url": "/dashboard",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$formValidationManager",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "name": "$sce",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "body": "const limit = 1000;\nconst offset = 0;\n\nreturn $ctrl.payrollAppApi[endpoint](\n    { limit: limit, offset: offset },\n    { headers: $ctrl.authCookies.setHeaders() }\n)\n    .then((result) => result.data[entity])\n    .catch((reason) => {\n        $ctrl.utils.toast(reason.data.message, reason.data.result);\n        throw reason;\n    });\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getData",
+      "parameters": [
+        "endpoint",
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const result = {};\nfor (const key in form) {\n    if (form.hasOwnProperty(key)) {\n        const titleCaseKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n        if (form[key] === \"\") continue;\n\n        // Resets\n        if (key === \"runType\" && form[key] !== \"OFFCYCLE\") $ctrl.utils.resetDependentFields([\"offCycleReason\"], form);\n\n        if ((key === \"offCycle\" || key === \"payScheduleId\" || key === \"startDate\" || key === \"endDate\" || key === \"payDate\" || key === \"payPeriodId\" || key === \"runType\" || key === \"finalPayEligibleWorker\") && method === \"PUT\") continue;\n\n        if ((/^(is|need|with|can|allow|active|salaried|enabled|final)/i.test(key) || key.toLowerCase() === \"employercontribution\") && method === \"POST\" && key !== \"finalPayEligibleWorker\") {\n            result[titleCaseKey] = form[key] || false;\n        } else if (key.includes(\"Date\") && form[key]) {\n            result[titleCaseKey] = $ctrl.utils.parseDate(form[key]);\n        } else {\n            result[titleCaseKey] = form[key];\n        }\n    }\n}\nreturn result;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildRequestBody",
+      "parameters": [
+        "form",
+        "method"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (method === \"POST\") $ctrl.isInserting = true;\nif (method === \"PUT\") $ctrl.isUpdating = true;\n\n$ctrl.payrollAppApi[endpoint](\n    {},\n    {\n        ...$ctrl.buildRequestBody(form, method),\n        ...(method === \"PUT\" ? { \"Id\": $ctrl.selectedEntity.Id } : {}),\n        ...(method === \"PUT\" && $ctrl.selectedEntity.Entity === \"Position\" ? { \"BaseRateUnit\": $ctrl.selectedEntity.Detail.BaseRateUnit } : {}),\n    },\n    { headers: $ctrl.authCookies.setHeaders() }\n).then(result => {\n    $ctrl.utils.toast(`Successfully ${$ctrl.isInserting ? \"added\" : \"edited\"} ${entityName}`, result.data.result);\n\n    if ($ctrl.isInserting) $ctrl.setIsAdding();\n    if ($ctrl.isUpdating) $ctrl.setIsEditing();\n\n    $ctrl.tempSelectedType = $ctrl.selectedType;\n    $ctrl.getAllEntities();\n    $ctrl.utils.resetForm(form);\n    \n}).catch(reason => {\n    $ctrl.utils.toast(reason.data.message, reason.data.result);\n}).finally(() => {\n    if ($ctrl.isInserting) $ctrl.isInserting = false;\n    if ($ctrl.isUpdating) $ctrl.isUpdating = false;\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "sendData",
+      "parameters": [
+        "endpoint",
+        "form",
+        "entityName",
+        "method"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const toBeDeletedEntity = $ctrl.selectedEntityName;\nlet isConfirmed;\n$ctrl.isDeleting = true;\n\nawait $ctrl.$modal.open(\"delete-entity-modal\", {\n    props:\n    {\n        EntityName: $ctrl.selectedEntityName,\n        EntityDetails: $ctrl.selectedEntityDetails\n    }\n}).then(response => isConfirmed = response.result === \"ok\");\n\nif (isConfirmed) {\n    $ctrl.payrollAppApi[endpoint](\n        {\n            userId: $ctrl.authCookies.activeUser.id,\n            id: $ctrl.selectedEntity.Id\n        },\n        { headers: $ctrl.authCookies.setHeaders() }\n    ).then(result => {\n        $ctrl.tempSelectedType = $ctrl.selectedType;\n        $ctrl.getAllEntities();\n        $ctrl.utils.toast(`Successfully deleted ${toBeDeletedEntity}`, result.data.result);\n        $ctrl.isDeleting = false;\n    }).catch(reason => {\n        $ctrl.utils.toast(reason.data.message, reason.data.result);\n        $ctrl.isDeleting = false;\n    }).finally(() => {\n        $ctrl.isDeleting = false;\n    });\n\n} else {\n    $ctrl.isDeleting = false;\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "deleteData",
+      "parameters": [
+        "endpoint"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.$env.current.name === \"prod\" && !$ctrl.$cookies.get(\"id_token\")) {\n    window.location.href = \"#!/user_login\";\n    return;\n}\n\nconst usrIsAdmin = await $ctrl.authService.redirectWorker();\nif(!usrIsAdmin) return;\n\nif ($ctrl.isFirstLoad) $ctrl.authCookies.getAuthToken().then(() => $ctrl.isFirstLoad = false);\n\n// Resets\n$ctrl.currentPage = 1;\n$ctrl.entityUiStateService.initializationError = null;\n\n$ctrl.selectedEntityName = null;\n$ctrl.selectedEntity = null;\n$ctrl.selectedEntityDetails = \"\";\n\n$ctrl.selectedPaySchedule = null;\n$ctrl.selectedPayPeriod = null;\n\n// Main\n$ctrl.isGettingEntities = true;\n\nPromise.all([\n    $ctrl.getData('lonti_app_payroll_service_user_SelectAllUser', 'user'),\n    $ctrl.getData('lonti_app_payroll_service_company_SelectAllCompany', 'company'),\n    $ctrl.getData('lonti_app_payroll_service_pay_period_SelectAllPayPeriod', 'payperiod'),\n    $ctrl.getData('lonti_app_payroll_service_payroll_run_SelectAllPayrollRun', 'payrollrun'),\n    $ctrl.getData('lonti_app_payroll_service_pay_schedule_SelectAllPaySchedule', 'payschedule'),\n    $ctrl.getData('lonti_app_payroll_service_worker_SelectAllWorker', 'worker'),\n    $ctrl.getData('lonti_app_payroll_service_reporting_SelectAllEntityEffectivity', 'entityeffectivity'),\n]).then(results => $ctrl.$timeout(() => {\n    const [\n        users,\n        companies,\n        payPeriods,\n        payrollRuns,\n        paySchedules,\n        workers,\n        entityEffectivities,\n    ] = results;\n\n    $ctrl.dataHandlers.setContext($ctrl);\n\n    $ctrl.dataHandlers.processData(users, {\n        ctrlDataName: 'users',\n        ctrlColumnName: 'userColumns',\n        removeFields: [\"Deleted\"],\n        replaceUserIds: true,\n        hideColumns: true\n    });\n\n    $ctrl.dataHandlers.processData(companies, {\n        ctrlDataName: 'companies',\n        removeFields: [\"Deleted\"],\n        replaceUserIds: true,\n        hideColumns: true\n    });\n\n    $ctrl.dataHandlers.processData(payPeriods, {\n        ctrlDataName: 'payPeriods',\n        ctrlColumnName: 'payPeriodColumns',\n        removeFields: [\"Deleted\"],\n        replaceUserIds: true,\n        hideColumns: true\n    });\n\n    $ctrl.dataHandlers.processData(entityEffectivities, {\n        ctrlDataName: 'entityEffectivities',\n        ctrlColumnName: 'entityEffectivityColumns',\n        removeFields: [\"Deleted\"],\n        replaceUserIds: true,\n        hideColumns: true\n    });\n\n    $ctrl.dataHandlers.processData(workers, {\n        ctrlDataName: 'workers'\n    });\n\n    $ctrl.dataHandlers.processData(payrollRuns, {\n        ctrlDataName: 'payrollRuns',\n        ctrlColumnName: 'payrollRunColumns',\n        removeFields: [\"Deleted\"],\n        replaceUserIds: true,\n        hideColumns: true\n    });\n\n    $ctrl.dataHandlers.processData(paySchedules, {\n        ctrlDataName: 'paySchedules',\n    });\n\n    $ctrl.dataHandlers.processData(companies, {\n        mapToLabelValue: 'companyMap',\n        entityList: $ctrl.companies,\n        mapLabelKey: 'LegalName',\n        mapValueKey: 'Id'\n    });\n    \n    $ctrl.dataHandlers.processData(paySchedules, {\n        mapToLabelValue: 'payScheduleMap',\n        entityList: paySchedules,\n        mapLabelKey: 'DisplayName',\n        mapValueKey: 'Id'\n    });\n\n    $ctrl.dataHandlers.processData(payPeriods, {\n        mapToLabelValue: 'payPeriodMap',\n        entityList: payPeriods,\n        mapLabelKey: 'DisplayName',\n        mapValueKey: 'Id'\n    });\n\n    $ctrl.dataHandlers.processData(users, {\n        mapToLabelValue: 'workerMap',\n        entityList: users,\n        mapLabelKey: ['FirstName', 'LastName'],\n        mapValueKey: 'WorkerId'\n    });\n\n    $ctrl.setTable($ctrl.storedTab ? $ctrl.storedTab : 1);\n    if (!$ctrl.globalSelectedCompany.companyMap.length > 0) $ctrl.globalSelectedCompany.companyMap = $ctrl.companyMap.map(obj => ({...obj}));\n    $ctrl.globalSelectedCompany.setMenuItems();\n    \n    if ($ctrl.tempSelectedType) {\n        $ctrl.selectedType = $ctrl.tempSelectedType;\n        $ctrl.tempSelectedType = null;\n    } else $ctrl.selectedType = \"REGULAR\"\n\n    if ($ctrl.globalSelectedCompany.companyId) $ctrl.handleCompanyChange();\n    if ($ctrl.globalSelectedCompany.companyId && $ctrl.storedTab === 2) $ctrl.handleRunTypeChange();\n\n    $ctrl.isGettingEntities = false;\n}, 500)).catch(error => {\n        $ctrl.entityUiStateService.initializationError = error.data?.message || \"Failed to load required data.\";\n        $ctrl.utils.toast($ctrl.entityUiStateService.initializationError, \"ERROR\");\n        console.error(\"Data loading failed:\", error);\n}).finally(() => $ctrl.isGettingEntities = false);",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "getAllEntities",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "isFirstLoad",
+      "type": "property",
+      "value": "true"
+    },
+    {
+      "body": "$ctrl.isUpdating = true;\nconst entity = $ctrl.selectedEntity.Entity;\n\nswitch ($ctrl.storedTab) {\n    default:\n        $ctrl.sendData(\n            entity !== \"Pay Schedule\"\n            ? \"lonti_app_payroll_service_\" + entity.toLowerCase() + \"_Update\" + entity\n            : \"lonti_app_payroll_service_pay_schedule_UpdatePaySchedule\",\n            $ctrl.form,\n            $ctrl.selectedEntity.Name,\n            \"PUT\"\n        );\n        break;\n\n    case 2:\n        $ctrl.sendData(\n            \"lonti_app_payroll_service_payroll_run_UpdatePayrollRun\",\n            $ctrl.form1,\n            $ctrl.selectedEntity.DisplayName,\n            \"PUT\"\n        );\n        break;\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "updateEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const entity = $ctrl.selectedEntity.Entity;\nswitch ($ctrl.storedTab) {\n    default:\n        $ctrl.deleteData(entity !== \"Pay Schedule\"\n            ? \"lonti_app_payroll_service_\" + entity.toLowerCase() + \"_Delete\" + entity\n            : \"lonti_app_payroll_service_pay_schedule_DeletePaySchedule\");\n        break;\n\n    case 2:\n        $ctrl.deleteData(\"lonti_app_payroll_service_payroll_run_DeletePayrollRun\");\n        break;\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "deleteEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "selectedEntityName",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedEntityDetails",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedEntity",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "// Main\nif (row === undefined) {\n    $ctrl.isEditingEntity = false;\n    $ctrl.isEditingPayrollRun = false;\n\n    $ctrl.selectedEntity = null;\n    $ctrl.selectedEntityName = null;\n    $ctrl.selectedEntityDetails = \"\";\n\n    if (document.getElementById(\"details\")) document.getElementById(\"details\").innerHTML = \"\";\n    return;\n}\n\n$ctrl.selectedEntity = row;\n\nif ($ctrl.isEditingEntity || $ctrl.isEditingPayrollRun) {\n    $ctrl.utils.resetForm($ctrl.form);\n    $ctrl.utils.resetForm($ctrl.form1);\n}\n\n$ctrl.selectedEntityDetails = \"\";\n\nsetEntityDetails();\nwaitForElementAndInject();\nsetEntityName();\n\nif ($ctrl.storedTab === 2) {\n    $ctrl.handlers.payroll_run.setSelectedPayrollRunReviewJobs(row.Id);\n}\n// End of Main\n\n// Functions\nfunction setEntityName() {\n    for (const key in row) {\n        if ((row.hasOwnProperty(key) && key.toLowerCase().includes(\"name\")) || ((row.hasOwnProperty(key) && key.toLowerCase().includes(\"title\")))) {\n            $ctrl.selectedEntityName = row[key] || \"Deleted\";\n            break;\n        }\n    }\n}\n\nfunction setEntityDetails() {\n    for (const [key, value] of Object.entries(row)) {\n        if (key.startsWith(\"$$\")) continue;\n        if (key.includes(\"Company\")) continue;\n        if (key.includes(\"YesNo\")) continue;\n        if ((key.includes(\"Id\") && key !== \"Id\") || value === undefined) continue;\n        if (key === \"CreatedDate\" || key === \"AnnualPayPeriods\") $ctrl.selectedEntityDetails += `<br><hr>`;\n\n        if (key.includes(\"CalculationMethodId\")) {\n            $ctrl.selectedEntityDetails +=\n                `\n                <div style=\"display: flex; width: 100%;\">\n                    <div style=\"font-weight: bold;\">${key}</div>\n                    <div style=\"flex-grow: 1;\"></div>\n                    <div>${value === 1 ? \"FLAT\" : \"PERCENT\"}</div>\n                </div>\n                <hr>\n                `;\n            continue;\n        }\n\n        if (typeof value === \"boolean\") {\n            $ctrl.selectedEntityDetails +=\n                `\n                <div style=\"display: flex; width: 100%; align-items: center;\">\n                    <div style=\"font-weight: bold; flex-shrink: 0;\">${key}</div>\n                    <div style=\"flex-grow: 1;\"></div>\n                    <div class=\"status-indicator ${value ? 'yes' : 'no'}\">\n                        ${value ? 'YES' : 'NO'}\n                    </div>\n                </div>\n                <hr>\n                `;\n            continue;\n        }\n\n        if (typeof value === \"object\") continue;\n\n        $ctrl.selectedEntityDetails +=\n            `\n            <div style=\"display: flex; width: 100%;\">\n                <div style=\"font-weight: bold;\">${key}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${value}</div>\n            </div>\n            <hr>\n            `;\n\n            // Parsing date for easier viewing, but it seems there is a bug with time, so disabling for now.\n            // <div>${typeof key === \"string\" && key.includes(\"Date\") ? $ctrl.parseDate(value) : value}</div>\n\n        if (key === \"DayStartTime\") $ctrl.selectedEntityDetails += `<br>`;\n    }\n}\n\nfunction waitForElementAndInject() {\n    let element = document.getElementById(\"details\");\n\n    if (element) {\n        element.innerHTML = $ctrl.selectedEntityDetails;\n    } else {\n        $ctrl.$timeout(waitForElementAndInject, 100);\n    }\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "setSelectedEntity",
+      "parameters": [
+        "row"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "storedTab",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "tableColumns",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "tableData",
+      "type": "array"
+    },
+    {
+      "body": "if (selectedTab === undefined) null;\n\n// Reset\n$ctrl.selectedEntity = null;\n$ctrl.selectedEntityName = null;\n$ctrl.selectedEntityDetails = \"\";\n\n$ctrl.isEditingEntity = false;\n$ctrl.isEditingPayrollRun = false;\n\n$ctrl.currentPage = 1;\n\n$ctrl.storedTab = selectedTab;\n\nswitch (selectedTab) {\n    default:\n        $ctrl.tableData = $ctrl.entityEffectivities;\n        $ctrl.tableColumns = $ctrl.entityEffectivityColumns;\n        $ctrl.filteredTableData = $ctrl.tableData;\n        if ($ctrl.globalSelectedCompany.companyId) $ctrl.handleCompanyChange();\n        break;\n\n    case 2:\n        $ctrl.tableData = $ctrl.payrollRuns;\n        $ctrl.tableColumns = $ctrl.payrollRunColumns;\n        $ctrl.filteredTableData = $ctrl.tableData;\n        $ctrl.runTypeMap = [\n            { \"label\": \"REGULAR\", \"value\": \"REGULAR\" },\n            { \"label\": \"OFF-CYCLE\", \"value\": \"OFFCYCLE\" },\n            { \"label\": \"TERMINATION\", \"value\": \"TERMINATION\" }\n        ];\n        if ($ctrl.globalSelectedCompany.companyId) $ctrl.handleCompanyChange();\n        break;\n}\n\nif ($ctrl.selectedType) $ctrl.handleRunTypeChange();\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setTable",
+      "parameters": [
+        "selectedTab"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.isEditingEntity || $ctrl.isEditingPayrollRun) {\n    $ctrl.setIsEditing();\n    return;\n} else {\n    $ctrl.selectedEntity = null;\n    $ctrl.selectedEntityName = null;\n    $ctrl.selectedEntityDetails = \"\";\n}\n\nswitch ($ctrl.storedTab) {\n    default:\n        $ctrl.utils.resetForm($ctrl.form);\n        break;\n\n    case 2:\n        $ctrl.utils.resetForm($ctrl.form1);\n        break;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setIsAdding",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.isEditingEntity || $ctrl.isEditingPayrollRun) {\n    $ctrl.utils.resetForm($ctrl.form);\n    $ctrl.utils.resetForm($ctrl.form1);\n}\n\nswitch ($ctrl.storedTab) {\n    default:\n        $ctrl.isEditingEntity = !$ctrl.isEditingEntity;\n        break;\n\n    case 2:\n        $ctrl.isEditingPayrollRun = !$ctrl.isEditingPayrollRun;\n        break;\n}\n\n$ctrl.setInputValues();\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setIsEditing",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!$ctrl.selectedEntity) return;\nif (Object.keys($ctrl.selectedEntity).length === 0) return;\n\nswitch ($ctrl.storedTab) {\n    default:\n        useExistingValuesAsInputValues($ctrl.form);\n        break;\n\n    case 2:\n        useExistingValuesAsInputValues($ctrl.form1);\n        break;\n}\n\nfunction useExistingValuesAsInputValues(form) {\n    const obj = $ctrl.selectedEntity;\n\n    for (let key in form) {\n        const adjustedKey = key.charAt(0).toUpperCase() + key.slice(1);\n        // if (key.includes(\"Date\")) form[key] = obj.hasOwnProperty(adjustedKey) ? $ctrl.parseDate(obj[adjustedKey]) : undefined;\n        form[key] = obj.hasOwnProperty(adjustedKey) ? obj[adjustedKey] : undefined;\n    }\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setInputValues",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": [
+        "$ctrl.selectedEntity"
+      ]
+    },
+    {
+      "description": "",
+      "name": "filterTarget",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "filteredTableData",
+      "type": "array"
+    },
+    {
+      "body": "if ($ctrl.storedTab === 2) {\n    if ($ctrl.selectedType === \"REGULAR\") $ctrl.filteredTableData = $ctrl.tableData.filter((row) =>\n        $ctrl.paySchedules.find(paySchedule => $ctrl.payPeriods.find(payPeriod => payPeriod.Id === row.PayPeriodId).PayScheduleId === paySchedule.Id).CompanyId === $ctrl.globalSelectedCompany.companyId && row.RunType === \"REGULAR\"\n            ? $ctrl.selectedPayPeriod ? row.PayPeriodId === $ctrl.selectedPayPeriod && Object.values(row).some((value) =>\n                String(value)\n                    .toLowerCase()\n                    .includes($ctrl.filterTarget.toLowerCase()))\n                : $ctrl.selectedPaySchedule ? $ctrl.payPeriods.find(payPeriod => payPeriod.Id === row.PayPeriodId).PayScheduleId === $ctrl.selectedPaySchedule &&\n                    Object.values(row).some((value) =>\n                        String(value)\n                            .toLowerCase()\n                            .includes($ctrl.filterTarget.toLowerCase()))\n\n                    : Object.values(row).some((value) =>\n                        String(value)\n                            .toLowerCase()\n                            .includes($ctrl.filterTarget.toLowerCase()))\n            : null\n    );\n\n    else $ctrl.filteredTableData = $ctrl.tableData.filter((row) =>\n        (row.OffCycle) || (row.RunType === $ctrl.selectedType)\n            ? Object.values(row).some((value) =>\n                String(value)\n                    .toLowerCase()\n                    .includes($ctrl.filterTarget.toLowerCase()))\n            : null\n    );\n} else $ctrl.filteredTableData = $ctrl.tableData.filter((row) =>\n    row.Detail.CompanyId === $ctrl.globalSelectedCompany.companyId || row.Entity === \"Deduction\" || row.Entity === \"Tax\"\n        ? Object.values(row).some((value) =>\n            String(value)\n                .toLowerCase()\n                .includes($ctrl.filterTarget.toLowerCase()))\n        : null\n);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleFilterData",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "companyMap",
+      "type": "array"
+    },
+    {
+      "body": "const currentCompanyId = $ctrl.globalSelectedCompany?.companyId;\n\nif (!currentCompanyId || !$ctrl.tableData || $ctrl.tableData.length === 0) return;\n\n// Resets\n$ctrl.isEditingEntity = false;\n$ctrl.isEditingPayrollRun = false;\n\n// Tab 1: Entity-based scoping (Deductions, Taxes, etc.)\nif ($ctrl.storedTab === 1) {\n    $ctrl.filteredTableData = $ctrl.tableData.filter(row => {\n        if (![\"Deduction\", \"Tax\"].includes(row.Entity)) {\n            return row.Detail?.CompanyId === currentCompanyId;\n        }\n        if (row.Entity === \"Deduction\") {\n            const worker = $ctrl.workers?.find(w => w.Id === row.Detail?.WorkerId);\n            return worker?.CompanyId === currentCompanyId;\n        }\n        return true;\n    });\n}\n// Tab 2: Payroll Runs scoping\nelse if ($ctrl.storedTab === 2) {\n    if ($ctrl.selectedType) {\n        // Triggers for ALL run types (REGULAR, OFFCYCLE, TERMINATION)\n        $ctrl.handleRunTypeChange();\n    } else {\n        // Fallback: Scope all runs when no run type filter is explicitly selected\n        $ctrl.filteredTableData = $ctrl.tableData.filter(row => {\n            const payPeriod = $ctrl.payPeriods?.find(p => p.Id === row.PayPeriodId);\n            if (!payPeriod) return false;\n\n            // REGULAR: Scope via PaySchedule -> CompanyId\n            if (row.RunType === \"REGULAR\") {\n                const paySchedule = $ctrl.paySchedules?.find(s => s.Id === payPeriod.PayScheduleId);\n                return paySchedule?.CompanyId === currentCompanyId;\n            }\n\n            // OFFCYCLE / TERMINATION: Scope via PayPeriod -> CompanyId (or fallback to PaySchedule)\n            const scheduleCompanyId = $ctrl.paySchedules?.find(s => s.Id === payPeriod.PayScheduleId)?.CompanyId;\n            const companyId = payPeriod.CompanyId ?? scheduleCompanyId;\n\n            return companyId === currentCompanyId;\n        });\n    }\n}\n\n$ctrl.filterTarget = null;\n\nif ($ctrl.selectedEntityName) {\n    $ctrl.selectedEntity = {};\n    $ctrl.selectedEntityName = \"\";\n    $ctrl.selectedEntityDetails = \"\";\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleCompanyChange",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": [
+        "$ctrl.globalSelectedCompany.companyId"
+      ]
+    },
+    {
+      "body": "const currentCompanyId = $ctrl.globalSelectedCompany?.companyId;\n\nif ($ctrl.storedTab === 2) {\n    $ctrl.filteredTableData = $ctrl.tableData.filter(row => {\n        if (row.RunType !== $ctrl.selectedType) return false;\n\n        // 1. Safe Pay Period Lookup\n        const payPeriod = $ctrl.payPeriods?.find(p => p.Id === row.PayPeriodId);\n        if (!payPeriod) return false;\n\n        // 2. Regular Runs: Scope via PaySchedule's CompanyId\n        if ($ctrl.selectedType === \"REGULAR\") {\n            const paySchedule = $ctrl.paySchedules?.find(s => s.Id === payPeriod.PayScheduleId);\n            return paySchedule?.CompanyId === currentCompanyId;\n        }\n\n        // 3. Off-Cycle / Termination Runs: Check direct CompanyId or fallback to PaySchedule\n        const scheduleCompanyId = $ctrl.paySchedules?.find(s => s.Id === payPeriod.PayScheduleId)?.CompanyId;\n        const companyId = payPeriod.CompanyId ?? scheduleCompanyId;\n\n        // Fail closed: returns false if companyId is null/undefined\n        return companyId === currentCompanyId;\n    });\n}\n\n$ctrl.selectedPaySchedule = null;\n$ctrl.selectedPayPeriod = null;\n$ctrl.filterTarget = null;\n\nif ($ctrl.selectedEntityName) {\n    $ctrl.selectedEntity = {};\n    $ctrl.selectedEntityName = \"\";\n    $ctrl.selectedEntityDetails = \"\";\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleRunTypeChange",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "runTypeMap",
+      "type": "array"
+    },
+    {
+      "body": "const state = { id: $ctrl.selectedEntity.Id, origin: \"Dashboard\" };\n$ctrl.$state.go(\"payroll_report\", state);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "redirectToPayrollReport",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    },
+    {
+      "body": "if ($ctrl.storedTab === 2) {\n    $ctrl.filteredTableData = $ctrl.tableData.filter(payrollRun => {\n        if (payrollRun.RunType !== \"REGULAR\") return false;\n\n        const relatedPayPeriod = $ctrl.payPeriods.find(p => p.Id === payrollRun.PayPeriodId);\n        return relatedPayPeriod?.PayScheduleId === $ctrl.selectedPaySchedule;\n    });\n}\n\n$ctrl.selectedPayPeriod = null;\n$ctrl.filterTarget = null;\n\nif ($ctrl.selectedEntityName) {\n    $ctrl.selectedEntity = {};\n    $ctrl.selectedEntityName = \"\";\n    $ctrl.selectedEntityDetails = \"\";\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handlePayScheduleChange",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.filteredTableData = $ctrl.tableData.filter(payrollRun => payrollRun.PayPeriodId === $ctrl.selectedPayPeriod && payrollRun.RunType === \"REGULAR\");\n$ctrl.filterTarget = null;\n\nif ($ctrl.selectedEntityName) {\n    $ctrl.selectedEntity = {};\n    $ctrl.selectedEntityName = \"\";\n    $ctrl.selectedEntityDetails = \"\";\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handlePayPeriodChange",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "dataHandlers",
+      "resourceIdentity": "services/data-handlers",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "description": "The visibility of the side panel.",
+      "name": "sidePanelVisible",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "id": "service",
+      "name": "payrollRunService",
+      "resourceIdentity": "services/entities/payroll-run-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "pollingService",
+      "resourceIdentity": "services/polling-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": ""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "isAdding",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditing",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingTable",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "The visibility of the side panel.",
+          "name": "isViewingPayrollRunReviews",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "payroll_run",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "jobs",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "isInserting",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isUpdating",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isDeleting",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "description": "",
+          "name": "payroll_run",
+          "properties": [
+            {
+              "body": "payrollRunId = payrollRunId ?? ($ctrl.uiState.selectedEntity ?? $ctrl.selectedEntity)?.Id;\n\nif (!payrollRunId) return;\n\nconst jobsMap = $ctrl.payrollRunReviewService.getCachedJobs(payrollRunId);\n$ctrl.uiState.payroll_run.jobs = Object.values(jobsMap);\n\nconst hasPendingJobs = $ctrl.uiState.payroll_run.jobs.some(\n    job => ![\"COMPLETED\", \"FAILED\"].includes(job.status)\n);\n\nif (hasPendingJobs && $ctrl.uiState.isViewingPayrollRunReviews) {\n    $ctrl.$timeout(() => $ctrl.handlers.payroll_run.setSelectedPayrollRunReviewJobs(), $ctrl.pollingService.payrollRunReview.POLLING_INTERVAL_MS);\n}",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "setSelectedPayrollRunReviewJobs",
+              "parameters": [
+                "payrollRunId"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "$ctrl.uiState.isViewingPayrollRunReviews = true;\n$ctrl.handlers.payroll_run.setSelectedPayrollRunReviewJobs();",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "handleReviewPayrollRunJobsButtonClick",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "if (!$ctrl.uiState.selectedEntity && !$ctrl.selectedEntity) {\n    console.error($ctrl.en.global.notifications.payrollRun.errors.console.NOT_FOUND);\n    $ctrl.utils.toast($ctrl.en.global.notifications.payrollRun.errors.toast.NOT_FOUND, \"ERROR\");\n    return;\n}\n\nconst payrollRunId = ($ctrl.uiState.selectedEntity ?? $ctrl.selectedEntity).Id;\nconst displayName = ($ctrl.uiState.selectedEntity ?? $ctrl.selectedEntity).DisplayName;\n\nconst confirmRes = await $ctrl.$modal.open(\"confirm-action-modal\", {\n    title: $ctrl.en.global.notifications.payrollRun.initiateReview.confirm.title,\n    body: $ctrl.en.global.notifications.payrollRun.initiateReview.confirm.body,\n    confirmButtonLabel: \"Yes\",\n    cancelButtonLabel: \"No\"\n});\n\nif (!confirmRes || ![\"ok\", \"cancel\"].includes(confirmRes.result)) return;\n\nconst encashAccrualBalances = confirmRes.result === \"ok\";\n\ntry {\n    const jobData = await $ctrl.payrollRunReviewService.initiateReview(payrollRunId, encashAccrualBalances);\n\n    $ctrl.payrollRunReviewService.cacheJobDetails(payrollRunId, jobData);\n    $ctrl.handlers.payroll_run.setSelectedPayrollRunReviewJobs();\n\n    $ctrl.utils.toast(\n        $ctrl.en.global.notifications.payrollRun.initiateReview.info.INITIATE(displayName),\n        \"INFO\"\n    );\n\n    $ctrl.pollingService.payrollRunReview.startPolling(payrollRunId);\n\n} catch (error) {\n    console.error($ctrl.en.global.notifications.payrollRun.initiateReview.error.console.FAILED(displayName), error);\n    $ctrl.utils.toast(\n        $ctrl.en.global.notifications.payrollRun.initiateReview.error.toast.FAILED(displayName),\n        \"ERROR\"\n    );\n}",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": true,
+              "name": "handlePreparePayrollRunReviewButtonClick",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "if (!row) return;\n\nconst { payrollRunId, jobId, status } = row;\n\nif (!payrollRunId || !jobId) {\n    console.error(\"Cannot navigate: Missing Run ID or Job ID.\");\n    return;\n}\n\nif (![\"COMPLETED\", \"FAILED\"].includes(status)) {\n    $ctrl.utils.toast(\"Review is not yet ready. Please try again later.\", \"INFO\");\n    return;\n}\n\nif (status === \"FAILED\") {\n    $ctrl.utils.toast(\"This Payroll Run Review job failed. Please generate a new review.\", \"INFO\");\n    return;\n}\n\ntry {\n    const stateParams = {\n        id: payrollRunId,\n        jobId: jobId,\n        origin: \"dashboard\"\n    };\n\n    $ctrl.$state.go(\"review_payroll\", stateParams);\n} catch (error) {\n    console.error(\"Error transitioning to 'review_payroll' state:\", error);\n}",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "handleViewReviewPayrollRunReviewButtonClick",
+              "parameters": [
+                "row"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "payrollRunReviewService",
+      "resourceIdentity": "services/entities/payroll-run-review-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "selectedType",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedPaySchedule",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedPayPeriod",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    },
+    {
+      "id": "open-api",
+      "name": "payrollAuth",
+      "resourceIdentity": "apis/payrollAuth",
+      "type": "open-api"
+    }
+  ]
+}

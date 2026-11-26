@@ -1,0 +1,60 @@
+{
+  "description": "",
+  "name": "currency-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"CurrencyName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Currency Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"Name\",\n    \"Symbol\",\n    \"Active\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Name\": \"CurrencyName\",\n        \"Symbol\": \"CurrencySymbol\"\n    },\n    type: {\n        \"Active\": \"boolean\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        // operators: [\"eq\"]\n    },\n\n    // --- Core Identity ---\n    {\n        label: \"Currency Name\",\n        value: \"CurrencyName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\", \"endswith\"]\n    },\n    {\n        label: \"Active\",\n        value: \"Active\",\n        type: \"boolean\",\n        operators: [\"eq\"] // True/False\n    },\n\n    // --- Details ---\n    {\n        label: \"Currency Symbol\",\n        value: \"CurrencySymbol\",\n        type: \"string\",\n        // operators: [\"eq\", \"contains\"]\n    },\n    {\n        label: \"ISO Currency Code\",\n        value: \"IsoCurrencyCode\",\n        type: \"string\",\n        // operators: [\"eq\", \"contains\"]\n    },\n    {\n        label: \"Currency Precision\",\n        value: \"CurrencyPrecision\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Custom (System Entity)\",\n        value: \"Custom\",\n        type: \"boolean\",\n        operators: [\"eq\"] // True (User Created) / False (System)\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "currencies",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "currencies",
+    "quickSearch",
+    "getColumnDefaults",
+    "getFilterDefinitions"
+  ]
+}

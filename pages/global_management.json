@@ -1,0 +1,3606 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "max-width",
+              "value": "auto"
+            }
+          ],
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.globalManagement.title"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.globalManagement.description"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-description",
+                      "name": "p",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add-entity",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onAddInit()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isAdding || $ctrl.uiState.isEditing || $ctrl.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"plus\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"Add \".concat($ctrl.uiState.currentTab.id === 2 ? \"Currency\" : $ctrl.uiState.currentTab.id === 3 ? \"Country\" : $ctrl.uiState.currentTab.id === 4 ? \"State\" : \"Company\")",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.loaders.loadActiveTab()",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-header-container"
+              ],
+              "comments": "section-header",
+              "layout": {},
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.entityUiStateService.initializationError"
+                }
+              ],
+              "classList": [],
+              "comments": "initialization-error",
+              "displayExpression": "$ctrl.entityUiStateService.initializationError",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "[{\n        label: \"Company\",\n        closable: false\n    },\n    {\n        label: \"Currency\",\n        closable: false\n    },\n    {\n        label: \"Country\",\n        closable: false\n    },\n    {\n        label: \"State\",\n        closable: false\n    }\n]",
+                      "to": "tabItems"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onTabChange(selectedTab)",
+                      "to": "onSelectedTabChange"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentTab.id",
+                      "to": "selectedTab"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Tab Bar",
+                  "nodeName": "bln-tab-bar",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.quickSearchPlaceholder",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentTab.name",
+                      "to": "entityType"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.filter.onSearch(newValue)",
+                      "to": "onSearch"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.advancedFilters",
+                      "to": "appliedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.filter.openAdvancedFilterModal()",
+                      "to": "onAdvancedClick"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.usingAdvancedFilters",
+                      "to": "usingAdvancedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.chips",
+                      "to": "filterChips"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.filter.onReset(true)",
+                      "to": "onReset"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.filter.onChipUpdate(remainingStrings)",
+                      "to": "onFilterUpdate"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.currentFilterString",
+                      "to": "searchText"
+                    }
+                  ],
+                  "name": "search-filter",
+                  "ownerId": "6b07c72a48cd88e32d307a88",
+                  "ownerType": "app",
+                  "resourceIdentity": "components/shared/search-filter/search-filter",
+                  "type": "custom-component"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [],
+                          "layout": {},
+                          "name": "Spinner",
+                          "nodeName": "bln-spinner",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-spinner-size",
+                              "value": "5rem"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "spinner",
+                      "displayExpression": "$ctrl.uiState.isLoadingTable",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "display",
+                          "value": "flex"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "justify-content",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "align-items",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "height",
+                          "value": "100%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].data",
+                              "to": "data"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "enableRowSelection"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onSelectRow(row)",
+                              "to": "onSelection"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "resizableColumns"
+                            },
+                            {
+                              "expression": "$ctrl.currentPage",
+                              "to": "currentPage"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableFiltering"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableCheckboxes"
+                            },
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].columns",
+                              "to": "columns"
+                            }
+                          ],
+                          "name": "Table",
+                          "nodeName": "bln-table",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-height",
+                              "value": "100%"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-secondary-bg-color",
+                              "value": "#f9f9f9"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [
+                        "table-container"
+                      ],
+                      "displayExpression": "!$ctrl.uiState.isLoadingTable",
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage",
+                          "to": "currentPage"
+                        },
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].pageCount",
+                          "to": "totalPages"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onPageChange(currentPage)",
+                          "to": "onPageChange"
+                        }
+                      ],
+                      "name": "Pagination",
+                      "nodeName": "bln-pagination",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "table-pagination-container"
+                  ],
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "main-body-container"
+              ],
+              "comments": "tab-bar-filter-table-pagination",
+              "displayExpression": "!$ctrl.entityUiStateService.initializationError",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "table",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "height": "",
+              "mainSize": "100%",
+              "minimumHeight": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "$ctrl.uiState.selectedEntity[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].entityNameKey]"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "entity-name",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onEditInit()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.isDeleting || !$ctrl.uiState.selectedEntity?.Custom && $ctrl.uiState.currentTab.id !== 1",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "(!$ctrl.uiState.selectedEntity?.Custom && $ctrl.uiState.currentTab.id !== 1) ? \"System Entities cannot be edited\": \"Edit\";",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"edit\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "delete",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.deleteEntity()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.isDeleting",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.isDeleting || !$ctrl.uiState.selectedEntity?.Custom && $ctrl.uiState.currentTab.id !== 1",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "(!$ctrl.uiState.selectedEntity?.Custom && $ctrl.uiState.currentTab.id !== 1) ? \"System Entities cannot be deleted\": \"Delete\";",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"trash-alt\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-bg-color",
+                          "value": "#d10000"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-hovered-bg-color",
+                          "value": "#b10e00"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-active-bg-color",
+                          "value": "#9b0c00"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "right-panel-header-container"
+              ],
+              "comments": "right-panel-header",
+              "name": "div"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "displayExpression": "$ctrl.uiState.detailsList\n&&\n$ctrl.uiState.detailsList.length",
+              "expressions": [
+                {
+                  "expression": "$ctrl.uiState.detailsList",
+                  "to": "data"
+                },
+                {
+                  "expression": "false",
+                  "to": "showTableHeader"
+                },
+                {
+                  "expression": "false",
+                  "to": "enableSorting"
+                },
+                {
+                  "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                  "to": "columns"
+                }
+              ],
+              "name": "Table",
+              "nodeName": "bln-table",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "--bln-table-height",
+                  "value": "90%"
+                },
+                {
+                  "enabled": true,
+                  "property": "--bln-table-secondary-bg-color",
+                  "value": "#f9f9f9"
+                }
+              ],
+              "type": "core-component"
+            }
+          ],
+          "classList": [
+            "right-panel-container"
+          ],
+          "comments": "right-panel",
+          "displayExpression": "!(!$ctrl.uiState.selectedEntity || $ctrl.uiState.isEditing)",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "50%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            },
+            {
+              "property": "name",
+              "value": "form"
+            }
+          ],
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "cancel",
+              "expressions": [
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.handlers.onAddInit()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "($ctrl.uiState.isEditing) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Company\""
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Fields marked with an asterisk (*) are required."
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "displayExpression": "!$ctrl.uiState.isEditing",
+              "name": "p"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "active",
+              "expressions": [
+                {
+                  "expression": "\"Active\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "\"right\"",
+                  "to": "labelPosition"
+                },
+                {
+                  "expression": "$ctrl.form.active",
+                  "to": "checked"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onCheckedChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "checked"
+              },
+              "name": "Checkbox",
+              "nodeName": "bln-checkbox",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "legal-name",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Legal Name\" : \"* Legal Name\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.legalName",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.LegalName",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "false",
+                  "to": "disabled"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "trade-name",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Trade Name\" : \"* Trade Name\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.tradeName",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.TradeName",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "country",
+              "expressions": [
+                {
+                  "expression": "$ctrl.uiState.isEditing ? \"Country\" : \"* Country\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.countryMap",
+                  "to": "values"
+                },
+                {
+                  "expression": "$ctrl.form.countryId",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.CountryId",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Dropdown",
+              "nodeName": "bln-dropdown",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "state",
+              "displayExpression": "$ctrl.form.countryId && $ctrl.stateMap[$ctrl.form.countryId]",
+              "expressions": [
+                {
+                  "expression": "$ctrl.uiState.isEditing ? \"State\" : \"* State\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.stateMap[$ctrl.form.countryId] ?? []",
+                  "to": "values"
+                },
+                {
+                  "expression": "$ctrl.form.stateId",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.StateId",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Dropdown",
+              "nodeName": "bln-dropdown",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "fiscal-year-start",
+              "expressions": [
+                {
+                  "expression": "[\"month\",\"day\"]",
+                  "to": "allowedValues"
+                },
+                {
+                  "expression": "$ctrl.uiState.isEditing ? \"Fiscal Year Start\" : \"* Fiscal Year Start\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.FiscalYearStart",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.form.fiscalYearStart",
+                  "to": "dateValue"
+                },
+                {
+                  "expression": "\"MM-DD\"",
+                  "to": "dateFormat"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Date Time Picker",
+              "nodeName": "bln-date-time-picker",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "fiscal-year-end",
+              "expressions": [
+                {
+                  "expression": "[\"month\",\"day\"]",
+                  "to": "allowedValues"
+                },
+                {
+                  "expression": "$ctrl.uiState.isEditing ? \"Fiscal Year End\" : \"* Fiscal Year End\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.FiscalYearEnd",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.form.fiscalYearEnd",
+                  "to": "dateValue"
+                },
+                {
+                  "expression": "\"MM-DD\"",
+                  "to": "dateFormat"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Date Time Picker",
+              "nodeName": "bln-date-time-picker",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "primary-address-location",
+              "expressions": [
+                {
+                  "expression": "\"Primary Address Location\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.primaryAddressLocation",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.PrimaryAddressLocation",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "primary-contact-email",
+              "expressions": [
+                {
+                  "expression": "\"Primary Contact Email\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.primaryContactEmail",
+                  "to": "value"
+                },
+                {
+                  "expression": "\"email\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.PrimaryContactEmail",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "primary-contact-phone",
+              "expressions": [
+                {
+                  "expression": "\"Primary Contact Phone\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.primaryContactPhone",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.PrimaryContactPhone",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "primary-contact-url",
+              "expressions": [
+                {
+                  "expression": "\"Primary Contact Url\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form.primaryContactUrl",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.PrimaryContactUrl",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.isCompanyFormPristine = false",
+                  "to": "onValueChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"Cancel\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onAddInit()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "add",
+                  "displayExpression": "!$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Add\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.insertEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || !$ctrl.form.legalName || !$ctrl.form.tradeName || !$ctrl.form.fiscalYearStart || !$ctrl.form.fiscalYearEnd || !$ctrl.form.countryId || ($ctrl.form.countryId && $ctrl.stateMap[$ctrl.form.countryId] && !$ctrl.form.stateId)",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl)",
+                      "to": "tooltip"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "displayExpression": "$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Save\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.updateEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating\n||\n(\n    $ctrl.form.countryId\n    &&\n    Object.hasOwn($ctrl.stateMap, $ctrl.form.countryId)\n    && !$ctrl.form.stateId\n)\n||\n$ctrl.isCompanyFormPristine",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "(\n    $ctrl.form.countryId\n    &&\n    $ctrl.stateMap[$ctrl.form.countryId]\n    &&\n    !$ctrl.form.stateId\n)\n? \"A State is required when the chosen Country has States\"\n: null",
+                      "to": "tooltip"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "form-div"
+              ],
+              "comments": "buttons",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "form"
+          ],
+          "comments": "company",
+          "displayExpression": "($ctrl.uiState.isAdding || $ctrl.uiState.isEditing) && $ctrl.uiState.currentTab.name === \"company\"",
+          "elementId": "form",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "height": "",
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "form"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            },
+            {
+              "property": "name",
+              "value": "form1"
+            }
+          ],
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "cancel",
+              "expressions": [
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.handlers.onAddInit()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "($ctrl.uiState.isEditing) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Currency\""
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Fields marked with an asterisk (*) are required."
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "displayExpression": "!$ctrl.uiState.isEditing",
+              "name": "p"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "active",
+              "expressions": [
+                {
+                  "expression": "\"Active\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "\"right\"",
+                  "to": "labelPosition"
+                },
+                {
+                  "expression": "$ctrl.form1.active",
+                  "to": "checked"
+                }
+              ],
+              "formControl": {
+                "modelName": "checked"
+              },
+              "name": "Checkbox",
+              "nodeName": "bln-checkbox",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "currency-name",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Currency Name\" : \"* Currency Name\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form1.currencyName",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.CurrencyName",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "currency-symbol",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Currency Symbol\" : \"* Currency Symbol\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form1.currencySymbol",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.CurrencySymbol",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "iso-currency-code",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Iso Currency Code\" : \"* Iso Currency Code\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form1.isoCurrencyCode",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.IsoCurrencyCode",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "currency-precision",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Currency Precision\" : \"* Currency Precision\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form1.currencyPrecision",
+                  "to": "value"
+                },
+                {
+                  "expression": "\"number\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.CurrencyPrecision",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"Cancel\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onAddInit()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "add",
+                  "displayExpression": "!$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Add\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.insertEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || !$ctrl.form1.currencyName || !$ctrl.form1.currencySymbol || !$ctrl.form1.isoCurrencyCode || typeof $ctrl.form1.currencyPrecision !==  \"number\"",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl)",
+                      "to": "tooltip"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "displayExpression": "$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Save\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.updateEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating || $ctrl.$formValidationManager.forms.form1.isPristine();",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "form-div"
+              ],
+              "comments": "buttons",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "form"
+          ],
+          "comments": "currency",
+          "displayExpression": "(\n    $ctrl.uiState.isAdding || \n    ($ctrl.uiState.isEditing && $ctrl.uiState.selectedEntity.Custom)\n) \n&& $ctrl.uiState.currentTab.name === \"currency\"",
+          "elementId": "form1",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "form"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            },
+            {
+              "property": "name",
+              "value": "form2"
+            }
+          ],
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "cancel",
+              "expressions": [
+                {
+                  "expression": "$ctrl.handlers.onAddInit()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"icon-only\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "($ctrl.uiState.isEditing) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add Country\""
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Fields marked with an asterisk (*) are required."
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "displayExpression": "!$ctrl.uiState.isEditing",
+              "name": "p"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "name",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Name\" : \"* Name\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form2.name",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.Name",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "time-zone",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Time Zone\" : \"* Time Zone\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form2.timeZone",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.TimeZone",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "with-states",
+              "expressions": [
+                {
+                  "expression": "\"With States\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "\"right\"",
+                  "to": "labelPosition"
+                },
+                {
+                  "expression": "$ctrl.form2.withStates",
+                  "to": "checked"
+                }
+              ],
+              "formControl": {
+                "modelName": "checked"
+              },
+              "name": "Checkbox",
+              "nodeName": "bln-checkbox",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"Cancel\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onAddInit()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "add",
+                  "displayExpression": "!$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Add\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.insertEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || !$ctrl.form2.name || !$ctrl.form2.timeZone",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl)",
+                      "to": "tooltip"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "displayExpression": "$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Save\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.updateEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating || $ctrl.$formValidationManager.forms.form2.isPristine()",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "form-div"
+              ],
+              "comments": "buttons",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "form"
+          ],
+          "comments": "country",
+          "displayExpression": "(\n    $ctrl.uiState.isAdding || \n    ($ctrl.uiState.isEditing && $ctrl.uiState.selectedEntity.Custom)\n) \n&& $ctrl.uiState.currentTab.name === \"country\"",
+          "elementId": "form2",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "form"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            },
+            {
+              "property": "name",
+              "value": "form3"
+            }
+          ],
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "cancel",
+              "expressions": [
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.handlers.onAddInit()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "($ctrl.uiState.isEditing) ? \"Edit \" + $ctrl.uiState.selectedEntityName : \"Add State\""
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Fields marked with an asterisk (*) are required."
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "displayExpression": "!$ctrl.uiState.isEditing",
+              "name": "p"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "name",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Name\" : \"* Name\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form3.name",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.Name",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "time-zone",
+              "expressions": [
+                {
+                  "expression": "($ctrl.uiState.isEditing) ? \"Time Zone\" : \"* Time Zone\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form3.timeZone",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.TimeZone",
+                  "to": "placeholder"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "country",
+              "expressions": [
+                {
+                  "expression": "$ctrl.uiState.isEditing ? \"Country\" : \"* Country\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.countryMap.filter(country => country.WithStates)",
+                  "to": "values"
+                },
+                {
+                  "expression": "$ctrl.form3.countryId",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.uiState.isAdding",
+                  "to": "isRequired"
+                },
+                {
+                  "expression": "$ctrl.uiState.selectedEntity?.CountryId",
+                  "to": "placeholder"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Dropdown",
+              "nodeName": "bln-dropdown",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"Cancel\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onAddInit()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || $ctrl.isUpdating",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "add",
+                  "displayExpression": "!$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Add\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.insertEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isInserting || !$ctrl.form3.name || !$ctrl.form3.timeZone || !$ctrl.form3.countryId",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl)",
+                      "to": "tooltip"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "displayExpression": "$ctrl.uiState.isEditing",
+                  "expressions": [
+                    {
+                      "expression": "\"Save\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.updateEntity()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.isUpdating || $ctrl.$formValidationManager.forms.form3.isPristine()",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "form-div"
+              ],
+              "comments": "buttons",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "form"
+          ],
+          "comments": "state",
+          "displayExpression": "(\n    $ctrl.uiState.isAdding || \n    ($ctrl.uiState.isEditing && $ctrl.uiState.selectedEntity.Custom)\n) \n&& $ctrl.uiState.currentTab.name === \"state\"",
+          "elementId": "form3",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "form"
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "layout": {
+        "container": {
+          "crossAxisAlignment": "stretch",
+          "gap": "0rem",
+          "items": [],
+          "mainAxisAlignment": "center",
+          "orientation": "row",
+          "type": "box"
+        }
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    }
+  ],
+  "name": "global_management",
+  "params": {
+    "createFirstCompany": ""
+  },
+  "type": "page",
+  "url": "/global_management",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$formValidationManager",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "countryMap",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "stateMap",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "companyMap",
+      "type": "array"
+    },
+    {
+      "body": "const result = {};\nfor (const key in form) {\n    if (form.hasOwnProperty(key)) {\n        const titleCaseKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n        if (form[key] === \"\") continue;\n\n        if (/^(is|need|with|active)/i.test(key) && method === \"POST\") {\n            result[titleCaseKey] = form[key] || false;\n        } else if (key.includes(\"fiscalYear\") && form[key] && typeof form[key] !== \"string\") {\n            const parsedDate = $ctrl.utils.parseDate(form[key]).split(\"-\");\n            const month = parsedDate[1];\n            const day = parsedDate[2].split(\" \")[0];\n            result[titleCaseKey] = month + \"-\" + day;\n        } else {\n            result[titleCaseKey] = form[key];\n        }\n    }\n}\nreturn result;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildRequestBody",
+      "parameters": [
+        "form",
+        "method"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.isInserting = true;\n\nswitch ($ctrl.uiState.currentTab.id) {\n    default:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_company_InsertCompany(\n            {},\n            {\n                ...$ctrl.buildRequestBody($ctrl.form, \"POST\")\n            }, {\n            headers: $ctrl.authCookies.setHeaders(),\n        }).then(result => {\n            $ctrl.utils.toast(`Successfully added ${$ctrl.form.legalName}`, result.data.result);\n            $ctrl.globalSelectedCompany.addCompanyMenuItem(result.data.company.Id, $ctrl.form.legalName);\n            $ctrl.handlers.onAddInit();\n            $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            $ctrl.utils.resetForm($ctrl.form);\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isInserting = false;\n        });\n        break;\n\n    case 2:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_currency_InsertCurrency(\n            {},\n            { ...$ctrl.buildRequestBody($ctrl.form1, \"POST\") },\n            { headers: $ctrl.authCookies.setHeaders() }\n        ).then(result => {\n            $ctrl.utils.toast(`Successfully added ${$ctrl.form1.currencyName}`, result.data.result);\n            $ctrl.handlers.onAddInit();\n            $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            $ctrl.utils.resetForm($ctrl.form1);\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isInserting = false;\n        });;\n        break;\n\n    case 3:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_country_InsertCountry(\n            {},\n            {\n                ...$ctrl.buildRequestBody($ctrl.form2, \"POST\")\n            }, {\n            headers: $ctrl.authCookies.setHeaders()\n        }).then(result => {\n            $ctrl.utils.toast(`Successfully added ${$ctrl.form2.name}`, result.data.result);\n            $ctrl.handlers.onAddInit();\n            $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            $ctrl.utils.resetForm($ctrl.form2);\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isInserting = false;\n        });\n        break;\n\n    case 4:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_state_InsertState(\n            {},\n            {\n                ...$ctrl.buildRequestBody($ctrl.form3, \"POST\")\n            }, {\n            headers: $ctrl.authCookies.setHeaders()\n        }).then(result => {\n            $ctrl.utils.toast(`Successfully added ${$ctrl.form3.name}`, result.data.result);\n            $ctrl.handlers.onAddInit();\n            $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            $ctrl.utils.resetForm($ctrl.form3);\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isInserting = false;\n        });\n        break;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "insertEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.isUpdating = true;\nconst entityId = $ctrl.uiState.selectedEntity?.Id;\n\n// Keep form open with updated info and reselect table row\nasync function updateEditForm() {\n    const tableRowIndex = $ctrl.tabStore[$ctrl.uiState.currentTab.name].data.findIndex(entity => entity.Id === entityId);\n    if (tableRowIndex === -1) {\n        throw new Error(`Entity not found in table`);\n    }\n\n    $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex] = $ctrl.uiState.selectedEntity = $ctrl.utils.buildUpdatedEntityData($ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form], $ctrl.uiState.selectedEntity);\n\n    // Hydrate fields based on updated Ids on dropdown selection\n    const hydratedEntity = await $ctrl.referenceDataService.hydrateEntity(\n        $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex]\n    );\n    \n    const tabConfig = $ctrl.tabConfig[$ctrl.uiState.currentTab.name]\n    $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex] = $ctrl.uiState.selectedEntity = hydratedEntity\n    $ctrl.uiState.selectedEntityName = (typeof tabConfig.getName === \"function\") \n    ? tabConfig.getName(hydratedEntity) \n    : hydratedEntity[tabConfig.entityNameKey];\n    \n    $ctrl.$timeout(() => {\n        $ctrl.utils.setSelectedBelliniTableRow(tableRowIndex);\n    });\n    $ctrl.handlers.onEditInit();\n    const formToReset = document.querySelector('.form');\n    if(formToReset) {\n        formToReset.scrollTop = 0;\n    }\n}\n\nswitch ($ctrl.uiState.currentTab.id) {\n    default:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_company_UpdateCompany(\n            {},\n            { ...$ctrl.buildRequestBody($ctrl.form, \"PUT\"), Id: $ctrl.uiState.selectedEntity?.Id }, {\n            headers: $ctrl.authCookies.setHeaders()\n        }).then(async result => {\n            $ctrl.utils.toast(`Successfully edited ${$ctrl.uiState.selectedEntityName}`, result.data.result);\n            $ctrl.globalSelectedCompany.updateCompanyMenuItem($ctrl.uiState.selectedEntity?.Id, $ctrl.form.legalName);\n            try {\n                await updateEditForm();\n            } catch (uiError) {\n                console.error('Failed to refresh form/table after successful update', uiError);\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            }\n\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isUpdating = false;\n        });\n        break;\n\n    case 2:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_currency_UpdateCurrency({},\n            { ...$ctrl.buildRequestBody($ctrl.form1, \"PUT\"), Id: $ctrl.uiState.selectedEntity?.Id }, {\n            headers: $ctrl.authCookies.setHeaders()\n        }).then(async result => {\n            $ctrl.utils.toast(`Successfully edited ${$ctrl.uiState.selectedEntityName}`, result.data.result);\n            try {\n                await updateEditForm();\n            } catch (uiError) {\n                console.error('Failed to refresh form/table after successful update', uiError);\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            }\n        }).catch(reason => {\n            $ctrl.utils.toast(reason.data.message, reason.data.result);\n        }).finally(() => {\n            $ctrl.isUpdating = false;\n        });\n        break;\n\n    case 3:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_country_UpdateCountry({},\n            { ...$ctrl.buildRequestBody($ctrl.form2, \"PUT\"), Id: $ctrl.uiState.selectedEntity?.Id }\n            , {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(async result => {\n                $ctrl.utils.toast(`Successfully edited ${$ctrl.uiState.selectedEntityName}`, result.data.result);\n                try {\n                    await updateEditForm();\n                } catch (uiError) {\n                    console.error('Failed to refresh form/table after successful update', uiError);\n                    $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                }\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n            }).finally(() => {\n                $ctrl.isUpdating = false;\n            });\n        break;\n\n    case 4:\n        $ctrl.payrollAppApi.lonti_app_payroll_service_state_UpdateState({},\n            { ...$ctrl.buildRequestBody($ctrl.form3, \"PUT\"), Id: $ctrl.uiState.selectedEntity?.Id }\n            , {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(async result => {\n                $ctrl.utils.toast(`Successfully edited ${$ctrl.uiState.selectedEntityName}`, result.data.result);\n                try {\n                    await updateEditForm();\n                } catch (uiError) {\n                    console.error('Failed to refresh form/table after successful update', uiError);\n                    $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                }\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n            }).finally(() => {\n                $ctrl.isUpdating = false;\n            });\n        break;\n}\n\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "updateEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const toBeDeletedEntityName = $ctrl.uiState.selectedEntityName;\nconst toBeDeletedEntityDetails = $ctrl.utils.legacyGenerateEntityDetails({\n    entity: $ctrl.uiState.selectedEntity,\n    utils: $ctrl.utils\n});\n\nlet isConfirmed;\n$ctrl.isDeleting = true;\n\nawait $ctrl.$modal.open(\"delete-entity-modal\", {\n    props:\n    {\n        EntityName: toBeDeletedEntityName,\n        EntityDetails: toBeDeletedEntityDetails\n    }\n}).then(response => isConfirmed = response.result === \"ok\");\n\nif (isConfirmed) {\n    switch ($ctrl.uiState.currentTab.id) {\n        default:\n            $ctrl.payrollAppApi.lonti_app_payroll_service_company_DeleteCompany({\n                id: $ctrl.uiState.selectedEntity?.Id\n            }, {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(result => {\n                $ctrl.globalSelectedCompany.deleteCompanyMenuItem($ctrl.uiState.selectedEntity?.Id);\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                $ctrl.utils.toast(`Successfully deleted ${toBeDeletedEntityName}`, result.data.result);\n                $ctrl.isDeleting = false;\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n                $ctrl.isDeleting = false;\n            });\n            break;\n\n        case 2:\n            $ctrl.payrollAppApi.lonti_app_payroll_service_currency_DeleteCurrency({\n                id: $ctrl.uiState.selectedEntity?.Id\n            }, {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(result => {\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                $ctrl.utils.toast(`Successfully deleted ${toBeDeletedEntityName}`, result.data.result);\n                $ctrl.isDeleting = false;\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n                $ctrl.isDeleting = false;\n            });\n            break;\n\n        case 3:\n            $ctrl.payrollAppApi.lonti_app_payroll_service_country_DeleteCountry({\n                id: $ctrl.uiState.selectedEntity?.Id\n            }, {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(result => {\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                $ctrl.utils.toast(`Successfully deleted ${toBeDeletedEntityName}`, result.data.result);\n                $ctrl.isDeleting = false;\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n                $ctrl.isDeleting = false;\n            });\n            break;\n\n        case 4:\n            $ctrl.payrollAppApi.lonti_app_payroll_service_state_DeleteState({\n                id: $ctrl.uiState.selectedEntity?.Id\n            }, {\n                headers: $ctrl.authCookies.setHeaders()\n            }).then(result => {\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                $ctrl.utils.toast(`Successfully deleted ${toBeDeletedEntityName}`, result.data.result);\n                $ctrl.isDeleting = false;\n            }).catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n                $ctrl.isDeleting = false;\n            });\n            break;\n    }\n} else {\n    $ctrl.isDeleting = false;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "deleteEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "selectedEntity",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "form",
+      "properties": [
+        {
+          "description": "",
+          "name": "active",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "legalName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "tradeName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "primaryAddressLocation",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "primaryContactEmail",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "primaryContactPhone",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "primaryContactUrl",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "fiscalYearStart",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "fiscalYearEnd",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "countryId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "stateId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form1",
+      "properties": [
+        {
+          "description": "",
+          "name": "active",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "currencyName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "currencySymbol",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isoCurrencyCode",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "currencyPrecision",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form2",
+      "properties": [
+        {
+          "description": "",
+          "name": "name",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "timeZone",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "withStates",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form3",
+      "properties": [
+        {
+          "description": "",
+          "name": "name",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "timeZone",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "countryId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "dataHandlers",
+      "resourceIdentity": "services/data-handlers",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "isCompanyFormPristine",
+      "type": "property",
+      "value": "true"
+    },
+    {
+      "description": "",
+      "name": "tabItemsMap",
+      "type": "property",
+      "value": "new Map([\n    [1, \"company\"],\n    [2, \"currency\"],\n    [3, \"country\"],\n    [4, \"state\"]\n]);"
+    },
+    {
+      "body": "$ctrl.authCookies.setServerUrl($ctrl.$env.getProperty(\"payroll_api_base_url\"));\nconst usrIsAdmin = await $ctrl.authService.redirectWorker();\nif(!usrIsAdmin) return;\n\n$ctrl.uiState.currentTab.name = $ctrl.tabItemsMap.get($ctrl.uiState.currentTab.id);\n\n$ctrl.uiState.currentFilter.quickSearchPlaceholder = $ctrl.filterService.quickSearchConfig.getSearchPlaceholder(\n    $ctrl.uiState.currentTab.name,\n    $ctrl.tabConfig[$ctrl.uiState.currentTab.name].quickSearchDefaultConfig,\n    $ctrl.userPreferenceService\n);\n\n$ctrl.loaders.loadActiveTab();\n$ctrl.handlers.processPageParameters();",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "onInit",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": ""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "isAdding",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditing",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingTable",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "company",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form\""
+            },
+            {
+              "description": "",
+              "name": "entityNameKey",
+              "type": "property",
+              "value": "\"LegalName\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.companyService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.companyService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currency",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form1\""
+            },
+            {
+              "description": "",
+              "name": "entityNameKey",
+              "type": "property",
+              "value": "\"CurrencyName\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.currencyService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.currencyService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "country",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form2\""
+            },
+            {
+              "description": "",
+              "name": "entityNameKey",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.countryService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.countryService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "state",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form3\""
+            },
+            {
+              "description": "",
+              "name": "entityNameKey",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.stateService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.stateService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [
+        {
+          "description": "",
+          "name": "company",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currency",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "country",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "state",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "countryService",
+      "resourceIdentity": "services/entities/country-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "stateService",
+      "resourceIdentity": "services/entities/state-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "companyService",
+      "resourceIdentity": "services/entities/company-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "currencyService",
+      "resourceIdentity": "services/entities/currency-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "userPreferenceService",
+      "resourceIdentity": "services/core/storage/user-preference-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "if (!params) params = {};\n\nconst currentTabName = $ctrl.uiState.currentTab.name;\n\n// Default values\nconst {\n    entityType = currentTabName,\n    page = $ctrl.tabStore[currentTabName].currentPage,\n    query = $ctrl.uiState.currentFilter.currentFilterString,\n    isAfterWrite = false\n} = params;\n\nconst apiQuery = $ctrl.filterService.buildCombinedQuery({\n    // quickSearchConfig: $ctrl.tabConfig[entityType].quickSearchDefaultConfig,\n    // quickSearchValue: query,\n    advancedFilters: $ctrl.uiState.currentFilter.advancedFilters\n});\n\nawait $ctrl.baseGridControllerService.loadGridData($ctrl, {\n    entityType,\n    columnDefs: $ctrl.tabConfig[entityType].columnDefaultConfig,\n    page,\n    limit: $ctrl.tabStore[entityType].limit,\n    query: apiQuery\n});\n\n$ctrl.loaders.loadReferenceMaps({\n    isAfterWrite\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadActiveTab",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "try {\n    if (!params) params = {};\n    const { isAfterWrite } = params;\n\n    if (isAfterWrite) {\n        $ctrl.referenceDataService.clearCache();\n    }\n\n    // Fetch formatted options directly from service\n    const [companyOpts, countryOpts, stateOpts] = await Promise.all([\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Company\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Country\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"State\")\n    ]);\n\n    $ctrl.companyMap = companyOpts;\n    $ctrl.countryMap = countryOpts;\n\n    // Group States (This specific logic can stay here or move to a specific StateService)\n    $ctrl.stateMap = stateOpts.reduce((acc, state) => {\n        if (!acc[state.CountryId]) acc[state.CountryId] = [];\n        acc[state.CountryId].push(state);\n        return acc;\n    }, {});\n\n    // Update Global Menu\n    if ($ctrl.globalSelectedCompany) {\n        $ctrl.globalSelectedCompany.companyMap = $ctrl.companyMap;\n        $ctrl.globalSelectedCompany.setMenuItems();\n    }\n\n} catch (e) {\n    console.warn(\"Background reference load failed\", e);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadReferenceMaps",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "if (!$ctrl.pageParameters) return;\n\nif ($ctrl.pageParameters.createFirstCompany === \"true\") {\n    $ctrl.handlers.onAddInit();\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "processPageParameters",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const canSwitchTabs = await $ctrl.entityViewService.checkUnsavedChanges(\n    $ctrl.uiState.isEditing,\n    $ctrl.selectedEntity?.Id,\n    null,\n    $ctrl.utils,\n    $ctrl.uiState.isAdding\n);\n\nif (!canSwitchTabs) {\n    $ctrl.utils.setSelectedBelliniTabBarTab($ctrl.uiState.currentTab.previousId);\n    return;   \n} else {\n    $ctrl.uiState.currentTab.previousId = selectedTab;\n}\n\n$ctrl.baseGridControllerService.resetState($ctrl.uiState);\nconst selectedTabName = $ctrl.tabItemsMap.get(selectedTab);\n$ctrl.uiState.currentTab.name = selectedTabName;\n$ctrl.handlers.filter.onReset(false);\n\n$ctrl.uiState.currentFilter.quickSearchPlaceholder = $ctrl.filterService.quickSearchConfig.getSearchPlaceholder(\n    selectedTabName,\n    $ctrl.tabConfig[selectedTabName].quickSearchDefaultConfig,\n    $ctrl.userPreferenceService\n);\n\n$ctrl.loaders.loadActiveTab({\n    entityType: selectedTabName,\n    page: 1\n});\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onTabChange",
+          "parameters": [
+            "selectedTab"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const canSwitch = await $ctrl.entityViewService.checkUnsavedChanges(\n    $ctrl.uiState.isEditing,\n    $ctrl.uiState.selectedEntity?.Id,\n    null,\n    $ctrl.utils,\n    $ctrl.uiState.isAdding\n);\n\nif (!canSwitch) {\n    $ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage = $ctrl.tabStore[$ctrl.uiState.currentTab.name].previousPage;\n    return;\n} else {\n    $ctrl.tabStore[$ctrl.uiState.currentTab.name].previousPage = currentPage;\n}\n\n$ctrl.loaders.loadActiveTab({page: currentPage})",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onPageChange",
+          "parameters": [
+            "currentPage"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.selectedEntity"
+          ]
+        },
+        {
+          "body": "$ctrl.baseGridControllerService.handleRowSelection($ctrl, row, {\n\n    uiState: $ctrl.uiState,\n    utils: $ctrl.utils,\n    referenceService: $ctrl.referenceDataService,\n    viewService: $ctrl.entityViewService,\n    gridData: $ctrl.tabStore[$ctrl.uiState.currentTab.name]?.data,\n\n    config: {\n        exclude: [\"CompanyId\", \"StateId\"],\n        separators: [\"AnnualPayPeriods\"],\n        mappers: {\n            \"CalculationMethodId\": (val) => (val === 1 ? \"FLAT\" : \"PERCENT\")\n        }\n    },\n\n    // onFormInit: (entity) => {\n    //     $ctrl.initializeForms(entity);\n    // }\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onSelectRow",
+          "parameters": [
+            "row"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\n\nif ($ctrl.uiState.isEditing) {\n    $ctrl.utils.resetForm($ctrl.form);\n    $ctrl.utils.resetForm($ctrl.form1);\n    $ctrl.utils.resetForm($ctrl.form2);\n    $ctrl.utils.resetForm($ctrl.form3);\n    $ctrl.uiState.isEditing = false;    \n    return;\n} else {\n    $ctrl.uiState.selectedEntity = null;\n}\n\nconst formKey = $ctrl.tabConfig[$ctrl.uiState.currentTab.name].form;\n$ctrl.uiState.isAdding = !$ctrl.uiState.isAdding;\n$ctrl.utils.resetForm($ctrl[formKey]);\ntableCtrl.gridApi.selection.clearSelectedRows();",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onAddInit",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if ($ctrl.uiState.isEditing) {\n    $ctrl.utils.resetForm($ctrl.form);\n    $ctrl.utils.resetForm($ctrl.form1);\n    $ctrl.utils.resetForm($ctrl.form2);\n    $ctrl.utils.resetForm($ctrl.form3);\n}\n\n$ctrl.handlers.setInputValues();\n$ctrl.uiState.isEditing = true;\n$ctrl.isCompanyFormPristine = true;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onEditInit",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!$ctrl.uiState.selectedEntity) return;\nswitch ($ctrl.uiState.currentTab.id) {\n    default:\n        useExistingValuesAsInputValues($ctrl.form);\n        break;\n\n    case 2:\n        useExistingValuesAsInputValues($ctrl.form1);\n        break;\n\n    case 3:\n        useExistingValuesAsInputValues($ctrl.form2);\n        break;\n\n    case 4:\n        useExistingValuesAsInputValues($ctrl.form3);\n        break;\n}\n\nfunction useExistingValuesAsInputValues(form) {\n    const obj = $ctrl.uiState.selectedEntity;\n\n    for (let key in form) {\n        const adjustedKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n    \n        form[key] = obj.hasOwnProperty(adjustedKey) ? obj[adjustedKey] : undefined;\n    }\n}\n\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "setInputValues",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "description": "",
+          "name": "filter",
+          "properties": [
+            {
+              "body": "$ctrl.uiState.currentFilter.currentFilterString = newValue;\n\nif (newValue.trim()) {\n    const quickSearchConfig = $ctrl.tabConfig[$ctrl.uiState.currentTab.name].quickSearchDefaultConfig;\n\n    $ctrl.uiState.currentFilter.advancedFilters = [{\n        property: quickSearchConfig.property, \n        operation: quickSearchConfig.operation,\n        value: newValue\n    }];\n} else {\n    $ctrl.uiState.currentFilter.advancedFilters = [];\n}\n\n$ctrl.loaders.loadActiveTab({\n    page: 1\n});\n",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "onSearch",
+              "parameters": [
+                "newValue"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "const filters = newFilters || [];\n\n$ctrl.uiState.currentFilter.currentFilterString = \"\"; // Clear quick search\n$ctrl.uiState.currentFilter.advancedFilters = filters;\n$ctrl.uiState.currentFilter.usingAdvancedFilters = filters.length > 0;\n\n$ctrl.handlers.filter.updateFilterChips();\n\n$ctrl.loaders.loadActiveTab({ page: 1 });",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "onAdvancedFilterUpdate",
+              "parameters": [
+                "newFilters"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "const service = $ctrl[$ctrl.uiState.currentTab.name + \"Service\"];\nconst definitions = service?.getFilterDefinitions ? service.getFilterDefinitions() : [];\n\n$ctrl.$modal.open(\"advanced-filter-modal\", {\n    resolve: {\n        definitions,\n        currentFilters: angular.copy($ctrl.uiState.currentFilter.advancedFilters),\n        referenceData: {\n            countryMap: $ctrl.countryMap,\n            stateMap: Object.values($ctrl.stateMap).flat()\n        }\n    }\n}).then(result => {\n    if (result.result === \"ok\") {\n        $ctrl.handlers.filter.onAdvancedFilterUpdate(result.resolve.filters);\n    }\n})",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "openAdvancedFilterModal",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "const service = $ctrl[$ctrl.uiState.currentTab.name + \"Service\"];\nconst definitions = service?.getFilterDefinitions ? service.getFilterDefinitions() : [];\n\nconst result = $ctrl.filterService.generateChips(\n    $ctrl.uiState.currentFilter.advancedFilters,\n    definitions,\n    {\n        countryMap: $ctrl.countryMap,\n        stateMap: Object.values($ctrl.stateMap ?? {}).flat(),\n    },\n    Object.fromEntries(\n        $ctrl.en.modals.advancedFilterModal.dropdowns.FILTER_OPERATION.values\n            .map(op => [op.value, op.label])\n    )\n);\n\n$ctrl.uiState.currentFilter.chips = result.strings;\n$ctrl.uiState.currentFilter.chipMap = result.map;",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "updateFilterChips",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "if (!Array.isArray(remainingStrings)) return;\n\nconst newFilterState = remainingStrings\n    .map(label => $ctrl.uiState.currentFilter.chipMap[label])\n    .filter(obj => obj !== undefined);\n\n$ctrl.handlers.filter.onAdvancedFilterUpdate(newFilterState);",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "onChipUpdate",
+              "parameters": [
+                "remainingStrings"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "body": "$ctrl.uiState.currentFilter.currentFilterString = \"\";\n$ctrl.uiState.currentFilter.advancedFilters = [];\n$ctrl.uiState.currentFilter.usingAdvancedFilters = false;\n\n$ctrl.handlers.filter.updateFilterChips();\n\nif (reload) {\n    $ctrl.loaders.loadActiveTab({ page: 1 });\n}",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "onReset",
+              "parameters": [
+                "reload"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    }
+  ]
+}

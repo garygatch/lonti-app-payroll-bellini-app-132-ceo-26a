@@ -1,0 +1,2629 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.attendanceSummary.title"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.attendanceSummary.description"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-description",
+                      "name": "p",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "import-attendance-summaries",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onImportFormOpen()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity || $ctrl.uiState.isEditingExistingEntity || $ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"file-import\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"Import Attendance Summary\"",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isDeleting || $ctrl.uiState.isLoadingTable",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.loaders.loadActiveTab()",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-header-container"
+              ],
+              "comments": "section-header",
+              "layout": {},
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.entityUiStateService.initializationError"
+                }
+              ],
+              "classList": [],
+              "comments": "initialization-error",
+              "displayExpression": "$ctrl.entityUiStateService.initializationError",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.quickSearchPlaceholder",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentTab.name",
+                      "to": "entityType"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onSearch(\n    $ctrl.uiState,\n    $ctrl.tabConfig,\n    $ctrl.loaders,\n    newValue\n)",
+                      "to": "onSearch"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.advancedFilters",
+                      "to": "appliedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.openAdvancedFilterModal(\n    $ctrl.uiState, \n    $ctrl.tabConfig,\n    $ctrl.referenceData,\n    $ctrl.loaders,\n    {\n        requestingPage: \"attendance_summary\"\n    }\n)",
+                      "to": "onAdvancedClick"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.usingAdvancedFilters",
+                      "to": "usingAdvancedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.chips",
+                      "to": "filterChips"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onReset(\n    $ctrl.uiState,\n    $ctrl.loaders,\n    true\n)",
+                      "to": "onReset"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onChipUpdate(\n    $ctrl.uiState,\n    $ctrl.tabConfig,\n    $ctrl.referenceData,\n    $ctrl.loaders,\n    remainingStrings,\n    {\n        requestingPage: \"attendance_summary\"\n    }\n)",
+                      "to": "onFilterUpdate"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.currentFilterString",
+                      "to": "searchText"
+                    }
+                  ],
+                  "name": "search-filter",
+                  "ownerId": "6b07c72a48cd88e32d307a88",
+                  "ownerType": "app",
+                  "resourceIdentity": "components/shared/search-filter/search-filter",
+                  "type": "custom-component"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [],
+                          "name": "Spinner",
+                          "nodeName": "bln-spinner",
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "spinner",
+                      "displayExpression": "$ctrl.uiState.isLoadingTable",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "display",
+                          "value": "flex"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "align-items",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "justify-content",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "position",
+                          "value": "absolute"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "top",
+                          "value": "0"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "left",
+                          "value": "0"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "right",
+                          "value": "0"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "bottom",
+                          "value": "0"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "background-color",
+                          "value": "rgba(255, 255, 255, 0.7)"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "z-index",
+                          "value": "10"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].data",
+                              "to": "data"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onSelectRow(row)",
+                              "to": "onSelection"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "resizableColumns"
+                            },
+                            {
+                              "expression": "$ctrl.currentPage",
+                              "to": "currentPage"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableFiltering"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableCheckboxes"
+                            },
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].columns",
+                              "to": "columns"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "enableRowSelection"
+                            }
+                          ],
+                          "name": "Table",
+                          "nodeName": "bln-table",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-height",
+                              "value": "100%"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-secondary-bg-color",
+                              "value": "#f9f9f9"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [
+                        "table-container"
+                      ],
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage",
+                          "to": "currentPage"
+                        },
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].pageCount",
+                          "to": "totalPages"
+                        },
+                        {
+                          "expression": "$ctrl.tabManagementService.onPageChange(\n    $ctrl.uiState,\n    $ctrl.tabStore,\n    $ctrl.loaders,\n    currentPage\n)",
+                          "to": "onPageChange"
+                        }
+                      ],
+                      "name": "Pagination",
+                      "nodeName": "bln-pagination",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "table-pagination-container"
+                  ],
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "position",
+                      "value": "relative"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-body-container"
+              ],
+              "comments": "tab-bar-filter-table-pagination",
+              "displayExpression": "!$ctrl.entityUiStateService.initializationError",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "table",
+          "displayExpression": "!$ctrl.uiState.isCreatingNewEntity",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "$ctrl.uiState.selectedEntityName"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "entity-name",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "comments": "assign-positions",
+                          "expressions": [
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.assignment.openComponentAssignment(\"position\")",
+                              "to": "onClick"
+                            },
+                            {
+                              "expression": "\"\"",
+                              "to": "label"
+                            },
+                            {
+                              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"briefcase\",\n  \"position\": \"left\"\n})",
+                              "to": "icon"
+                            }
+                          ],
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "type": "core-component"
+                        },
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "comments": "assign-workers",
+                          "expressions": [
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "\"\"",
+                              "to": "label"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.assignment.openComponentAssignment(\"worker\")",
+                              "to": "onClick"
+                            },
+                            {
+                              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"users\",\n  \"position\": \"left\"\n})",
+                              "to": "icon"
+                            }
+                          ],
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "assignment-buttons",
+                      "displayExpression": "$ctrl.uiState.currentTab.name === \"earning\" \n||\n$ctrl.uiState.currentTab.name === \"benefit\"",
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.formManagementService.onFormOpen(\n    $ctrl.uiState,\n    $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form],\n    \"edit\"\n)",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "\"Edit\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"edit\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "delete",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onDelete()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "\"Delete\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"trash-alt\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-bg-color",
+                          "value": "#d10000"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-hovered-bg-color",
+                          "value": "#b10e00"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-primary-active-bg-color",
+                          "value": "#9b0c00"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "right-panel-header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "right-panel-header-container"
+              ],
+              "comments": "right-panel-header",
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "displayExpression": "$ctrl.uiState.detailsList\n&&\n$ctrl.uiState.detailsList.length",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.detailsList",
+                      "to": "data"
+                    },
+                    {
+                      "expression": "false",
+                      "to": "showTableHeader"
+                    },
+                    {
+                      "expression": "false",
+                      "to": "enableSorting"
+                    },
+                    {
+                      "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"\",\n        textAlign: \"left\",\n        headerTextAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                      "to": "columns"
+                    }
+                  ],
+                  "name": "Table",
+                  "nodeName": "bln-table",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-height",
+                      "value": "100%"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-secondary-bg-color",
+                      "value": "#f9f9f9"
+                    }
+                  ],
+                  "type": "core-component"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "assigned-positions",
+                      "events": {
+                        "click": ""
+                      },
+                      "expressions": [
+                        {
+                          "expression": "true",
+                          "to": "readOnly"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "textInputEditable"
+                        },
+                        {
+                          "expression": "\"Assigned to Positions\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.assignments[$ctrl.uiState.currentTab.name].position.displayed",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "true",
+                          "to": "disabled"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "values"
+                      },
+                      "name": "Chip List",
+                      "nodeName": "bln-chip-list",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-chip-list-font-weight",
+                          "value": "bold"
+                        }
+                      ],
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "assigned-workers",
+                      "events": {
+                        "click": ""
+                      },
+                      "expressions": [
+                        {
+                          "expression": "true",
+                          "to": "readOnly"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "textInputEditable"
+                        },
+                        {
+                          "expression": "\"Assigned to Workers\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.assignments[$ctrl.uiState.currentTab.name].worker.displayed",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "true",
+                          "to": "disabled"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "values"
+                      },
+                      "name": "Chip List",
+                      "nodeName": "bln-chip-list",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-chip-list-font-weight",
+                          "value": "bold"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "chip-lists",
+                  "displayExpression": "$ctrl.uiState.currentTab.name === \"earning\" || $ctrl.uiState.currentTab.name === \"benefit\"",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "right-panel-body-container"
+              ],
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "right-panel-container"
+          ],
+          "comments": "right-panel",
+          "displayExpression": "$ctrl.uiState.selectedEntity && !$ctrl.uiState.isFormOpen",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "50%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": false,
+                          "name": "text",
+                          "textContent": "Import Attendance Summary"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": false,
+                          "name": "text",
+                          "textContent": "Optional sub nav menu description"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-description",
+                      "name": "p",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "show-sample",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"Show Sample CSV\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.openSampleCSVModal()",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId",
+                      "expressions": [
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isDeleting || $ctrl.isGettingEntities",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"regular\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "tooltip"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onImportFormClose()",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [],
+              "comments": "section-header",
+              "layout": {},
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "space-between;"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center;"
+                },
+                {
+                  "enabled": true,
+                  "property": "padding",
+                  "value": "0.5rem"
+                }
+              ]
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [],
+                  "layout": {},
+                  "name": "Spinner",
+                  "nodeName": "bln-spinner",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-spinner-size",
+                      "value": "5rem"
+                    }
+                  ],
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "spinner",
+              "displayExpression": "$ctrl.isGettingEntities",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "100%"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "\"Please select a Company from the Drop-down to view the Data.\""
+                    }
+                  ],
+                  "classList": [],
+                  "name": "p"
+                }
+              ],
+              "classList": [],
+              "comments": "select-company-or-worker-info",
+              "displayExpression": "(!$ctrl.globalSelectedCompany.companyId && !$ctrl.isGettingEntities)",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "run-type",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.utils.resetForm($ctrl.form);",
+                          "to": "onValueChange"
+                        },
+                        {
+                          "expression": "\"Run Type\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.runTypeMap",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.importFormRunType",
+                          "to": "value"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "pay-schedule",
+                      "displayExpression": "$ctrl.uiState.importFormRunType === \"REGULAR\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Pay Schedule\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form.payScheduleId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.payScheduleMap",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.handlePayScheduleChange()",
+                          "to": "onValueChange"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "pay-period",
+                      "displayExpression": "($ctrl.uiState.importFormRunType === \"REGULAR\" && $ctrl.form.payScheduleId) || $ctrl.uiState.importFormRunType === \"OFFCYCLE\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Pay Period\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form.payPeriodId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.payPeriodMap.filter(payPeriod => {\n    const relatedPayPeriod = $ctrl.referenceData.payPeriodMap.find(\n        period => period.Id === payPeriod.value\n    );\n\n    if ($ctrl.uiState.importFormRunType === \"REGULAR\")\n        return relatedPayPeriod && relatedPayPeriod\n            .PayScheduleId === $ctrl\n            .form.payScheduleId;\n\n    else return relatedPayPeriod && relatedPayPeriod.OffCycle && relatedPayPeriod.CompanyId === $ctrl.globalSelectedCompany.companyId;\n});",
+                          "to": "values"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "select-file",
+                      "displayExpression": "$ctrl.form.payPeriodId",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.form.file",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onFileImport()",
+                          "to": "onValueChange"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "showFilePreview"
+                        },
+                        {
+                          "expression": "[\".csv\"]",
+                          "to": "allowedFileTypes"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "File Input",
+                      "nodeName": "bln-file-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "allow-negative-balance",
+                      "displayExpression": "$ctrl.form.file",
+                      "expressions": [
+                        {
+                          "expression": "\"Allow Negative Leave Credits\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form.allowNegativeBalance",
+                          "to": "checked"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "checked"
+                      },
+                      "name": "Checkbox",
+                      "nodeName": "bln-checkbox",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "pay-period-file",
+                  "displayExpression": "$ctrl.globalSelectedCompany.companyId",
+                  "layout": {},
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "border-style",
+                      "value": "none"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.form.file.name + \" Preview\""
+                        }
+                      ],
+                      "classList": [],
+                      "name": "h4"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "elementId": "file-preview",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "border-style",
+                          "value": "solid"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "overflow",
+                          "value": "auto"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "border-width",
+                          "value": "thin"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "max-height",
+                          "value": "30vh"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [
+                            {
+                              "expression": "\"primary\"",
+                              "to": "type"
+                            },
+                            {
+                              "expression": "\"Validate\"",
+                              "to": "label"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.uploadCsv()",
+                              "to": "onClick"
+                            }
+                          ],
+                          "name": "Button",
+                          "nodeName": "bln-button",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-button-margin",
+                              "value": "1rem auto"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "import",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "display",
+                          "value": "flex"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "justify-content",
+                          "value": "center"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "preview-button",
+                  "displayExpression": "$ctrl.form.file",
+                  "layout": {},
+                  "name": "div"
+                }
+              ],
+              "classList": [],
+              "comments": "drop-downs-file-preview-buttons",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "padding",
+                  "value": "1rem"
+                }
+              ]
+            }
+          ],
+          "classList": [],
+          "comments": "attendance-import-form",
+          "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "border-style",
+              "value": "solid"
+            },
+            {
+              "enabled": true,
+              "property": "border-color",
+              "value": "#cecece"
+            },
+            {
+              "enabled": true,
+              "property": "border-width",
+              "value": "thin"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "\"Errors and Warnings\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "errors-and-warnings",
+                  "name": "h3"
+                }
+              ],
+              "classList": [],
+              "comments": "right-panel-header",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "space-between"
+                }
+              ]
+            },
+            {
+              "children": [],
+              "classList": [],
+              "elementId": "errors-and-warnings",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "max-height",
+                  "value": "90%"
+                },
+                {
+                  "enabled": true,
+                  "property": "overflow",
+                  "value": "auto"
+                },
+                {
+                  "enabled": true,
+                  "property": "max-width",
+                  "value": "100%"
+                }
+              ]
+            }
+          ],
+          "classList": [],
+          "comments": "errors-panel",
+          "displayExpression": "$ctrl.uiState.csvHasErrors && $ctrl.uiState.isCreatingNewEntity",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "50%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "padding",
+              "value": "1rem"
+            },
+            {
+              "enabled": true,
+              "property": "border-style",
+              "value": "solid"
+            },
+            {
+              "enabled": true,
+              "property": "border-color",
+              "value": "#cecece"
+            },
+            {
+              "enabled": true,
+              "property": "border-width",
+              "value": "thin"
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            },
+            {
+              "property": "name",
+              "value": "form5"
+            }
+          ],
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "cancel",
+              "expressions": [
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.formManagementService.onFormClose($ctrl.uiState)",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "\"Edit \" + $ctrl.uiState.selectedEntity.Worker + \"'s \" + $ctrl.uiState.selectedEntity.EarningCode"
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": "Fields marked with an asterisk (*) are required."
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "displayExpression": "!$ctrl.isEditingUser",
+              "name": "p"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "units-type",
+              "expressions": [
+                {
+                  "expression": "\"Units Type\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form5.unitsType",
+                  "to": "value"
+                },
+                {
+                  "expression": "$ctrl.referenceData.unitsTypeMap",
+                  "to": "values"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Dropdown",
+              "nodeName": "bln-dropdown",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "units-worked",
+              "expressions": [
+                {
+                  "expression": "\"Units Worked\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form5.unitsWorked",
+                  "to": "value"
+                },
+                {
+                  "expression": "\"number\"",
+                  "to": "type"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "remarks",
+              "expressions": [
+                {
+                  "expression": "\"Remarks\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.form5.remarks",
+                  "to": "value"
+                }
+              ],
+              "formControl": {
+                "modelName": "value"
+              },
+              "name": "Text Input",
+              "nodeName": "bln-text-input",
+              "type": "core-component"
+            },
+            {
+              "children": [],
+              "classList": [],
+              "name": "hr"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"Cancel\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.formManagementService.onFormClose($ctrl.uiState)",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                  "expressions": [
+                    {
+                      "expression": "\"Save\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onSave()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isSaving",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isSaving",
+                      "to": "isDisabled"
+                    }
+                  ],
+                  "layout": {},
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [
+                "form-div"
+              ],
+              "comments": "buttons",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "form"
+          ],
+          "comments": "attendance",
+          "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+          "elementId": "form5",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "form"
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "layout": {
+        "container": {
+          "crossAxisAlignment": "stretch",
+          "gap": "0rem",
+          "items": [],
+          "mainAxisAlignment": "center",
+          "orientation": "row",
+          "type": "box"
+        }
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    }
+  ],
+  "name": "attendance_summary",
+  "params": {},
+  "type": "page",
+  "url": "/attendance_summary",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "name": "$sce",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "form",
+      "properties": [
+        {
+          "description": "",
+          "name": "payScheduleId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "payPeriodId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "file",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "allowNegativeBalance",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form5",
+      "properties": [
+        {
+          "description": "",
+          "name": "unitsType",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "unitsWorked",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "remarks",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "dataHandlers",
+      "resourceIdentity": "services/data-handlers",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "tabItemsMap",
+      "type": "property",
+      "value": "new Map([\n    [1, \"attendance_summary\"]\n]);"
+    },
+    {
+      "body": "$ctrl.authCookies.setServerUrl($ctrl.$env.getProperty(\"payroll_api_base_url\"));\nconst usrIsAdmin = await $ctrl.authService.redirectWorker();\nif(!usrIsAdmin) return;\n\n$ctrl.uiState.currentTab.name = $ctrl.tabItemsMap.get($ctrl.uiState.currentTab.id);\n\n$ctrl.uiState.currentFilter.quickSearchPlaceholder = $ctrl.filterService.quickSearchConfig.getSearchPlaceholder(\n    $ctrl.uiState.currentTab.name,\n    $ctrl.tabConfig[$ctrl.uiState.currentTab.name].quickSearchDefaultConfig,\n    $ctrl.userPreferenceService\n);\n\nawait $ctrl.loaders.loadCompanies();\n$ctrl.loaders.loadActiveTab();\n$ctrl.loaders.loadReferenceMaps();\n$ctrl.uiState.isFirstLoad = false",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "onInit",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": ""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "isLoadingTable",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isFormOpen",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isCreatingNewEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditingExistingEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isSaving",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isDeleting",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "csvHasErrors",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "importFormRunType",
+          "type": "property",
+          "value": "\"REGULAR\""
+        },
+        {
+          "description": "",
+          "name": "isFirstLoad",
+          "type": "property",
+          "value": "true"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "referenceData",
+      "properties": [
+        {
+          "children": [],
+          "description": "",
+          "name": "workerMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "payScheduleMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "payPeriodMap",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "runTypeMap",
+          "type": "property",
+          "value": "[\n    {\n        label: \"REGULAR\",\n        value: \"REGULAR\"\n    },\n    {\n        label: \"OFFCYCLE\",\n        value: \"OFFCYCLE\"\n    }\n]"
+        },
+        {
+          "description": "",
+          "name": "unitsTypeMap",
+          "type": "property",
+          "value": "[\n    {\n        label: \"DAY\",\n        value: \"DAY\"\n    },\n    {\n        label: \"HOUR\",\n        value: \"HOUR\"\n    },\n    {\n        label: \"UNIT\",\n        value: \"UNIT\"\n    }\n]"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "attendance_summary",
+          "properties": [
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService.getColumnDefaults(\"attendance_summary\")"
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"attendancesummary\""
+            },
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form5\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.attendanceSummaryService"
+            },
+            {
+              "body": "return `${f?.Worker ?? \"Unknown Worker Name\"}'s ${f?.EarningCode ?? \"Unknown Earning Code\"}`;",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "getName",
+              "parameters": [
+                "f"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [
+        {
+          "description": "",
+          "name": "attendance_summary",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "if (!params) params = {};\n\nconst currentTabName = $ctrl.uiState.currentTab.name;\n\nconst {\n    entityType = currentTabName,\n    page = $ctrl.tabStore[currentTabName].currentPage,\n    query = $ctrl.uiState.currentFilter.currentFilterString\n} = params;\n\nlet apiQuery = $ctrl.filterService.buildCombinedQuery({\n    advancedFilters: $ctrl.uiState.currentFilter.advancedFilters\n});\n\nif ($ctrl.tabConfig[entityType]?.isCompanyBound) {\n\n    if (entityType === 'attendance_summary') {\n        try {\n            const workerOpts = await $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Worker\");\n            $ctrl.referenceData.workerMap = workerOpts;\n            \n            const workerIds = workerOpts.map(opt => opt.value);\n\n            if (workerIds.length > 0) {\n                apiQuery += `&WorkerId_in=${workerIds.join(',')}`;\n            } else {\n                apiQuery += `&Id_eq=-1`;\n            }\n        } catch (err) {\n            console.warn(\"Failed to fetch workers for attendance summary company filtering\", err);\n            apiQuery += `&Id_eq=-1`;\n        }\n    }\n\n    else {\n        apiQuery += `&CompanyId=${$ctrl.globalSelectedCompany.companyId}`;\n    }\n}\n\nawait $ctrl.baseGridControllerService.loadGridData($ctrl, {\n    entityType,\n    customEntityKey: $ctrl.tabConfig[entityType]?.customEntityKey,\n    columnDefs: $ctrl.tabConfig[entityType].columnDefaultConfig,\n    page,\n    limit: $ctrl.tabStore[entityType].limit,\n    query: apiQuery,\n    hydrateOnLoad: true\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadActiveTab",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "try {\n    // Fetch formatted options directly from service\n    const [payScheduleOpts, payPeriodOpts] = await Promise.all([\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"PaySchedule\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"PayPeriod\")\n    ]);\n\n    // workerMap is being populated already in loadActiveTab, so removing it from here.\n    $ctrl.referenceData.payScheduleMap = payScheduleOpts;\n    $ctrl.referenceData.payPeriodMap = payPeriodOpts;\n\n} catch (e) {\n    console.warn(\"Background reference load failed\", e);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadReferenceMaps",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const companyOpts = await $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Company\");\n\nif ($ctrl.globalSelectedCompany) {\n    $ctrl.globalSelectedCompany.companyMap = companyOpts;\n    $ctrl.globalSelectedCompany.setMenuItems();\n}",
+          "description": "Loads Companies and sets them under global-selected-company service.\n\nThis was extracted to load the Companies first before hydrating the entities on load since the CompanyId is required for hydration.",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadCompanies",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "$ctrl.uiState.csvHasErrors = false;\n$ctrl.formManagementService.onFormOpen(\n    $ctrl.uiState,\n    $ctrl.tabConfig[$ctrl.uiState.currentTab.name].form,\n    \"add\"\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onImportFormOpen",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.utils.resetForm($ctrl.form);\n$ctrl.formManagementService.onFormClose($ctrl.uiState)",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onImportFormClose",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const previewBox = document.getElementById(\"file-preview\");\nconst errorDisplay = document.getElementById(\"errors-and-warnings\");\n\nif ($ctrl.form.file) {\n    window.Papa.parse($ctrl.form.file, {\n        complete: (results) => {\n            const data = results.data;\n            const maxLines = 100;\n            const previewData = data.slice(0, maxLines);\n            renderTable(previewData, data.length > maxLines);\n        },\n        error: (err) => {\n            previewBox.innerHTML = `<p style=\"color:red;\">Error parsing CSV: ${err.message}</p>`;\n        }\n    });\n} else {\n    if (previewBox) previewBox.innerHTML = ``;\n    if (errorDisplay) errorDisplay.innerHTML = ``;\n    if ($ctrl.hasErrors) $ctrl.hasErrors = false;\n}\n\nfunction renderTable(data, isTruncated) {\n    if (!data || data.length === 0) {\n        previewBox.innerHTML = \"<p>No data to display.</p>\";\n        return;\n    }\n\n    // Create table element\n    let table = `<table style=\"width: 100%; \">`;\n    table += \"<thead><tr>\";\n\n    // Add header row\n    data[0].forEach(header => {\n        table += `<th style=\"text-align: left; \">${header}</th>`;\n    });\n    table += \"</tr></thead>\";\n\n    // Add data rows\n    table += \"<tbody>\";\n    for (let i = 1; i < data.length; i++) {\n        table += \"<tr>\";\n        data[i].forEach(cell => {\n            table += `<td style=\"text-align: left; \">${cell}</td>`;\n        });\n        table += \"</tr>\";\n    }\n    table += \"</tbody></table>\";\n\n    // Add truncation message if applicable\n    if (isTruncated) {\n        table += \"<p>... (preview truncated)</p>\";\n    }\n\n    waitForElementAndInject(table);\n}\n\nfunction waitForElementAndInject(table) {\n    let element = document.getElementById(\"file-preview\");\n\n    if (element) {\n        element.innerHTML = table;\n    } else {\n        $ctrl.$timeout(waitForElementAndInject(table), 100);\n    }\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onFileImport",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.isSaving = true;\nconst endpoint = $ctrl.authCookies.serverUrl.concat('/attendance_summary');\n\nif ($ctrl.form.file) {\n    const formData = new FormData();\n    formData.append('attendanceSummaryCSV', $ctrl.form.file, $ctrl.form.file.name);\n    formData.append('PayPeriodId', $ctrl.form.payPeriodId);\n    formData.append('allowNegativeBalance', $ctrl.form.allowNegativeBalance);\n    formData.append('validateOnly', true);\n\n    await fetch(endpoint, {\n        method: 'POST',\n        headers: $ctrl.authCookies.setHeaders(),\n        body: formData\n    })\n        .then(response => {\n            if (!response.ok) {\n                return response.json().then(errData => {\n                    throw new Error(JSON.stringify(errData));\n                });\n            }\n            return response.json();\n        })\n        .then(result => {\n            const errorDisplay = document.getElementById(\"errors-and-warnings\");\n            if (errorDisplay) errorDisplay.innerHTML = ``;\n            if ($ctrl.uiState.csvHasErrors) $ctrl.uiState.csvHasErrors = false;\n            window.Papa.parse($ctrl.form.file, {\n                complete: (results) => {\n                    const data = results.data;\n                    const maxLines = 100;\n                    const previewData = data.slice(0, maxLines);\n\n                    $ctrl.$modal.open(\"confirm-csv-modal\", { props: { FileName: $ctrl.form.file.name, PreviewData: previewData, DataLength: data.length } })\n                        .then(response => {\n                            if ($ctrl.form.file && response.result === \"ok\") {\n                                $ctrl.isGettingEntities = true;\n                                \n                                const formData = new FormData();\n                                formData.append('attendanceSummaryCSV', $ctrl.form.file, $ctrl.form.file.name);\n                                formData.append('PayPeriodId', $ctrl.form.payPeriodId);\n                                formData.append('allowNegativeBalance', $ctrl.form.allowNegativeBalance);\n                                formData.append('validateOnly', false);\n\n                                fetch(endpoint, {\n                                    method: 'POST',\n                                    headers: $ctrl.authCookies.setHeaders(),\n                                    body: formData\n                                })\n                                    .then(response => {\n                                        if (!response.ok) {\n                                            return response.json().then(errData => {\n                                                throw new Error(JSON.stringify(errData));\n                                            });\n                                        }\n                                        return response.json();\n                                    })\n                                    .then(result => {\n                                        $ctrl.utils.toast(`Successfully Uploaded Attendance`, \"OK\");\n                                        $ctrl.loaders.loadActiveTab();\n                                        $ctrl.formManagementService.onFormClose($ctrl.uiState);\n\n                                        $ctrl.utils.resetForm($ctrl.form);\n                                        if ($ctrl.uiState.csvHasErrors) document.getElementById(\"errors-and-warnings\").innerHTML = \"\";\n                                        $ctrl.uiState.csvHasErrors = false;\n                                    })\n                                    .catch(error => {\n                                        $ctrl.uiState.csvHasErrors = true;\n                                        $ctrl.utils.toast(`Errors Found.`, \"ERROR\");\n                                        const errors = JSON.parse(error.message)?.errors || [\"An unexpected error occurred\"];\n                                        let errorDisplay = \"\";\n                                        errors.forEach(err => {\n                                            errorDisplay += `\n                <p style=\"font-weight: bold; \">Line ${err.LineNumber}: <span style=\"font-weight: normal; font-style: underline; \">${err.Row}</span></p>\n                ${err.messages.map(msg => `<li>${msg}</li>`).join(\"\")}\n                <hr>\n                `;\n                                        });\n                                        waitForElementAndInject(errorDisplay);\n                                    })\n                            }\n                        });\n                },\n                error: (err) => {\n                    previewBox.innerHTML = `<p style=\"color:red;\">Error parsing CSV: ${err.message}</p>`;\n                }\n            });\n        })\n        .catch(error => {\n            $ctrl.uiState.csvHasErrors = true;\n            $ctrl.utils.toast(`Errors Found.`, \"ERROR\");\n            const errors = JSON.parse(error.message)?.errors || [\"An unexpected error occurred\"];\n            let errorDisplay = \"\";\n            errors.forEach(err => {\n                errorDisplay += `\n                <p style=\"font-weight: bold; \">Line ${err.LineNumber}: <span style=\"font-weight: normal; font-style: underline; \">${err.Row}</span></p>\n                ${err.messages.map(msg => `<li>${msg}</li>`).join(\"\")}\n                <hr>\n                `;\n            });\n            waitForElementAndInject(errorDisplay);\n        })\n        .finally(() => {\n            if ($ctrl.uiState.isSaving) $ctrl.uiState.isSaving = false;\n        });\n}\n\nfunction waitForElementAndInject(errors) {\n    const element = document.getElementById(\"errors-and-warnings\");\n    if (element) {\n        element.innerHTML = \"\";\n        element.innerHTML += errors;\n    } else {\n        $ctrl.$timeout(() => waitForElementAndInject(errors), 100);\n    }\n}\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "uploadCsv",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const config = $ctrl.tabConfig[$ctrl.uiState.currentTab.name];\nif (!config) {\n    console.error(\"No configuration found for current tab:\", $ctrl.uiState.currentTab.name);\n    return;\n}\n\nconst isUpdate = $ctrl.uiState.isEditingExistingEntity;\nconst method = isUpdate ? \"PUT\" : \"POST\";\nconst formData = $ctrl[config.form];\n\nlet displayName = \"Item\";\nif (config.getName) {\n    displayName = config.getName(formData);\n} else if (config.entityNameKey) {\n    displayName = formData[config.entityNameKey] || \"Item\";\n}\n\nconst additionalData = {};\nif (config.companyBound && method === \"POST\") {\n    additionalData.CompanyId = $ctrl.globalSelectedCompany.companyId;\n}\n\n$ctrl.uiState.isSaving = true;\n\nawait $ctrl.entityOperationsService.executeEntityOperation(\n    method,\n    formData,\n    async (result) => { // onSuccess\n        // Reload Grid\n        if (method === \"POST\") {\n            $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n            $ctrl.formManagementService.onFormClose($ctrl.uiState);\n            $ctrl.utils.resetForm(formData);\n        } else {\n            const tableRowIndex = $ctrl.tabStore[$ctrl.uiState.currentTab.name].data.findIndex(entity => entity.Id === $ctrl.uiState.selectedEntity.Id);\n            if (tableRowIndex === -1) {\n                $ctrl.loaders.loadActiveTab({ isAfterWrite: true });\n                throw new Error(`Entity not found in table`);\n            }\n            \n            $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex] = $ctrl.uiState.selectedEntity = $ctrl.utils.buildUpdatedEntityData(formData, $ctrl.uiState.selectedEntity);\n            const hydratedEntity = await $ctrl.referenceDataService.hydrateEntity(\n                $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex]\n            );\n            $ctrl.tabStore[$ctrl.uiState.currentTab.name].data[tableRowIndex] = $ctrl.uiState.selectedEntity = hydratedEntity;\n            $ctrl.uiState.selectedEntityName = $ctrl.uiState.selectedEntity.Worker + \"'s \" + $ctrl.uiState.selectedEntity.EarningCode;\n            $ctrl.utils.reselectEntityAfterUpdate({\n                timeout: $ctrl.$timeout,\n                rowIndex: tableRowIndex,\n                formManagementService: $ctrl.formManagementService, \n                uiState: $ctrl.uiState,\n                form: $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form] \n            });\n        }\n    },\n    null,\n    () => { // onFinally\n        $ctrl.uiState.isSaving = false;\n    },\n    $ctrl.uiState.currentTab.name,\n    displayName,\n    $ctrl.uiState.selectedEntity,\n    additionalData\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSave",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const entityName = $ctrl.uiState.selectedEntityName || \"Item\";\n\nawait $ctrl.entityOperationsService.confirmDelete($ctrl.uiState.selectedEntity, entityName)\n    .then(confirmed => {\n        if (!confirmed) return;\n\n        $ctrl.uiState.isDeleting = true;\n\n        return $ctrl.entityOperationsService.executeEntityOperation(\n            \"DELETE\",           // Method\n            null,               // No form data\n            () => {             // Success\n                $ctrl.loaders.loadActiveTab();\n                $ctrl.uiState.selectedEntity = null;\n            },\n            null,               // Error\n            () => {             // Finally\n                $ctrl.uiState.isDeleting = false;\n            },\n            $ctrl.uiState.currentTab.name,       // EntityType\n            entityName,         // Display Name\n            $ctrl.uiState.selectedEntity\n        );\n    });",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onDelete",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.baseGridControllerService.handleRowSelection($ctrl, row, {\n\n    uiState: $ctrl.uiState,\n    utils: $ctrl.utils,\n    referenceService: $ctrl.referenceDataService,\n    viewService: $ctrl.entityViewService,\n    gridData: $ctrl.tabStore[$ctrl.uiState.currentTab.name]?.data,\n\n    config: {\n        mappers: {\n            \"CalculationMethodId\": (val) => (val === 1 ? \"FLAT\" : \"PERCENT\")\n        }\n    },\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onSelectRow",
+          "parameters": [
+            "row"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.$modal.open(\"sample-csv-modal\");",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "openSampleCSVModal",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "watchers",
+      "properties": [
+        {
+          "body": "if($ctrl.uiState.isFirstLoad) {\n    return;\n}\n\n$ctrl.loaders.loadActiveTab();\n$ctrl.loaders.loadReferenceMaps();\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "watchCompany",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.globalSelectedCompany.companyId"
+          ]
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "attendanceSummaryService",
+      "resourceIdentity": "services/entities/attendance-summary-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityOperationsService",
+      "resourceIdentity": "services/core/logic/entity-operations-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterOperationsService",
+      "resourceIdentity": "services/core/ui/filter-operations-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "formManagementService",
+      "resourceIdentity": "services/core/ui/form-management-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "userPreferenceService",
+      "resourceIdentity": "services/core/storage/user-preference-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "tabManagementService",
+      "resourceIdentity": "services/core/ui/tab-management-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    }
+  ]
+}

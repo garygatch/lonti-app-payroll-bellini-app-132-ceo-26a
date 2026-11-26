@@ -1,0 +1,142 @@
+{
+  "description": "",
+  "name": "filter-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "const { property, operation, value } = filter;\n\nif (!property || !operation) return null;\n\n// Handle \"Is Null\" / \"Is Not Null\" (No value needed)\nconst noValueOps = ['isnull', 'isnotnull'];\nif (noValueOps.includes(operation.toLowerCase())) {\n    return `${property}_${operation}`;\n}\n\n// Validate value existence\nif (value === undefined || value === null || value === \"\") return null;\n\n// Encode value safely\nreturn `${property}_${operation}=${encodeURIComponent(value)}`;",
+      "description": "Internal helper that transforms an individual filter object into a formatted string segment.\n- **filter**: An object containing `property`, `operation`, and `value`.\n- **Logic**: \n    - Validates presence of property and operation.\n    - Supports operations that do not require values (e.g., `isnull`, `isnotnull`).\n    - URL-encodes the value for safety.\n- **Returns**: A formatted string (e.g., `Property_op=Value` or `Property_op`) or `null` if the filter is invalid.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_buildSingleQueryPart",
+      "parameters": [
+        "filter"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "quickSearchConfig",
+      "properties": [
+        {
+          "body": "// 1. Check User Preference (High Priority)\nconst userPref = userPreferenceService.get('quickSearch', entityType);\nif (userPref) {\n    return userPref;\n}\n\n// 2. Use Passed Defaults (Medium Priority)\n// The controller passes this object, so this service stays generic\nif (defaultSettings) {\n    return defaultSettings;\n}\n\n// 3. Fallback (Low Priority)\nreturn {\n    property: \"Keywords\",\n    operation: \"contains\",\n    label: \"Keywords\"\n};",
+          "description": "Resolves the active configuration for a specific entity using a tiered priority system. It first looks for user-defined overrides, then entity-specific defaults, and finally falls back to a global system safety net.\n- **entityType**: The name of the entity to resolve (e.g., 'company', 'worker').\n- **defaultSettings**: An object containing the default settings to fall back on if no specific configurations are found.\n- **userPreferenceService**: An object with methods to fetch user-specific preferences.\n- **Returns**: An object containing `property`, `operation`, and `label`.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "get",
+          "parameters": [
+            "entityType",
+            "defaultSettings",
+            "userPreferenceService"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// config object: { property: 'Email', operation: 'startsWith', label: 'Email' }\nuserPreferenceService.set('quickSearch', entityType, config);",
+          "description": "Persists a user's custom search configuration to the `UserPreferenceService` under the 'quickSearch' category.\n- **entityType**: The name of the entity being customized.\n- **config**: The configuration object to save (e.g., `{ property: 'Email', operation: 'startsWith', label: 'Email' }`).\n- **userPreferenceService**: An object with methods to fetch user-specific preferences.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "save",
+          "parameters": [
+            "entityType",
+            "config",
+            "userPreferenceService"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const config = this.quickSearchConfig.get(entityType, defaultSettings, userPreferenceService);\nreturn `Search by: ${config.operation} ${config.label || config.property}`;",
+          "description": "A helper function that generates dynamic placeholder text for UI inputs based on the resolved configuration.\n- **entityType**: The name of the entity.\n- **defaultSettings**: An object containing the default settings to fall back on if no specific configurations are found.\n- **userPreferenceService**: An object with methods to fetch user-specific preferences.\n- **Returns**: A string in the format \"Search by: [Operation] [Label/Property]\".",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "getSearchPlaceholder",
+          "parameters": [
+            "entityType",
+            "defaultSettings",
+            "userPreferenceService"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "try {\n    const config = this.quickSearchConfig.get(entityType, defaultSettings, userPreferenceService);\n    const { property, operation } = config;\n\n    if (!property || !operation) {\n        return '';\n    }\n\n    const noValueOperations = ['isnull', 'isnotnull'];\n\n    if (noValueOperations.includes(operation)) {\n        return `${property}_${operation}`;\n    }\n\n    if (!value) {\n        return '';\n    }\n\n    return `${property}_${operation}=${value}`;\n\n} catch (error) {\n    console.error('Error constructing query string:', error);\n    return null;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildQueryString",
+      "parameters": [
+        "entityType",
+        "defaultSettings",
+        "userPreferenceService",
+        "value"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const { quickSearchConfig, quickSearchValue, advancedFilters = [] } = params;\nconst queryParts = [];\n\n// 1. Handle Quick Search (if active)\nif (quickSearchValue && quickSearchValue.trim() !== \"\") {\n    const qsPart = this._buildSingleQueryPart({\n        property: quickSearchConfig.property,\n        operation: quickSearchConfig.operation,\n        value: quickSearchValue\n    });\n    if (qsPart) queryParts.push(qsPart);\n}\n\n// 2. Handle Advanced Filters\nadvancedFilters.forEach(filter => {\n    const part = this._buildSingleQueryPart(filter);\n    if (part) queryParts.push(part);\n});\n\n// 3. Join with '&'\nreturn queryParts.join(\"&\");",
+      "description": "Constructs a unified API query string by merging Quick Search parameters and an array of Advanced Filters.\n- **params**: An object containing:\n    - **quickSearchConfig**: The configuration object (property and operation) for the quick search.\n    - **quickSearchValue**: The actual text input for the search.\n    - **advancedFilters**: An array of additional filter objects.\n- **Returns**: A URL-encoded string of joined query parameters (e.g., `Name_contains=John&Status_eq=Active`).",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildCombinedQuery",
+      "parameters": [
+        "params"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!filters || !Array.isArray(filters)) return { strings: [], map: {} };\n\nconst strings = [];\nconst map = {};\nconst processedDefinitions = definitions.map(d => ({\n    ...d,\n    property: d.value\n}));\n\nfilters.forEach(filter => {\n    const def = processedDefinitions.find(d => d.property === filter.property);\n    if (!def) return;\n\n    const label = def.label || filter.property;\n    const op = opMap[filter.operation] || filter.operation;\n\n    let displayValue = filter.value;\n\n    if (def.type === 'dropdown' && def.source && referenceData[def.source]) {\n        const list = referenceData[def.source];\n        const match = list.find(item => String(item.value) === String(filter.value));\n        if (match) {\n            displayValue = match.label;\n        }\n    } else if (def.type === \"boolean\") {\n        displayValue = filter.value === \"1\" ? \"YES\" : \"NO\"\n    }\n\n    const displayText = ['isnull', 'isnotnull'].includes(filter.operation)\n        ? `${label} ${op}`\n        : `${label} ${op} \"${displayValue}\"`;\n\n    strings.push(displayText);\n    map[displayText] = filter;\n});\n\nreturn { strings, map };",
+      "description": "Converts raw filter state objects into user-friendly \"chips\" for UI display. This function maps technical values to human-readable labels using configuration definitions and reference data maps.\n- **filters**: The array of currently active filter objects.\n- **definitions**: The configuration array defining how each filter should be handled (usually from `getFilterDefinitions()`).\n- **referenceData**: An object containing lookup maps (e.g., `countryMap`) used to translate IDs into readable names.\n- **Returns**: An array of chip objects containing a formatted `label` and the `filter` reference for easy removal or editing.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "generateChips",
+      "parameters": [
+        "filters",
+        "definitions",
+        "referenceData",
+        "opMap"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "buildQueryString",
+    "getQuickSearchConfig",
+    "saveQuickSearchConfig",
+    "getSearchPlaceholder",
+    "quickSearchConfig",
+    "buildCombinedQuery",
+    "generateChips"
+  ]
+}

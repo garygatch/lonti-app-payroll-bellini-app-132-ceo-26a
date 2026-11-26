@@ -1,0 +1,61 @@
+{
+  "description": "",
+  "name": "country-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Name\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"Name\",\n    \"TimeZone\",\n    \"WithStates\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n    },\n    type: {\n        \"WithStates\": \"boolean\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        // operators: [\"eq\"] \n    },\n\n    // --- Core Identity ---\n    {\n        label: \"Name\",\n        value: \"Name\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\", \"endswith\"]\n    },\n\n    // --- Configuration & Settings ---\n    {\n        label: \"Time Zone\",\n        value: \"TimeZone\",\n        type: \"string\",\n        // operators: [\"eq\", \"contains\"]\n    },\n    {\n        label: \"With States\",\n        value: \"WithStates\",\n        type: \"boolean\",\n        operators: [\"eq\"] // True/False\n    },\n    {\n        label: \"Custom (System Entity)\",\n        value: \"Custom\",\n        type: \"boolean\",\n        operators: [\"eq\"] // True (User Created) / False (System)\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "countries",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "countries",
+    "quickSearch",
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "getQuickSearchDefaults"
+  ]
+}

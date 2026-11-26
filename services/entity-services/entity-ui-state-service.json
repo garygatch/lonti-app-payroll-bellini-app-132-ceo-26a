@@ -1,0 +1,39 @@
+{
+  "description": "",
+  "name": "entity-ui-state-service",
+  "parentDirectoryId": "0uOAfhszKVOJANC4YMNsC",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "initializationError",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "clickHandlers",
+      "properties": [
+        {
+          "body": "",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onTabChange",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    }
+  ],
+  "visible": [
+    "initializationError",
+    "clickHandlers"
+  ]
+}

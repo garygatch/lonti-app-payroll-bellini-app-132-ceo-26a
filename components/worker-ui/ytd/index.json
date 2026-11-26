@@ -1,0 +1,851 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "entityType",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isLoadingTable",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isWorker",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "referenceData",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "userId",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "workerId",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "reloadTab",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "classList": [],
+          "contentType": "html",
+          "html": {
+            "content": "(\n    $ctrl.isWorker && !$ctrl.workerId\n)\n    ? \"Worker record not found. Create one in Worker tab.\"\n    : \"User is not a Worker.\"",
+            "evaluate": true
+          },
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-worker-note",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n!$ctrl.workerId\n&&\n(\n    $ctrl.entityType !== \"user\"\n    &&\n    (   \n        $ctrl.isWorker\n        &&\n        $ctrl.entityType !== \"worker\"\n    )\n)\n||\n(\n    !$ctrl.isWorker\n    &&\n    $ctrl.entityType !== \"user\"\n)",
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "text-align",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": true,
+              "name": "text",
+              "textContent": "$ctrl.helpers._getDisplayedNoData()"
+            }
+          ],
+          "classList": [],
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-data",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n$ctrl.isWorker\n&&\n(\n    $ctrl.uiState.displayedInfo.length === 0\n) \n&&\n(\n    $ctrl.workerId\n    ||\n    $ctrl.entityType === \"worker\"\n)",
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "align-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "position",
+          "value": "absolute"
+        },
+        {
+          "enabled": true,
+          "property": "top",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "left",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "right",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "bottom",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "background-color",
+          "value": "rgba(255, 255, 255, 0.7)"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "ytd-fiscal-year",
+                  "expressions": [
+                    {
+                      "expression": "\"date\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "[\"year\"]",
+                      "to": "allowedValues"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.ytd.isSpanningFiscalYear ? \"Start Fiscal Year\" : \"Fiscal Year\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.ytd.startFiscalDate",
+                      "to": "dateValue"
+                    },
+                    {
+                      "expression": "\"YYYY\"",
+                      "to": "dateFormat"
+                    },
+                    {
+                      "expression": "$ctrl.loaders.loadActiveTab({\n    fiscalDate: newValue\n})",
+                      "to": "onValueChange"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Date Time Picker",
+                  "nodeName": "bln-date-time-picker",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "spanning-ytd-fiscal-year",
+                  "displayExpression": "$ctrl.uiState.ytd.isSpanningFiscalYear",
+                  "expressions": [
+                    {
+                      "expression": "\"date\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "[\"year\"]",
+                      "to": "allowedValues"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.ytd.endFiscalDate",
+                      "to": "dateValue"
+                    },
+                    {
+                      "expression": "\"YYYY\"",
+                      "to": "dateFormat"
+                    },
+                    {
+                      "expression": "$ctrl.loaders.loadActiveTab({\n    fiscalDate: newValue\n})",
+                      "to": "onValueChange"
+                    },
+                    {
+                      "expression": "\"End Fiscal Year\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "true",
+                      "to": "disabled"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Date Time Picker",
+                  "nodeName": "bln-date-time-picker",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "viewing-mode",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.ytd.viewingMode",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.ytd.viewingModes",
+                      "to": "values"
+                    },
+                    {
+                      "expression": "\"Viewing\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onYtdViewingModeChange(value)",
+                      "to": "onValueChange"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Dropdown",
+                  "nodeName": "bln-dropdown",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "ytd",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "spanning-fiscal-year",
+              "expressions": [
+                {
+                  "expression": "\"Spanning Fiscal Year\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.uiState.ytd.isSpanningFiscalYear",
+                  "to": "checked"
+                },
+                {
+                  "expression": "$ctrl.handlers.onSpanningFiscalYearToggle()",
+                  "to": "onCheckedChange"
+                }
+              ],
+              "formControl": {
+                "modelName": "checked"
+              },
+              "name": "Checkbox",
+              "nodeName": "bln-checkbox",
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "displayExpression": "$ctrl.entityType === \"ytd\"",
+          "name": "div"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "displayed-info-ytd",
+          "expressions": [
+            {
+              "expression": "false",
+              "to": "enableSorting"
+            },
+            {
+              "expression": "$ctrl.uiState.displayedInfo",
+              "to": "data"
+            },
+            {
+              "expression": "[\n    {\n        name: \"Name\",\n        hide: false,\n        valueKey: \"key\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"YTD Employee Amount\",\n        hide: false,\n        valueKey: \"value\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"YTD Employer Amount\",\n        hide: false,\n        valueKey: \"value2\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+              "to": "columns"
+            }
+          ],
+          "name": "Table",
+          "nodeName": "bln-table",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "--bln-table-height",
+              "value": "100%"
+            },
+            {
+              "enabled": true,
+              "property": "--bln-table-secondary-bg-color",
+              "value": "#f9f9f9"
+            }
+          ],
+          "type": "core-component"
+        }
+      ],
+      "classList": [],
+      "comments": "displayed-info",
+      "displayExpression": "$ctrl.isWorker",
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100%"
+        }
+      ]
+    }
+  ],
+  "modules": [],
+  "name": "ytd",
+  "parentDirectoryId": "6dBwzCfV1ckz9mpRF36mm",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentRequestId",
+          "type": "property",
+          "value": "0"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "displayedInfo",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "displayedRole",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "selectedPaySlipDetails",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "accrualAllowsEncashment",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditingTerminationInfo",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isViewingLegacyPaySlip",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "ytd",
+          "properties": [
+            {
+              "description": "",
+              "name": "viewingMode",
+              "type": "property",
+              "value": "\"SUMMARY\""
+            },
+            {
+              "description": "",
+              "name": "isFirstLoad",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isSpanningFiscalYear",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "startFiscalDate",
+              "type": "property",
+              "value": "new Date()"
+            },
+            {
+              "description": "",
+              "name": "endFiscalDate",
+              "type": "property",
+              "value": ""
+            },
+            {
+              "description": "",
+              "name": "SUMMARY",
+              "properties": [],
+              "type": "object"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "properties": [
+                    {
+                      "description": "",
+                      "name": "label",
+                      "type": "property",
+                      "value": "\"SUMMARY\""
+                    },
+                    {
+                      "description": "",
+                      "name": "value",
+                      "type": "property",
+                      "value": "\"SUMMARY\""
+                    }
+                  ],
+                  "type": "object"
+                }
+              ],
+              "description": "",
+              "name": "viewingModes",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "ytd",
+          "properties": [],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "const availableMode = $ctrl.uiState.ytd.viewingModes.some(mode => mode.value === viewingMode) ? viewingMode : \"SUMMARY\";\n$ctrl.uiState.ytd.viewingMode = availableMode;\nlet toDisplay = $ctrl.uiState.ytd[availableMode];\n\nif (Array.isArray(toDisplay)) {\n    toDisplay = toDisplay.reduce((acc, item) => {\n        if (item.Name) {\n            acc[item.Name] = {\n                value: item.YtdEmployeeAmount || 0,\n                value2: item.YtdEmployerAmount || 0\n            };\n        }\n        return acc;\n    }, {});\n}\n\n$ctrl.helpers._setDisplayedInfo(toDisplay);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onYtdViewingModeChange",
+          "parameters": [
+            "viewingMode"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if ($ctrl.uiState.ytd.isSpanningFiscalYear && $ctrl.uiState.ytd.startFiscalDate) {\n    $ctrl.uiState.ytd.endFiscalDate = $ctrl.helpers._calculateNewEndFiscalYear();\n} else {\n    $ctrl.uiState.ytd.endFiscalDate = undefined;\n}\n\nawait $ctrl.loaders.loadProfileTabContent({ fiscalDate: $ctrl.uiState.ytd.startFiscalDate });",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSpanningFiscalYearToggle",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "$ctrl.helpers._resetProfileYtd();\n\nif (!fiscalDate) {\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $ctrl.uiState.ytd.endFiscalDate = undefined;\n        $ctrl.isLoadingTable = false;\n        $ctrl.uiState.ytd.isFirstLoad = false;\n    }\n    return;\n}\n\nlet startFiscalYear = String(fiscalDate?.getFullYear());\n\nif ($ctrl.uiState.ytd.isFirstLoad) {\n    startFiscalYear = String($ctrl.uiState.ytd.startFiscalDate?.getFullYear());\n    $ctrl.uiState.ytd.isFirstLoad = false;\n}\n\nlet fiscalYear = startFiscalYear;\n\nif ($ctrl.uiState.ytd.isSpanningFiscalYear && startFiscalYear) {\n    $ctrl.uiState.ytd.endFiscalDate = $ctrl.helpers._calculateNewEndFiscalYear(fiscalDate);\n    fiscalYear = startFiscalYear.concat(\"-\", String($ctrl.uiState.ytd.endFiscalDate?.getFullYear()));\n}\n\n$ctrl.payrollAppApi.lonti_app_payroll_service_reporting_GetWorkerYtdSummary({\n    workerId: $ctrl.workerId,\n    fiscalYear: fiscalYear\n}, {\n    headers: $ctrl.authCookies.setHeaders()\n}).then((res) => {\n    const { data: { ytdSummary, ytdComponents } } = res;\n\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    $ctrl.uiState.ytd.SUMMARY = ytdSummary;\n\n    if (ytdComponents && Array.isArray(ytdComponents) && ytdComponents.length > 0) {\n        ytdComponents.forEach((component) => {\n            const componentClass = component.ComponentClass;\n\n            if (!$ctrl.uiState.ytd.hasOwnProperty(componentClass)) {\n                $ctrl.uiState.ytd[componentClass] = [];\n\n                $ctrl.uiState.ytd.viewingModes = [\n                    ...$ctrl.uiState.ytd.viewingModes,\n                    {\n                        label: componentClass,\n                        value: componentClass\n                    }\n                ];\n            }\n\n            $ctrl.uiState.ytd[componentClass].push(component);\n        });\n    }\n\n    $ctrl.handlers.onYtdViewingModeChange($ctrl.uiState.ytd.viewingMode);\n\n}).catch((e) => {\n}).finally(() => {\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $ctrl.isLoadingTable = false;\n    }\n})",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadWorkerYtdSummary",
+          "parameters": [
+            "currentRequestId",
+            "fiscalDate"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!params) params = {};\n\nconst entityType = $ctrl.entityType;\n$ctrl.uiState.currentRequestId++;\nconst currentRequestId = $ctrl.uiState.currentRequestId;\n$ctrl.isLoadingTable = true;\n\n$ctrl.helpers._resetUiState(true);\n\nif (!$ctrl.isWorker || !$ctrl.workerId) {\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $ctrl.isLoadingTable = false;\n    }\n    return;\n}\n\ntry {\n    if(!params.fiscalDate) {\n        params.fiscalDate = $ctrl.uiState.ytd.startFiscalDate;\n    }\n\n    await $ctrl.loaders.loadWorkerYtdSummary(currentRequestId, params.fiscalDate);\n} catch (err) {\n    // Only show the error if user is still on the tab that failed\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        console.error(err);\n        $ctrl.utils.toast(`Failed to load ${entityType} data`, \"ERROR\");\n    }\n    \n}",
+          "description": "",
+          "invokeOnLoad": true,
+          "isAsync": true,
+          "name": "loadActiveTab",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.entityType",
+            "$ctrl.reloadTab"
+          ]
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "// Items to persist\nconst viewingMode = $ctrl.uiState.ytd.viewingMode;\nconst startFiscalDate = $ctrl.uiState.ytd.startFiscalDate;\nconst endFiscalDate = $ctrl.uiState.ytd.endFiscalDate;\nconst isSpanningFiscalYear = $ctrl.uiState.ytd.isSpanningFiscalYear;\nconst isFirstLoad = $ctrl.uiState.ytd.isFirstLoad;\n\n// Reset\n$ctrl.uiState.ytd = {};\n$ctrl.uiState.ytd.SUMMARY = {};\n$ctrl.uiState.ytd.viewingModes = [\n    {\n        label: \"SUMMARY\",\n        value: \"SUMMARY\"\n    }\n];\n\n// Persist\n$ctrl.uiState.ytd.viewingMode = viewingMode;\n$ctrl.uiState.ytd.startFiscalDate = startFiscalDate;\n$ctrl.uiState.ytd.endFiscalDate = endFiscalDate;\n$ctrl.uiState.ytd.isSpanningFiscalYear = isSpanningFiscalYear;\n$ctrl.uiState.ytd.isFirstLoad = isFirstLoad;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_resetProfileYtd",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "try {\n    const startDate = new Date(fiscalDate ?? $ctrl.profileUiState?.ytd?.startFiscalDate);\n\n    // Clone start date to avoid mutating the original\n    const endDate = new Date(startDate);\n    endDate.setFullYear(endDate.getFullYear() + 1);\n\n    return endDate;\n} catch (e) {\n    throw e;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_calculateNewEndFiscalYear",
+          "parameters": [
+            "fiscalDate"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tabConfig = $ctrl.tabConfig[$ctrl.entityType];\n$ctrl.uiState.displayedInfo = $ctrl.helpers._generateAndMaskDetailsList(data, tabConfig);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_setDisplayedInfo",
+          "parameters": [
+            "data"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.selectedEntity = null;\n$ctrl.uiState.selectedEntityName = \"\";\n\n$ctrl.uiState.displayedInfo = [];\n$ctrl.uiState.detailsList = [];\n\nif (resetTabStore && $ctrl.tabStore[$ctrl.entityType]) {\n    $ctrl.tabStore[$ctrl.entityType].data = [];\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_resetUiState",
+          "parameters": [
+            "resetTabStore"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!data) return [];\n\nconst detailsList = $ctrl.entityViewService.generateDetailsList(data);\n\nif (tabConfig?.containsSensitiveInfo && tabConfig?.sensitiveInfoFields) {\n    return $ctrl.helpers._maskSensitiveInfo(tabConfig.sensitiveInfoFields, detailsList);\n}\n\nreturn detailsList;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_generateAndMaskDetailsList",
+          "parameters": [
+            "data",
+            "tabConfig"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const sensitiveFieldsSet = new Set(sensitiveInfoFields);\nreturn detailsList.map(item => {\n    if (item.isSpacer || !sensitiveFieldsSet.has(item.originalKey)) {\n        return item;\n    }\n\n    const strValue = String(item.value || \"\");\n    const maskedValue = \"*\".repeat(strValue.length);\n\n    return {\n        ...item,\n        originalValue: item.value,\n        value: maskedValue, // Default to maskedValue for sensitive info\n        maskedValue: maskedValue,\n        isMasked: true\n    };\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_maskSensitiveInfo",
+          "parameters": [
+            "sensitiveInfoFields",
+            "detailsList"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const startFiscalDate = $ctrl.uiState.ytd?.startFiscalDate;\n\nconst year = startFiscalDate\n    ? (startFiscalDate instanceof Date ? startFiscalDate.getFullYear() : startFiscalDate)\n    : null;\n\nlet msg;\n\nif (!startFiscalDate) {\n    msg = \"Select a valid year to get started.\";\n} else {\n    msg = `Looks like there's no data for year ${year}.`;\n    if($ctrl.authService.isCurrentUserAdmin) {\n        msg += ` Go to Payroll Processing page to get started.`\n    }\n}\n\nreturn msg;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getDisplayedNoData",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    }
+  ]
+}

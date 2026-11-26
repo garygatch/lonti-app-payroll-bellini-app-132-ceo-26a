@@ -1,0 +1,389 @@
+{
+  "description": "",
+  "name": "utils",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "name": "$notificationManager",
+      "type": "service"
+    },
+    {
+      "body": "let type = 'error';\n\nif (typeof result === 'number') {\n    if (result >= 200 && result < 300) type = 'success';\n    else if (result >= 400 && result < 500) type = 'warning';\n    else if (result >= 500) type = 'error';\n    else type = 'info';\n\n} else if (typeof result === 'string') {\n    const upperResult = result.toUpperCase();\n    if (['OK', 'SUCCESS'].includes(upperResult)) type = 'success';\n    else if (['WARNING', 'PARTIAL CONTENT'].includes(upperResult)) type = 'warning';\n    else if (upperResult === 'INFO') type = 'info';\n    else type = 'error';\n}\n\nswitch (type) {\n    case 'success':\n        // this.$notificationManager.show(message, {\n        //     delay: 3500,\n        //     icon: 'check',\n        //     color: 'success',\n        //     dismissible: true,\n        //     animation: 'fade'\n        // });\n        break;\n\n    case 'info':\n        this.$notificationManager.show(message, {\n            delay: 3500,\n            icon: 'info-circle',\n            color: 'primary',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n\n    case 'warning':\n        this.$notificationManager.show(message, {\n            delay: 3500,\n            icon: 'exclamation-triangle',\n            color: 'warning',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n\n    case 'error':\n    default:\n        this.$notificationManager.show(message, {\n            delay: 5000,\n            icon: 'exclamation-circle',\n            color: 'danger',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "toast",
+      "parameters": [
+        "message",
+        "result"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "for (let prop in form) {\n    if (form.hasOwnProperty(prop)) {\n        form[prop] = undefined;\n    }\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetForm",
+      "parameters": [
+        "form"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "dependentFields.forEach(field => form[field] = undefined);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetDependentFields",
+      "parameters": [
+        "dependentFields",
+        "form"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (Array.isArray(arrayOfVariables)) {\n    arrayOfVariables.forEach(variable => {\n        if (Array.isArray(ctrl[variable])) ctrl[variable].length = 0;\n        else if (typeof ctrl[variable] === \"string\" && ctrl[variable]) ctrl[variable] = \"\";\n        else if (ctrl[variable]) ctrl[variable] = undefined;\n    });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetVariables",
+      "parameters": [
+        "arrayOfVariables",
+        "ctrl"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return this.formatDate(dateString);",
+      "description": "DEPRECATED - use formatDate moving forward",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "parseDate",
+      "parameters": [
+        "dateString"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!input) return null;\nconst date = new Date(input);\n\nif (isNaN(date.getTime())) {\n    console.warn(\"Invalid date passed to formatDate:\", input);\n    return null;\n}\n\nconst pad = (num, size) => String(num).padStart(size, '0');\nconst year = date.getFullYear();\nconst month = pad(date.getMonth() + 1, 2);\nconst day = pad(date.getDate(), 2);\n\nreturn `${year}-${month}-${day} 00:00:00.000`;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "formatDate",
+      "parameters": [
+        "input"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const hours = dateObject.getHours().toString().padStart(2, '0');\nconst minutes = dateObject.getMinutes().toString().padStart(2, '0');\n\nreturn `${hours}:${minutes}`;\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "extractTimeFromDate",
+      "parameters": [
+        "dateObject"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "body": "if (!formStatus) return;\n\nreturn this.$modal.open(\"confirm-action-modal\", {\n    title: \"Discard Changes?\",\n    body: \"Any unsaved changes will be lost if you continue. Are you sure you want to proceed?\"\n}).then(res => {\n    if (res.result === \"ok\") return true;\n        else return false;\n})",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleUnsavedChanges",
+      "parameters": [
+        "formStatus"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope().$ctrl;\nconst tableRows = tableCtrl.tableConfig.data;\ntableCtrl.gridApi.selection.selectRow(tableRows[index]);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setSelectedBelliniTableRow",
+      "parameters": [
+        "index"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const tabBarCtrl = angular.element(document.querySelector('bln-tab-bar')).isolateScope().$ctrl;\ntabBarCtrl.selectedTab = tabIndex;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setSelectedBelliniTabBarTab",
+      "parameters": [
+        "tabIndex"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "formValidation",
+      "properties": [
+        {
+          "body": "if (!controller) return null;\n\nconst formValidationMap = this.formValidation.getFormValidationMap();\n\nlet activeForm = null;\nlet activeConfig = null;\nlet tabConfig = null;\n\nif (!uiState) {\n    uiState = controller.uiState;\n}\n\nconst uiStateCurrentTabName = uiState?.currentTab?.name;\n\nif (uiStateCurrentTabName) {\n    // Refactor: Handle snake_case or standard names\n    // e.g., 'pay_schedule' -> ['pay', 'schedule'] -> 'PaySchedule'\n    // e.g., 'company' -> ['company'] -> 'Company'\n    const normalizedTabName = uiStateCurrentTabName\n        .split('_')\n        .map(part => part.charAt(0).toUpperCase() + part.slice(1))\n        .join('');\n\n    tabConfig = formValidationMap[normalizedTabName];\n\n    // Only proceed if we found a matching config in the map\n    if (tabConfig) {\n        activeForm = controller[tabConfig.formKey];\n        activeConfig = tabConfig.config;\n    }\n}\n\n// Fallback: If no tab name was found or the tab name didn't match a config,\n// check the boolean flags (e.g., isAddingCompany).\nif (!activeForm || !activeConfig) {\n    for (const tabName in formValidationMap) {\n        const flagName = `isAdding${tabName}`;\n        if (controller[flagName]) {\n            tabConfig = formValidationMap[tabName];\n            activeForm = controller[tabConfig.formKey];\n            activeConfig = tabConfig.config;\n            break;\n        }\n    }\n}\n\nif (!activeForm || !activeConfig) {\n    return null;\n}\n\nreturn this.formValidation.generateMissingFieldsMessage({\n    form: activeForm,\n    requiredFieldsConfig: activeConfig,\n    context: controller\n});",
+          "description": "Generates a user-friendly validation tooltip message specifically for the active form or tab. It maps internal tab naming conventions to their respective form objects and returns a localized error message if the form is invalid.\n- **controller**: The controller instance (`$ctrl`) containing the current state and form objects.\n- **Logic**: Automatically handles the conversion of `snake_case` tab names to their corresponding form object keys (e.g., converting `'pay_schedule'` to `'PaySchedule'`).\n- **Returns**: A formatted string containing the validation message if errors exist, or `null` if the form is valid or no message is required.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "generateTooltipMessage",
+          "parameters": [
+            "controller",
+            "uiState"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const { form, requiredFieldsConfig, context = {} } = options;\n\nif (!form || !Array.isArray(requiredFieldsConfig)) {\n    return null;\n}\n\nconst missingFieldLabels = [];\n\nfor (const field of requiredFieldsConfig) {\n    let isRequired = true;\n    if (typeof field.condition === 'function') {\n        isRequired = field.condition(form, context);\n    }\n\n    if (!isRequired) {\n        continue;\n    }\n\n    const value = form[field.key];\n    let isInvalid = false;\n\n    if (typeof field.isValid === 'function') {\n        isInvalid = !field.isValid(value, form);\n    } else {\n        isInvalid = (value === null || value === undefined || String(value).trim() === '');\n    }\n    \n    if (isInvalid) {\n        missingFieldLabels.push(field.label);\n    }\n}\n\nif (missingFieldLabels.length > 0) {\n    return `Missing required fields:\\n${missingFieldLabels.join('\\n')}`;\n}\n\nreturn null;",
+          "description": "Checks a form object against a configuration of required fields and generates a user-friendly message listing any missing fields.\n```\n@param {object} options - The configuration object for the transformation.\n@param {object} options.form - The form object containing the data to validate.\n@param {Array<object>} options.requiredFieldsConfig - An array of objects defining the validation rules.\n@param {object} [options.context={}] - An optional context object providing any external functions or data needed by the condition functions.\n@returns {string|null} A formatted string of missing fields, or null if all required fields are present.\n ```",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "generateMissingFieldsMessage",
+          "parameters": [
+            "options"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "    return {\n        Company: {\n            formKey: 'form',\n            config: [\n                { key: 'legalName', label: 'Legal Name' },\n                { key: 'tradeName', label: 'Trade Name' },\n                { key: 'fiscalYearStart', label: 'Fiscal Year Start' },\n                { key: 'fiscalYearEnd', label: 'Fiscal Year End' },\n                { key: 'countryId', label: 'Country' },\n                {\n                    key: 'stateId',\n                    label: 'State',\n                    condition: (form, context) => countryHasStates(form, context)\n                }\n            ]\n        },\n        Currency: {\n            formKey: 'form1',\n            config: [\n                { key: 'currencyName', label: 'Currency Name' },\n                { key: 'currencySymbol', label: 'Currency Symbol' },\n                { key: 'isoCurrencyCode', label: 'Iso Currency Code' },\n                { key: 'currencyPrecision', label: 'Currency Precision' }\n            ]\n        },\n        Country: {\n            formKey: 'form2',\n            config: [\n                { key: 'name', label: 'Name' },\n                { key: 'timeZone', label: 'Time Zone' }\n            ]\n        },\n        State: {\n            formKey: 'form3',\n            config: [\n                { key: 'name', label: 'Name' },\n                { key: 'timeZone', label: 'Time Zone' },\n                { key: 'countryId', label: 'Country' }\n            ]\n        },\n        PaySchedule: {\n            formKey: 'form4',\n            config: [\n                // --- Always Required ---\n                { key: 'displayName', label: 'Display Name' },\n                { key: 'dayStartTime', label: 'Day Start Time' },\n                { key: 'payDateOnBd', label: 'Pay Date On Business Day' }, // Made label more descriptive\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n                { key: 'frequency', label: 'Frequency' },\n                {\n                    key: 'workingDays',\n                    label: 'Working Days',\n                    // This custom function checks if at least one day is selected.\n                    isValid: (workingDaysObject) => {\n                        // If the object itself doesn't exist, it's invalid.\n                        if (!workingDaysObject) {\n                            return false;\n                        }\n                        // The field is valid if at least one of its values is true.\n                        // Object.values() gets an array of all values (e.g., [true, true, false...])\n                        // .some() checks if any element in the array is true.\n                        return Object.values(workingDaysObject).some(dayIsSelected => dayIsSelected === true);\n                    }\n                },\n                // --- Conditionally Required for WEEKLY ---\n                {\n                    key: 'weekPayDayName',\n                    label: 'Weekly Pay Day',\n                    condition: (form) => form.frequency?.includes(\"WEEK\")\n                },\n                {\n                    key: 'weekStartDayName',\n                    label: 'Week Start Day',\n                    condition: (form) => form.frequency?.includes(\"WEEK\")\n                },\n\n                // --- Conditionally Required for SEMIMONTHLY ---\n                {\n                    key: 'monthSecondPayDay',\n                    label: 'Second Pay Day of Month',\n                    condition: (form) => form.frequency === \"SEMIMONTHLY\"\n                },\n                {\n                    key: 'monthSecondStartDay',\n                    label: 'Second Pay Period Start Day',\n                    condition: (form) => form.frequency === \"SEMIMONTHLY\"\n                },\n\n                // --- Conditionally Required for MONTHLY or SEMIMONTHLY ---\n                {\n                    key: 'monthFirstPayDay',\n                    label: 'First Pay Day of Month',\n                    condition: (form) => form.frequency === \"MONTHLY\" || form.frequency === \"SEMIMONTHLY\"\n                },\n                {\n                    key: 'monthFirstStartDay',\n                    label: 'First Pay Period Start Day',\n                    condition: (form) => form.frequency === \"MONTHLY\" || form.frequency === \"SEMIMONTHLY\"\n                }\n            ]\n        },\n        Position: {\n            formKey: 'form5',\n            config: [\n                { key: 'department', label: 'Department' },\n                { key: 'title', label: 'Title' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n                { key: 'weeklyDays', label: 'Weekly Days' },\n                { key: 'weeklyHours', label: 'Weekly Hours' },\n                { key: 'annualRate', label: 'Annual Rate' },\n                { key: 'baseRateUnit', label: 'Base Rate Unit' },\n            ]\n        },\n        User: {\n            formKey: 'form',\n            config: [\n                { key: 'firstName', label: 'First Name' },\n                { key: 'lastName', label: 'Last Name' },\n                { key: 'email', label: 'Email' }\n            ]\n        },\n        Worker: {\n            formKey: 'form1',\n            config: [\n                // --- Always Required ---\n                { key: 'originalHireDateTime', label: 'Original Hire Date' },\n                { key: 'maritalStatus', label: 'Marital Status' },\n                { key: 'numberOfDependents', label: 'Number of Dependents' },\n                { key: 'workerType', label: 'Worker Type' },\n                { key: 'currencyId', label: 'Currency' },\n                { key: 'countryId', label: 'Country' },\n\n                // --- Conditionally Required ---\n                {\n                    key: 'stateId',\n                    label: 'State',\n                    // This field is only required if the selected country has states.\n                    condition: (form, context) => countryHasStates(form, context)\n                }\n            ]\n        },\n        EmploymentInfo: {\n            formKey: 'form2',\n            config: [\n                { key: 'effectiveFromDate', label: 'Employment Start Date' },\n                { key: 'otherProjectedTaxableIncome', label: 'Other Projected Taxable Income' }\n            ]\n        },\n        StatutoryCompliance: {\n            formKey: 'form4',\n            config: [\n                { key: 'name', label: 'Name' },\n                { key: 'number', label: 'Number' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' }\n            ]\n        },\n        BankInfo: {\n            formKey: 'form3',\n            config: [\n                { key: 'bankName', label: 'Bank Name' },\n                { key: 'accountType', label: 'Account Type' },\n                { key: 'accountNumber', label: 'Account Number' }\n            ]\n        },\n        AccrualBalance: {\n            formKey: 'form7',\n            config: [\n                { key: 'accrualId', label: 'Leave' },\n                { key: 'balance', label: 'Balance' },\n                { key: 'used', label: 'Used' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n                {\n                    key: 'earningId',\n                    label: 'Earning',\n                    condition: (form, context) => context.accrualAllowsEncashment\n                }\n            ]\n        },\n        Earning: {\n            formKey: 'form', config: [\n                // --- Always Required ---\n                { key: 'name', label: 'Name' },\n                { key: 'type', label: 'Type' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n                { key: 'calculationMethodId', label: 'Calculation Method' },\n                {\n                    key: 'amount',\n                    label: 'Amount',\n                    // Custom validation: value must be a number.\n                    isValid: (value) => typeof value === 'number'\n                },\n                // Custom validation: Either 'code' or 'accrualId' must be provided.\n                {\n                    key: 'code',\n                    label: 'Code or Leave',\n                    isValid: (value, form) => !!value || !!form.accrualId\n                },\n\n                // --- Conditionally Required ---\n                {\n                    key: 'sDCalculationMethodId',\n                    label: 'Shift Differential Calculation Method',\n                    condition: (form) => form.shiftDifferential\n                },\n                {\n                    key: 'taxExemptionAmount',\n                    label: 'Tax Exemption Amount',\n                    condition: (form) => form.isTaxable,\n                    isValid: (value) => typeof value === 'number'\n                }\n            ]\n        },\n        Accrual: {\n            formKey: 'form1', config: [\n                // --- Always Required ---\n                { key: 'name', label: 'Name' },\n                { key: 'code', label: 'Code' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n                { key: 'accrualMethod', label: 'Accrual Method' },\n\n                // --- Conditionally Required ---\n                { key: 'accrualRate', label: 'Leave Rate', condition: (form) => form.accrualMethod === \"ACCRUED\" },\n                { key: 'accrualRateUnit', label: 'Leave Rate Unit', condition: (form) => form.accrualMethod === \"ACCRUED\" },\n                { key: 'accrualCycleDay', label: 'Leave Cycle Day', condition: (form) => form.accrualMethod === \"ACCRUED\" },\n                { key: 'accrualCycleMonth', label: 'Leave Cycle Month', condition: (form) => form.accrualMethod === \"ACCRUED\" },\n                { key: 'accrualFrequency', label: 'Accrual Frequency', condition: (form) => form.accrualMethod === \"ACCRUED\" },\n\n                { key: 'carryForwardLimit', label: 'Carry Forward Limit', condition: (form) => form.canCarryForward }\n            ]\n        },\n        Benefit: {\n            formKey: 'form2', config: [\n                // --- Always Required ---\n                { key: 'name', label: 'Name' },\n                { key: 'providerName', label: 'Provider Name' },\n                { key: 'code', label: 'Code' },\n                { key: 'type', label: 'Type' },\n                { key: 'action', label: 'Action' },\n                { key: 'employeeAmount', label: 'Employee Amount', isValid: (value) => typeof value === 'number' },\n                { key: 'employeeCalculationMethodId', label: 'Employee Calculation Method' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' },\n\n                // --- Conditionally Required ---\n                { key: 'employerAmount', label: 'Employer Amount', condition: (form) => form.employerContribution, isValid: (value) => typeof value === 'number' },\n                { key: 'employerCalculationMethodId', label: 'Employer Calculation Method', condition: (form) => form.employerContribution },\n\n                { key: 'taxExemptionAmount', label: 'Tax Exemption Amount', condition: (form) => form.isTaxable, isValid: (value) => typeof value === 'number' }\n            ]\n        },\n        Tax: {\n            formKey: 'form4', config: [\n                { key: 'name', label: 'Name' },\n                { key: 'code', label: 'Code' },\n                { key: 'employeeAmount', label: 'Employee Amount' },\n                { key: 'employeeCalculationMethodId', label: 'Employee Calculation Method' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' }\n            ]\n        },\n        TaxSchedule: {\n            formKey: 'form5', config: [\n                { key: 'lowerLimit', label: 'Lower Limit' },\n                { key: 'upperLimit', label: 'Upper Limit' },\n                { key: 'baseAmount', label: \"Base Amount\" },\n                { key: 'percentDeduction', label: 'Percent Deduction' },\n                { key: 'effectiveFromDate', label: 'Effective From Date' }\n            ]\n        },\n        TaxApplicability: {\n            formKey: 'form6', config: [\n                { key: 'taxId', label: 'Tax' },\n                { key: 'countryId', label: 'Country' }\n            ]\n        },\n        PayPeriod: {\n            formKey: 'form',\n            config: [\n                // The 'offCycle' field itself is required (must be true or false, not undefined).\n                // Our default validator handles the '=== undefined' check correctly.\n                { key: 'offCycle', label: 'Type' },\n\n                // The following fields are required ONLY when offCycle is true.\n                {\n                    key: 'displayName',\n                    label: 'Display Name',\n                    condition: (form) => form.offCycle === true\n                },\n                {\n                    key: 'startDate',\n                    label: 'Start Date',\n                    condition: (form) => form.offCycle === true\n                },\n                {\n                    key: 'endDate',\n                    label: 'End Date',\n                    condition: (form) => form.offCycle === true\n                },\n                {\n                    key: 'payDate',\n                    label: 'Pay Date',\n                    condition: (form) => form.offCycle === true\n                },\n\n                // This field is required ONLY when offCycle is false.\n                {\n                    key: 'payScheduleId',\n                    label: 'Pay Schedule',\n                    condition: (form) => form.offCycle === false\n                }\n            ]\n        },\n        PayrollRun: {\n            formKey: 'form1',\n            config: [\n                // --- Always Required ---\n                { key: 'runType', label: 'Run Type' },\n                // --- Conditionally Required ---\n                {\n                    key: 'offCycleReason',\n                    label: 'Off Cycle Reason',\n                    // This field is only required if the runType is 'OFFCYCLE'.\n                    condition: (form) => form.runType === \"OFFCYCLE\"\n                },\n                { key: 'payPeriodId', label: 'Pay Period' },\n                { key: 'postingDate', label: 'Posting Date' },\n            ]\n        }\n    };\n\nfunction countryHasStates(form, context) {\n    if (form.countryId) {\n        const stateMap = context?.stateMap || context.referenceData.stateMap || {};\n        return form.countryId in stateMap;\n    }\n    return false;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "getFormValidationMap",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "if (!value) return \"N/A\";\n\n// This is the internationalization API for relative time. 'en' is for English.\n// 'numeric: \"auto\"' allows it to use words like \"yesterday\" or \"tomorrow\".\nconst rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });\n\ntry {\n    const expirationDate = new Date(value);\n    const now = new Date();\n    \n    // Handle invalid date strings\n    if (isNaN(expirationDate.getTime())) {\n        return \"Invalid date\";\n    }\n\n    // Find the difference in seconds\n    const diffSeconds = Math.round((expirationDate.getTime() - now.getTime()) / 1000);\n    \n    // Determine the best unit to display\n    if (Math.abs(diffSeconds) < 60) {\n        return rtf.format(diffSeconds, 'second');\n    }\n\n    const diffMinutes = Math.round(diffSeconds / 60);\n    if (Math.abs(diffMinutes) < 60) {\n        return rtf.format(diffMinutes, 'minute');\n    }\n\n    const diffHours = Math.round(diffMinutes / 60);\n    if (Math.abs(diffHours) < 24) {\n        return rtf.format(diffHours, 'hour');\n    }\n\n    const diffDays = Math.round(diffHours / 24);\n    return rtf.format(diffDays, 'day');\n\n} catch (error) {\n    console.error(\"Error formatting time remaining:\", error);\n    return \"Invalid date\";\n}\n",
+      "description": "* Transforms a date string into a human-readable relative time string (e.g., \"expires in 5 minutes\").\n* @param {string} value - The date string to compare against the current time (e.g., \"2025-10-03T15:52:04+0800\").\n* @returns {string} The human-readable time difference.\n",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "formatTimeRemaining",
+      "parameters": [
+        "value"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!word) return \"\";\n\nif (word.endsWith('y') && !/[aeiou]y$/i.test(word)) {\n    return word.slice(0, -1) + 'ies';\n}\n\nif (/(s|x|z|ch|sh)$/i.test(word)) {\n    return word + 'es';\n}\n\nreturn word + 's';",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "pluralize",
+      "parameters": [
+        "word"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const { columnKeys = [], options = {} } = params;\n\nreturn columnKeys.map(key => {\n    const readableName = key\n        .replace(/([a-z])([A-Z])/g, '$1 $2')\n        .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')\n        .trim();\n\n    const valueKey = options.valueKey && options.valueKey[key] ? options.valueKey[key] : key;\n\n    return {\n        name: readableName,\n        valueKey: valueKey, \n        hide: options.hide !== undefined ? options.hide : false,\n        textAlign: options.textAlign !== undefined ? options.textAlign : \"left\",\n        enableSorting: options.enableSorting !== undefined ? options.enableSorting : false,\n        sortBy: options.sortBy !== undefined ? options.sortBy : \"none\",\n        enableFiltering: options.enableFiltering !== undefined ? options.enableFiltering : false,\n        enablePinning: options.enablePinning !== undefined ? options.enablePinning : false,\n        type: (options.type && options.type[key]) ? options.type[key] : \"string\",\n        cellTemplate: options.cellTemplate !== undefined ? options.cellTemplate[key] : \"default\",\n        cellTooltip: options.cellTooltip !== undefined ? options.cellTooltip : '',\n        cellConditionalStyle: options.cellConditionalStyle !== undefined ? options.cellConditionalStyle : [],\n        cellActions: options.cellActions !== undefined ? options.cellActions : [],\n        classes: options.classes !== undefined ? options.classes : [],\n        conditionalClasses: options.conditionalClasses !== undefined ? options.conditionalClasses : [],\n        cellTemplateJsExpression: options.cellTemplateJsExpression !== undefined ? options.cellTemplateJsExpression[key] : \"\"\n    };\n});",
+      "description": "## `generateColumnDefinitions` Options\n\nThis function takes an optional second argument, `options`, which is an object allowing you to customize the default properties of the generated column definitions. If a property is not specified in the `options` object, a default value will be used.\n\nHere's a breakdown of the available options:\n\n* **`hide`**: `boolean` - Sets the initial visibility of all columns. Default: `false`.\n* **`textAlign`**: `string` - Sets the text alignment for all columns. Default: `\"left\"`.\n* **`valueKey`**: `object` - An object where keys are `columnName` strings and values are the desired `valueKey` strings for those specific columns. If a `columnName` is not found as a key in this object, the `valueKey` will be automatically generated (lowercase with spaces removed).\n* **`enableSorting`**: `boolean` - Enables sorting for all columns. Default: `true`.\n* **`sortBy`**: `string` - Sets the initial sort order for all columns. Default: `\"none\"`.\n* **`enableFiltering`**: `object` - An object where keys are `columnName` strings and values are `boolean` indicating whether filtering should be enabled for those specific columns. Default: `false` for all columns.\n* **`enablePinning`**: `boolean` - Enables pinning for all columns. Default: `false`.\n* **`type`**: `object` - An object where keys are `columnName` strings and values are the data `type` (`\"string\"`, `\"number\"`, `\"date\"`, etc.) for those specific columns. Default: `\"string\"` for all columns.\n* **`cellTemplate`**: `string` - Sets the cell template for all columns. Default: `\"default\"`.\n* **`cellTooltip`**: `string` - Sets the cell tooltip for all columns. Default: `''`.\n* **`cellConditionalStyle`**: `array` - Sets the conditional styles for all columns. Default: `[]`.\n* **`cellActions`**: `array` - Sets the cell actions for all columns. Default: `[]`.\n* **`classes`**: `array` - Sets the CSS classes for all columns. Default: `[]`.\n* **`conditionalClasses`**: `array` - Sets the conditional CSS classes for all columns. Default: `[]`.\n\n**Example Usage:**\n\n```javascript\nconst columnNames = [\"First Name\", \"Last Name\", \"Email\"];\nconst customOptions = {\n  hide: false, // Show all columns\n  textAlign: \"center\", // Center align all text\n  valueKey: {\n    \"First Name\": \"firstName\",\n    \"Last Name\": \"lastName\",\n    \"Email\": \"emailAddress\"\n  },\n  enableFiltering: {\n    \"Last Name\": true,\n    \"Email\": true\n  }\n};\n\nconst columnDefinitions = generateColumnDefinitions(columnNames, customOptions);\n```",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "generateColumnDefinitions",
+      "parameters": [
+        "params"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!Array.isArray(data) || !data.length) return [];\nif (!keysToConvert || !keysToConvert.length) return data;\n\nreturn data.map(item => {\n    const newItem = { ...item };\n\n    keysToConvert.forEach(key => {\n        if (Object.prototype.hasOwnProperty.call(newItem, key)) {\n            const val = newItem[key];\n            newItem[key] = (val === 1 || val === \"1\" || val === true || val === \"true\");\n        }\n    });\n\n    return newItem;\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "normalizeBooleans",
+      "parameters": [
+        "data",
+        "keysToConvert"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!defs || !defs.options || !defs.options.type) return [];\n\nconst booleanCols = Object.keys(defs.options.type)\n    .filter(key => defs.options.type[key] === 'boolean');\n\nreturn booleanCols.map(colName => {\n    const mappedKey = defs.options.valueKey && defs.options.valueKey[colName];\n    return mappedKey || colName;\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "extractBooleanKeys",
+      "parameters": [
+        "defs"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const { entity, utils } = params;\n\nlet entityDetails = \"\";\n\nfor (const [key, value] of Object.entries(entity)) {\n    if (key.startsWith(\"$$\")) continue;\n    if (key.includes(\"Company\")) continue;\n    if (key.includes(\"YesNo\")) continue;\n    if ((key.includes(\"Id\") && key !== \"Id\") || value === undefined) continue;\n    if (key === \"CreatedDate\" || key === \"AnnualPayPeriods\") entityDetails += `<br><hr>`;\n\n    if (key.includes(\"CalculationMethodId\")) {\n        entityDetails +=\n            `\n            <div style=\"display: flex; width: 100%;\">\n                <div style=\"font-weight: bold;\">${key}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${value === 1 ? \"FLAT\" : \"PERCENT\"}</div>\n            </div>\n            <hr>\n            `;\n        continue;\n    }\n\n    if (typeof value === \"boolean\") {\n        entityDetails +=\n            `\n            <div style=\"display: flex; width: 100%; align-items: center;\">\n                <div style=\"font-weight: bold; flex-shrink: 0;\">${key}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div class=\"status-indicator ${value ? 'yes' : 'no'}\">\n                    ${value ? 'YES' : 'NO'}\n                </div>\n            </div>\n            <hr>\n            `;\n        continue;\n    }\n\n    entityDetails +=\n        `\n        <div style=\"display: flex; width: 100%;\">\n            <div style=\"font-weight: bold;\">${key}</div>\n            <div style=\"flex-grow: 1;\"></div>\n            <div>${typeof key === \"string\" && key.includes(\"Date\") ? utils.parseDate(value) : value}</div>\n        </div>\n        <hr>\n        `;\n\n    if (key === \"DayStartTime\") entityDetails += `<br>`;\n}\n\nreturn entityDetails;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "legacyGenerateEntityDetails",
+      "parameters": [
+        "params"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return key.charAt(0).toUpperCase() + key.slice(1);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "toPascalKey",
+      "parameters": [
+        "key"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const pascalCased = Object.fromEntries(\n    Object.entries(formObj).filter(([, value]) => value != null).map(([key, value]) => [this.toPascalKey(key), value])\n);\n\nreturn Object.assign({}, existingEntity, pascalCased);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildUpdatedEntityData",
+      "parameters": [
+        "formObj",
+        "existingEntity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "updatedEntityObj.timeout(() => {\n    this.setSelectedBelliniTableRow(updatedEntityObj.rowIndex);\n});\n\nupdatedEntityObj.formManagementService.onFormOpen(\n    updatedEntityObj.uiState,\n    updatedEntityObj.form,\n    \"edit\"\n);\n\nconst formToReset = document.querySelector('.form');\nif(formToReset) {\n    formToReset.scrollTop = 0;\n}\n\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "reselectEntityAfterUpdate",
+      "parameters": [
+        "updatedEntityObj"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "toast",
+    "resetForm",
+    "resetDependentFields",
+    "extractTimeFromDate",
+    "sendGoogleChatMessage",
+    "resetVariables",
+    "formatEntityForDisplay",
+    "handleUnsavedChanges",
+    "setSelectedBelliniTableRow",
+    "setSelectedBelliniTabBarTab",
+    "generateFormRequiredFieldsArray",
+    "generateMissingFieldsMessage",
+    "generateTooltipMessage",
+    "formValidation",
+    "formatTimeRemaining",
+    "pluralize",
+    "generateColumnDefinitions",
+    "normalizeBooleans",
+    "extractBooleanKeys",
+    "legacyGenerateEntityDetails",
+    "buildQueryString",
+    "formatDate",
+    "parseDate",
+    "toPascalKey",
+    "buildUpdatedEntityData",
+    "reselectEntityAfterUpdate"
+  ]
+}

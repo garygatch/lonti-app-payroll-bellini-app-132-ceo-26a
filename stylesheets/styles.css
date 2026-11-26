@@ -1,0 +1,266 @@
+/*
+  --------------------------------------------------
+  Root Variables
+  --------------------------------------------------
+*/
+:root {
+  --color-border: #cecece;
+  --color-border-gray: #444;
+  --color-green: #006747;
+  --color-red: #d10000;
+}
+
+/*
+  --------------------------------------------------
+  Global Styles
+  --------------------------------------------------
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+  --------------------------------------------------
+  Bellini Styles Overrides
+  --------------------------------------------------
+*/
+.bln-dropdown-menu-dropdown,
+.bln-dropdown-list {
+  z-index: 1089;
+}
+
+
+.menu-label, .menu-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.bln-table .grid input:checked ~ .checkmark {
+  border-color: rgba(160, 174, 192, var(--border-opacity));
+  background-color: transparent;
+}
+
+.bln-table .grid .checkmark .check {
+  /* visibility: hidden; */
+  color: var(--color-green);
+  /* font-size: calc(var(--bln-checkbox-size) * 0.6); */
+}
+
+.bln-table .grid .ui-grid-render-container-body .ui-grid-viewport {
+  overflow-x: hidden !important;
+}
+
+.bln-table .grid .ui-grid-row {
+  max-height: unset !important;
+}
+
+.ui-grid-viewport .ui-grid-cell-contents {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.ui-grid-header-cell-label {
+  white-space: normal;
+}
+
+.ui-grid-row,
+.ui-grid-cell {
+  height: auto !important;
+}
+
+.ui-grid-row div[role="row"] {
+  display: flex;
+  align-content: stretch;
+}
+
+.bln-table .grid .ui-grid-cell-contents {
+  max-height: unset !important;
+  height: 100% !important;
+}
+
+.modal-component {
+  width: 100% !important;
+  max-width: 1000px !important;
+  min-width: 300px !important;
+}
+
+.bln-modal {
+  z-index: 1089;
+}
+
+.bln-modal-backdrop {
+  z-index: 1088;
+}
+
+/*
+  --------------------------------------------------
+  Custom Styles
+  --------------------------------------------------
+*/
+.main-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.main-body-container {
+  padding: 1rem;
+  height: 88% !important; 
+}
+
+.main-body-container-legacy {
+  padding: 1rem;
+  height: 84% !important;
+}
+
+.tabs-filter-table-pagination-container {
+  height: 100%;
+}
+
+.filter-table-pagination-container {
+  height: 100%;
+}
+
+.table-pagination-container {
+  height: 90%;
+}
+
+.table-container {
+  height: 100%;
+}
+
+.right-panel-container {
+  padding: 1rem;
+  border: thin solid var(--color-border);
+  overflow-y: auto;
+}
+
+.right-panel-body-container {
+  height: 85%;
+}
+
+.right-panel-header-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: thin solid var(--color-border);
+  border-radius: 6px;
+  padding: 4px;
+  margin-bottom: 4px;
+  background-color: white;
+}
+
+.section-container {
+  height: 100%;
+  padding: 1rem;
+  background-color: #fefefe;
+  border: solid thin var(--color-border);
+  border-radius: 6px;
+}
+
+.form-container {
+  position: fixed;
+  height: 100%;
+  width: 70%;
+  right: 0;
+  display: flex;
+  z-index: 100;
+  overflow-y: auto;
+  background-color: white;
+  border-style: solid;
+  border-width: thin;
+}
+
+.form-container .form {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+
+.form {
+  position: fixed;
+  height: calc(100% - 50px);
+  width: 25%;
+  right: 0;
+  padding: 1rem;
+  background-color: white;
+  overflow-y: auto;
+  border-style: solid;
+  border-width: thin;
+}
+
+.form-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-container {
+  z-index: 9999;
+}
+
+.notif-div {
+  z-index: 9999;
+}
+
+.status-indicator {
+  display: inline-block;
+  padding: 4px 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+}
+
+.status-indicator.yes {
+  background-color: var(--color-green);
+}
+
+.status-indicator.no {
+  background-color: var(--color-red);
+}
+
+.bln-table .grid input:checked ~ .checkmark {
+  border-color: rgba(160, 174, 192, var(--border-opacity));
+  background-color: transparent;
+}
+
+.bln-table .grid .checkmark .check {
+  /* visibility: hidden; */
+  color: var(--color-green);
+  /* font-size: calc(var(--bln-checkbox-size) * 0.6); */
+}
+
+div[bln-panel] {
+  padding-top: 50px;
+}
+
+/* Payslip Masking Toggle Styles */
+.ps-toggle-cb {
+  display: none;
+}
+
+.ps-toggle-cb:checked ~ .ps-masked {
+  display: none !important;
+}
+
+.ps-toggle-cb:checked ~ .ps-unmasked {
+  display: block !important;
+}
+
+.ps-toggle-cb:checked ~ .ps-icon-wrapper .fa-eye {
+  display: none !important;
+}
+
+.ps-toggle-cb:checked ~ .ps-icon-wrapper .fa-eye-slash {
+  display: inline-block !important;
+}

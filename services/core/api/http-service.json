@@ -1,0 +1,46 @@
+{
+  "description": "",
+  "name": "http-service",
+  "parentDirectoryId": "D8D3o8N9R8U4NB4va4vap",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    \"Content-Type\": \"application/json\",\n    \"X-Authorization\": this.$cookies.get(\"id_token\")\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getHeaders",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "body": "const options = {\n    method,\n    headers: this.getHeaders()\n};\n\nif (body) options.body = JSON.stringify(body);\n\ntry {\n    const response = await fetch(url, options);\n\n    if (!response.ok) {\n        let errorData;\n        try {\n            errorData = await response.json();\n        } catch (e) {\n            errorData = await response.text();\n        }\n        const msg = errorData?.message || errorData || `HTTP ${response.status}`;\n        throw new Error(msg);\n    }\n\n    if (response.status === 204) return null;\n    return await response.json();\n\n} catch (error) {\n    console.error(`HTTP Error [${method} ${url}]:`, error);\n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "request",
+      "parameters": [
+        "url",
+        "method",
+        "body"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "request"
+  ]
+}

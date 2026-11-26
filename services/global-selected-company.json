@@ -1,0 +1,165 @@
+{
+  "description": "",
+  "name": "global-selected-company",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "companyId",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "companyName",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "this.companyId = companyId;\nthis.companyName = companyName;\nthis.setMenuItems();",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setCompany",
+      "parameters": [
+        "companyId",
+        "companyName"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "companyMap",
+      "type": "array"
+    },
+    {
+      "description": "",
+      "name": "menuItems",
+      "type": "property",
+      "value": "    [\n        {\n            label: \"Dashboard\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"dashboard\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"chart-line\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"Global Management\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"global_management\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"globe\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"Payroll Management\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"payroll_management\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"business-time\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"People Management\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"people_management\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"users\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"Pay Configuration\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"pay_configuration\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"coins\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"Attendance Summary\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"attendance_summary\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"user-check\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        },\n        {\n            label: \"Payroll Processing\",\n            evaluateLabel: false,\n            onClick: \"link\",\n            link: {\n                type: \"state\",\n                state: \"payroll_processing\",\n                parameters: {}\n            },\n            openIn: \"current-window\",\n            icon: {\n                name: \"calculator\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        }\n    ]"
+    },
+    {
+      "body": "if (this.companyMap && this.companyMap.length > 0 && !this.companyId) {\n    this.companyId = this.companyMap[0].value;\n    this.companyName = this.companyMap[0].label;\n}\n\nif ((this.menuItems[0].label === \"Select a Company\" || this.menuItems[0].label === \"Create a Company\") && !this.companyId) return;\n\nif (this.companyMap.length === 0 && this.menuItems[0].label !== \"Create a Company\") {\n    this.menuItems.unshift(\n        {\n            label: \"Create a Company\",\n            evaluateLabel: false,\n            onClick: \"function\",\n            function: () => {\n                const targetStateName = 'global_management';\n                const stateParams = {\n                    createFirstCompany: 'true'\n                };\n\n                this.$state.go(targetStateName, stateParams)\n                    .then(() => {\n                    })\n                    .catch((error) => {\n                        console.error(`Error transitioning to state '${targetStateName}':`, error);\n                    });\n            },\n            icon: {\n                name: \"building\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        }\n    );\n    return;\n}\n\nif (this.companyMap.length === 1) {\n    const company = this.companyMap[0]\n    this.companyId = company.value;\n    this.companyName = company.label;\n    if (this.menuItems[0].menuItems) this.menuItems.shift();\n    this.menuItems.unshift(\n        {\n            label: this.companyName || \"Select a Company\",\n            evaluateLabel: true,\n            icon: {\n                name: \"building\",\n                style: \"solid\",\n                type: \"font-icon\",\n                position: \"left\"\n            }\n        });\n    if (this.menuItems[1].label !== \"Dashboard\") this.menuItems.shift();\n    return;\n}\n\nif (this.menuItems[0].label === \"Dashboard\") this.menuItems.unshift(\n    {\n        label: this.companyName || \"Select a Company\",\n        evaluateLabel: true,\n        menuItems: [],\n        icon: {\n            name: \"building\",\n            style: \"solid\",\n            type: \"font-icon\",\n            position: \"left\"\n        }\n    });\n\nelse {\n    this.menuItems[0].label = this.companyName;\n\n    if (this.menuItems[0].menuItems.length === 0) {\n        this.setCompanyMenuItems();\n    }\n\n    return;\n}\n\nthis.setCompanyMenuItems();",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setMenuItems",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "try {\n    const LABEL_SELECT_COMPANY = \"Select a Company\";\n    const LABEL_CREATE_COMPANY = \"Create a Company\";\n\n    // 1. Ensure this.menuItems is an array.\n    if (!Array.isArray(this.menuItems)) {\n        this.menuItems = [];\n    }\n\n    let primaryDropdown = this.menuItems[0];\n    if (!Array.isArray(primaryDropdown.menuItems)) {\n        primaryDropdown.menuItems = [];\n        \n        // Add the currently selected Company, if any\n        const currentCompanyId = this.companyId;\n        const currentCompanyName = this.companyName;\n\n        if (currentCompanyId) {\n            const currentCompanyItem = {\n                label: currentCompanyName,\n                evaluateLabel: true,\n                value: currentCompanyId,\n                onClick: \"function\",\n                function: () => this.setCompany(currentCompanyItem, currentCompanyName)\n            };\n\n            primaryDropdown.menuItems.push(currentCompanyItem);\n        }\n    }\n\n    // 2. Create the new Company menu item.\n    const newCompanyItem = {\n        label: companyName,\n        evaluateLabel: true,\n        value: companyId,\n        onClick: \"function\",\n        function: () => this.setCompany(companyId, companyName)\n    };\n\n    // 3. Add the new item to the sub-menu.\n    primaryDropdown.menuItems.push(newCompanyItem);\n\n    // 4. Change the dropdown label if first Company item\n    if (primaryDropdown.label === LABEL_CREATE_COMPANY) primaryDropdown.label = LABEL_SELECT_COMPANY;\n\n} catch (error) {\n    console.error(`Error in addCompanyMenuItem while adding Company '${companyName}' (ID: '${companyId}'):`, error);\n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "addCompanyMenuItem",
+      "parameters": [
+        "companyId",
+        "companyName"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "try {\n    // 1. Safely access the primary dropdown and its sub-menu items.\n    const primaryDropdown = (this.menuItems && Array.isArray(this.menuItems) && this.menuItems.length > 0)\n        ? this.menuItems[0]\n        : null;\n\n    const subMenuItems = (primaryDropdown && primaryDropdown.menuItems && Array.isArray(primaryDropdown.menuItems))\n        ? primaryDropdown.menuItems\n        : null;\n\n    if (subMenuItems) {\n        // 2. Find the specific item to update in the sub-menu.\n        //    It's good practice to check if `item` and `item.value` exist.\n        const itemToUpdate = subMenuItems.find(item => item && item.value === companyId);\n\n        // 3. If the item is found, update its properties.\n        if (itemToUpdate) {\n            itemToUpdate.label = newCompanyName;\n            itemToUpdate.function = () => this.setCompany(companyId, newCompanyName);\n        } else {\n            // console.warn(`Menu item with companyId: ${companyId} not found in sub-menu. Cannot update item label/function.`);\n        }\n    } else {\n        // console.warn(\"Sub-menu items list not found. Cannot update any menu item.\");\n    }\n\n    // 4. If the company being updated is the currently selected/active company,\n    //    update the global company name and potentially the primary dropdown's label.\n    if (this.companyId === companyId) {\n        this.companyName = newCompanyName;\n        if (primaryDropdown) {\n            primaryDropdown.label = newCompanyName;\n        }\n    }\n\n} catch (error) {\n    console.error(`Error in updateCompanyMenuItem for companyId '${companyId}', newName '${newCompanyName}':`, error);\n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "updateCompanyMenuItem",
+      "parameters": [
+        "companyId",
+        "newCompanyName"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "body": "try {\n    const LABEL_SELECT_COMPANY = \"Select a Company\";\n    const LABEL_CREATE_COMPANY = \"Create a Company\";\n\n    // Part 1: Remove the company from the sub-menu list\n    const primaryDropdown = this.menuItems && this.menuItems.length > 0 ? this.menuItems[0] : null;\n    \n    if (primaryDropdown && primaryDropdown.menuItems && Array.isArray(primaryDropdown.menuItems)) {\n        const subMenuItems = primaryDropdown.menuItems;\n        const itemIndex = subMenuItems.findIndex(item => item && item.value === companyIdToDelete);\n\n        if (itemIndex > -1) {\n            subMenuItems.splice(itemIndex, 1);\n        }\n    }\n\n    // Part 2: Update the currently selected company if it was the one deleted.\n    if (this.companyId === companyIdToDelete) {\n        this.menuItems.shift();\n        this.companyId = undefined;\n    }\n\n    // Part 3: Change the primaryDropdown label if it's Select a Company and there are no Companies\n    if (primaryDropdown.label === LABEL_SELECT_COMPANY && this.companyMap.length === 0) {\n        primaryDropdown.label = LABEL_CREATE_COMPANY;\n    }\n\n} catch (error) {\n    console.error(`Error in deleteCompanyMenuItem while processing companyId '${companyIdToDelete}':`, error);\n    throw error; \n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "deleteCompanyMenuItem",
+      "parameters": [
+        "companyIdToDelete"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    },
+    {
+      "body": "this.companyMap.forEach(company =>\n    this.menuItems[0].menuItems.push(\n        {\n            label: company.label,\n            evaluateLabel: true,\n            value: company.value,\n            onClick: \"function\",\n            function: () => this.setCompany(company.value, company.label)\n        })\n);",
+      "description": "Sets `menuItems[0]` array values using `this.companyMap`",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setCompanyMenuItems",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "this.menuItems[0].menuItems = [];",
+      "description": "Resets `menuItems[0]`'s `menuItems` to empty array `[]`.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "clearCompanyMenuItems",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "companyId",
+    "companyName",
+    "setMenuItems",
+    "menuItems",
+    "companyMap",
+    "deleteCompanyMenuItem",
+    "updateCompanyMenuItem",
+    "addCompanyMenuItem",
+    "unlockCompanyMenu",
+    "isCompanyMenuLocked",
+    "clearCompanyMenuItems",
+    "setCompanyMenuItems",
+    "setCompany",
+    "restoreCompanyMenuItems",
+    "onInit"
+  ]
+}

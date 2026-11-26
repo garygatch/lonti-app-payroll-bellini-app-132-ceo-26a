@@ -1,0 +1,91 @@
+{
+  "description": "",
+  "name": "tab-management-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "userPreferenceService",
+      "resourceIdentity": "services/core/storage/user-preference-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "body": "const canSwitchTabs = await this.entityViewService.checkUnsavedChanges(\n    uiState.isFormOpen,\n    uiState.selectedEntity?.Id,\n    null,\n    this.utils\n);\n\nif (!canSwitchTabs) {\n    this.utils.setSelectedBelliniTabBarTab(uiState.currentTab.previousId);\n    return;\n}\n\nuiState.currentTab.previousId = selectedTab;\nuiState.isFormOpen = false;\nthis.baseGridControllerService.resetState(uiState);\n\nconst selectedTabName = tabItemsMap.get(selectedTab);\nuiState.currentTab.name = selectedTabName;\n\nthis.filterOperationsService.onReset(uiState, loaders, false);\n\nuiState.currentFilter.quickSearchPlaceholder = this.filterService.quickSearchConfig.getSearchPlaceholder(\n    selectedTabName,\n    tabConfig[selectedTabName].quickSearchDefaultConfig,\n    this.userPreferenceService\n);\n\nloaders.loadActiveTab({\n    entityType: selectedTabName,\n    page: 1\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "onTabChange",
+      "parameters": [
+        "uiState",
+        "tabItemsMap",
+        "tabConfig",
+        "handlers",
+        "loaders",
+        "selectedTab"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const canSwitch = await this.entityViewService.checkUnsavedChanges(\n    uiState.isFormOpen,\n    uiState.selectedEntity?.Id,\n    null,\n    this.utils\n);\n\nif (!canSwitch) {\n    tabStore[uiState.currentTab.name].currentPage = tabStore[uiState.currentTab.name].previousPage;\n    this.$rootScope.$apply();\n} else {\n    uiState.isFormOpen = false;\n    tabStore[uiState.currentTab.name].previousPage = currentPage;\n    loaders.loadActiveTab({ page: currentPage });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "onPageChange",
+      "parameters": [
+        "uiState",
+        "tabStore",
+        "loaders",
+        "currentPage"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "filterOperationsService",
+      "resourceIdentity": "services/core/ui/filter-operations-service",
+      "type": "service"
+    },
+    {
+      "name": "$rootScope",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "onTabChange",
+    "onPageChange"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "description": "",
+  "name": "accrual-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Name\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Name\",\n    \"Code\",\n    \"Method\",\n    \"Rate\",\n    // \"Frequency\",\n    // \"EffectiveFromDate\",\n    // \"EffectiveToDate\",\n    \"Active\",\n    \"CanCarryForward\",\n    \"AllowEncashment\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Name\": \"Name\",\n        \"Method\": \"AccrualMethod\",\n        \"Rate\": \"AccrualRate\",\n        \"Frequency\": \"AccrualFrequency\"\n    },\n    type: {\n        \"Active\": \"boolean\",\n        \"CanCarryForward\": \"boolean\",\n        \"AllowEncashment\": \"boolean\",\n        \"EffectiveFromDate\": \"date\",\n        \"EffectiveToDate\": \"date\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "    return [\n        // --- Identifiers ---\n        {\n            label: \"ID\",\n            value: \"Id\",\n            type: \"number\",\n            // operators: [\"eq\"]\n        },\n        {\n            label: \"Code\",\n            value: \"Code\",\n            type: \"string\",\n            // operators: [\"eq\", \"contains\", \"startswith\"]\n        },\n\n        // --- Core Identity ---\n        {\n            label: \"Name\",\n            value: \"Name\",\n            type: \"string\",\n            // operators: [\"contains\", \"eq\", \"startswith\"]\n        },\n        {\n            label: \"Description\",\n            value: \"Description\",\n            type: \"string\",\n            // operators: [\"contains\"]\n        },\n        {\n            label: \"Active\",\n            value: \"Active\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n\n        // --- Accrual Logic ---\n        {\n            label: \"Accrual Method\",\n            value: \"AccrualMethod\",\n            type: \"dropdown\",\n            source: \"accrualMethodMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Accrual Frequency\",\n            value: \"AccrualFrequency\",\n            type: \"dropdown\",\n            source: \"frequencyMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Accrual Rate\",\n            value: \"AccrualRate\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n        {\n            label: \"Accrual Rate Unit\",\n            value: \"AccrualRateUnit\",\n            type: \"dropdown\",\n            source: \"accrualRateUnitMap\",\n            // operators: [\"eq\"]\n        },\n\n        // --- Limits & Constraints ---\n        {\n            label: \"Max Annual Accrual\",\n            value: \"MaxAnnualAccrual\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n        {\n            label: \"Min Annual Accrual\",\n            value: \"MinAnnualAccrual\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n        {\n            label: \"Waiting Days\",\n            value: \"WaitingDays\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n\n        // --- Carry Forward ---\n        {\n            label: \"Can Carry Forward\",\n            value: \"CanCarryForward\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Carry Forward Limit\",\n            value: \"CarryForwardLimit\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n\n        // --- Encashment ---\n        {\n            label: \"Allow Encashment\",\n            value: \"AllowEncashment\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Cash Rate\",\n            value: \"CashRate\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n        {\n            label: \"Cash Frequency\",\n            value: \"CashFrequency\",\n            type: \"dropdown\",\n            source: \"frequencyMap\",\n            // operators: [\"eq\"]\n        },\n\n        // --- Dates ---\n        {\n            label: \"Effective From\",\n            value: \"EffectiveFromDate\",\n            type: \"date\",\n            // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n        },\n        {\n            label: \"Effective To\",\n            value: \"EffectiveToDate\",\n            type: \"date\",\n            // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n        }\n    ];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "accruals",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "accruals",
+    "getQuickSearchDefaults"
+  ]
+}

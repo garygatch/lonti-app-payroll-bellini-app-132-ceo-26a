@@ -1,0 +1,87 @@
+{
+  "description": "",
+  "name": "polling-service",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "payrollRunReview",
+      "properties": [
+        {
+          "description": "",
+          "name": "POLLING_INTERVAL_MS",
+          "type": "property",
+          "value": "5_000"
+        },
+        {
+          "description": "This is a Map",
+          "name": "activePolls",
+          "type": "property",
+          "value": "new Map()"
+        },
+        {
+          "body": "this.payrollRunReviewService.pruneExpiredJobs(payrollRunId);\n\nconst jobsMap = this.payrollRunReviewService.getCachedJobs(payrollRunId);\nconst activeJobs = Object.values(jobsMap).filter(\n    job => ![\"COMPLETED\", \"FAILED\"].includes(job.status)\n);\n\nif (activeJobs.length === 0) {\n    this.payrollRunReview.stopPolling(payrollRunId);\n    return;\n}\n\nawait Promise.allSettled(\n    activeJobs.map(job =>\n        this.payrollRunReviewService.refreshJobStatus(payrollRunId, job.jobId)\n    )\n);\n\nconst timerId = this.$timeout(\n    () => this.payrollRunReview._pollLoop(payrollRunId),\n    this.payrollRunReview.POLLING_INTERVAL_MS\n);\n\nthis.payrollRunReview.activePolls.set(payrollRunId, timerId);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_pollLoop",
+          "parameters": [
+            "payrollRunId"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!payrollRunId) return;\nif (this.payrollRunReview.activePolls.has(payrollRunId)) return;\nthis.payrollRunReview._pollLoop(payrollRunId);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "startPolling",
+          "parameters": [
+            "payrollRunId",
+            "callback"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (this.payrollRunReview.activePolls.has(payrollRunId)) {\n    this.$timeout.cancel(this.payrollRunReview.activePolls.get(payrollRunId));\n    this.payrollRunReview.activePolls.delete(payrollRunId);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "stopPolling",
+          "parameters": [
+            "payrollRunId"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "payrollRunReviewService",
+      "resourceIdentity": "services/entities/payroll-run-review-service",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "payrollRun",
+    "payrollRunReview"
+  ]
+}

@@ -1,0 +1,849 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "() => {}",
+      "description": "This function should be called to close the modal.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onClose",
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "resolve",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "false",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "applied",
+      "propertyType": "boolean",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": true,
+              "name": "text",
+              "textContent": "$ctrl.privateStateVars.title"
+            }
+          ],
+          "classList": [
+            "modal-title"
+          ],
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "×"
+            }
+          ],
+          "classList": [
+            "modal-close"
+          ],
+          "events": {
+            "click": "$ctrl.handlers.onCancel()"
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [
+        "modal-header"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": false,
+                          "name": "text",
+                          "textContent": "Unassigned Items"
+                        }
+                      ],
+                      "classList": [],
+                      "name": "h3"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "text-align",
+                      "value": "center"
+                    }
+                  ]
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "search",
+                  "expressions": [
+                    {
+                      "expression": "\"\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"search\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.search.placeholder",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "500",
+                      "to": "debounceDelay"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onUnassignedSearch()",
+                      "to": "onValueChange"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.query",
+                      "to": "value"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.results",
+                      "to": "data"
+                    },
+                    {
+                      "expression": "[{\n    icon: {\n        name: \"plus\",\n        style: \"solid\",\n        type: \"font-icon\"\n    },\n    handler: $ctrl.handlers.onAssign,\n    tooltip: \"Assign\"\n}]",
+                      "to": "rowActions"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.columns",
+                      "to": "columns"
+                    },
+                    {
+                      "expression": "true",
+                      "to": "enablePagination"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.pagination.currentPage",
+                      "to": "currentPage"
+                    }
+                  ],
+                  "name": "Table",
+                  "nodeName": "bln-table",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-secondary-bg-color",
+                      "value": "#f9f9f9"
+                    }
+                  ],
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.pagination.currentPage",
+                      "to": "currentPage"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.unassigned.pagination.totalPages",
+                      "to": "totalPages"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onUnassignedPageChange(currentPage)",
+                      "to": "onPageChange"
+                    }
+                  ],
+                  "name": "Pagination",
+                  "nodeName": "bln-pagination",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "unassigned",
+              "layout": {
+                "cell": {
+                  "initialSize": 50,
+                  "minimumSize": 10,
+                  "type": "split-item"
+                }
+              },
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": false,
+                          "name": "text",
+                          "textContent": "Assigned Items"
+                        }
+                      ],
+                      "classList": [],
+                      "name": "h3"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "search",
+                      "expressions": [
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"search\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.privateStateVars.search.placeholder",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "500",
+                          "to": "debounceDelay"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onAssignedSearch()",
+                          "to": "onValueChange"
+                        },
+                        {
+                          "expression": "$ctrl.privateStateVars.assigned.query",
+                          "to": "value"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "text-align",
+                      "value": "center"
+                    }
+                  ]
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.privateStateVars.assigned.results",
+                      "to": "data"
+                    },
+                    {
+                      "expression": "[{\n    icon: {\n        name: \"minus\",\n        style: \"solid\",\n        type: \"font-icon\"\n    },\n    tooltip: \"Unassign\",\n    handler: $ctrl.handlers.onUnassign\n}]",
+                      "to": "rowActions"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.assigned.columns",
+                      "to": "columns"
+                    },
+                    {
+                      "expression": "true",
+                      "to": "enablePagination"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.assigned.pagination.currentPage",
+                      "to": "currentPage"
+                    },
+                    {
+                      "expression": "true",
+                      "to": "enableEditing"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onCellEdit(row, columnName, newValue, oldValue)",
+                      "to": "onAfterCellEdit"
+                    }
+                  ],
+                  "name": "Table",
+                  "nodeName": "bln-table",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-table-secondary-bg-color",
+                      "value": "#f9f9f9"
+                    }
+                  ],
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.privateStateVars.assigned.pagination.currentPage",
+                      "to": "currentPage"
+                    },
+                    {
+                      "expression": "$ctrl.privateStateVars.assigned.pagination.totalPages",
+                      "to": "totalPages"
+                    }
+                  ],
+                  "name": "Pagination",
+                  "nodeName": "bln-pagination",
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "assigned",
+              "layout": {
+                "cell": {
+                  "initialSize": 50,
+                  "minimumSize": 10,
+                  "type": "split-item"
+                }
+              },
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "layout": {
+            "container": {
+              "handleColor": "#eeeeee",
+              "handleWidth": 10,
+              "items": [],
+              "orientation": "horizontal",
+              "type": "split"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "100% !important"
+            },
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "100% !important"
+            }
+          ]
+        }
+      ],
+      "classList": [
+        "modal-body"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-cancel"
+          ],
+          "expressions": [
+            {
+              "expression": "\"default\"",
+              "to": "type"
+            },
+            {
+              "expression": "$ctrl.en.modals.assignmentModal.buttons.CANCEL.label",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.handlers.onCancel()",
+              "to": "onClick"
+            },
+            {
+              "expression": "$ctrl.en.modals.assignmentModal.buttons.CANCEL.tooltip",
+              "to": "tooltip"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-ok"
+          ],
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "$ctrl.en.modals.assignmentModal.buttons.APPLY.label",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.handlers.onApply()",
+              "to": "onClick"
+            },
+            {
+              "expression": "$ctrl.en.modals.assignmentModal.buttons.APPLY.tooltip",
+              "to": "tooltip"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-footer"
+      ],
+      "name": "div"
+    }
+  ],
+  "localStylesheets": [
+    {
+      "path": "index.css"
+    }
+  ],
+  "modules": [],
+  "name": "assignment-modal",
+  "parentDirectoryId": "8qA4cKVWgi3986MOTgCWg",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "body": "$ctrl.privateStateVars.title = $ctrl.resolve?.title ?? \"Items\";\n\n$ctrl.privateStateVars.search.property = $ctrl.resolve?.search?.property;\n$ctrl.privateStateVars.search.operation = $ctrl.resolve?.search?.operation;\n$ctrl.privateStateVars.search.placeholder = $ctrl.resolve?.search?.placeholder ?? `Search by: ${$ctrl.resolve?.search?.operation} ${$ctrl.resolve?.search?.property}`;\n$ctrl.privateStateVars.search.fn = $ctrl.resolve?.search?.fn;\n\n$ctrl.privateStateVars.assigned.columns = $ctrl.resolve?.assigned?.columns ?? [{ name: \"Name\", valueKey: \"Name\" }];\n$ctrl.privateStateVars.assigned.items = angular.copy($ctrl.resolve?.assigned?.items) ?? [];\n$ctrl.privateStateVars.assigned.ids = new Set ($ctrl.privateStateVars.assigned.items.map(i => i.Id));\n$ctrl.privateStateVars.assigned.results = angular.copy($ctrl.resolve?.assigned?.items) ?? [];\n$ctrl.privateStateVars.assigned.pagination.totalPages = $ctrl.privateStateVars.assigned.items.length > 0 ? Math.ceil($ctrl.privateStateVars.assigned.items.length / 25) : 1;\n\n$ctrl.privateStateVars.unassigned.columns = $ctrl.resolve?.unassigned?.columns ?? [{ name: \"Name\", valueKey: \"Name\" }];\n$ctrl.privateStateVars.unassigned.items = angular.copy($ctrl.resolve?.unassigned?.items) ?? [];\n$ctrl.privateStateVars.unassigned.results = angular.copy($ctrl.resolve?.unassigned?.items) ?? [];\n$ctrl.privateStateVars.unassigned.pagination.totalPages = $ctrl.resolve?.unassigned?.pagination?.totalPages > 0 ? $ctrl.resolve?.unassigned?.pagination?.totalPages  : 1;\n$ctrl.privateStateVars.unassigned.pagination.fn = $ctrl.resolve?.unassigned?.pagination?.fn;",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": false,
+      "name": "onInit",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "privateStateVars",
+      "properties": [
+        {
+          "description": "",
+          "name": "title",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "assigned",
+          "properties": [
+            {
+              "description": "",
+              "name": "query",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "results",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "items",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "ids",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "pagination",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "currentPage",
+                  "type": "property",
+                  "value": "1"
+                },
+                {
+                  "description": "",
+                  "name": "totalPages",
+                  "type": "property",
+                  "value": "1"
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "unassigned",
+          "properties": [
+            {
+              "description": "",
+              "name": "query",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "results",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "pagination",
+              "properties": [
+                {
+                  "description": "",
+                  "name": "currentPage",
+                  "type": "property",
+                  "value": "1"
+                },
+                {
+                  "description": "",
+                  "name": "totalPages",
+                  "type": "property",
+                  "value": "1"
+                },
+                {
+                  "body": "",
+                  "description": "",
+                  "invokeOnLoad": false,
+                  "isAsync": false,
+                  "name": "fn",
+                  "parameters": [
+                    "currentPage"
+                  ],
+                  "returnType": {
+                    "name": "any"
+                  },
+                  "type": "method",
+                  "watch": []
+                }
+              ],
+              "type": "object"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "search",
+          "properties": [
+            {
+              "description": "",
+              "name": "property",
+              "type": "property",
+              "value": ""
+            },
+            {
+              "description": "",
+              "name": "operation",
+              "type": "property",
+              "value": ""
+            },
+            {
+              "description": "",
+              "name": "placeholder",
+              "type": "property",
+              "value": ""
+            },
+            {
+              "body": "",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "fn",
+              "parameters": [],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "$ctrl.applied = true;\n$ctrl.resolve.assignedItems = $ctrl.privateStateVars.assigned.items;\n$ctrl.resolve.assignedIds = $ctrl.privateStateVars.assigned.ids;\n$ctrl.onClose()",
+          "description": "This function is called when OK button is clicked.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onApply",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.applied = false;\n$ctrl.onClose()",
+          "description": "This function is called when Cancel button is clicked.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onCancel",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.privateStateVars.assigned.items.push(item);\n$ctrl.privateStateVars.assigned.ids.add(item.Id);\n\nif ($ctrl.helpers.shouldAddBack(item, $ctrl.privateStateVars.assigned.query)) {\n    $ctrl.privateStateVars.assigned.results.push(item);\n}\n\n$ctrl.helpers._updatePageCount($ctrl.privateStateVars.assigned);\n\nconst unassignedResults = $ctrl.privateStateVars.unassigned.results;\nconst idx = unassignedResults.findIndex(x => x.Id === item.Id);\n\nif (idx > -1) {\n    unassignedResults.splice(idx, 1);\n}\n\nconst unassignedResultsLength = unassignedResults.length;\nconst unassignedCurrentPage = $ctrl.privateStateVars.unassigned.pagination.currentPage;\nlet pageToRequest = 1;\n\nif (unassignedResultsLength > 0) {\n    pageToRequest = unassignedCurrentPage;\n} else {\n    if (unassignedCurrentPage > 1) {\n        pageToRequest = unassignedCurrentPage - 1;\n    }\n}\n\n$ctrl.handlers.onUnassignedPageChange(pageToRequest);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onAssign",
+          "parameters": [
+            "item"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const idx = $ctrl.privateStateVars.assigned.items.findIndex(x => x.Id === item.Id);\n\nif (idx > -1) {\n    $ctrl.privateStateVars.assigned.items.splice(idx, 1);\n    $ctrl.handlers.onAssignedSearch();\n}\n\n$ctrl.privateStateVars.assigned.ids.delete(item.Id);\n\nif ($ctrl.helpers.shouldAddBack(item, $ctrl.privateStateVars.unassigned.query)) {\n    $ctrl.privateStateVars.unassigned.results.push(item);\n    $ctrl.handlers.onUnassignedPageChange($ctrl.privateStateVars.unassigned.pagination.currentPage);\n}\n\n$ctrl.helpers._updatePageCount($ctrl.privateStateVars.assigned);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onUnassign",
+          "parameters": [
+            "item"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const query = $ctrl.privateStateVars.assigned.query ?? \"\";\n\nif (query.trim().length > 0) {\n  $ctrl.privateStateVars.assigned.results = $ctrl.privateStateVars.assigned.items.filter(item =>\n    item[$ctrl.privateStateVars.search.property].toLowerCase().includes(query.trim().toLowerCase())\n  );\n} else {\n  $ctrl.privateStateVars.assigned.results = [...$ctrl.privateStateVars.assigned.items];\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onAssignedSearch",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.privateStateVars.unassigned.pagination.fn(currentPage, $ctrl.privateStateVars.unassigned.query, $ctrl.privateStateVars.assigned).then(res => {\n    const { entities, metadata: { currentPage, pageCount } } = res;\n    $ctrl.privateStateVars.unassigned.results = entities.filter(item => !$ctrl.privateStateVars.assigned.ids.has(item.Id));\n    $ctrl.privateStateVars.unassigned.pagination.currentPage = currentPage || 1;\n    $ctrl.privateStateVars.unassigned.pagination.totalPages = pageCount || 1;\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onUnassignedPageChange",
+          "parameters": [
+            "currentPage"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.privateStateVars.search.fn($ctrl.privateStateVars.unassigned.query, $ctrl.privateStateVars.assigned).then(res => {\n    const { entities, metadata: { pageCount } } = res;\n    $ctrl.privateStateVars.unassigned.results = entities.filter(item => !$ctrl.privateStateVars.assigned.ids.has(item.Id));\n    $ctrl.privateStateVars.unassigned.pagination.currentPage = 1;\n    $ctrl.privateStateVars.unassigned.pagination.totalPages = pageCount > 0 ? pageCount : 1;\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onUnassignedSearch",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const targetRow = $ctrl.privateStateVars.assigned.items.find(i => row.Id === i.Id);\n\nif (targetRow) {\n    targetRow[columnName] = newValue\n};",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onCellEdit",
+          "parameters": [
+            "row",
+            "columnName",
+            "newValue",
+            "oldValue"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "if (!query) return true;\n\nconst textToMatch = (item[$ctrl.privateStateVars.search.property] ?? \"\").toLowerCase();\nreturn textToMatch.includes(query.toLowerCase());",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "shouldAddBack",
+          "parameters": [
+            "item",
+            "query"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const targetArray = targetObj.results;\n\nif (!Array.isArray(targetArray)) {\n    console.error(\"Failed to update page count for assignment modal.\");\n    return;\n}\n\nconst ITEMS_PER_PAGE = 25;\nconst arrLength = targetArray.length || 1;\n\ntargetObj.pagination.totalPages = Math.ceil(arrLength / ITEMS_PER_PAGE);\n\nif (targetObj.pagination.currentPage > targetObj.pagination.totalPages) {\n    targetObj.pagination.currentPage -= 1;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_updatePageCount",
+          "parameters": [
+            "targetObj"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    }
+  ]
+}

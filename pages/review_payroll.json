@@ -1,0 +1,2296 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "displayExpression": "!$ctrl.isGettingEntities",
+              "expressions": [
+                {
+                  "expression": "[{\n        label: $ctrl.pageParameters.origin === \"dashboard\" ? \"Dashboard\" :\n            \"Payroll Processing\",\n        active: false,\n        onClick: \"link\",\n        link: {\n            type: \"state\",\n            state: $ctrl.pageParameters.origin,\n            parameters: {}\n        },\n        openIn: \"current-window\"\n    },\n    {\n        label: $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.DisplayName,\n        active: false,\n        onClick: \"link\",\n        openIn: \"current-window\"\n    }\n]",
+                  "to": "links"
+                }
+              ],
+              "name": "Breadcrumbs",
+              "nodeName": "bln-breadcrumbs",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "\"Review \" + $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.DisplayName"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "export-report",
+                      "displayExpression": "$ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status !== \"PROCESSED\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Preview Report\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.exportReport()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.isExportingReport",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.isExportingReport",
+                          "to": "showLoading"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "assign",
+                      "displayExpression": "$ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status !== \"PROCESSED\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Override Pay Components\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.activeAssignmentView = !$ctrl.activeAssignmentView",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "calculate",
+                      "displayExpression": "$ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status !== \"PROCESSED\"",
+                      "expressions": [
+                        {
+                          "expression": "\"Generate Payslips\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.runPayroll()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "[\"PROCESSED\", \"PROCESSING\"].includes($ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status)\n||\n$ctrl.payrollRunReview.PayrollRunReview.PayrollRun.TotalEmployees < 1",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "(\n    $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status === \"PROCESSED\"\n    &&\n    \"Payslips already generated\"\n)\n||\n(\n    $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status === \"PROCESSING\"\n    &&\n    \"Payslips already generating\"\n)\n|| \n(\n    $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.TotalEmployees < 1\n    &&\n    \"No employees found to include in Payroll Run\"\n) \n|| \nundefined",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "view-report",
+                      "displayExpression": "$ctrl.payrollRunReview.PayrollRunReview.PayrollRun.Status === \"PROCESSED\"",
+                      "expressions": [
+                        {
+                          "expression": "\"View Report\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.$state.go(\"payroll_report\", { id: $ctrl.pageParameters.id, origin: $ctrl.pageParameters.origin })",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "displayExpression": "$ctrl.globalSelectedCompany.companyId",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting || $ctrl.isGettingEntities",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.getAllEntities($ctrl.storedTab, undefined, \"reload\")",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "main-header-container"
+              ],
+              "comments": "section-header",
+              "displayExpression": "!$ctrl.isGettingEntities",
+              "layout": {},
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.entityUiStateService.initializationError"
+                }
+              ],
+              "classList": [],
+              "comments": "initialization-error",
+              "displayExpression": "$ctrl.entityUiStateService.initializationError",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [],
+                      "layout": {},
+                      "name": "Spinner",
+                      "nodeName": "bln-spinner",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-spinner-size",
+                          "value": "5rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "spinner",
+                  "displayExpression": "$ctrl.isGettingEntities",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "justify-content",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "align-items",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "height",
+                      "value": "100%"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [
+                        {
+                          "expression": "[{\n        label: \"Summary\",\n        closable: false\n    },\n    {\n        label: \"Calculation Preview\",\n        closable: false\n    },\n    {\n        label: \"Alerts\",\n        closable: false\n    },\n    {\n        label: \"Pay Components\",\n        closable: false\n    },\n    {\n        label: \"Payslip Previews\",\n        closable: false\n    }\n]",
+                          "to": "tabItems"
+                        },
+                        {
+                          "expression": "$ctrl.storedTab",
+                          "to": "selectedTab"
+                        },
+                        {
+                          "expression": "$ctrl.setSection(selectedTab)",
+                          "to": "onSelectedTabChange"
+                        }
+                      ],
+                      "name": "Tab Bar",
+                      "nodeName": "bln-tab-bar",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "evaluate": false,
+                              "name": "text",
+                              "textContent": ""
+                            },
+                            {
+                              "children": [
+                                {
+                                  "evaluate": false,
+                                  "name": "text",
+                                  "textContent": "INFO"
+                                }
+                              ],
+                              "classList": [],
+                              "name": "strong"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "evaluate": false,
+                                  "name": "text",
+                                  "textContent": "This Payroll Run Review will encash Leave Credits when processed."
+                                }
+                              ],
+                              "classList": [],
+                              "name": "span"
+                            }
+                          ],
+                          "classList": [],
+                          "comments": "encash-accrual-balances-info",
+                          "displayExpression": "$ctrl.encashAccrualBalances",
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "display",
+                              "value": "flex"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "justify-content",
+                              "value": "space-between"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "align-items",
+                              "value": "center"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "padding",
+                              "value": "1rem"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "background-color",
+                              "value": "#030712"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "color",
+                              "value": "#ffffff"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "border-radius",
+                              "value": "1rem"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": [
+                                    {
+                                      "property": "core",
+                                      "value": ""
+                                    }
+                                  ],
+                                  "children": [],
+                                  "classList": [],
+                                  "expressions": [
+                                    {
+                                      "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"key\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'WARN'\",\n            propertyName: \"color\",\n            value: \"#fe5000\"\n        }, {\n            condition: \"value === 'INFO'\",\n            propertyName: \"color\",\n            value: \"#0f4c81\"\n        }, {\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"value\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                                      "to": "columns"
+                                    },
+                                    {
+                                      "expression": "false",
+                                      "to": "showTableHeader"
+                                    },
+                                    {
+                                      "expression": "false",
+                                      "to": "enableSorting"
+                                    },
+                                    {
+                                      "expression": "$ctrl.sectionData",
+                                      "to": "data"
+                                    }
+                                  ],
+                                  "name": "Table",
+                                  "nodeName": "bln-table",
+                                  "styles": [
+                                    {
+                                      "enabled": true,
+                                      "property": "--bln-table-height",
+                                      "value": "100%"
+                                    },
+                                    {
+                                      "enabled": true,
+                                      "property": "--bln-table-secondary-bg-color",
+                                      "value": "#f9f9f9"
+                                    }
+                                  ],
+                                  "type": "core-component"
+                                }
+                              ],
+                              "classList": [
+                                "table-container"
+                              ],
+                              "name": "div"
+                            }
+                          ],
+                          "classList": [
+                            "table-pagination-container"
+                          ],
+                          "comments": "section",
+                          "layout": {},
+                          "name": "div"
+                        }
+                      ],
+                      "classList": [
+                        "filter-table-pagination-container"
+                      ],
+                      "comments": "info-tables",
+                      "displayExpression": "$ctrl.storedTab === 1 || $ctrl.storedTab === 2 || $ctrl.storedTab === 3",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "padding",
+                          "value": "1rem"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "attributes": [
+                                {
+                                  "property": "core",
+                                  "value": ""
+                                }
+                              ],
+                              "children": [],
+                              "classList": [],
+                              "comments": "keyword-filter",
+                              "displayExpression": "true",
+                              "expressions": [
+                                {
+                                  "expression": "\"\"",
+                                  "to": "label"
+                                },
+                                {
+                                  "expression": "\"Filter\"",
+                                  "to": "placeholder"
+                                },
+                                {
+                                  "expression": "$ctrl.filterTarget",
+                                  "to": "value"
+                                },
+                                {
+                                  "expression": "$ctrl.handleFilterData()",
+                                  "to": "onValueChange"
+                                },
+                                {
+                                  "expression": "false",
+                                  "to": "disabled"
+                                },
+                                {
+                                  "expression": "500",
+                                  "to": "debounceDelay"
+                                },
+                                {
+                                  "expression": "\"search\"",
+                                  "to": "type"
+                                }
+                              ],
+                              "formControl": {
+                                "modelName": "value"
+                              },
+                              "name": "Text Input",
+                              "nodeName": "bln-text-input",
+                              "type": "core-component"
+                            }
+                          ],
+                          "classList": [],
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "display",
+                              "value": "flex"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "attributes": [
+                                {
+                                  "property": "core",
+                                  "value": ""
+                                }
+                              ],
+                              "children": [],
+                              "classList": [],
+                              "expressions": [
+                                {
+                                  "expression": "$ctrl.filteredTableData",
+                                  "to": "data"
+                                },
+                                {
+                                  "expression": "$ctrl.storedTab === 4 ? $ctrl.setSelectedEntity(row) : $ctrl.setPaySlip(row.PaySlipPreview)",
+                                  "to": "onSelection"
+                                },
+                                {
+                                  "expression": "true",
+                                  "to": "resizableColumns"
+                                },
+                                {
+                                  "expression": "true",
+                                  "to": "enablePagination"
+                                },
+                                {
+                                  "expression": "$ctrl.currentPage",
+                                  "to": "currentPage"
+                                },
+                                {
+                                  "expression": "false",
+                                  "to": "enableFiltering"
+                                },
+                                {
+                                  "expression": "false",
+                                  "to": "enableCheckboxes"
+                                },
+                                {
+                                  "expression": "[{\n        name: \"First Name\",\n        hide: false,\n        valueKey: 'FirstName',\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"js-expression\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: ''\n    },\n    {\n        name: \"Last Name\",\n        hide: false,\n        valueKey: 'LastName',\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"js-expression\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: ''\n    },\n    {\n        name: \"Department\",\n        hide: false,\n        valueKey: 'Position.Department',\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"js-expression\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: ''\n    },\n    {\n        name: \"Title\",\n        hide: false,\n        valueKey: 'Position.Title',\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"js-expression\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: ''\n    },\n    {\n        name: \"Type\",\n        hide: false,\n        valueKey: 'WorkerType',\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"js-expression\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: [],\n        cellTemplateJsExpression: ''\n    },\n    {\n        name: \"Employment Start Date\",\n        hide: false,\n        valueKey: 'EmploymentInfo.EmploymentStartDate',\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        resizable: false,\n        cellTemplate: \"default\",\n        cellTooltip: '',\n        cellConditionalStyle: [],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                                  "to": "columns"
+                                },
+                                {
+                                  "expression": "true",
+                                  "to": "enableRowSelection"
+                                }
+                              ],
+                              "name": "Table",
+                              "nodeName": "bln-table",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "--bln-table-height",
+                                  "value": "100%"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "--bln-table-secondary-bg-color",
+                                  "value": "#f9f9f9"
+                                }
+                              ],
+                              "type": "core-component"
+                            }
+                          ],
+                          "classList": [
+                            "table-container"
+                          ],
+                          "name": "div"
+                        },
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "displayExpression": "$ctrl.filteredTableData.length > 0",
+                          "expressions": [
+                            {
+                              "expression": "$ctrl.currentPage",
+                              "to": "currentPage"
+                            },
+                            {
+                              "expression": "Math.ceil($ctrl.filteredTableData.length / 25)",
+                              "to": "totalPages"
+                            }
+                          ],
+                          "name": "Pagination",
+                          "nodeName": "bln-pagination",
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [
+                        "table-pagination-container"
+                      ],
+                      "comments": "worker-table",
+                      "displayExpression": "$ctrl.storedTab === 4 || $ctrl.storedTab === 5",
+                      "layout": {},
+                      "name": "div"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "tabs-sections",
+                  "displayExpression": "!$ctrl.isGettingEntities",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "main-body-container"
+              ],
+              "displayExpression": "!$ctrl.entityUiStateService.initializationError",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "table",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "height": "",
+              "mainSize": "100%",
+              "minimumHeight": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "padding",
+              "value": "1rem"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "pay-component-tab-bar",
+              "expressions": [
+                {
+                  "expression": "[{\n        label: \"Worker\",\n        closable: false\n    },\n    {\n        label: \"Position\",\n        closable: false\n    },\n    {\n        label: \"Taxes\",\n        closable: false\n    },\n    {\n        label: \"Leave Credits\",\n        closable: false\n    }\n]",
+                  "to": "tabItems"
+                },
+                {
+                  "expression": "$ctrl.handlePayComponentTabChange(selectedTab)",
+                  "to": "onSelectedTabChange"
+                },
+                {
+                  "expression": "$ctrl.payComponentSelectedTab",
+                  "to": "selectedTab"
+                }
+              ],
+              "name": "Tab Bar",
+              "nodeName": "bln-tab-bar",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.payComponentSelectedTab === 3 ? \"Taxes\" :\n    $ctrl.payComponentSelectedTab === 4 ? \"Leave Credits\" :\n        [1, 2].includes($ctrl.payComponentSelectedTab) ? (\n            $index === 0 ? \"Earnings\" :\n                $index === 1 ? \"Benefits\" :\n                    \"\"\n        ) :\n            \"\""
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "entity-name",
+                      "name": "h4"
+                    }
+                  ],
+                  "classList": [
+                    "right-panel-header-container"
+                  ],
+                  "comments": "pay-components-header",
+                  "layout": {},
+                  "name": "div"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "evaluate": true,
+                                      "name": "text",
+                                      "textContent": "key"
+                                    }
+                                  ],
+                                  "classList": [],
+                                  "comments": "key",
+                                  "name": "div",
+                                  "styles": [
+                                    {
+                                      "enabled": true,
+                                      "property": "text-align",
+                                      "value": "right"
+                                    },
+                                    {
+                                      "enabled": true,
+                                      "property": "color",
+                                      "value": "#000"
+                                    },
+                                    {
+                                      "enabled": true,
+                                      "property": "font-weight",
+                                      "value": "bold"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "evaluate": true,
+                                      "name": "text",
+                                      "textContent": "value === true ? \"YES\" : value === false ? \"NO\" : value"
+                                    }
+                                  ],
+                                  "classList": [],
+                                  "comments": "value",
+                                  "conditionalClasses": [
+                                    {
+                                      "className": "status-indicator",
+                                      "condition": "value === true || value === false"
+                                    },
+                                    {
+                                      "className": "yes",
+                                      "condition": "value === true"
+                                    },
+                                    {
+                                      "className": "no",
+                                      "condition": "value === false"
+                                    }
+                                  ],
+                                  "displayExpression": "key !== \"TaxSchedules\"",
+                                  "name": "div",
+                                  "styles": [
+                                    {
+                                      "enabled": true,
+                                      "property": "text-align",
+                                      "value": "left"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "attributes": [
+                                    {
+                                      "property": "core",
+                                      "value": ""
+                                    }
+                                  ],
+                                  "children": [],
+                                  "classList": [],
+                                  "comments": "view-tax-schedules",
+                                  "displayExpression": "key === \"TaxSchedules\"",
+                                  "expressions": [
+                                    {
+                                      "expression": "\"View\"",
+                                      "to": "label"
+                                    },
+                                    {
+                                      "expression": "\"primary\"",
+                                      "to": "type"
+                                    },
+                                    {
+                                      "expression": "$ctrl.handleViewTaxSchedule(value)",
+                                      "to": "onClick"
+                                    }
+                                  ],
+                                  "name": "Button",
+                                  "nodeName": "bln-button",
+                                  "type": "core-component"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "line",
+                              "displayExpression": "(\n    key !== \"TaxSchedules\"\n    ||\n    (key === \"TaxSchedules\" && value.length > 0)\n)\n&&\n(\n    key !== \"Name\"\n    ||\n    $ctrl.payComponentSelectedTab !== 4\n)",
+                              "name": "div",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "display",
+                                  "value": "flex"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "justify-content",
+                                  "value": "space-between"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "align-items",
+                                  "value": "center"
+                                }
+                              ]
+                            },
+                            {
+                              "children": [],
+                              "classList": [],
+                              "displayExpression": "(\n    key !== \"TaxSchedules\"\n    ||\n    (key === \"TaxSchedules\" && value.length > 0)\n)\n&&\n(\n    key !== \"Name\"\n    ||\n    $ctrl.payComponentSelectedTab !== 4\n)",
+                              "name": "hr"
+                            }
+                          ],
+                          "classList": [],
+                          "iterate": {
+                            "array": "payComponent",
+                            "variable": "(key, value)"
+                          },
+                          "name": "div"
+                        }
+                      ],
+                      "classList": [],
+                      "iterate": {
+                        "array": "payComponents",
+                        "variable": "payComponent"
+                      },
+                      "layout": {
+                        "cell": {
+                          "expanded": "false",
+                          "label": "payComponent.Name",
+                          "type": "accordion-folder"
+                        }
+                      },
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "font-weight",
+                          "value": "normal"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "pay-component",
+                  "layout": {
+                    "container": {
+                      "allowMultiple": true,
+                      "items": [],
+                      "type": "accordion"
+                    }
+                  },
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "height",
+                      "value": "fit-content"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "width",
+                      "value": "100% !important"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-style",
+                      "value": "solid"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-width",
+                      "value": "thin"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "border-color",
+                      "value": "#cecece"
+                    }
+                  ]
+                }
+              ],
+              "classList": [],
+              "comments": "pay-components",
+              "displayExpression": "payComponents && payComponents.length > 0",
+              "iterate": {
+                "array": "$ctrl.displayedPayComponents",
+                "variable": "payComponents"
+              },
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "right-panel-container"
+          ],
+          "comments": "pay-components-accrual-balances",
+          "displayExpression": "!(!$ctrl.selectedEntityName || $ctrl.isViewingPayslip)",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "50%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.selectedPayslip.PayPeriodDisplayName"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "pay-period-display-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.parseDate($ctrl.selectedPayslip.PayPeriodStartDate).split(\" \")[0] + \" - \" + $ctrl.parseDate($ctrl.selectedPayslip.PayPeriodEndDate).split(\" \")[0]"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "pay-period-start-end",
+                      "name": "h4",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0 0 1rem 0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "right-panel-header",
+                  "name": "div"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "ng-bind-html",
+                          "value": "$ctrl.$sce.trustAsHtml($ctrl.selectedEntityDetails)"
+                        }
+                      ],
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.selectedEntityDetails"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "entity-details",
+                      "elementId": "details",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "background-color",
+                          "value": "#ffffff"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                }
+              ],
+              "classList": [],
+              "elementId": "info-panel",
+              "name": "div"
+            }
+          ],
+          "classList": [
+            "right-panel-container"
+          ],
+          "comments": "pay-slip",
+          "displayExpression": "$ctrl.selectedPayslipName",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "75%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [],
+          "classList": [
+            "form"
+          ],
+          "displayExpression": "$ctrl.activeAssignmentView",
+          "expressions": [
+            {
+              "expression": "[\n    \"Select Workers to assign \" + ($ctrl.selectedPayComponent ? $ctrl\n        .selectedPayComponent.Name : \"Pay Component\") + \" to.\",\n    \"Workers that will be assigned or are currently assigned will be highlighted.\",\n    \"On that note, Workers that are not highlighted will have \" + ($ctrl\n        .selectedPayComponent ? $ctrl.selectedPayComponent.Name :\n        \"Pay Component\") + \" removed/unassigned.\",\n    \"Override Assignments are only TEMPORARY and will only apply for this Payroll Run. Future Payroll Runs will reference the Pay Components assigned in Payroll Management > Position and People Management > Pay Components.\"\n]",
+              "to": "descriptions"
+            },
+            {
+              "expression": "\"Assign \" + ($ctrl.selectedPayComponent ? $ctrl.selectedPayComponent.Name : \"Pay Component\") + \" to Workers\"",
+              "to": "header"
+            },
+            {
+              "expression": "$ctrl.setAssignedWorkers(undefined, \"cancel\")",
+              "to": "cancelOnClick"
+            },
+            {
+              "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting",
+              "to": "cancelDisabled"
+            },
+            {
+              "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting",
+              "to": "cancelShowLoading"
+            },
+            {
+              "expression": "$ctrl.isInserting || $ctrl.isUpdating || $ctrl.isDeleting || $ctrl.isAssigning",
+              "to": "assignmentDisabled"
+            },
+            {
+              "expression": "$ctrl.assignedToWorkers",
+              "to": "selectedRows"
+            },
+            {
+              "expression": "$ctrl.processAssignment()",
+              "to": "assignmentOnClick"
+            },
+            {
+              "expression": "true",
+              "to": "displayDropdown"
+            },
+            {
+              "expression": "[{\n        label: \"Earnings\",\n        onClick: \"function\",\n        menuItems: $ctrl.earnings\n        .filter(earning => earning.CompanyId === $ctrl.globalSelectedCompany.companyId)\n        .map(earning => {\n            earning.Classification = \"Earnings\";\n            return {\n                label: earning.Name,\n                onClick: \"function\",\n                function: () => $ctrl.setAssignedWorkers(earning)\n            }\n        })\n\n    },\n    {\n        label: \"Benefits\",\n        onClick: \"function\",\n        menuItems: $ctrl.benefits\n        .filter(benefit => benefit.CompanyId === $ctrl.globalSelectedCompany.companyId)\n        .map(benefit => {\n            benefit.Classification = \"Benefits\";\n            return {\n                label: benefit.Name,\n                onClick: \"function\",\n                function: () => $ctrl.setAssignedWorkers(benefit)\n            }\n        })\n    },\n]",
+              "to": "dropdownMenuItems"
+            },
+            {
+              "expression": "$ctrl.selectedPayComponent ? $ctrl.selectedPayComponent.Name : \"Select Pay Component to Assign\"",
+              "to": "dropdownLabel"
+            },
+            {
+              "expression": "($ctrl.isAssignmentTableDisplayed && $ctrl.selectedPayComponent) || false",
+              "to": "displayTable"
+            },
+            {
+              "expression": "$ctrl.isAssignmentTableLoading && $ctrl.selectedPayComponent",
+              "to": "tableLoading"
+            },
+            {
+              "expression": "($ctrl.selectedPayComponent && $ctrl.isAssignmentTableDisplayed) || false",
+              "to": "displayPagination"
+            },
+            {
+              "expression": "($ctrl.isAssignmentTableDisplayed && $ctrl.selectedPayComponent) || false",
+              "to": "displayAssignButton"
+            },
+            {
+              "expression": "$ctrl.selectedPayComponent",
+              "to": "displayCalculateButton"
+            },
+            {
+              "expression": "$ctrl.handleAssignmentFormCalculateButtonClick()",
+              "to": "calculateOnClick"
+            },
+            {
+              "expression": "$ctrl.selectedPayComponent",
+              "to": "displayInformationTable"
+            },
+            {
+              "expression": "$ctrl.formatPayComponentInformationForDisplay()",
+              "to": "informationTableData"
+            },
+            {
+              "expression": "!$ctrl.hasModifiedPayrollRunReview || $ctrl.hasRecentlyRecalculated",
+              "to": "calculateDisabled"
+            },
+            {
+              "expression": "$ctrl.isAssigning",
+              "to": "assignmentShowLoading"
+            },
+            {
+              "expression": "$ctrl.formatPayComponentsForAssignment()",
+              "to": "tableData"
+            },
+            {
+              "expression": "$ctrl.assignmentTableColumns",
+              "to": "tableColumns"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "100%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "assignment-form-component",
+          "ownerId": "6b07c72a48cd88e32d307a88",
+          "ownerType": "app",
+          "resourceIdentity": "components/assignment-form-component",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "50%"
+            }
+          ],
+          "type": "custom-component"
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "layout": {
+        "container": {
+          "crossAxisAlignment": "stretch",
+          "gap": "0rem",
+          "items": [],
+          "mainAxisAlignment": "center",
+          "orientation": "row",
+          "type": "box"
+        }
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    }
+  ],
+  "name": "review_payroll",
+  "params": {
+    "id": "",
+    "jobId": "",
+    "origin": ""
+  },
+  "type": "page",
+  "url": "/review_payroll/:id?jobId&origin",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "name": "$notificationManager",
+      "type": "service"
+    },
+    {
+      "name": "$sce",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "selectedEntityName",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedEntityDetails",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "selectedEntity",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "// Main\nif (!row) {\n    $ctrl.selectedEntity = null;\n    $ctrl.selectedEntityName = null;\n    $ctrl.selectedEntityDetails = \"\";\n\n    if (document.getElementById(\"details\")) document.getElementById(\"details\").innerHTML = null;\n    return;\n}\n\n$ctrl.selectedEntity = row;\n$ctrl.selectedEntityDetails = \"\";\n\n[\n    row.Earnings,\n    row.Benefits,\n    row.Taxes,\n    row.AccrualBalance\n].forEach((payComponentsArr) => {\n    mapIdsToNames(payComponentsArr);\n});\n\nconst { workerPayComponents: workerEarnings, positionPayComponents: positionEarnings } = splitByOrigin(row.Earnings);\nconst { workerPayComponents: workerBenefits, positionPayComponents: positionBenefits } = splitByOrigin(row.Benefits);\n\n$ctrl.payComponents = {\n    workerEarnings,\n    workerBenefits,\n    positionEarnings,\n    positionBenefits,\n    taxes: [row.Taxes]\n}\n\n$ctrl.workerAccrualBalances = [[...row.AccrualBalance]]\n$ctrl.workerAccrualBalances.forEach(accrualBalanceArrays => {\n    accrualBalanceArrays.forEach(accrualBalance => {\n        accrualBalance.Name = accrualBalance.Accrual;\n        \n        Object.entries(accrualBalance).forEach(([key, value]) => {\n            if (typeof value === \"object\") accrualBalance[key] = value.Name;\n            if (accrualBalance[key] === undefined) delete accrualBalance[key];\n        });\n    });\n});\n\n$ctrl.handlePayComponentTabChange($ctrl.payComponentSelectedTab)\nsetEntityName();\n// End of Main\n\n// Functions\nfunction setEntityName() {\n    for (const key in row) {\n        if ((row.hasOwnProperty(key) && key.toLowerCase().includes(\"name\")) || ((row.hasOwnProperty(key) && key.toLowerCase().includes(\"title\")))) {\n            $ctrl.selectedEntityName = row.FirstName + \" \" + row.LastName;\n            break;\n        }\n    }\n}\n\nfunction mapIdsToNames(payComponentArr) {\n    payComponentArr.forEach((payComponent) => {\n        Object.entries(payComponent).forEach(([key, value]) => {\n            if (typeof payComponent[key] === \"object\") {\n                if (key.includes(\"CalculationMethod\")) {\n                    payComponent[key] = (payComponent[key].Id === 1)\n                        ? \"FLAT\"\n                        : \"PERCENT\";\n                }\n                if (key.includes(\"Currency\")) {\n                    payComponent[key] = $ctrl.currencies.find(currency => currency?.Id === value.Id)?.CurrencyName ?? payComponent[key];\n                } else if (key.includes(\"Accrual\")) {\n                    payComponent[key] = $ctrl.accruals.find(accrual => accrual?.Id === value.Id)?.Name ?? payComponent[key];\n                }\n            }\n        });\n    });\n}\n\nfunction splitByOrigin(payComponentArr) {\n    return payComponentArr.reduce((acc, payComponent) => {\n        if (payComponent.Origin === \"WORKER\") {\n            acc.workerPayComponents.push(payComponent);\n        } else {\n            acc.positionPayComponents.push(payComponent);\n        }\n        return acc;\n    }, { workerPayComponents: [], positionPayComponents: [] });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setSelectedEntity",
+      "parameters": [
+        "row"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const date = new Date(dateString);\n\nconst pad = (num, size) => String(num).padStart(size, '0');\n\nconst year = date.getUTCFullYear();\nconst month = pad(date.getUTCMonth() + 1, 2);\nconst day = pad(date.getUTCDate(), 2);\nconst hours = pad(date.getUTCHours(), 2);\nconst minutes = pad(date.getUTCMinutes(), 2);\nconst seconds = pad(date.getUTCSeconds(), 2);\nconst milliseconds = pad(date.getUTCMilliseconds(), 3);\n\nreturn `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "parseDate",
+      "parameters": [
+        "dateString"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "switch (result) {\n    case \"OK\":\n        $ctrl.$notificationManager.show(message, {\n            delay: 3500,\n            icon: 'check',\n            color: 'success',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n\n    case \"INFO\":\n        $ctrl.$notificationManager.show(message, {\n            delay: 2500,\n            icon: 'info-circle',\n            color: 'primary',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n\n    case \"WARNING\":\n        $ctrl.$notificationManager.show(message, {\n            delay: 2500,\n            icon: 'exclamation-triangle',\n            color: 'warning',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n\n    default:\n        $ctrl.$notificationManager.show(message, {\n            delay: 5000,\n            icon: 'exclamation-circle',\n            color: 'danger',\n            dismissible: true,\n            animation: 'fade'\n        });\n        break;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "toast",
+      "parameters": [
+        "message",
+        "result"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const limit = 1000;\nconst offset = 0;\n\nreturn $ctrl.payrollAppApi[endpoint](\n    { limit: limit, offset: offset },\n    { headers: $ctrl.authCookies.setHeaders() }\n)\n    .then((result) => result.data[entity])\n    .catch((reason) => {\n        $ctrl.utils.toast(reason.data.message, reason.data.result);\n        throw reason;\n    });\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getData",
+      "parameters": [
+        "endpoint",
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const result = {};\nfor (const key in form) {\n    if (form.hasOwnProperty(key)) {\n        const titleCaseKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n        if ((/^(is|need|with|can|allow|active|salaried|enabled|final)/i.test(key) || key.toLowerCase() === \"employercontribution\") && method === \"POST\") {\n            result[titleCaseKey] = form[key] || false;\n        } else if (key.includes(\"Date\") && form[key]) {\n            result[titleCaseKey] = $ctrl.parseDate(form[key]);\n        } else {\n            result[titleCaseKey] = form[key];\n        }\n    }\n}\nreturn result;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "buildRequestBody",
+      "parameters": [
+        "form",
+        "method"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (method === \"POST\") $ctrl.isInserting = true;\nif (method === \"PUT\") $ctrl.isUpdating = true;\n\n$ctrl.payrollAppApi[endpoint](\n    {\n        body: {\n            ...$ctrl.buildRequestBody(form, method),\n            ...(method === \"PUT\" ? { \"Id\": $ctrl.selectedEntity.Id } : {})\n        }\n    },\n    { headers: $ctrl.authCookies.setHeaders() }\n).then(result => {\n    $ctrl.toast(`Successfully ${$ctrl.isInserting ? \"added\" : \"edited\"} ${entityName}`, result.data.result);\n    if ($ctrl.isInserting) $ctrl.setIsAdding();\n    if ($ctrl.isUpdating) $ctrl.setIsEditing();\n    $ctrl.getAllEntities();\n    $ctrl.resetForm(form);\n})\n    .catch(reason => {\n        $ctrl.toast(reason.data.message, reason.data.result);\n    })\n    .finally(() => {\n        if ($ctrl.isInserting) $ctrl.isInserting = false;\n        if ($ctrl.isUpdating) $ctrl.isUpdating = false;\n    });\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "sendData",
+      "parameters": [
+        "endpoint",
+        "form",
+        "entityName",
+        "method"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const toBeDeletedEntity = $ctrl.selectedEntityName;\nlet isConfirmed;\n$ctrl.isDeleting = true;\n\nawait $ctrl.$modal.open(\"delete-entity-modal\", {\n    props:\n    {\n        EntityName: $ctrl.selectedEntityName,\n        EntityDetails: $ctrl.selectedEntityDetails\n    }\n}).then(response => isConfirmed = response.result === \"ok\");\n\nif (isConfirmed) {\n        $ctrl.payrollAppApi[endpoint](\n            { id: $ctrl.selectedEntity.Id },\n            { headers: $ctrl.authCookies.setHeaders() }\n        ).then(result => {\n            $ctrl.getAllEntities();\n            $ctrl.toast(`Successfully deleted ${toBeDeletedEntity}`, result.data.result);\n            $ctrl.isDeleting = false;\n        }).catch(reason => {\n            $ctrl.toast(reason.data.message, reason.data.result);\n            $ctrl.isDeleting = false;\n        }).finally(() => {\n            $ctrl.isDeleting = false;\n        });\n\n} else {\n    $ctrl.isDeleting = false;\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "deleteData",
+      "parameters": [
+        "endpoint"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const isProd = $ctrl.$env.current.name === \"prod\";\nconst isDev = $ctrl.$env.current.name === \"dev\";\n\nif ((isProd || isDev) && !$ctrl.$cookies.get(\"id_token\")) {\n    window.location.href = \"#!/user_login\";\n    return;\n}\n\nconst usrIsAdmin = await $ctrl.authService.redirectWorker();\nif(!usrIsAdmin) return;\n\nif ((isProd || isDev) && ($ctrl.pageParameters.id === \":id\" || !$ctrl.pageParameters.id)) {\n    window.location.href = \"#!/payroll_processing\";\n    return;\n}\n\nif ($ctrl.isFirstLoad) $ctrl.authCookies.getAuthToken().then(() => $ctrl.isFirstLoad = false);\n\nlet userSelectedProceed = true;\nif ($ctrl.hasModifiedPayrollRunReview && source === \"reload\") {\n    userSelectedProceed = await $ctrl.$modal.open(\"confirm-action-modal\", {\n        title: \"Discard Pay Component Overrides?\",\n        body: \"Reloading will discard Pay Component Overrides. Proceed?\"\n    }).then(res => {\n        if (res.result === \"ok\") return true;\n        else return false;\n    })\n}\n\nif (!userSelectedProceed) return;\n\n// Resets\n$ctrl.currentPage = 1;\n$ctrl.entityUiStateService.initializationError = null;\n\n$ctrl.selectedEntityName = null;\n$ctrl.selectedEntity = null;\n$ctrl.selectedEntityDetails = null;\n\n$ctrl.workerPayslip = null;\n$ctrl.selectedPayslip = null;\n$ctrl.selectedPayslipName = null;\n$ctrl.selectedPayslipDetails = null;\n$ctrl.isViewingPayslip = null;\n\n$ctrl.filterTarget = null;\n\n$ctrl.activeAssignmentView = null;\n$ctrl.selectedPayComponent = null;\n$ctrl.originalAssignedToWorkers = null;\n$ctrl.assignedToWorkers = null;\n\nif ($ctrl.tableData) $ctrl.tableData.length = 0;\nif ($ctrl.filteredTableData) $ctrl.filteredTableData = 0;\n\n// Main\n$ctrl.isGettingEntities = true;\n\n// Append Font Awesome link if not already present\nif (!document.querySelector('link[href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css\"]')) {\n    const link = document.createElement('link');\n    link.rel = 'stylesheet';\n    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';\n    document.head.appendChild(link);\n}\n\nPromise.all([\n    !modifiedPayrollRunReview\n        ? $ctrl.payrollAppApi.lonti_app_payroll_service_payroll_run_GetCachedPayrollRunReviewJob(\n            {\n                id: $ctrl.pageParameters?.id,\n                jobId: $ctrl.pageParameters?.jobId,\n            },\n            { headers: $ctrl.authCookies.setHeaders() }\n        ).then(result => result.data)\n        : $ctrl.payrollAppApi.lonti_app_payroll_service_payroll_run_InitiateReviewPayrollRun(\n            {\n                id: $ctrl.pageParameters?.id,\n                maskSensitiveWorkerInfo: maskSensitiveWorkerInfo,\n                encashAccrualBalances: encashAccrualBalances\n            },\n            $ctrl.payrollRunReview.PayrollRunReview.Workers.map(worker => {\n                return {\n                    WorkerId: worker.Id,\n                    Earnings: worker.Earnings.map(earning => {\n                        return {\n                            Id: earning.Id,\n                            CustomAmount: earning.CustomAmount\n                        }\n                    }),\n                    Benefits: worker.Benefits.map(benefit => {\n                        return {\n                            Id: benefit.Id,\n                            CustomEmployeeAmount: benefit.CustomEmployeeAmount,\n                            CustomEmployerAmount: benefit.CustomEmployerAmount\n                        }\n                    })\n                }\n            }),\n            { headers: $ctrl.authCookies.setHeaders() }\n        ).then(result => result.data),\n    $ctrl.getData('lonti_app_payroll_service_currency_SelectAllCurrency', 'currency'),\n    $ctrl.getData('lonti_app_payroll_service_accrual_SelectAllAccrual', 'accrual'),\n    $ctrl.getData('lonti_app_payroll_service_earning_SelectAllEarning', 'earning'),\n    $ctrl.getData('lonti_app_payroll_service_benefit_SelectAllBenefit', 'benefit'),\n    $ctrl.getData('lonti_app_payroll_service_company_SelectAllCompany', 'company'),\n]).then(results => $ctrl.$timeout(() => {\n    const [\n        payrollRunReview,\n        currencies,\n        accruals,\n        earnings,\n        benefits,\n        companies,\n    ] = results;\n\n    $ctrl.dataHandlers.setContext($ctrl);\n\n    $ctrl.dataHandlers.processData(currencies, {\n        ctrlDataName: 'currencies',\n        transformBooleans: false\n    });\n\n    $ctrl.dataHandlers.processData(accruals, {\n        ctrlDataName: 'accruals',\n        transformBooleans: false\n    });\n\n    $ctrl.dataHandlers.processData(earnings, {\n        ctrlDataName: 'earnings',\n        transformBooleans: false\n    });\n\n    $ctrl.dataHandlers.processData(benefits, {\n        ctrlDataName: 'benefits',\n        transformBooleans: false\n    });\n\n    $ctrl.dataHandlers.processData(companies, {\n        mapToLabelValue: 'companyMap',\n        entityList: companies,\n        mapLabelKey: 'LegalName',\n        mapValueKey: 'Id'\n    });\n\n    $ctrl.payrollRunReview = payrollRunReview;\n    if (!modifiedPayrollRunReview) {\n        $ctrl.warnings = payrollRunReview.PayrollRunReview.Warnings;\n        $ctrl.hasModifiedPayrollRunReview = false;\n    } else $ctrl.hasRecentlyRecalculated = true;\n\n    $ctrl.processPayrollRunReview();\n\n    if (!$ctrl.globalSelectedCompany.companyMap.length > 0) $ctrl.globalSelectedCompany.companyMap = $ctrl.companyMap.map(obj => ({ ...obj }));\n    \n    const payPeriod = payrollRunReview.PayrollRunReview.PayrollRun.PayPeriod;\n    const paySchedule = payPeriod.PaySchedule;\n    const company = payPeriod.Company ?? paySchedule.Company;\n    const companyId = company?.Id;\n    const companyLegalName = company?.LegalName;\n\n    if (companyId && companyLegalName && companyId !== $ctrl.globalSelectedCompany.companyId) {\n        $ctrl.utils.toast(`Switching Payroll Run's Company (${companyLegalName})`, \"INFO\");\n        $ctrl.globalSelectedCompany.setCompany(companyId, companyLegalName);\n    }\n    \n    $ctrl.globalSelectedCompany.setMenuItems();\n    $ctrl.globalSelectedCompany.clearCompanyMenuItems();\n\n    if ($ctrl.tempStoredEntityId) {\n        const tempStoredEntity = $ctrl.payrollRunReview.PayrollRunReview.Workers.find(worker => worker.Id === $ctrl.tempStoredEntityId);\n        if ($ctrl.storedTab === 4) $ctrl.setSelectedEntity(tempStoredEntity);\n        else if ($ctrl.storedTab === 5) $ctrl.setPaySlip(tempStoredEntity.PaySlipPreview);\n\n        $ctrl.tempStoredEntityId = null;\n        tempStoredEntity = null;\n    }\n\n    $ctrl.encashAccrualBalances = $ctrl.payrollRunReviewService.getCachedJobs($ctrl.pageParameters.id)[$ctrl.pageParameters.jobId]?.encashAccrualBalances;\n    $ctrl.isGettingEntities = false;\n}, 500)).catch(error => {\n    $ctrl.entityUiStateService.initializationError = error.data?.message || \"Failed to load required data.\";\n    $ctrl.utils.toast($ctrl.entityUiStateService.initializationError, \"ERROR\");\n    console.error(\"Data loading failed:\", error);\n\n    if (isDev || isProd) {\n        $ctrl.$state.go(\"payroll_processing\");\n    }\n}).finally(() => $ctrl.isGettingEntities = false);",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "getAllEntities",
+      "parameters": [
+        "maskSensitiveWorkerInfo=true",
+        "modifiedPayrollRunReview",
+        "source",
+        "encashAccrualBalances=false"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "isFirstLoad",
+      "type": "property",
+      "value": "true"
+    },
+    {
+      "body": "$ctrl.isUpdating = true;\n\n$ctrl.sendData(\n    \"lonti_app_payroll_service_attendance_summary_UpdateAttendanceSummary\",\n    $ctrl.form,\n    $ctrl.selectedEntity.EarningCode,\n    \"PUT\"\n);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "updateEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.deleteData(\"lonti_app_payroll_service_attendance_summary_DeleteAttendanceSummary\");\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "deleteEntity",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "for (let prop in form) {\n    if (form.hasOwnProperty(prop)) {\n        form[prop] = undefined;\n    }\n}\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetForm",
+      "parameters": [
+        "form"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.isEditingAttendance) {\n    $ctrl.setIsEditing();\n    return;\n} else {\n    delete $ctrl.selectedEntity;\n    delete $ctrl.selectedEntityName;\n    delete $ctrl.selectedEntityDetails;\n}\n\n$ctrl.resetForm($ctrl.form);\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setIsAdding",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.isEditingAttendance) $ctrl.resetForm($ctrl.form);\n\n$ctrl.isEditingAttendance = !$ctrl.isEditingAttendance;\n\nif ($ctrl.isEditingAttendance) $ctrl.setInputValues();\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setIsEditing",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.selectedEntity === undefined) return;\nif (Object.keys($ctrl.selectedEntity).length === 0) return;\n\nuseExistingValuesAsInputValues($ctrl.form);\n\nfunction useExistingValuesAsInputValues(form) {\n    const obj = $ctrl.selectedEntity;\n\n    for (let key in form) {\n        const adjustedKey = key.charAt(0).toUpperCase() + key.slice(1);\n\n\n        form[key] = obj.hasOwnProperty(adjustedKey) ? obj[adjustedKey] : undefined;\n    }\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setInputValues",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const payrollRunObj = $ctrl.payrollRunReview.PayrollRunReview.PayrollRun;\nconst payrollRun = Object.entries(payrollRunObj);\n\nconst payPeriodObj = payrollRunObj.PayPeriod;\nconst payScheduleObj = payPeriodObj.PaySchedule;\n\n$ctrl.rightColumn = payrollRun.filter(row =>\n    ![\"Id\", \"DisplayName\", \"PostingDate\", \"ProcessDate\", \"PayPeriod\", \"Status\", \"RunType\", \"TotalEmployees\", \"Description\", \"OffCycleReason\"].includes(row[0])\n);\n\nlet ctr = 0;\n$ctrl.rightColumn.forEach(([key, value]) => {\n    if (key.includes(\"Total\")) $ctrl.rightColumn[ctr][1] = value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\n    ctr++;\n})\n\n$ctrl.rightColumn.unshift([\"Section\", \"Calculation Preview\"])\n\n$ctrl.leftColumn = [\n    [\"Section\", \"Summary\"],\n    [\"RunType\", payrollRunObj.RunType],\n    [\"PaySchedule\", payScheduleObj.DisplayName],\n    [\"PayPeriod\", $ctrl.parseDate(payPeriodObj.StartDate).split(\" \")[0] + \" - \" + $ctrl.parseDate(payPeriodObj.EndDate).split(\" \")[0]],\n    payrollRunObj.ProcessDate && [\"ProcessDate\", $ctrl.utils.parseDate(payrollRunObj.ProcessDate)],\n    [\"PostingDate\", $ctrl.utils.parseDate(payrollRunObj.PostingDate)],\n    [\"TotalEmployees\", payrollRunObj.TotalEmployees],\n];\n\nif (payrollRunObj.Description) $ctrl.leftColumn.push([\"Description\", payrollRunObj.Description]);\nif (payrollRunObj.OffCycleReason) $ctrl.leftColumn.push([\"OffCycleReason\", payrollRunObj.OffCycleReason]);\n\n$ctrl.leftColumn = formatKeysForDisplay($ctrl.leftColumn.filter(arr => arr !== undefined));\n$ctrl.rightColumn = formatKeysForDisplay($ctrl.rightColumn);\n\n$ctrl.dataHandlers.processData($ctrl.payrollRunReview.PayrollRunReview.Workers, {\n    ctrlDataName: 'workers',\n    hideColumns: true,\n    transformBooleans: false\n});\n\n$ctrl.payrollAppApi.lonti_app_payroll_service_payroll_run_SelectPayrollRun(\n    {\n        id: $ctrl.pageParameters.id\n    },\n    { headers: $ctrl.authCookies.setHeaders() }\n).then(result => {\n    payrollRunObj.Status = result.data.payrollrun.Status;\n});\n\n$ctrl.setSection($ctrl.storedTab);\n$ctrl.setTable();\n\nfunction formatKeysForDisplay(arr) {\n    return arr.map(([key, value]) => {\n        const transformedKey = key.replace(/([A-Z])/g, ' $1').trim();\n        return [transformedKey, value];\n    });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "processPayrollRunReview",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "tableData",
+      "type": "array"
+    },
+    {
+      "body": "// Reset\n$ctrl.selectedEntity = null;\n$ctrl.selectedEntityName = null;\n$ctrl.selectedEntityDetails = null;\n\n$ctrl.currentPage = 1;\n\n$ctrl.tableData = $ctrl.workers;\n$ctrl.transformEmploymentStartDateForDisplay();\n$ctrl.filteredTableData = $ctrl.tableData;\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setTable",
+      "parameters": [
+        "selectedTab"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "filterTarget",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "filteredTableData",
+      "type": "array"
+    },
+    {
+      "body": "$ctrl.filteredTableData = $ctrl.tableData.filter((row) =>\n    Object.values(row).some((value) =>  \n        String(value)\n            .toLowerCase()\n            .includes($ctrl.filterTarget.toLowerCase()))\n);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleFilterData",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.$modal.open(\"confirm-action-modal\", {\n    title: $ctrl.hasModifiedPayrollRunReview ? \"Generate Payslips with Pay Component Overrides?\" : \"Generate Payslips?\",\n    body: \"Once generated, Payslips can no longer be modified or regenerated for this Payroll Run. Proceed?\" + ($ctrl.hasModifiedPayrollRunReview ? \" This Payroll Run has Pay Component Overrides and will use those values instead. Proceed?\" : \"\")\n}).then(res => {\n    if (res.result === \"ok\") {\n        $ctrl.selectedEntity = null;\n        $ctrl.selectedEntityName = null;\n        $ctrl.selectedEntityDetails = \"\";\n\n        $ctrl.selectedPayslip = null;\n        $ctrl.selectedPayslipName = null;\n        $ctrl.selectedPayslipDetails = null;\n\n        $ctrl.isGettingEntities = true;\n\n        $ctrl.payrollAppApi.lonti_app_payroll_service_payroll_run_ProcessPayroll(\n            {\n                id: $ctrl.pageParameters.id,\n                encashAccrualBalances: $ctrl.encashAccrualBalances,\n                jobId: $ctrl.pageParameters.jobId\n            },\n            $ctrl.hasModifiedPayrollRunReview ? $ctrl.payrollRunReview.PayrollRunReview.Workers.map(worker => {\n                return {\n                    WorkerId: worker.Id,\n                    Earnings: worker.Earnings.map(earning => {\n                        return {\n                            Id: earning.Id,\n                            CustomAmount: earning.CustomAmount\n                        }\n                    }),\n                    Benefits: worker.Benefits.map(benefit => {\n                        return {\n                            Id: benefit.Id,\n                            CustomEmployeeAmount: benefit.CustomEmployeeAmount,\n                            CustomEmployerAmount: benefit.CustomEmployerAmount\n                        }\n                    })\n                }\n            })\n                : undefined\n            , { headers: $ctrl.authCookies.setHeaders() })\n            .then(result => {\n                if (result.data.result === \"OK\") {\n                    if (window.location.hash === \"#!/review_payroll\") $ctrl.$state.go(\"payroll_report\", { id: $ctrl.pageParameters.id, origin: $ctrl.pageParameters.origin });\n                    else $ctrl.utils.toast(\"Successfully ran \" + $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.DisplayName, \"INFO\");\n                }\n            })\n            .catch(reason => {\n                $ctrl.utils.toast(reason.data.message, reason.data.result);\n                $ctrl.isGettingEntities = false;\n            });\n\n        $ctrl.$state.go(\"payroll_processing\");\n        $ctrl.utils.toast($ctrl.payrollRunReview.PayrollRunReview.PayrollRun.DisplayName + \" is now processing. We will notify you when it is finished.\", \"INFO\");\n    }\n})",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "runPayroll",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const taxScheduleData = taxSchedules.map(({Id, EffectiveFromDate, ...taxSchedCols}) => taxSchedCols);\n\nawait $ctrl.$modal.open(\"view-tax-schedules-modal\", {\n    props:\n    {\n        TaxSchedules: taxScheduleData\n    }\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "handleViewTaxSchedule",
+      "parameters": [
+        "taxSchedules"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "body": "// Main\nif (!row) {\n    resetselectedPayslip();\n    clearDetailsElement();\n    return;\n}\n\n$ctrl.selectedPayslip = row;\n$ctrl.selectedPayslipDetails = \"\";\n\npopulateEntityDetails(row);\ninjectDetailsIntoElement();\nsetEntityName(row);\n\nfunction resetselectedPayslip() {\n    $ctrl.selectedPayslip = null;\n    $ctrl.selectedPayslipName = null;\n    $ctrl.selectedPayslipDetails = \"\";\n}\n\nfunction clearDetailsElement() {\n    const detailsElement = document.getElementById(\"details\");\n    if (detailsElement) detailsElement.innerHTML = \"\";\n}\n\n// Helper Functions\nfunction setEntityName(row) {\n    $ctrl.selectedPayslipName = row.PayPeriodDisplayName;\n}\n\nfunction populateEntityDetails(row) {\n    for (const [key, value] of Object.entries(row)) {\n        if (key.startsWith(\"$$\") || (isExcludedKey(key, value) && key !== \"PayPeriodRate\")) continue;\n        switch (key) {\n            case \"PayPeriodRate\":\n                appendPayPeriodRate(row.Frequency, value);\n                break;\n            case \"WorkerName\":\n                appendWorkerName(value);\n                break;\n            case \"BankInfo\":\n                Object.entries(value).forEach(([key, value]) => key !== \"Id\" ? appendGeneralDetails(key, value) : undefined);\n                break;\n            case \"CreatedDate\":\n                return; // Stop processing at CreatedDate\n            case \"AccrualBalance\":\n                if (value.length > 0) {\n                    $ctrl.selectedPayslipDetails += appendSectionTitle(\"Leave Credits\");\n                    appendAccrualBalances(value);\n                }\n                break;\n            case \"GrossPay\":\n            case \"TotalDeductions\":\n            case \"NetPay\":\n                appendTotals(key, value);\n                break;\n            default:\n                if (isStatutoryCompliance(key)) {\n                    appendStatutoryCompliance(value);\n                } else if (isPayComponent(key)) {\n                    appendPayComponents(key, value, row);\n                } else {\n                    appendGeneralDetails(key, value);\n                }\n        }\n    }\n}\n\nfunction injectDetailsIntoElement() {\n    const element = document.getElementById(\"details\");\n    if (element) {\n        element.innerHTML = $ctrl.selectedPayslipDetails;\n    } else {\n        $ctrl.$timeout(injectDetailsIntoElement, 100);\n    }\n}\n\n// Utility Functions\nfunction isExcludedKey(key, value) {\n    const excludedKeys = [\n        \"Id\", \"PayPeriod\", \"Payroll\", \"Department\", \"Position\",\n        \"Frequency\", \"GrossTaxable\", \"GrossNonTaxable\", \"PreTaxDeductions\", \"NetTaxable\", \"Taxes\",\n        \"PostTaxDeductions\", \"Ytd\"\n    ];\n    return excludedKeys.some(item => key.includes(item)) || value === undefined;\n}\n\nfunction appendPayPeriodRate(frequency, value) {\n    const formattedFrequency = formatFrequency(frequency);\n    const formattedValue = formatCurrency(value);\n    $ctrl.selectedPayslipDetails += `\n        <div style=\"display: flex; width: 100%;\">\n            <div>${formattedFrequency} Rate</div>\n            <div style=\"flex-grow: 1;\"></div>\n            <div>${formattedValue}</div>\n        </div>\n        <br>`;\n}\n\nfunction appendWorkerName(name) {\n    $ctrl.selectedPayslipDetails += `<div>${name}</div>`;\n}\n\nfunction appendStatutoryCompliance(complianceList) {\n  complianceList.forEach(({ Name, Number }) => {\n    const uniqueId = `item-${Name.replace(/\\s+/g, '-')}-${Math.random().toString(36).substring(2, 15)}`;\n\n    $ctrl.selectedPayslipDetails += `\n      <div style=\"display: flex; width: 100%; align-items: center;\"> \n        <div style=\"min-width: 150px;\">${Name}</div>\n        <div style=\"flex-grow: 1;\"></div>\n        <div style=\"display: flex; align-items: center;\">\n          <div id=\"${uniqueId}-value\" style=\"margin-right: 5px;\">\n            ${\"*\".repeat(Number.length)}\n          </div>\n          <button type=\"button\" id=\"${uniqueId}-button\" style=\"border: none; padding: 0; background-color: transparent; cursor: pointer;\">\n            <i class=\"fas fa-eye\"></i>\n          </button>\n        </div>\n      </div>`;\n\n    $ctrl.$timeout(() => {\n      const button = document.getElementById(`${uniqueId}-button`);\n      const valueElement = document.getElementById(`${uniqueId}-value`);\n\n      if (button && valueElement) {\n        button.addEventListener('click', () => {\n          if (!$ctrl.hasBeenUnmasked) {\n            $ctrl.handleSensitiveInfoMasking();\n            $ctrl.hasBeenUnmasked = true;\n          }\n          const isMasked = valueElement.textContent.startsWith(\"*\");\n          valueElement.textContent = isMasked? Number: \"*\".repeat(Number.length);\n          button.innerHTML = isMasked? '<i class=\"fas fa-eye-slash\"></i>': '<i class=\"fas fa-eye\"></i>';\n        });\n      }\n    }, 500);\n  });\n}\n\nfunction appendSectionTitle(key) {\n    const title = key.toUpperCase().replace(\"LOGS\", \"S\");\n    return `\n        <br>\n        <div style=\"width: 100%; font-weight: bold; border: 1px solid black; padding: 0.5rem; text-align: center; box-sizing: border-box;\">\n            ${title}\n        </div>\n        <br>`;\n}\n\nfunction appendPayComponents(key, components, row) {\n    $ctrl.selectedPayslipDetails += appendSectionTitle(key);\n\n    if (key === \"DeductionLogs\") {\n        appendPayComponentCategory(\"Pre-tax\", components.filter(c => c.Type === \"PRETAX\"), row.PreTaxDeductions);\n        tempAppendNetTaxable(\"Net Taxable\", [{ Name: \"Gross Taxable\", EmployeeAmount: row.GrossTaxable }, { Name: \"Pre-tax Deductions\", EmployeeAmount: -Math.abs(row.PreTaxDeductions) }], row.NetTaxable);\n        appendPayComponentCategory(\"Tax\", components.filter(c => c.ComponentClass === \"TAX\"), row.Taxes);\n        appendPayComponentCategory(\"Post-tax\", components.filter(c => c.Type === \"POSTTAX\"), row.PostTaxDeductions);\n    } else {\n        const categorizedComponents = categorizePayComponents(components);\n        appendPayComponentCategory(\"Non-taxable\", categorizedComponents.nonTaxable, row.GrossNonTaxable);\n        appendPayComponentCategory(\"Taxable\", categorizedComponents.taxable, row.GrossTaxable);\n    }\n}\n\nfunction appendPayComponentCategory(category, components, total = null) {\n    const validComponents = components.filter(component => typeof component.EmployeeAmount === \"number\");\n    if (!validComponents.length) return;\n\n    const colWidth = \"120px\";\n\n    $ctrl.selectedPayslipDetails += `<div style=\"background-color: #F2F2F2;\">`;\n    $ctrl.selectedPayslipDetails += `<hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">`;\n\n    $ctrl.selectedPayslipDetails += `\n        <div style=\"display: flex; width: 100%; padding: 0 1rem; box-sizing: border-box;\">\n            <div style=\"flex-grow: 1; font-weight: bold;\">${category}</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-size: 0.85em; color: #555; align-self: flex-end;\">YTD</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-size: 0.85em; color: #555; align-self: flex-end;\">CURRENT</div>\n        </div>\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px dashed black;\">\n        <br>`;\n\n    $ctrl.selectedPayslipDetails += `<div style=\"padding: 0 1rem;\">`;\n    validComponents.forEach(({ Name, EmployeeAmount, Ytd }) => {\n        const formattedAmount = formatCurrency(EmployeeAmount);\n\n        const ytdAmount = formatCurrency(Ytd?.EmployeeAmount || 0);\n\n        $ctrl.selectedPayslipDetails += `\n            <div style=\"display: flex; width: 100%; margin-bottom: 0.25rem;\">\n                <div style=\"flex-grow: 1;\">${Name}</div>\n                <div style=\"width: ${colWidth}; text-align: right;\">${ytdAmount}</div>\n                <div style=\"width: ${colWidth}; text-align: right;\">${formattedAmount}</div>\n            </div>`;\n    });\n    $ctrl.selectedPayslipDetails += `</div>`;\n\n    if (total !== null) {\n        const totalLabel = category === \"Taxable\" || category === \"Non-taxable\"\n            ? \"Gross \" + category\n            : category + \" Deductions\";\n\n        const ytdKeyMap = {\n            \"Pre-tax\": \"PreTaxDeductions\",\n            \"Tax\": \"Taxes\",\n            \"Post-tax\": \"PostTaxDeductions\",\n            \"Non-taxable\": \"GrossNonTaxable\",\n            \"Taxable\": \"GrossTaxable\"\n        };\n\n        const ytdKey = ytdKeyMap[category];\n        const ytdValue = row?.Ytd?.[ytdKey] || 0;\n\n        $ctrl.selectedPayslipDetails += `\n            <br>\n            <hr style=\"border: none; height: 0; border-bottom: 0.5px dashed black;\">\n            <div style=\"display: flex; width: 100%; padding: 0 1rem; box-sizing: border-box;\">\n                <div style=\"flex-grow: 1; font-weight: bold;\">${totalLabel}</div>\n                <div style=\"width: ${colWidth}; text-align: right; font-weight: bold;\">${formatCurrency(ytdValue)}</div>\n                <div style=\"width: ${colWidth}; text-align: right; font-weight: bold;\">${formatCurrency(total)}</div>\n            </div>`;\n    }\n\n    $ctrl.selectedPayslipDetails += `\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        </div>\n        <br>`;\n}\n\nfunction appendTotals(key, value) {\n    const labelMap = {\n        \"GrossPay\": \"GROSS PAY\",\n        \"TotalDeductions\": \"TOTAL DEDUCTIONS\",\n        \"NetPay\": \"NET PAY\"\n    };\n    const label = labelMap[key] || key;\n    const fontStyle = key === \"NetPay\" ? \"normal\" : \"italic\";\n\n    const colWidth = \"120px\";\n\n    const ytdValue = row?.Ytd?.[key] || 0;\n    const formattedYtd = formatCurrency(ytdValue);\n    const formattedCurrent = formatCurrency(value);\n\n    $ctrl.selectedPayslipDetails += `\n        <hr style=\"border: none; height: 0; border-top: 1px solid black; margin: 0;\">\n        <div style=\"display: flex; width: 100%; padding: 0.5rem 1rem; box-sizing: border-box;\">\n            <div style=\"flex-grow: 1; font-style: ${fontStyle}; font-weight: bold;\">${label}</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-style: ${fontStyle}; font-weight: bold;\">${formattedYtd}</div>\n            <div style=\"width: ${colWidth}; text-align: right; font-style: ${fontStyle}; font-weight: bold;\">${formattedCurrent}</div>\n        </div>\n        <hr style=\"border: none; height: 0; border-top: 1px solid black; margin: 0;\">\n        ${key === \"NetPay\" ? `` : `<br>`}`;\n}\n\nfunction appendAccrualBalances(balances) {\n    $ctrl.selectedPayslipDetails += `\n        <div style=\"background-color: #F2F2F2; \">\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black; \">\n        <div style=\"padding: 1rem; \">`;\n\n    balances.forEach(({ AccrualName, Balance }) => {\n        const formattedBalance = formatCurrency(Balance, 3, false);\n        $ctrl.selectedPayslipDetails += `\n            <div style=\"display: flex; width: 100%; \">\n                <div>${AccrualName}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${formattedBalance}</div>\n            </div>`;\n    });\n\n    $ctrl.selectedPayslipDetails += `\n    </div>\n    <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black; \">\n    </div>`;\n}\n\nfunction appendGeneralDetails(key, value) {\n    const uniqueId = `item-${key.replace(/\\s+/g, '-')}-${Math.random().toString(36).substring(2, 15)}`;\n    const isNumberKey = key.includes(\"Number\");\n\n    $ctrl.selectedPayslipDetails += `\n    <div style=\"display: flex; width: 100%; align-items: center;\"> <div style=\"min-width: 150px;\">${key}</div>\n      <div style=\"flex-grow: 1;\"></div>\n      <div style=\"display: flex; align-items: center;\">\n        <div id=\"${uniqueId}-value\" style=\"margin-right: 5px;\">\n            ${isNumberKey ? \"*\".repeat(value.length) : value}\n        </div>\n        ${isNumberKey ? `\n            <button type=\"button\" id=\"${uniqueId}-button\" style=\"border: none; padding: 0; background-color: transparent; cursor: pointer\">\n            <i class=\"fas fa-eye\"></i>\n            </button>`\n            : ''}\n      </div>\n    </div>`;\n\n    $ctrl.$timeout(() => {\n        const button = document.getElementById(`${uniqueId}-button`);\n        const valueElement = document.getElementById(`${uniqueId}-value`);\n\n        if (button && valueElement) {\n            // Event listener for the button only\n            button.addEventListener('click', () => {\n                if (!$ctrl.hasBeenUnmasked) {\n                    $ctrl.handleSensitiveInfoMasking();\n                    $ctrl.hasBeenUnmasked = true; // Set the flag to prevent further calls\n                }\n                const isMasked = valueElement.textContent.startsWith(\"*\");\n                valueElement.textContent = isMasked ? value : \"*\".repeat(value.length);\n                button.innerHTML = isMasked ? '<i class=\"fas fa-eye-slash\"></i>' : '<i class=\"fas fa-eye\"></i>'; // Toggle icon\n            });\n        }\n    }, 500);\n}\n\nfunction formatCurrency(amount, fractionDigits = 2, isCurrency = true, currency = row.EarningLogs[0]?.Currency) {\n    return `${isCurrency && currency && currency.CurrencySymbol ? `${currency.CurrencySymbol}` : ``} ${amount.toLocaleString(\"en-US\", {\n        minimumFractionDigits: (currency && currency.CurrencyPrecision) || fractionDigits,\n        maximumFractionDigits: (currency && currency.CurrencyPrecision) || fractionDigits\n    })}`;\n}\n\nfunction formatFrequency(frequency) {\n    return frequency\n        .toLowerCase()\n        .split(/[-\\s]/)\n        .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n        .join(frequency.includes(\"-\") ? \"-\" : \" \");\n}\n\nfunction categorizePayComponents(components) {\n    return {\n        nonTaxable: components.filter(comp => !comp.IsTaxable),\n        taxable: components.filter(comp => comp.IsTaxable)\n    };\n}\n\nfunction isStatutoryCompliance(key) {\n    return key.includes(\"StatutoryCompliance\");\n}\n\nfunction isPayComponent(key) {\n    const relevantKeywords = [\"Earning\", \"Deduction\"];\n    return relevantKeywords.some(kw => key.includes(kw) && !key.includes(\"Tax\") && !key.includes(\"Total\"));\n}\n\nfunction tempAppendNetTaxable(category, components, total = null) {\n    if (!components.filter(component => typeof component.EmployeeAmount === \"number\").length) return;\n\n    $ctrl.selectedPayslipDetails += `<div>`;\n    $ctrl.selectedPayslipDetails += `<hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">`;\n\n    $ctrl.selectedPayslipDetails += `<div style=\"padding: 1rem 0; \">`;\n    components.filter(component => typeof component.EmployeeAmount === \"number\").forEach(({ Name, EmployeeAmount }) => {\n        const formattedAmount = formatCurrency(EmployeeAmount);\n        $ctrl.selectedPayslipDetails += `\n            <div style=\"display: flex; width: 100%;\">\n                <div>${Name}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div>${formattedAmount}</div>\n            </div>`;\n    });\n    $ctrl.selectedPayslipDetails += `</div>`;\n\n    if (total !== null) {\n        $ctrl.selectedPayslipDetails += `\n            <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n            <div style=\"display: flex; width: 100%;\">\n                <div style=\"font-style: italic;\">${category.toUpperCase()}</div>\n                <div style=\"flex-grow: 1;\"></div>\n                <div style=\"font-style: italic;\">${formatCurrency(total)}</div>\n            </div>`;\n    }\n\n    $ctrl.selectedPayslipDetails += `\n        <hr style=\"border: none; height: 0; border-bottom: 0.5px solid black;\">\n        </div>\n        <br>`;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setPaySlip",
+      "parameters": [
+        "row"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.isSensitiveInfoMasked && !$ctrl.hasBeenUnmasked) {\n    $ctrl.tempStoredEntityId = $ctrl.storedTab === 4 ? $ctrl.selectedEntity && $ctrl.selectedEntity.Id : $ctrl.selectedPayslip && $ctrl.selectedPayslip.WorkerId;\n    $ctrl.getAllEntities(false);\n    $ctrl.hasBeenUnmasked = !$ctrl.hasBeenUnmasked;\n    $ctrl.isSensitiveInfoMasked = false;\n} else {\n    $ctrl.isSensitiveInfoMasked = !$ctrl.isSensitiveInfoMasked;\n    $ctrl.setPaySlip($ctrl.selectedPayslip);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleSensitiveInfoMasking",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "isSensitiveInfoMasked",
+      "type": "property",
+      "value": "true"
+    },
+    {
+      "description": "",
+      "name": "hasBeenUnmasked",
+      "type": "property",
+      "value": "true"
+    },
+    {
+      "body": "$ctrl.selectedEntity = null;\n$ctrl.selectedEntityName = null;\n$ctrl.selectedEntityDetails = null;\n\n$ctrl.isViewingPayslip = null;\n$ctrl.selectedPayslip = null;\n$ctrl.selectedPayslipName = null;\n$ctrl.selectedPayslipDetails = null;\n\n$ctrl.filterTarget = \"\";\n$ctrl.storedTab = selectedTab;\n\n$ctrl.handleFilterData();\n\nlet sectionDataToFormat;\nswitch (selectedTab) {\n    case 1:\n        sectionDataToFormat = $ctrl.leftColumn;\n    break;\n\n    case 2:\n        sectionDataToFormat = $ctrl.rightColumn;\n    break;\n\n    case 3:\n        sectionDataToFormat = $ctrl.warnings;\n    break;\n}\n\nif (sectionDataToFormat) {\n    $ctrl.sectionData = $ctrl.formatReviewForDisplay(sectionDataToFormat);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setSection",
+      "parameters": [
+        "selectedTab"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.selectedPayComponent) $ctrl.$modal.open(\"confirm-action-modal\", {\n    title: \"Discard Pay Component Overrides?\",\n    body: \"Moving to a different Pay Component or closing without clicking 'Assign' will discard the most recent overrides. Proceed?\"\n}).then(res => {\n    if (res.result === \"ok\") {\n        setAssignedWorkers();\n    }\n})\n\nelse setAssignedWorkers();\n\nfunction setAssignedWorkers() {\n    $ctrl.isAssignmentTableLoading = true;\n    $ctrl.isAssignmentTableDisplayed = false;\n\n    if ($ctrl.originalAssignedToWorkers) $ctrl.originalAssignedToWorkers.length = 0;\n    if ($ctrl.assignedToWorkers) $ctrl.assignedToWorkers.length = 0;\n\n    if (calledBy === \"cancel\") {\n        $ctrl.activeAssignmentView = !$ctrl.activeAssignmentView;\n        $ctrl.selectedPayComponent = null;\n        return;\n    }\n\n    $ctrl.selectedPayComponent = payComponent;\n\n    $ctrl.originalAssignedToWorkers = $ctrl.payrollRunReview.PayrollRunReview.Workers\n        .filter(worker => worker[payComponent.Classification]\n            .find(assignedPayComponent => assignedPayComponent.Id === payComponent.Id))\n        .map(worker => {\n            const relatedPayComponent = worker[payComponent.Classification].find(assignedPayComponent => assignedPayComponent.Id === payComponent.Id);\n            return {\n                \"Id\": worker.Id,\n                \"Name\": worker.FirstName + \" \" + worker.LastName,\n                \"CustomEmployeeAmount\": relatedPayComponent.CustomAmount || relatedPayComponent.CustomEmployeeAmount,\n                \"CustomEmployerAmount\": relatedPayComponent.CustomEmployerAmount\n            }\n        })\n\n    $ctrl.assignedToWorkers = $ctrl.originalAssignedToWorkers.map(obj => ({ ...obj }));\n    \n    if(calledBy !== \"cancel\") {\n        $ctrl.assignmentTableColumns = [...$ctrl.assignmentTableColumnRefs];\n        if(payComponent.Classification === \"Earnings\") {\n            $ctrl.assignmentTableColumns.pop();\n        } \n    }\n    \n    $ctrl.$timeout(() => {\n        $ctrl.isAssignmentTableLoading = false;\n        $ctrl.isAssignmentTableDisplayed = true;\n    }, 1);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setAssignedWorkers",
+      "parameters": [
+        "payComponent",
+        "calledBy"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "selectedPayComponent",
+      "type": "property",
+      "value": "false"
+    },
+    {
+      "body": "$ctrl.$modal.open(\"confirm-action-modal\", {\n  title: \"Override \" + $ctrl.selectedPayComponent.Name + \" Assignments?\",\n  body: \"This will override the current assignments for \" + $ctrl.selectedPayComponent.Name + \" for this Payroll Run. Proceed?\"\n}).then(res => {\n  if (res.result === \"ok\") processAssignment();\n})\n\nfunction processAssignment() {\n  $ctrl.isAssigning = true;\n\n  const selectedPayComponent = $ctrl.selectedPayComponent;\n  const selectedPayComponentClass = selectedPayComponent.Classification;\n  const isEarning = selectedPayComponentClass === \"Earnings\";\n  const workers = $ctrl.payrollRunReview.PayrollRunReview.Workers;\n\n  $ctrl.assignedToWorkers.forEach(assignedWorker => {\n    const relatedWorker = workers.find(worker => worker.Id === assignedWorker.Id);\n    if (!relatedWorker) return;\n\n    const relatedPayComponent = relatedWorker[selectedPayComponentClass].find(payComponent => payComponent.Id === selectedPayComponent.Id);\n\n    if (relatedPayComponent) { // Handle modifications to existing components\n      let hasChanges = false;\n\n      if (isEarning) {\n        if (relatedPayComponent.CustomAmount !== assignedWorker.CustomEmployeeAmount) {\n          relatedPayComponent.CustomAmount = assignedWorker.CustomEmployeeAmount;\n          hasChanges = true;\n        }\n      } else {\n        if (relatedPayComponent.CustomEmployeeAmount !== assignedWorker.CustomEmployeeAmount || relatedPayComponent.CustomEmployerAmount !== assignedWorker.CustomEmployerAmount) {\n          relatedPayComponent.CustomEmployeeAmount = assignedWorker.CustomEmployeeAmount;\n          relatedPayComponent.CustomEmployerAmount = assignedWorker.CustomEmployerAmount;\n          hasChanges = true;\n        }\n      }\n\n      // Only override the Origin to \"WORKER\" if amounts were modified\n      if (hasChanges) {\n        relatedPayComponent.Origin = \"WORKER\";\n      }\n\n    } else { // Handle new components to add\n      const payComponentToAdd = { ...selectedPayComponent };\n\n      if (isEarning) {\n        payComponentToAdd.CustomAmount = assignedWorker.CustomEmployeeAmount;\n      } else {\n        payComponentToAdd.CustomEmployeeAmount = assignedWorker.CustomEmployeeAmount;\n        payComponentToAdd.CustomEmployerAmount = assignedWorker.CustomEmployerAmount;\n      }\n\n      // Set Origin to \"WORKER\" since it is newly added via overrides\n      payComponentToAdd.Origin = \"WORKER\";\n      relatedWorker[selectedPayComponentClass].push(transformPayComponent(payComponentToAdd));\n    }\n  });\n\n  // Handle components to remove\n  $ctrl.originalAssignedToWorkers\n    .filter(originalAssignedWorker => !$ctrl.assignedToWorkers\n      .some(assignedWorker => assignedWorker.Id === originalAssignedWorker.Id))\n    .forEach(workerToUnassign => {\n      const relatedWorker = workers.find(worker => worker.Id === workerToUnassign.Id);\n      const relatedPayComponentIndex = relatedWorker[selectedPayComponentClass].findIndex(payComponent => payComponent.Id === selectedPayComponent.Id);\n      if (relatedPayComponentIndex != -1) relatedWorker[selectedPayComponentClass].splice(relatedPayComponentIndex, 1);\n    });\n\n  $ctrl.$notificationManager.show(\"Assignment Processed\", {\n    delay: 3500,\n    icon: 'check',\n    color: 'success',\n    dismissible: true,\n    animation: 'fade'\n  });\n\n  $ctrl.$timeout(() => {\n    $ctrl.isAssigning = false;\n    $ctrl.hasRecentlyRecalculated = false;\n    $ctrl.hasModifiedPayrollRunReview = true;\n  }, 100);\n\n  function transformPayComponent(selectedPayComponent) {\n    if (typeof selectedPayComponent !== 'object' || selectedPayComponent === null) {\n      return selectedPayComponent;\n    }\n\n    const payComponentToAdd = {};\n    for (const key in selectedPayComponent) {\n      if (Object.prototype.hasOwnProperty.call(selectedPayComponent, key)) {\n        if (key.toLowerCase().includes('calculationmethod')) {\n          let newKey = key.replace(/Id$/i, '');\n          payComponentToAdd[newKey] = { Id: selectedPayComponent[key] };\n          delete payComponentToAdd[key];\n        } else {\n          payComponentToAdd[key] = transformPayComponent(selectedPayComponent[key]);\n        }\n      }\n    }\n    return payComponentToAdd;\n  }\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "processAssignment",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "dataHandlers",
+      "resourceIdentity": "services/data-handlers",
+      "type": "service"
+    },
+    {
+      "body": "const endpoint = $ctrl.authCookies.serverUrl.concat(\"/payroll_run/\", $ctrl.pageParameters.id, \"/review/export\");\n\n$ctrl.$modal.open(\"select-sheets-to-export-modal\").then(result => {\n  result = result.result;\n  if (result.status === \"ok\") {\n    if (typeof result === 'object' && result !== null) {\n      const formData = new FormData();\n\n      for (const key in result) {\n        if (result.hasOwnProperty(key)) {\n          if (key === \"status\") continue;\n\n          const value = result[key];\n\n          if (typeof value === 'boolean') formData.append(key[0].toUpperCase() + key.slice(1), value.toString());\n        }\n      }\n      fetchExcel(formData);\n      $ctrl.isExportingReport = true;\n    }\n  }\n});\n\nfunction fetchExcel(formData) {\n  const params = new URLSearchParams(formData);\n  params.set(\"jobId\", $ctrl.pageParameters.jobId);\n  fetch(`${endpoint}?${params.toString()}`, {\n    method: \"POST\",\n    headers: {\n      ...$ctrl.authCookies.setHeaders(),\n      \"Content-Type\": \"application/json;charset=UTF-8\"\n    },\n    body: $ctrl.hasModifiedPayrollRunReview ?\n    JSON.stringify($ctrl.payrollRunReview.PayrollRunReview.Workers.map(worker => {\n      return {\n        WorkerId: worker.Id,\n        Earnings: worker.Earnings.map(earning => {\n          return {\n            Id: earning.Id,\n            CustomAmount: earning.CustomAmount\n          }\n      }),\n        Benefits: worker.Benefits.map(benefit => {\n          return {\n            Id: benefit.Id,\n            CustomEmployeeAmount: benefit.CustomEmployeeAmount,\n            CustomEmployerAmount: benefit.CustomEmployerAmount\n          }\n        })\n      }\n    }))\n      : JSON.stringify({})\n  }).then(response => {\n    if (response.status === 200) {\n      return response.blob();\n    }\n    throw new Error('Failed to fetch file');\n  })\n    .then(blob => {\n      const payPeriod = $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.PayPeriod;\n      const payPeriodStartDate = $ctrl.parseDate(payPeriod.StartDate).split(\"-\");\n      const payPeriodEndDate = $ctrl.parseDate(payPeriod.EndDate).split(\"-\");\n\n      const payPeriodStartYear = payPeriodStartDate[0];\n      const payPeriodStartMonth = payPeriodStartDate[1];\n      const payPeriodStartDay = payPeriodStartDate[2].split(\" \")[0];\n\n      const payPeriodEndYear = payPeriodEndDate[0];\n      const payPeriodEndMonth = payPeriodEndDate[1];\n      const payPeriodEndDay = payPeriodEndDate[2].split(\" \")[0];\n\n      const dateRange = (payPeriodStartYear !== payPeriodEndYear)\n        ? payPeriodStartMonth + \"_\" + payPeriodStartDay + \"_\" + payPeriodStartYear + \"-\" + payPeriodEndMonth + \"_\" + payPeriodEndDay + \"_\" + payPeriodEndYear\n        : (payPeriodStartMonth !== payPeriodEndMonth)\n          ? payPeriodStartMonth + \"_\" + payPeriodStartDay + \"-\" + payPeriodEndMonth + \"_\" + payPeriodEndDay + \"_\" + payPeriodEndYear\n          : payPeriodStartMonth + \"_\" + payPeriodStartDay + \"-\" + payPeriodEndDay + \"_\" + payPeriodEndYear;\n\n      const fileName = \"PREVIEW_\" + dateRange + \".\" + $ctrl.globalSelectedCompany.companyName.replaceAll(\" \", \"\") + \".Report_PREVIEW.xlsx\";\n\n      const link = document.createElement('a');\n      const url = window.URL.createObjectURL(blob);\n\n      link.href = url;\n      link.download = fileName;\n      link.click();\n      window.URL.revokeObjectURL(url);\n    })\n    .catch(error => $ctrl.utils.toast(error, error))\n    .finally(() => $ctrl.$timeout(() => $ctrl.isExportingReport = false), 500);\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "exportReport",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "let mappedSection;\n\nif ($ctrl.storedTab === 1 || $ctrl.storedTab === 2) {\n    mappedSection = section.filter(arr => arr && arr[0] !==\n        \"Section\" && !arr[0].includes(\"$$\") && !arr[0].includes(\"YesNo\"))\n        .map(\n            arr => {\n                return {\n                    \"key\": arr[0],\n                    \"value\": arr[1]\n                }\n            });\n} else if ($ctrl.storedTab === 3) {\n    mappedSection = section.map(error => {\n        const {\n            type,\n            message\n        } = error;\n        return {\n            \"key\": type,\n            \"value\": message\n        }\n    });\n}\n\nreturn mappedSection;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "formatReviewForDisplay",
+      "parameters": [
+        "section"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.originalAssignedToWorkers) {\n    return [\n        ...$ctrl.originalAssignedToWorkers,\n        ...$ctrl.payrollRunReview.PayrollRunReview.Workers\n            .filter(worker => !$ctrl.originalAssignedToWorkers\n                .some(assignedWorker => worker.Id === assignedWorker.Id))\n            .map(worker => {\n                return {\n                    \"Id\": worker.Id,\n                    \"Name\": worker.FirstName + \" \" + worker.LastName,\n                    \"CustomEmployeeAmount\": undefined,\n                    \"CustomEmployerAmount\": undefined\n                }\n            })\n    ]\n} else {\n    return;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "formatPayComponentsForAssignment",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if ($ctrl.selectedPayComponent) {\n    return Object.entries($ctrl.selectedPayComponent)\n        .filter(([key, value]) => (!(key.includes(\"Id\") && !key.includes(\n            \"CalculationMethodId\"))) && ![\n                \"CreatedDate\", \"CreatedBy\", \"UpdatedDate\", \"UpdatedBy\", \"Deleted\",\n                \"Classification\"\n            ].includes(key))\n        .reduce((acc, [key, value], i) => {\n            let displayValue = value;\n            if (key.includes(\"Method\")) {\n                displayValue = value === 1 ? \"FLAT\" : (value === 2 ? \"PERCENT\" :\n                    value);\n                key = key.replace(\"Id\", \"\");\n            } else if (typeof value === \"boolean\") {\n                displayValue = value ? \"YES\" : \"NO\";\n            }\n\n            if (i % 2 === 0) {\n                acc.push({\n                    key: key,\n                    value: displayValue,\n                });\n            } else {\n                if (acc.length > 0) {\n                    acc[acc.length - 1].key2 = key;\n                    acc[acc.length - 1].value2 = displayValue;\n                }\n            }\n            return acc;\n        }, []);\n} else {\n    return;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "formatPayComponentInformationForDisplay",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    },
+    {
+      "body": "if (!$ctrl || !$ctrl.pageParameters || typeof $ctrl.pageParameters.id === 'undefined') {\n    console.error($ctrl.en.global.notifications.payrollRun.errors.console.NOT_FOUND);\n    $ctrl.utils.toast($ctrl.en.global.notifications.payrollRun.errors.toast.NOT_FOUND, \"ERROR\");\n    return;\n}\n\nconst payrollRunId = $ctrl.pageParameters.id;\nconst displayName = $ctrl.payrollRunReview.PayrollRunReview.PayrollRun.DisplayName;\nlet encashAccrualBalances = false;\nlet requestBody;\n\nconst confirmAccrualBalanceEncashmentResponse = await this.$modal.open(\"confirm-action-modal\", {\n    title: $ctrl.en.global.notifications.payrollRun.initiateReview.confirm.title,\n    body: $ctrl.en.global.notifications.payrollRun.initiateReview.confirm.body,\n    confirmButtonLabel: \"Yes\",\n    cancelButtonLabel: \"No\"\n}).then(res => {\n    return res.result;\n});\n\nif ([\"ok\", \"cancel\"].includes(confirmAccrualBalanceEncashmentResponse)) encashAccrualBalances = confirmAccrualBalanceEncashmentResponse === \"ok\" ? true : false;\nelse return;\n\ntry {\n    const requestParameters = {\n        id: payrollRunId,\n        maskSensitiveWorkerInfo: false,\n        encashAccrualBalances: encashAccrualBalances\n    };\n\n    const requestHeaders = {\n        headers: $ctrl.authCookies.setHeaders()\n    };\n\n    if ($ctrl.hasModifiedPayrollRunReview) {\n        requestBody = $ctrl.payrollRunReview.PayrollRunReview.Workers.map(worker => {\n            return {\n                WorkerId: worker.Id,\n                Earnings: worker.Earnings.map(earning => {\n                    return {\n                        Id: earning.Id,\n                        CustomAmount: earning.CustomAmount,\n                        Origin: earning.Origin\n                    }\n                }),\n                Benefits: worker.Benefits.map(benefit => {\n                    return {\n                        Id: benefit.Id,\n                        CustomEmployeeAmount: benefit.CustomEmployeeAmount,\n                        CustomEmployerAmount: benefit.CustomEmployerAmount,\n                        Origin: benefit.Origin\n                    }\n                })\n            }\n        });\n    }\n\n    const response = await $ctrl.payrollAppApi.lonti_app_payroll_service_payroll_run_InitiateReviewPayrollRun(\n        requestParameters,\n        requestBody,\n        requestHeaders\n    );\n\n    const reviewPayrollRunJobData = response?.data?.PayrollRunReviewJob;\n\n    if (!reviewPayrollRunJobData) {\n        throw new Error($ctrl.en.global.notifications.payrollRun.initiateReview.error.console.UNEXPECTED_JOB_DATA);\n    }\n\n    reviewPayrollRunJobData.encashAccrualBalances = encashAccrualBalances;\n\n    $ctrl.payrollRunReviewService.cacheJobDetails(\n        payrollRunId,\n        reviewPayrollRunJobData\n    );\n\n    $ctrl.utils.toast(\n        $ctrl.en.global.notifications.payrollRun.initiateReview.info.INITIATE(displayName),\n        \"INFO\"\n    );\n\n    $ctrl.pollingService.payrollRunReview.startPolling(payrollRunId);\n    $ctrl.$state.go(\"payroll_processing\");\n} catch (error) {\n    console.error($ctrl.en.global.notifications.payrollRun.initiateReview.error.console.FAILED(displayName), error);\n    $ctrl.utils.toast(\n        $ctrl.en.global.notifications.payrollRun.initiateReview.error.toast.FAILED(displayName),\n        \"ERROR\"\n    );\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "handleAssignmentFormCalculateButtonClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "payrollRunService",
+      "resourceIdentity": "services/entities/payroll-run-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "pollingService",
+      "resourceIdentity": "services/polling-service",
+      "type": "service"
+    },
+    {
+      "body": "$ctrl.tableData.forEach(row => {\n    const employmentStartDate = row.EmploymentInfo.EmploymentStartDate;\n    const date = new Date(employmentStartDate);\n\n    if (!(date instanceof Date) || isNaN(date.getTime())) {\n        return;\n    }\n    \n    const year = date.getFullYear();\n    const month = (date.getMonth() + 1).toString().padStart(2, '0');\n    const day = date.getDate().toString().padStart(2, '0');\n\n    row.EmploymentInfo.EmploymentStartDate = `${year}-${month}-${day}`;\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "transformEmploymentStartDateForDisplay",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "encashAccrualBalances",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "const tabs = new Map([\n    [1, [$ctrl.payComponents.workerEarnings, $ctrl.payComponents.workerBenefits]],\n    [2, [$ctrl.payComponents.positionEarnings, $ctrl.payComponents.positionBenefits]],\n    [3, $ctrl.payComponents.taxes],\n    [4, $ctrl.workerAccrualBalances]\n]);\n\n$ctrl.displayedPayComponents = tabs.get(selectedTab);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handlePayComponentTabChange",
+      "parameters": [
+        "selectedTab"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "payComponentSelectedTab",
+      "type": "property",
+      "value": "1"
+    },
+    {
+      "id": "service",
+      "name": "payrollRunReviewService",
+      "resourceIdentity": "services/entities/payroll-run-review-service",
+      "type": "service"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "assignmentTableColumns",
+      "type": "array"
+    },
+    {
+      "children": [
+        {
+          "description": "",
+          "name": "0",
+          "properties": [
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"Name\""
+            },
+            {
+              "description": "",
+              "name": "hide",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "valueKey",
+              "type": "property",
+              "value": "'Name'"
+            },
+            {
+              "description": "",
+              "name": "enableSorting",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enableFiltering",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enableEditing",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "enablePinning",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "type",
+              "type": "property",
+              "value": "\"string\""
+            },
+            {
+              "description": "",
+              "name": "resizable",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "cellTemplate",
+              "type": "property",
+              "value": "\"js-expression\""
+            },
+            {
+              "description": "",
+              "name": "cellTooltip",
+              "type": "property",
+              "value": "''"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellConditionalStyle",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellActions",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "classes",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "conditionalClasses",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "cellTemplateJsExpression",
+              "type": "property",
+              "value": "''"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "1",
+          "properties": [
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"Custom Employee Amount\""
+            },
+            {
+              "description": "",
+              "name": "hide",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "valueKey",
+              "type": "property",
+              "value": "'CustomEmployeeAmount'"
+            },
+            {
+              "description": "",
+              "name": "enableSorting",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "sortBy",
+              "type": "property",
+              "value": "\"none\""
+            },
+            {
+              "description": "",
+              "name": "enableFiltering",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enableEditing",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enablePinning",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "type",
+              "type": "property",
+              "value": "\"number\""
+            },
+            {
+              "description": "",
+              "name": "resizable",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "cellTemplate",
+              "type": "property",
+              "value": "\"js-expression\""
+            },
+            {
+              "description": "",
+              "name": "cellTooltip",
+              "type": "property",
+              "value": "''"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellConditionalStyle",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellActions",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "classes",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "conditionalClasses",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "cellTemplateJsExpression",
+              "type": "property",
+              "value": "''"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "2",
+          "properties": [
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"Custom Employer Amount\""
+            },
+            {
+              "description": "",
+              "name": "hide",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "valueKey",
+              "type": "property",
+              "value": "'CustomEmployerAmount'"
+            },
+            {
+              "description": "",
+              "name": "enableSorting",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "sortBy",
+              "type": "property",
+              "value": "\"none\""
+            },
+            {
+              "description": "",
+              "name": "enableFiltering",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enableEditing",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "enablePinning",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "type",
+              "type": "property",
+              "value": "\"number\""
+            },
+            {
+              "description": "",
+              "name": "resizable",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "cellTemplate",
+              "type": "property",
+              "value": "\"js-expression\""
+            },
+            {
+              "description": "",
+              "name": "cellTooltip",
+              "type": "property",
+              "value": "''"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellConditionalStyle",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "cellActions",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "classes",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "conditionalClasses",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "cellTemplateJsExpression",
+              "type": "property",
+              "value": "''"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "description": "",
+      "name": "assignmentTableColumnRefs",
+      "type": "array"
+    },
+    {
+      "description": "",
+      "name": "storedTab",
+      "type": "property",
+      "value": "1"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "sectionData",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "leftColumn",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "rightColumn",
+      "type": "array"
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "warnings",
+      "type": "array"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    }
+  ]
+}

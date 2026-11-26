@@ -1,0 +1,54 @@
+{
+  "description": "",
+  "name": "user-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"LastName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Last Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"FirstName\",\n    \"LastName\",\n    \"Email\",\n    \"Active\",\n    \"Enabled\",\n    \"Department\",\n    \"Title\",\n    \"EmploymentStartDate\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n    },\n    type: {\n        \"Active\": \"boolean\",\n        \"Enabled\": \"boolean\",\n        \"EmploymentStartDate\": \"date\",\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        // operators: [\"eq\"]\n    },\n    {\n        label: \"Worker ID\",\n        value: \"WorkerId\",\n        type: \"number\",\n        // operators: [\"eq\"]\n    },\n\n    // --- Core Identity ---\n    {\n        label: \"First Name\",\n        value: \"FirstName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\"]\n    },\n    // {\n    //     label: \"Middle Name\",\n    //     value: \"MiddleName\",\n    //     type: \"string\",\n    //     // operators: [\"contains\", \"eq\", \"startswith\"]\n    // },\n    {\n        label: \"Last Name\",\n        value: \"LastName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\"]\n    },\n    // {\n    //     label: \"Last Name Prefix\",\n    //     value: \"LastNamePrefix\",\n    //     type: \"string\",\n    //     // operators: [\"contains\", \"eq\", \"startswith\"]\n    // },\n    {\n        label: \"Email\",\n        value: \"Email\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\"]\n    },\n\n    // --- Status ---\n    {\n        label: \"Active\",\n        value: \"Active\",\n        type: \"boolean\",\n        operators: [\"eq\"]\n    },\n    {\n        label: \"Enabled\",\n        value: \"Enabled\",\n        type: \"boolean\",\n        operators: [\"eq\"]\n    },\n\n    // --- Metadata ---\n    // {\n    //     label: \"Created Date\",\n    //     value: \"CreatedDate\",\n    //     type: \"date\",\n    //     // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n    // },\n    // {\n    //     label: \"Updated Date\",\n    //     value: \"UpdatedDate\",\n    //     type: \"date\",\n    //     // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n    // }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getQuickSearchDefaults",
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "earnings"
+  ]
+}

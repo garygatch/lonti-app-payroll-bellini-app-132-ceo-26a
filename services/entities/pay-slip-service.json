@@ -1,0 +1,53 @@
+{
+  "description": "",
+  "name": "pay-slip-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"PayPeriodDisplayName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Pay Period Display Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"PayPeriodDisplayName\",\n    \"StartDate\",\n    \"EndDate\",\n    \"PayDate\",\n    \"Status\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"StartDate\": \"PayPeriodStartDate\",\n        \"EndDate\": \"PayPeriodEndDate\",\n        \"PayDate\": \"PayPeriodPayDate\"\n    },\n    type: {\n        \"StartDate\": \"date\",\n        \"EndDate\": \"date\",\n        \"PayDate\": \"date\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n    },\n    {\n        label: \"Pay Period Display Name\",\n        value: \"PayPeriodDisplayName\",\n    },\n        {\n        label: \"Start Date\",\n        value: \"PayPeriodStartDate\",\n        type: \"string\"\n\n    },\n        {\n        label: \"End Date\",\n        value: \"PayPeriodEndDate\",\n        type: \"string\"\n\n    },\n        {\n        label: \"Pay Date\",\n        value: \"PayPeriodPayDate\",\n        type: \"string\"\n\n    },\n    {\n        label: \"Run Type\",\n        value: \"PayrollRunType\",\n        type: \"dropdown\",\n        source: \"runTypeMap\",\n        operators: [\"eq\"]\n    },\n    {\n        label: \"Gross Pay\",\n        value: \"GrossPay\",\n        type: \"number\"\n    },\n    {\n        label: \"Total Deductions\",\n        value: \"TotalDeductions\",\n        type: \"number\"\n    },\n    {\n        label: \"Net Pay\",\n        value: \"NetPay\",\n        type: \"number\"\n    },\n    {\n        label: \"Status\",\n        value: \"Status\",\n        type: \"string\"\n    },\n    {\n        label: \"Gross Non-taxable\",\n        value: \"GrossNonTaxable\",\n        type: \"number\",\n    },\n    {\n        label: \"Gross Taxable\",\n        value: \"GrossTaxable\",\n        type: \"number\",\n    },\n    {\n        label: \"Pre-tax Deductions\",\n        value: \"PreTaxDeductions\",\n        type: \"number\",\n    },\n    {\n        label: \"Net Taxable\",\n        value: \"NetTaxable\",\n        type: \"number\"\n    },\n    {\n        label: \"Taxes\",\n        value: \"Taxes\",\n        type: \"number\"\n    },\n    {\n        label: \"Post-tax Deductions\",\n        value: \"PostTaxDeductions\",\n        type: \"number\"   \n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getQuickSearchDefaults",
+    "getColumnDefaults",
+    "getFilterDefinitions"
+  ]
+}

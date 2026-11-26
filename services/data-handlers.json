@@ -1,0 +1,103 @@
+{
+  "description": "",
+  "name": "data-handlers",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "currentContext",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "this.currentContext = context",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setContext",
+      "parameters": [
+        "context"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "try {\n    limit = limit ?? 25;\n    let offset = 0;\n    \n    if (currentPage) {\n        offset = (currentPage - 1) * limit;\n    }\n\n    const response = await this.currentContext.payrollAppApi[endpoint](\n        {\n            limit, offset\n        },\n        {\n            headers: this.authCookies.setHeaders()\n        }\n    )\n\n    if (response.status == 200) {\n        return response.data[entity]\n    } else {\n        this.utils.toast(response.data.message, response.data.result);\n        throw response;\n    }\n    \n} catch (e) {\n    console.error(\"Error getting data:\", e);\n}\n\n// limit = limit || 25;\n\n// const offset = currentPage ? (currentPage - 1) * limit : 0;\n\n// return this.currentContext.payrollAppApi[endpoint](\n//     { limit: limit, offset: offset },\n//     { headers: this.authCookies.setHeaders() }\n// )\n//     .then((result) => result.data[entity])\n//     .catch((reason) => {\n//         this.utils.toast(reason.data.message, reason.data.result);\n//         throw reason;\n//     });\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "getData",
+      "parameters": [
+        "endpoint",
+        "entity",
+        "currentPage",
+        "limit"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const processedData = this.processDataFields(data, {\n    removeFields: options.removeFields,\n    transformBooleansToYesNo: options.transformBooleans,\n    replaceUserIdsWithNames: options.replaceUserIds,\n    addCountryAndStateNames: options.addCountryStateNames,\n    addUserRoles: options.addUserRoles,\n    addPositionDetails: options.addPositionDetails,\n    replaceCompanyIdsWithNames: options.replaceCompanyIds,\n    replacePayScheduleIdsWithNames: options.replacePayScheduleIds,\n    replaceTaxIdsWithNames: options.replaceTaxIds,\n    replaceCurrencyIdsWithNames: options.replaceCurrencyIds,\n    replaceEarningIdsWithNames: options.replaceEarningIds,\n    replaceBenefitIdsWithNames: options.replaceBenefitIds,\n    hideAccrualRelatedFields: options.hideAccrualFields\n});\n\n// Assign processed data to the specified ctrl property\nif (options.ctrlDataName) {\n    this.currentContext[options.ctrlDataName] = processedData;\n}\n\n// Handle column visibility and transformation if specified\nif (options.ctrlColumnName && options.hideColumns) {\n    this.currentContext[options.ctrlColumnName] = this.processDataFields(data, { hideColumns: true })[0];\n}\n\n// Map entities to labels and values if specified\nif (options.mapToLabelValue && options.entityList && options.mapLabelKey && options.mapValueKey) {\n    this.currentContext[options.mapToLabelValue] = mapEntitiesToLabelsAndValues(\n        options.entityList,\n        options.mapLabelKey,\n        options.mapValueKey\n    );\n}\n\nreturn processedData;\n\n// Mapping Functions\nfunction mapEntitiesToLabelsAndValues(entities, labelKeyOrKeys, valueKey) {\n    return entities\n        .filter(entity => {\n            // Check if labelKeyOrKeys is an array (multiple keys) or a single string\n            if (Array.isArray(labelKeyOrKeys)) {\n                // Ensure all keys in labelKeyOrKeys have values in entity\n                return entity && labelKeyOrKeys.every(key => entity[key]) && entity[valueKey];\n            } else {\n                // Single key: ensure it has a value in entity\n                return entity && entity[labelKeyOrKeys] && entity[valueKey];\n            }\n        })\n        .map(entity => ({\n            label: Array.isArray(labelKeyOrKeys)\n                ? labelKeyOrKeys.map(key => entity[key]).join(' ')  // Combine multiple keys\n                : entity[labelKeyOrKeys],  // Use single key directly\n            value: entity[valueKey]\n        }));\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "processData",
+      "parameters": [
+        "data",
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "  return data.map(record => {\n    let updatedRecord = { ...record };\n    \n    // Replace user IDs with names\n    if (options.replaceUserIdsWithNames && this.currentContext.users) {\n      const createdByUser = this.currentContext.users.find(user => user.Id == updatedRecord.CreatedBy);\n      const updatedByUser = this.currentContext.users.find(user => user.Id == updatedRecord.UpdatedBy);\n\n      // Update fields only if corresponding user is found; otherwise, keep the original ID\n      updatedRecord = {\n        ...updatedRecord,\n        CreatedBy: createdByUser ? `${createdByUser.FirstName} ${createdByUser.LastName}` : updatedRecord.CreatedBy,\n        UpdatedBy: updatedByUser ? `${updatedByUser.FirstName} ${updatedByUser.LastName}` : updatedRecord.UpdatedBy\n      };\n\n      if (updatedRecord?.Detail) {\n        const detailCreatedByUser = this.currentContext.users.find(user => user.Id == updatedRecord.Detail.CreatedBy);\n        const detailUpdatedByUser = this.currentContext.users.find(user => user.Id == updatedRecord.Detail.UpdatedBy);\n        updatedRecord.Detail.CreatedBy = detailCreatedByUser ? `${detailCreatedByUser.FirstName} ${detailCreatedByUser.LastName}` : updatedRecord.Detail.CreatedBy;\n        updatedRecord.Detail.UpdatedBy = detailUpdatedByUser ? `${detailUpdatedByUser.FirstName} ${detailUpdatedByUser.LastName}` : updatedRecord.Detail.UpdatedBy;\n      }\n    }\n\n    // Replace company IDs with names\n    if (options.replaceCompanyIdsWithNames && this.currentContext.companies) {\n      const company = this.currentContext.companies.find(company => company.Id === updatedRecord.CompanyId);\n      if (company) updatedRecord.Company = company.LegalName;\n    }\n\n    // Replace pay schedule IDs with names\n    if (options.replacePayScheduleIdsWithNames && this.currentContext.paySchedules && !updatedRecord.OffCycle) {\n      const paySchedule = this.currentContext.paySchedules\n        .find(paySchedule => paySchedule.Id === (updatedRecord?.PayScheduleId ||\n          this.currentContext.payPeriods\n            .find(payPeriod => payPeriod.Id === updatedRecord.PayPeriodId)?.PayScheduleId));\n\n      if (paySchedule) updatedRecord = {\n        PaySchedule: paySchedule.DisplayName,\n        ...Object.fromEntries(\n          Object.entries(updatedRecord)\n            .filter(([key]) =>\n              !['CreatedDate', 'CreatedBy', 'UpdatedDate', 'UpdatedBy'].includes(key))),\n        CreatedDate: updatedRecord.CreatedDate,\n        CreatedBy: updatedRecord.CreatedBy,\n        UpdatedDate: updatedRecord.UpdatedDate,\n        UpdatedBy: updatedRecord.UpdatedBy\n      }\n    }\n\n    if (options.replaceEarningIdsWithNames && this.currentContext.earnings) {\n      const earning = this.currentContext.earnings.find(earning => earning.Id === updatedRecord.EarningId);\n      if (earning) updatedRecord.Earning = earning.Name;\n    }\n\n    if (options.replaceBenefitIdsWithNames && this.currentContext.benefits) {\n      const benefit = this.currentContext.benefits.find(benefit => benefit.Id === updatedRecord.BenefitId);\n      if (benefit) updatedRecord.Benefit = benefit.Name;\n    }\n\n    // Add Position Details\n    if (options.addPositionDetails && this.currentContext.positions && this.currentContext.workerPositions) {\n      const workerPosition = this.currentContext.workerPositions.find(workerPosition => workerPosition.WorkerId === updatedRecord.Id);\n\n      if (workerPosition) {\n        const positionDetails = this.currentContext.positions.find(position => position.Id === workerPosition.PositionId);\n\n        updatedRecord = {\n          Department: positionDetails.Department,\n          Title: positionDetails.Title,\n          CustomAnnualRate: workerPosition.CustomAnnualRate,\n          ...Object.fromEntries(\n            Object.entries(updatedRecord).filter(([key]) =>\n              !['CreatedDate', 'CreatedBy', 'UpdatedDate', 'UpdatedBy'].includes(key)\n            )\n          ),\n          PositionId: positionDetails.Id,\n          WorkerPositionId: workerPosition.Id,\n          CreatedDate: updatedRecord.CreatedDate,\n          CreatedBy: updatedRecord.CreatedBy,\n          UpdatedDate: updatedRecord.UpdatedDate,\n          UpdatedBy: updatedRecord.UpdatedBy,\n        }\n      }\n    }\n\n    // Replace tax IDs with names\n    if (options.replaceTaxIdsWithNames && this.currentContext.taxes) {\n      const tax = this.currentContext.taxes.find(tax => tax.Id === updatedRecord.TaxId);\n      if (tax) updatedRecord = Object.entries(updatedRecord).reduce((acc, [key, value]) => {\n        if (key === \"TaxId\") acc.Tax = tax.Name;\n        acc[key] = value;\n        return acc;\n      }, {});\n    }\n\n    // Replace currency IDs with names\n    if (options.replaceCurrencyIdsWithNames && this.currentContext.currencies) {\n      const currency = this.currentContext.currencies.find(currency => currency.Id === updatedRecord.CurrencyId);\n      if (currency) updatedRecord = Object.entries(updatedRecord).reduce((acc, [key, value]) => {\n        if (key === \"CurrencyId\") acc.Currency = currency.CurrencyName;\n        acc[key] = value;\n        return acc;\n      }, {});\n    }\n\n    // Add country and state names\n    if (options.addCountryAndStateNames && this.currentContext.countries && this.currentContext.states) {\n      const country = this.currentContext.countries.find(country => country.Id === updatedRecord.CountryId);\n      const state = this.currentContext.states.find(state => state.Id === updatedRecord.StateId);\n      if (country) updatedRecord = Object.entries(updatedRecord).reduce((acc, [key, value]) => {\n        if (key === \"CountryId\") acc.Country = country.Name;\n        if (state && key === \"StateId\") acc.State = state.Name;\n        acc[key] = value;\n        return acc;\n      }, {});\n    }\n\n    // Add User Roles\n    if (options.addUserRoles && this.currentContext.userRoles) {\n      const isWorker = this.currentContext.userRoles.find(userRole => userRole.UserId === updatedRecord.Id && userRole.RoleId === 1) ? true : false;\n      const isPayrollAdmin = this.currentContext.userRoles.find(userRole => userRole.UserId === updatedRecord.Id && userRole.RoleId === 2) ? true : false;\n\n      updatedRecord = {\n        ...Object.fromEntries(\n          Object.entries(updatedRecord).filter(([key]) =>\n            !['CreatedDate', 'CreatedBy', 'UpdatedDate', 'UpdatedBy'].includes(key)\n          )\n        ),\n        IsWorker: isWorker,\n        IsPayrollAdmin: isPayrollAdmin,\n        CreatedDate: updatedRecord.CreatedDate,\n        CreatedBy: updatedRecord.CreatedBy,\n        UpdatedDate: updatedRecord.UpdatedDate,\n        UpdatedBy: updatedRecord.UpdatedBy,\n      };\n    }\n\n    // Transform boolean fields\n    if (options.transformBooleansToYesNo === undefined || options.transformBooleansToYesNo) {\n      updatedRecord = moveBooleansToEnd(updatedRecord);\n      // updatedRecord = booleanToYesNo(updatedRecord);\n    }\n\n    // Remove specified fields\n    if (options.removeFields) {\n      options.removeFields.forEach(field => delete updatedRecord[field]);\n    }\n\n    // Hide columns and transform column names if specified\n    // TODO: Pass the columns to be hidden as arguments instead of a fixed array\n    if (options.hideColumns) {\n      updatedRecord = Object.keys(updatedRecord)\n        .filter(columnName => ![\n          ...(window.location.hash === \"#!/dashboard\" ? [] : [\"EffectiveFromDate\", \"EffectiveToDate\"]),\n          \"Description\", \"Detail\",\n          \"DayStartTime\", \"WorkingDays\", \"PayDateOnBD\",\n          \"MonthFirstStartDay\", \"MonthFirstPayDay\", \"MonthSecondStartDay\", \"MonthSecondPayDay\",\n          \"WeekStartDayName\", \"WeekPayDayName\",\n          \"UnitsType\", \"AccrualRate\", \"AccrualRateUnit\", \"AccrualCycleDay\", \"AccrualCycleMonth\", \"CashDay\", \"CashMonth\",\n          \"Id\", \"CountryId\", \"CompanyId\", \"PayScheduleId\", \"CalculationMethodId\", \"TaxCalculationMethodId\", \"EmployeeCalculationMethodId\", \"EmployerCalculationMethodId\", \"CurrencyId\", \"WorkerId\", \"TaxId\", \"AccrualId\", \"EarningId\", \"PayPeriodId\",\n          \"CreatedDate\", \"CreatedBy\", \"UpdatedDate\", \"UpdatedBy\", \"Custom\", \"Deleted\", \"DeletedYesNo\"\n        ].includes(columnName)) // && typeof updatedRecord[columnName] !== \"boolean\")\n        .map(columnName => {\n          const originalColumn = columnName;\n\n          // Simplify column names\n          if (columnName.includes(\"Primary\")) columnName = columnName.replace(\"Primary\", \"\");\n          if (columnName.includes(\"Contact\")) columnName = columnName.replace(\"Contact\", \"\");\n          if (columnName.includes(\"Location\")) columnName = columnName.replace(\"Location\", \"\");\n\n          if (typeof updatedRecord[originalColumn] === \"boolean\") return {\n            name: columnName,\n            hide: false,\n            textAlign: \"left\",\n            enableSorting: true,\n            sortBy: \"none\",\n            enableFiltering: false,\n            enablePinning: false,\n            type: \"boolean\",\n            cellTemplate: \"default\",\n            cellConditionalStyle: [],\n            cellActions: [],\n            classes: [],\n            conditionalClasses: [],\n            valueKey: originalColumn\n          };\n\n          return {\n            name: columnName,\n            hide: false,\n            textAlign: \"left\",\n            enableSorting: true,\n            sortBy: \"none\",\n            enableFiltering: false,\n            enablePinning: false,\n            type: \"string\",\n            cellTemplate: \"default\",\n            cellConditionalStyle: [],\n            cellActions: [],\n            classes: [],\n            conditionalClasses: [],\n            valueKey: originalColumn\n          };\n        });\n    }\n\n    if (options.hideAccrualRelatedFields && updatedRecord.AccrualMethod === \"AWARDED\") {\n      updatedRecord = Object.keys(updatedRecord)\n        .filter(key => !key.includes(\"Accrual\") || key === \"AccrualMethod\")\n        .reduce((obj, key) => {\n          obj[key] = updatedRecord[key]\n          return obj;\n        }, {});\n    }\n\n    return updatedRecord;\n  });\n\n  function booleanToYesNo(obj) {\n    for (const key in obj) {\n      if (Object.hasOwnProperty.call(obj, key)) {\n        if (typeof obj[key] === 'boolean') {\n          obj[key.concat(\"YesNo\")] = obj[key] ? 'YES' : 'NO';\n        } else if (typeof obj[key] === 'object' && obj[key] !== null) {\n          booleanToYesNo(obj[key]);\n        }\n      }\n    }\n    return obj;\n  }\n\n  function moveBooleansToEnd(obj) {\n    const nonBooleanProps = {};\n    const booleanProps = {};\n    const auditProps = {};\n    const auditKeys = [\"CreatedDate\", \"CreatedBy\", \"UpdatedDate\", \"UpdatedBy\"];\n\n    for (const key in obj) {\n      if (Object.hasOwnProperty.call(obj, key)) {\n        if (auditKeys.includes(key)) {\n          auditProps[key] = obj[key];\n        } else if (typeof obj[key] === 'boolean') {\n          booleanProps[key] = obj[key];\n        } else {\n          nonBooleanProps[key] = obj[key];\n        }\n      }\n    }\n\n    return { ...nonBooleanProps, ...booleanProps, ...auditProps };\n  }",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "processDataFields",
+      "parameters": [
+        "data",
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getData",
+    "processData",
+    "processDataFields",
+    "setContext"
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "description": "",
+  "name": "auth-service",
+  "parentDirectoryId": "plukWBhIlQsdGDE67dxNA",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAuth",
+      "resourceIdentity": "apis/payrollAuth",
+      "type": "open-api"
+    },
+    {
+      "name": "$auth",
+      "type": "service"
+    },
+    {
+      "body": "this.setBaseApiUrl(); \n\nconst user = this.$auth.getUserInfo();\nthis.loggedInUser = user?.fullname || user?.name || user?.username || user?.email || user?.sub || \"User\";\n\nthis.authReadyPromise = this.setSaasAuth(); \nawait this.authReadyPromise; ",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "setLoggedInUser",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "loggedInUser",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "description": "",
+      "name": "saasAuth",
+      "properties": [
+        {
+          "description": "",
+          "name": "rolesByName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "userScopes",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "userId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "return this.saasAuth.rolesByName;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getSaasUserRoles",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "body": "try {\n    const result = await this.payrollAuth.workflow_access_control_workflow_users_SelectUserMe({}, {\n        headers: {\n            \"X-Authorization\": this.$cookies.get(\"id_token\")\n        }\n    });\n\n    const user = result?.data?.users_me;\n    if (!user || !Array.isArray(user.role_names) || !Array.isArray(user.scopes)) {\n        throw new Error(\n            \"API response is missing the expected user, roles, or scopes data.\"\n        );\n    }\n\n    this.saasAuth.rolesByName = user.role_names;\n    this.saasAuth.userScopes = user.scopes;\n    this.saasAuth.userId = user.Id;\n    this.saasAuth.workerId = user.WorkerId;\n    this.isCurrentUserAdmin = this.saasAuth.rolesByName.includes(\"Payroll Admin\");\n    \n} catch (error) {\n    console.error(\"API Error in authService:\", error);\n    if (error.response) {\n        console.error(\"Server responded with:\", error.response.data);\n    }\n    \n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "setSaasAuth",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const ENV_PROPERTY_NAME = \"payroll_api_base_url\";\n\n// Helper function to safely construct a full URL from a base and a path\nconst getFullApiUrl = (base, path) => {\n  if (!base || !path) {\n    return null;\n  }\n  const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;\n  const cleanPath = path.startsWith('/') ? path : `/${path}`;\n  return cleanBase + cleanPath;\n};\n\n// Get the single base URL from the environment\nconst apiBaseUrlFromEnv = this.$env.getProperty(ENV_PROPERTY_NAME);\n\n// Central validation for the base URL\nif (!apiBaseUrlFromEnv || apiBaseUrlFromEnv.trim() === \"\") {\n  console.warn(`The '${ENV_PROPERTY_NAME}' environment variable is not set. API URLs cannot be configured.`);\n} else {\n  // Array of API endpoint configurations\n  const apiEndpoints = [\n    {\n      path: \"/api/access_control/1.0\",\n      service: this.payrollAuth, \n      serviceName: \"payrollAuth\"\n    }\n  ];\n\n  // Iterate over each configuration to set the URL and configure the service\n  apiEndpoints.forEach(endpoint => {\n    const fullApiUrl = getFullApiUrl(apiBaseUrlFromEnv, endpoint.path);\n    if (endpoint.service && typeof endpoint.service.setServerUrl === 'function') {\n      endpoint.service.setServerUrl(fullApiUrl);\n    } else {\n      console.warn(`The '${endpoint.serviceName}' service or its 'setServerUrl' method is not available.`);\n    }\n  });\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "setBaseApiUrl",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "isCurrentUserAdmin",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "body": "const option = {\n        entity: \"user\",\n        query: `Id=${Id}`\n    };\n\nconst result = await this.payrollApiService.get(option);\nconst workerId = result?.entities?.[0]?.WorkerId ?? null;\n\nreturn workerId;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "getUserWorkerId",
+      "parameters": [
+        "Id"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "body": "await this.authReadyPromise;\nif (!this.isCurrentUserAdmin) {\n    this.$state.go(\"user\", {userId: this.saasAuth.userId});\n    return false;\n} else return true;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "redirectWorker",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "authReadyPromise",
+      "type": "property",
+      "value": ""
+    }
+  ],
+  "visible": [
+    "loggedInUser",
+    "saasAuth",
+    "getSaasUserRoles",
+    "isCurrentUserAdmin",
+    "getUserWorkerId",
+    "redirectWorker",
+    "setSaasAuth",
+    "authReadyPromise"
+  ]
+}

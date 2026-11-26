@@ -1,0 +1,349 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "() => {}",
+      "description": "This function should be called to close the modal.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onClose",
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "{\n    \n}",
+      "description": "The result of the modal that is returned after the modal is closed.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "result",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "Select Sheets to Export"
+            }
+          ],
+          "classList": [
+            "modal-title"
+          ],
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "×"
+            }
+          ],
+          "classList": [
+            "modal-close"
+          ],
+          "events": {
+            "click": "$ctrl.onCancelClick()"
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [
+        "modal-header"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Attendance Summary\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.result.attendanceSummarySheet",
+              "to": "checked"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Benefit Contributions\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.result.benefitContributionsSheet",
+              "to": "checked"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Department Summary\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.result.departmentSummarySheet",
+              "to": "checked"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Employee Net Pay\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.result.employeeNetPaySheet",
+              "to": "checked"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Payroll Summary\"",
+              "to": "label"
+            },
+            {
+              "expression": "true",
+              "to": "checked"
+            },
+            {
+              "expression": "$ctrl.result.payrollSummarySheet = value;\n$ctrl.untickedPayrollSummarySheet = true;",
+              "to": "onCheckedChange"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "\"Taxes\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.result.taxesSheet",
+              "to": "checked"
+            }
+          ],
+          "formControl": {
+            "modelName": "checked"
+          },
+          "name": "Checkbox",
+          "nodeName": "bln-checkbox",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-body"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-cancel"
+          ],
+          "expressions": [
+            {
+              "expression": "\"default\"",
+              "to": "type"
+            },
+            {
+              "expression": "'Cancel'",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onCancelClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-ok"
+          ],
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "\"Export\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onOkClick()",
+              "to": "onClick"
+            },
+            {
+              "expression": "$ctrl.untickedPayrollSummarySheet && Object.values($ctrl.result).filter(value => value).length === 0",
+              "to": "isDisabled"
+            },
+            {
+              "expression": "$ctrl.untickedPayrollSummarySheet && Object.values($ctrl.result).filter(value => value).length === 0 ? \"Select a Sheet to Export\" : undefined",
+              "to": "tooltip"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-footer"
+      ],
+      "name": "div"
+    }
+  ],
+  "description": null,
+  "formControl": null,
+  "localStylesheets": [
+    {
+      "path": "index.css"
+    }
+  ],
+  "modules": [],
+  "name": "select-sheets-to-export-modal",
+  "nodeName": null,
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "body": "if (typeof $ctrl.result.payrollSummarySheet === \"undefined\") $ctrl.result.payrollSummarySheet = true;\n$ctrl.result.status = 'ok';\n$ctrl.onClose();",
+      "description": "This function is called when OK button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onOkClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.result.status = 'cancel'\n$ctrl.onClose()",
+      "description": "This function is called when Cancel button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onCancelClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ]
+}

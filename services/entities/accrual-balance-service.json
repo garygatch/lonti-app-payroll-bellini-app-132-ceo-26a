@@ -1,0 +1,53 @@
+{
+  "description": "",
+  "name": "accrual-balance-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"AccrualName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Leave\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Name\",\n    \"Balance\",\n    \"Used\",\n    \"AccruedAmount\",\n    \"LastAccrualDate\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Name\": \"AccrualName\",\n    },\n    type: {\n        \"LastAccrualDate\": \"date\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n    },\n    {\n        label: \"Name\",\n        value: \"AccrualName\",\n        type: \"string\"\n    },\n    {\n        label: \"Description\",\n        value: \"Description\",\n        type: \"string\"\n    },\n    {\n        label: \"Balance\",\n        value: \"Balance\",\n        type: \"number\"\n    },\n    {\n        label: \"Used\",\n        value: \"Used\",\n        type: \"number\"\n    },\n    {\n        label: \"Accrued Amount\",\n        value: \"AccruedAmount\",\n        type: \"number\"\n    },\n    {\n        label: \"Carry Over\",\n        value: \"CarryOver\",\n        type: \"number\"\n    },\n    {\n        label: \"Max Balance\",\n        value: \"MaxBalance\",\n        type: \"number\"\n    },\n    {\n        label: \"Last Accrual Date\",\n        value: \"LastAccrualDate\",\n        type: \"date\"\n    },\n    {\n        label: \"Effective From\",\n        value: \"EffectiveFromDate\",\n        type: \"date\"\n    },\n    {\n        label: \"Effective To\",\n        value: \"EffectiveToDate\",\n        type: \"date\"\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getQuickSearchDefaults",
+    "getColumnDefaults",
+    "getFilterDefinitions"
+  ]
+}

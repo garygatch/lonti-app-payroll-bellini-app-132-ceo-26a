@@ -1,0 +1,4299 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "workerId",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "links",
+      "propertyType": "array",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "workerName",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "workerRole",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "entityType",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "userId",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isLoadingTable",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isWorker",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "reloadTab",
+      "propertyType": "boolean",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "isPanelOpen",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "referenceData",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "positionId",
+      "propertyType": "property",
+      "type": "=",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "classList": [],
+          "contentType": "html",
+          "html": {
+            "content": "(\n    $ctrl.isWorker && !$ctrl.workerId\n)\n    ? \"Worker record not found. Create one in Worker tab.\"\n    : \"User is not a Worker.\"",
+            "evaluate": true
+          },
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-worker-note",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n!$ctrl.workerId\n&&\n(\n    $ctrl.entityType !== \"user\"\n    &&\n    (   \n        $ctrl.isWorker\n        &&\n        $ctrl.entityType !== \"worker\"\n    )\n)\n||\n(\n    !$ctrl.isWorker\n    &&\n    $ctrl.entityType !== \"user\"\n)",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "text-align",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": true,
+              "name": "text",
+              "textContent": "$ctrl.helpers._getDisplayedNoData()"
+            }
+          ],
+          "classList": [],
+          "name": "p"
+        }
+      ],
+      "classList": [],
+      "comments": "no-data",
+      "displayExpression": "!$ctrl.isLoadingTable\n&&\n$ctrl.isWorker\n&&\n(\n    $ctrl.uiState.displayedInfo.length === 0\n    ||\n    $ctrl.tabStore[$ctrl.entityType].data.length === 0\n) \n&&\n(\n    $ctrl.workerId\n    ||\n    $ctrl.entityType === \"worker\"\n)",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "align-items",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "justify-content",
+          "value": "center"
+        },
+        {
+          "enabled": true,
+          "property": "position",
+          "value": "absolute"
+        },
+        {
+          "enabled": true,
+          "property": "top",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "left",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "right",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "bottom",
+          "value": "0"
+        },
+        {
+          "enabled": true,
+          "property": "background-color",
+          "value": "rgba(255, 255, 255, 0.7)"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "add",
+              "displayExpression": "$ctrl.entityType !== \"user\"\n&&\n$ctrl.entityType !== \"ytd\"\n&&\n$ctrl.uiState.displayedInfo.length === 0",
+              "expressions": [
+                {
+                  "expression": "\"primary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "false",
+                  "to": "showLoading"
+                },
+                {
+                  "expression": "$ctrl.handlers.onSidePanelOpen(\"add\")",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"plus\",\n  \"position\": \"left\"\n})",
+                  "to": "icon"
+                }
+              ],
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "edit",
+                  "expressions": [
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "\"\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onSidePanelOpen(\"edit\")",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isDeleting",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "\"Edit\"",
+                      "to": "tooltip"
+                    },
+                    {
+                      "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"edit\",\n  \"position\": \"left\"\n})",
+                      "to": "icon"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "terminate",
+                  "displayExpression": "$ctrl.entityType === \"employment_info\"",
+                  "expressions": [
+                    {
+                      "expression": "\"\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"user-slash\",\n  \"position\": \"left\"\n})",
+                      "to": "icon"
+                    },
+                    {
+                      "expression": "\"Edit Termination\"",
+                      "to": "tooltip"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onOpenTerminateForm()",
+                      "to": "onClick"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "delete",
+                  "expressions": [
+                    {
+                      "expression": "\"primary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "\"\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.handlers.onDelete()",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isDeleting",
+                      "to": "showLoading"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isDeleting",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "\"Delete\"",
+                      "to": "tooltip"
+                    },
+                    {
+                      "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"trash-alt\",\n  \"position\": \"left\"\n})",
+                      "to": "icon"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-button-primary-bg-color",
+                      "value": "#d10000"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "--bln-button-primary-hovered-bg-color",
+                      "value": "#b10e00"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "--bln-button-primary-active-bg-color",
+                      "value": "#9b0c00"
+                    }
+                  ],
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "edit-terminate-delete",
+              "displayExpression": "$ctrl.uiState.displayedInfo.length > 0",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "displayed-info-buttons",
+          "displayExpression": "$ctrl.authService.isCurrentUserAdmin\n&&\n(\n    (\n        $ctrl.isWorker\n        &&\n        $ctrl.workerId\n    )\n    ||\n    (\n        $ctrl.entityType === \"user\"\n        ||\n        $ctrl.entityType === \"worker\"\n    )\n)",
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "display",
+              "value": "flex"
+            },
+            {
+              "enabled": true,
+              "property": "justify-content",
+              "value": "flex-end"
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "displayed-info",
+          "displayExpression": "!($ctrl.uiState.displayedInfo.length === 0)",
+          "expressions": [
+            {
+              "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"key\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"value\",\n        textAlign: \"left\",\n        enableSorting: true,\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+              "to": "columns"
+            },
+            {
+              "expression": "[{\n    icon: {\n        name: \"eye\",\n        style: \"solid\",\n        type: \"font-icon\"\n    },\n    handler: $ctrl.handlers.onUnmaskSensitiveInfo,\n    tooltip: \"Show\",\n    visibleWhen: \"$ctrl.tabConfig[$ctrl.entityType].sensitiveInfoFields.includes(rowData.originalKey)\"\n}]",
+              "to": "rowActions"
+            },
+            {
+              "expression": "false",
+              "to": "showTableHeader"
+            },
+            {
+              "expression": "false",
+              "to": "enableSorting"
+            },
+            {
+              "expression": "$ctrl.uiState.displayedInfo",
+              "to": "data"
+            }
+          ],
+          "layout": {},
+          "name": "Table",
+          "nodeName": "bln-table",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "--bln-table-height",
+              "value": "100%"
+            },
+            {
+              "enabled": true,
+              "property": "--bln-table-secondary-bg-color",
+              "value": "#f9f9f9"
+            }
+          ],
+          "type": "core-component"
+        }
+      ],
+      "classList": [],
+      "comments": "displayed-info",
+      "displayExpression": "$ctrl.entityType === \"user\"\n||\n$ctrl.isWorker\n    \n",
+      "layout": {},
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100%"
+        }
+      ]
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "expressions": [
+            {
+              "expression": "'Hide Side Panel'",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.handlers.onSidePanelClose()",
+              "to": "onClick"
+            },
+            {
+              "expression": "({\n              \"type\": \"font-icon\",\n              \"style\": \"solid\",\n              \"name\": \"times\",\n              \"position\": \"icon-only\"\n            })",
+              "to": "icon"
+            },
+            {
+              "expression": "'default'",
+              "to": "type"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s User Info\" : \"Add User\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "active",
+                  "expressions": [
+                    {
+                      "expression": "\"Active\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"right\"",
+                      "to": "labelPosition"
+                    },
+                    {
+                      "expression": "$ctrl.form.active",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "enabled",
+                  "expressions": [
+                    {
+                      "expression": "\"Enabled\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"right\"",
+                      "to": "labelPosition"
+                    },
+                    {
+                      "expression": "$ctrl.form.enabled",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "first-name",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"First Name\" : \"* First Name\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.firstName",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.FirstName",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "last-name",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"Last Name\" : \"* Last Name\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.lastName",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.LastName",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "email",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"Email\" : \"* Email\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.email",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"email\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Email",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "is-worker",
+                  "expressions": [
+                    {
+                      "expression": "\"Worker\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.isWorker",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "is-payroll-admin",
+                  "expressions": [
+                    {
+                      "expression": "\"Payroll Admin\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.isPayrollAdmin",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form.firstName || !$ctrl.form.lastName || !$ctrl.form.email",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "user",
+              "displayExpression": "$ctrl.entityType === \"user\"",
+              "elementId": "form",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form1"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s Worker Info\": \"Add Worker Info\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "position",
+                      "expressions": [
+                        {
+                          "expression": "[{\n        label: \"--- NO POSITION ---\",\n        value: undefined\n    },\n    ...$ctrl.referenceData.positionMap\n]",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "\"Position\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.positionId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState?.positionId",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "custom-annual-rate",
+                      "displayExpression": "$ctrl.form1.positionId",
+                      "expressions": [
+                        {
+                          "expression": "\"number\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "\"Custom Annual Rate\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.customAnnualRate",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.CustomAnnualRate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "original-hire-date-time",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Original Hire Date Time\" : \"* Original Hire Date Time\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.originalHireDateTime",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "\"date\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.OriginalHireDateTime",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "birth-date",
+                      "expressions": [
+                        {
+                          "expression": "\"Birth Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.birthDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.BirthDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "seniority-date",
+                      "expressions": [
+                        {
+                          "expression": "\"Seniority Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.seniorityDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.SeniorityDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "name": "hr"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "is-person-with-disability",
+                      "expressions": [
+                        {
+                          "expression": "\"Person with Disability\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"right\"",
+                          "to": "labelPosition"
+                        },
+                        {
+                          "expression": "$ctrl.form1.isDisabled",
+                          "to": "checked"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "checked"
+                      },
+                      "name": "Checkbox",
+                      "nodeName": "bln-checkbox",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "is-fulltime-student",
+                      "expressions": [
+                        {
+                          "expression": "\"Full-time Student\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"right\"",
+                          "to": "labelPosition"
+                        },
+                        {
+                          "expression": "$ctrl.form1.isFulltimeStudent",
+                          "to": "checked"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "checked"
+                      },
+                      "name": "Checkbox",
+                      "nodeName": "bln-checkbox",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "works-from-home",
+                      "expressions": [
+                        {
+                          "expression": "\"Work From Home\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"right\"",
+                          "to": "labelPosition"
+                        },
+                        {
+                          "expression": "$ctrl.form1.worksFromHome",
+                          "to": "checked"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "checked"
+                      },
+                      "name": "Checkbox",
+                      "nodeName": "bln-checkbox",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "name": "hr"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "marital-status",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Marital Status\" : \"* Marital Status\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "[{\n        label: \"SINGLE\",\n        value: \"SINGLE\"\n    },\n    {\n        label: \"MARRIED\",\n        value: \"MARRIED\"\n    },\n    {\n        label: \"SEPARATED\",\n        value: \"SEPARATED\"\n    },\n    {\n        label: \"DIVORCED\",\n        value: \"DIVORCED\"\n    },\n    {\n        label: \"WIDOWED\",\n        value: \"WIDOWED\"\n    }\n]",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.form1.maritalStatus",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.MaritalStatus",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "number-of-dependents",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Number of Dependents\" : \"* Number of Dependents\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.numberOfDependents",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "\"number\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.NumberOfDependents",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "worker-type",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Worker Type\" : \"* Worker Type\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.workerType",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.WorkerType",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "worker-status",
+                      "expressions": [
+                        {
+                          "expression": "\"Worker Status\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form1.workerStatus",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.WorkerStatus",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "currency",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Currency\" : \"* Currency\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.currencyMap",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.form1.currencyId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.CurrencyId",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "country",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Country\" : \"* Country\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.countryMap",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.form1.countryId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.CountryId",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "state",
+                      "displayExpression": "$ctrl.form1.countryId && $ctrl.referenceData.stateMap[$ctrl.form1.countryId]",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"State\" : \"* State\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.referenceData.stateMap[$ctrl.form1.countryId]",
+                          "to": "values"
+                        },
+                        {
+                          "expression": "$ctrl.form1.stateId",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "true",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.StateId",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Dropdown",
+                      "nodeName": "bln-dropdown",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "!$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form1.originalHireDateTime || !$ctrl.form1.maritalStatus || typeof $ctrl.form1.numberOfDependents !== \"number\" || !$ctrl.form1.workerType || !$ctrl.form1.currencyId || !$ctrl.form1.countryId || ($ctrl.form1.countryId && $ctrl.referenceData.stateMap[$ctrl.form1.countryId] && !$ctrl.form1.stateId)",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || ($ctrl.form1.countryId && $ctrl.referenceData.stateMap[$ctrl.form1.countryId] && !$ctrl.form1.stateId)",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "($ctrl.form1.countryId && $ctrl.referenceData.stateMap[$ctrl.form1.countryId] && !$ctrl.form1.stateId) ? \"A required field is missing\" : null",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "worker",
+              "displayExpression": "$ctrl.entityType === \"worker\"",
+              "elementId": "form1",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form2"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s Employment Info\" : \"Add Employment Info\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "employment-start-date",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Employment Start Date\" : \"* Employment Start Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.employmentStartDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.EmploymentStartDate",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.form2.effectiveFromDate = newValue",
+                          "to": "onValueChange"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "first-day",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.FirstDay",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"First Day\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.firstDay",
+                          "to": "dateValue"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "employment-end-date",
+                      "expressions": [
+                        {
+                          "expression": "\"Employment End Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.employmentEndDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.EmploymentEndDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "name": "hr"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "effective-from-date",
+                      "displayExpression": "false",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Effective From Date\" : \"* Effective From Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.effectiveFromDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.EffectiveFromDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "effective-to-date",
+                      "displayExpression": "false",
+                      "expressions": [
+                        {
+                          "expression": "\"Effective to Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.effectiveToDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.EffectiveToDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "name": "hr"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "regulatory-establishment",
+                      "expressions": [
+                        {
+                          "expression": "\"Regulatory Establishment\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.regulatoryEstablishment",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.RegulatoryEstablishment",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "other-projected-taxable-income",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Other Projected Taxable Income\" : \"* Other Projected Taxable Income\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.otherProjectedTaxableIncome",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "\"number\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.profileUiState.selectedEntity?.OtherProjectedTaxableIncome",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "!$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form2.employmentStartDate || !$ctrl.form2.effectiveFromDate || typeof $ctrl.form2.otherProjectedTaxableIncome !== \"number\"",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "employment-info",
+              "displayExpression": "$ctrl.entityType === \"employment_info\"",
+              "elementId": "form2",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form2"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s Termination Info\" : \"Add Termination Info\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "final-pay-eligible",
+                      "expressions": [
+                        {
+                          "expression": "\"Final Pay Eligible\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"right\"",
+                          "to": "labelPosition"
+                        },
+                        {
+                          "expression": "$ctrl.form2.finalPayEligible",
+                          "to": "checked"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "checked"
+                      },
+                      "name": "Checkbox",
+                      "nodeName": "bln-checkbox",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "termination-reason",
+                      "expressions": [
+                        {
+                          "expression": "\"Termination Reason\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.terminationReason",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.TerminationReason",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "termination-date",
+                      "expressions": [
+                        {
+                          "expression": "\"Termination Date\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.terminationDate",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.TerminationDate",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "last-date-worked",
+                      "expressions": [
+                        {
+                          "expression": "\"Last Date Worked\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form2.lastDateWorked",
+                          "to": "dateValue"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.LastDateWorked",
+                          "to": "placeholder"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Date Time Picker",
+                      "nodeName": "bln-date-time-picker",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "termination-info",
+              "displayExpression": "$ctrl.uiState.isEditingTerminationInfo",
+              "elementId": "form2",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form3"
+                }
+              ],
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s Bank Info\" : \"Add Bank Info\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "bank-name",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Bank Name\" : \"* Bank Name\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form3.bankName",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.BankName",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "account-type",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Account Type\" : \"* Account Type\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form3.accountType",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.AccountType",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "account-number",
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.uiState.isEditingExistingEntity ? \"Account Number\" : \"* Account Number\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form3.accountNumber",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.AccountNumber ? \"*\".repeat($ctrl.uiState.selectedEntity?.AccountNumber.length) : $ctrl.uiState.selectedEntity?.AccountNumber",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isCreatingNewEntity",
+                          "to": "isRequired"
+                        },
+                        {
+                          "expression": "\"password\"",
+                          "to": "type"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "routing-number",
+                      "expressions": [
+                        {
+                          "expression": "\"Routing Number\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.form3.routingNumber",
+                          "to": "value"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.selectedEntity?.RoutingNumber ? \"*\".repeat($ctrl.uiState.selectedEntity?.RoutingNumber.length) : $ctrl.uiState.selectedEntity?.RoutingNumber",
+                          "to": "placeholder"
+                        },
+                        {
+                          "expression": "\"password\"",
+                          "to": "type"
+                        }
+                      ],
+                      "formControl": {
+                        "modelName": "value"
+                      },
+                      "name": "Text Input",
+                      "nodeName": "bln-text-input",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "div"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSidePanelClose()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "!$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form3.bankName || !$ctrl.form3.accountType || !$ctrl.form3.accountNumber",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.uiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "bank-info",
+              "displayExpression": "$ctrl.entityType === \"bank_info\"",
+              "elementId": "form3",
+              "layout": {},
+              "name": "form",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "width",
+                  "value": "100%"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "90%"
+                }
+              ]
+            }
+          ],
+          "classList": [],
+          "comments": "forms",
+          "displayExpression": "$ctrl.uiState.isFormOpen",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "0%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "100%"
+            },
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "90%"
+            }
+          ]
+        }
+      ],
+      "classList": [],
+      "layout": {
+        "container": {
+          "items": [],
+          "position": "right",
+          "type": "side-panel",
+          "visible": "$ctrl.sidePanelVisible",
+          "width": "35%",
+          "zIndex": 1
+        }
+      },
+      "name": "div"
+    }
+  ],
+  "modules": [],
+  "name": "static-table",
+  "parentDirectoryId": "6dBwzCfV1ckz9mpRF36mm",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "id": "service",
+      "name": "formManagementService",
+      "resourceIdentity": "services/core/ui/form-management-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentRequestId",
+          "type": "property",
+          "value": "0"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "displayedInfo",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "displayedRole",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "isEditingTerminationInfo",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isFormOpen",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isSaving",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isDeleting",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isCreatingNewEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditingExistingEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "positionId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "customAnnualRate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"user\""
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "if (!user) return \"\";\n\n// 1. Handle Non-Workers immediately\nif (!user.IsWorker) {\n    return user.IsPayrollAdmin ? \"Payroll Admin\" : \"User\";\n}\n\n// 2. Base Role for Workers\nconst baseRole = user.IsPayrollAdmin ? \"Payroll Admin\" : \"Worker\";\n\n// 3. Append Position Details\nif (user.Department && user.Title) {\n    return `${baseRole} | ${user.Department} - ${user.Title}`;\n}\n\n// 4. Fallback if no position is assigned\nreturn `${baseRole} | No Position Assigned`;",
+          "description": "Generates a human-readable string combining a user's organizational role, department, and job title. This helper is primarily used in data grids and profile headers to provide immediate context regarding a user's position within the company hierarchy.\n\n- **user**: The user data object retrieved from the application state or API.\n- **Logic**:\n    - **Role**: Identifies the primary system role (e.g., \"Worker\", \"Payroll Admin\").\n    - **Department & Title**: If assigned to a position, it concatenates the department and job title (e.g., \"HR - Manager\").\n    - **Fallback**: If no position is found, it defaults to a \"No Position Assigned\" string. If the object is empty, it returns a generic \"User\" label.\n- **Returns**: A formatted string in the pattern `Role | Department - Title` or a relevant fallback.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getUserDisplayRole",
+          "parameters": [
+            "user"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const userRoles = await $ctrl.workerGridControllerService.loadWorkerGridData($ctrl, {\n    entityType: \"user_role\",\n    query: `UserId_eq=${userId}`,\n    customEntityKey: \"userrole\",\n    columnDefs: {},\n    page: 1,\n    limit: $ctrl.tabStore.user_role.limit,\n    resetUiState: false,\n    touchLoadingStates: false\n});\n\nreturn userRoles ?? [];",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_fetchUserRoles",
+          "parameters": [
+            "userId"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const ROLES = {\n    worker: 1,\n    payrollAdmin: 2\n};\n\nconst userRoleIds = roleEntities.map(r => r.RoleId);\n\nreturn {\n    IsWorker: userRoleIds.includes(ROLES.worker),\n    IsPayrollAdmin: userRoleIds.includes(ROLES.payrollAdmin)\n};",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getRoleFlags",
+          "parameters": [
+            "roleEntities"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// Update the Display Role (e.g., \"Worker | HR - Manager\")\n$ctrl.uiState.displayedRole = $ctrl.helpers._getUserDisplayRole({\n    ...roleFlags,\n    Department: entity.Department,\n    Title: entity.Title,\n});\n\n// Merge flags into the selected entity for global access\n$ctrl.uiState.selectedEntity = {\n    ...entity,\n    ...roleFlags\n};",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_updateProfileState",
+          "parameters": [
+            "entity",
+            "roleFlags"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// Destructure to separate Worker-specific fields from User fields\nconst {\n    PositionId,\n    Position,\n    Department,\n    Title,\n    CustomAnnualRate,\n    EmploymentStartDate,\n    CreatedDate,\n    CreatedBy,\n    UpdatedDate,\n    UpdatedBy,\n    ...userData\n} = entity;\n\n// Return the clean User object with Role flags and Audit fields\n// return $ctrl.referenceDataService.hydrateEntity({\n//     ...userData,\n//     ...roleFlags,\n//     CreatedDate,\n//     CreatedBy,\n//     UpdatedDate,\n//     UpdatedBy\n// });\n\nconst baseEntity = {\n    ...userData,\n    ...roleFlags,\n    CreatedDate,\n    CreatedBy,\n    UpdatedDate,\n    UpdatedBy\n};\n\n// Temporarily skip hydration for non-admin users (no scope access yet to the lookup\n// endpoints hydrateEntity calls). Manually replicate hydrateEntity's resulting shape,\n// falling back to raw ids instead of resolved labels — same fallback hydrateEntity\n// itself uses when a lookup fails. Remove this branch once new scopes are added.\nif (!$ctrl.authService.isCurrentUserAdmin) {\n    const fallbackHydrated = { ...baseEntity };\n\n    Object.keys(fallbackHydrated).forEach(key => {\n        if (key.endsWith(\"Id\") && key.length > 2) {\n            const entityType = key.slice(0, -2);\n            const id = fallbackHydrated[key];\n\n            if (entityType.includes(\"CalculationMethod\") && id != null) {\n                if (id == 1) fallbackHydrated[entityType] = \"FLAT\";\n                else if (id == 2) fallbackHydrated[entityType] = \"PERCENT\";\n                else fallbackHydrated[entityType] = id;\n                return;\n            }\n\n            if (entityType === \"Worker\") return; // handled below\n\n            fallbackHydrated[entityType] = id;\n        }\n    });\n\n    if (fallbackHydrated.WorkerId != null) {\n        fallbackHydrated.Worker = fallbackHydrated.WorkerId;\n    }\n\n    return fallbackHydrated;\n}\n\n// Return the clean User object with Role flags and Audit fields\nreturn $ctrl.referenceDataService.hydrateEntity(baseEntity);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_buildUserProfileData",
+          "parameters": [
+            "entity",
+            "roleFlags"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tabConfig = $ctrl.tabConfig[$ctrl.entityType];\n$ctrl.uiState.displayedInfo = $ctrl.helpers._generateAndMaskDetailsList(data, tabConfig);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_setDisplayedInfo",
+          "parameters": [
+            "data"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!data) return [];\n\nconst detailsList = $ctrl.entityViewService.generateDetailsList(data);\n\nif (tabConfig?.containsSensitiveInfo && tabConfig?.sensitiveInfoFields) {\n    return $ctrl.helpers._maskSensitiveInfo(tabConfig.sensitiveInfoFields, detailsList);\n}\n\nreturn detailsList;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_generateAndMaskDetailsList",
+          "parameters": [
+            "data",
+            "tabConfig"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const sensitiveFieldsSet = new Set(sensitiveInfoFields);\nreturn detailsList.map(item => {\n    if (item.isSpacer || !sensitiveFieldsSet.has(item.originalKey)) {\n        return item;\n    }\n\n    const strValue = String(item.value || \"\");\n    const maskedValue = \"*\".repeat(strValue.length);\n\n    return {\n        ...item,\n        originalValue: item.value,\n        value: maskedValue, // Default to maskedValue for sensitive info\n        maskedValue: maskedValue,\n        isMasked: true\n    };\n});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_maskSensitiveInfo",
+          "parameters": [
+            "sensitiveInfoFields",
+            "detailsList"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const tabConfig = $ctrl.tabConfig[entityType];\nconst workerId = $ctrl.workerId;\n\nlet filtersToProcess = [...($ctrl.uiState.currentFilter.advancedFilters || [])];\nlet extraApiQuery = \"\";\n\nlet apiQuery = $ctrl.filterService.buildCombinedQuery({\n    advancedFilters: filtersToProcess\n});\n\nif (tabConfig?.isWorkerBound) {\n    apiQuery += workerId ? `&WorkerId_eq=${workerId}` : `&Id_eq=-1`;\n}\n\nif (entityType === \"worker\") {\n    apiQuery += workerId ? `&Id_eq=${workerId}` : `&Id_eq=-1`;\n}\n\nif (tabConfig?.containsSensitiveInfo) {\n    apiQuery += \"&maskSensitiveWorkerInfo=false\" // Request unmasked data and just do FE masking to reduce API roundtrips\n}\n\nreturn apiQuery + extraApiQuery;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_buildProfileTabQuery",
+          "parameters": [
+            "entityType"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.selectedEntity = null;\n$ctrl.uiState.selectedEntityName = \"\";\n\n$ctrl.uiState.displayedInfo = [];\n$ctrl.uiState.detailsList = [];\n\nif (resetTabStore && $ctrl.tabStore[$ctrl.entityType]) {\n    $ctrl.tabStore[$ctrl.entityType].data = [];\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_resetUiState",
+          "parameters": [
+            "resetTabStore"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!$ctrl.uiState.selectedEntity) {\n    console.warn(\"[_updatePositionData] uiState.selectedEntity is null — skipping position update.\");\n    return;\n}\n\nif (newPosId) {\n    const newPosInfo = $ctrl.referenceData.positionMap.find(p => p.Id === newPosId);\n    if (newPosInfo) {\n        $ctrl.uiState.selectedEntity.PositionId = newPosId;\n        $ctrl.uiState.selectedEntity.Department = newPosInfo.Department;\n        $ctrl.uiState.selectedEntity.Title = newPosInfo.Title;\n        $ctrl.uiState.selectedEntity.CustomAnnualRate = formData.customAnnualRate;\n    } else {\n        console.warn(\"[_updatePositionData] Could not find new Position data. This could be caused by data that is loaded from another Company.\");\n    }\n} else {\n    $ctrl.uiState.selectedEntity.PositionId = null;\n    $ctrl.uiState.selectedEntity.Department = null;\n    $ctrl.uiState.selectedEntity.Title = null;\n    $ctrl.uiState.selectedEntity.CustomAnnualRate = null;\n}\n\n$ctrl.uiState.displayedRole = $ctrl.helpers._getUserDisplayRole($ctrl.uiState.selectedEntity);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_updatePositionData",
+          "parameters": [
+            "newPosId",
+            "formData"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!form) return {};\n\nconst FIELDS_TO_EXCLUDE = [\n    \"accrualId\",            // Update Accrual Balance\n    \"customAnnualRate\",     // Update Worker\n    \"positionId\",           // Update Worker\n    \"workerId\"              // Update Worker\n];\n\nconst sanitizedForm = { ...form };\n\nFIELDS_TO_EXCLUDE.forEach(field => {\n    if (Object.hasOwn(sanitizedForm, field)) {\n        delete sanitizedForm[field];\n    }\n});\n\nreturn sanitizedForm;",
+          "description": "Excludes fields on edit/update to prevent \"Attempted to add a property...\" warning on MR.",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_excludeFieldsOnSave",
+          "parameters": [
+            "form"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "let msg = \"Looks like there's no data here. \";\n\nif($ctrl.authService.isCurrentUserAdmin) {\n    msg += \"Click + to get started.\";\n}\n\nreturn msg;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "_getDisplayedNoData",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "const tabStore = $ctrl.tabStore[entityType];\nconst tabConfig = $ctrl.tabConfig[entityType];\nconst { page = tabStore.currentPage, currentRequestId } = params;\n\ntry {\n    await $ctrl.workerGridControllerService.loadWorkerGridData($ctrl, {\n        entityType: entityType,\n        query: query,\n        columnDefs: tabConfig?.columnDefaultConfig ?? [],\n        customEntityKey: tabConfig?.customEntityKey,\n        page: page,\n        limit: tabStore.limit,\n        hydrateOnLoad: false,\n        resetUiState: false,\n        touchLoadingStates: false,\n        reloadColumns: false\n    });\n\n    // After Grid Data Load, check if the user switched tabs while the grid was fetching, abort before processing single-record logic\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    if (!tabConfig?.isMultiple && tabStore.data && tabStore.data.length > 0) {\n        if (entityType === \"user\") {\n            await $ctrl.loaders.loadAdditionalUserData();\n            $ctrl.workerName = $ctrl.uiState.selectedEntityName = $ctrl.tabConfig.user.getName($ctrl.tabStore.user.data[0]);\n            $ctrl.uiState.selectedEntity = $ctrl.tabStore.user.data[0];\n            return;\n        } else {\n            const entity = tabStore.data[0];\n            if (entityType === \"worker\") {\n                // Fetch fresh positionId and customAnnualRate incase of update\n                if ($ctrl.authService.isCurrentUserAdmin) {\n                    try {\n                        const posRes = await $ctrl.payrollApiService.get({\n                            entity: \"worker_position\",\n                            limit: 1,\n                            query: `WorkerId_eq=${$ctrl.workerId}`,\n                            customEntityKey: \"workerposition\"\n                        });\n                        const posRecords = posRes.entities || posRes || [];\n                        const posRecord = posRecords[0];\n\n                        entity.PositionId = posRecord?.PositionId ?? null;\n                        entity.CustomAnnualRate = posRecord?.CustomAnnualRate ?? null;\n\n                        $ctrl.positionId = entity.PositionId;\n                        $ctrl.uiState.customAnnualRate = entity.CustomAnnualRate;\n                        $ctrl.uiState.positionLookupFailed = false;\n                    } catch (err) {\n                        console.error(\"Failed to fetch worker position data\", err);\n                        entity.PositionId = $ctrl.positionId ?? null;\n                        entity.CustomAnnualRate = $ctrl.uiState.customAnnualRate ?? null;\n                    }\n                } else {\n                    entity.PositionId = $ctrl.positionId;\n                    entity.CustomAnnualRate = $ctrl.uiState.customAnnualRate;\n                }\n\n            }\n\n            // Temporarily prevent hydration for non admin user\n            // Will be removed after new scopes are added\n            if ($ctrl.authService.isCurrentUserAdmin) {\n                const hydratedEntity = await $ctrl.referenceDataService.hydrateEntity(entity);\n\n                // Check after hydration\n                // If user switched tabs while reference data was hydrating, abort before mutating the UI\n                if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n                $ctrl.helpers._setDisplayedInfo(hydratedEntity);\n                $ctrl.uiState.selectedEntity = hydratedEntity;\n\n                if (entityType === \"worker\" && $ctrl.userId) {\n                    const roleEntities = await $ctrl.helpers._fetchUserRoles($ctrl.userId);\n                    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n                    const roleFlags = $ctrl.helpers._getRoleFlags(roleEntities);\n                    const positionId = $ctrl.positionId;\n                    const positionInfo = positionId\n                        ? $ctrl.referenceData.positionMap.find(p => p.Id === positionId)\n                        : null;\n\n                    $ctrl.uiState.displayedRole = $ctrl.helpers._getUserDisplayRole({\n                        ...roleFlags,\n                        Department: positionInfo?.Department,\n                        Title: positionInfo?.Title\n                    });\n\n                    $ctrl.workerRole = $ctrl.uiState.displayedRole;\n                }\n            } else {\n                $ctrl.helpers._setDisplayedInfo(entity);\n                $ctrl.uiState.selectedEntity = entity;\n            }\n\n        }\n    }\n\n} finally {\n    // Manual loading state reset\n    // Only turn off the spinner if this request is still the most recent request\n    // If a new request started, let its 'true' state persist so the spinner doesn't flicker\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $timeout(() => {\n            if (currentRequestId === $ctrl.uiState.currentRequestId) {\n                $ctrl.isLoadingTable = false;\n            }\n        });\n    }\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadGridData",
+          "parameters": [
+            "entityType",
+            "query",
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const roleEntities = await this.helpers._fetchUserRoles($ctrl.uiState.selectedEntity.Id);\nconst roleFlags = this.helpers._getRoleFlags(roleEntities);\nthis.helpers._updateProfileState($ctrl.uiState.selectedEntity, roleFlags);\nreturn await this.helpers._buildUserProfileData($ctrl.uiState.selectedEntity, roleFlags);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadCompleteUserProfileTab",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if (!$ctrl.userId) {\n    return;\n}\n\n// Close any open panels on load\nif ($ctrl.uiState.isEditingTerminationInfo) {\n    $ctrl.uiState.isEditingTerminationInfo = false;\n}\n\n$ctrl.sidePanelVisible = false;\n$ctrl.formManagementService.onFormClose($ctrl.uiState);\n$ctrl.isPanelOpen = false;\n\n\nif (!params) params = {};\n$ctrl.uiState.currentTab.name = $ctrl.entityType;\nconst entityType = $ctrl.entityType;\n$ctrl.uiState.currentRequestId++;\nconst currentRequestId = $ctrl.uiState.currentRequestId;\n\n// Setting it manually here and is reset in loadProfileGridData's finally block if requestId matches\n$ctrl.isLoadingTable = true;\n\nif (entityType === \"user\") {\n    const query = `Id=${$ctrl.userId}`;\n    params.currentRequestId = currentRequestId;\n    await $ctrl.loaders.loadGridData(entityType, query, params);\n\n    // Initial race condition check: Did the user click another tab while waiting?\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    const updatedUserData = $ctrl.tabStore.user.data.find(u => u.Id === $ctrl.uiState.selectedEntity.Id);\n    if (updatedUserData) {\n        $ctrl.uiState.selectedEntity = updatedUserData;\n    }\n\n    const userData = await $ctrl.loaders.loadCompleteUserProfileTab();\n\n    // Check again before mutating the UI state\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    $ctrl.helpers._setDisplayedInfo(userData);\n    $ctrl.uiState.selectedEntity = userData;\n    $ctrl.workerRole = $ctrl.uiState.displayedRole;\n    $ctrl.isWorker = $ctrl.uiState.selectedEntity.IsWorker;\n    $ctrl.positionId = $ctrl.tabStore.user.data[0].PositionId;\n    $ctrl.uiState.customAnnualRate = $ctrl.tabStore.user.data[0].CustomAnnualRate;\n\n    if($ctrl.links.length === 1) {\n        $ctrl.links.push(\n            {\n                label: $ctrl.uiState.selectedEntityName,\n                active: true\n            }\n        );\n    }\n\n    if($ctrl.links[1].label !== $ctrl.uiState.selectedEntityName) {\n        $ctrl.links[1].label = $ctrl.uiState.selectedEntityName\n    }\n    \n    // Reset loading state here since it is handled separately from the rest and matches the current request\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $timeout(() => {\n            if (currentRequestId === $ctrl.uiState.currentRequestId) {\n                $ctrl.isLoadingTable = false;\n            }\n        });\n    }\n\n    return;\n}\n\n$ctrl.helpers._resetUiState(true);\n\nif (!$ctrl.isWorker || !$ctrl.workerId) {\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        $timeout(() => {\n            if (currentRequestId === $ctrl.uiState.currentRequestId) {\n                $ctrl.isLoadingTable = false;\n            }\n        });\n    }\n    return;\n}\n\ntry {\n    const finalQuery = await $ctrl.helpers._buildProfileTabQuery(entityType);\n    // Abort if user switched tabs while building the query\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    params.currentRequestId = currentRequestId;\n    await $ctrl.loaders.loadGridData(entityType, finalQuery, params);\n} catch (err) {\n    // Only show the error if user is still on the tab that failed\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        console.error(err);\n        $ctrl.utils.toast(`Failed to load ${entityType} data`, \"ERROR\");\n    }\n\n}",
+          "description": "",
+          "invokeOnLoad": true,
+          "isAsync": true,
+          "name": "loadActiveTabContent",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.entityType",
+            "$ctrl.userId",
+            "$ctrl.reloadTab"
+          ]
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    return;\n}\n\nconst workerIds = $ctrl.tabStore.user.data\n    .map(u => u.WorkerId).filter(id => id);\n\nif (!workerIds || workerIds.length === 0) return;\n\ntry {\n    const workerIdFilter = `WorkerId_in=${workerIds.join(',')}`;\n    const [employmentInfoRes, workerPositionRes] = await Promise.all([\n        $ctrl.payrollApiService.get({\n            entity: \"employment_info\",\n            limit: workerIds.length,\n            query: `${workerIdFilter}&select=Id,WorkerId,EmploymentStartDate`,\n            customEntityKey: \"employmentinfo\"\n        }),\n        $ctrl.payrollApiService.get({\n            entity: \"worker_position\",\n            limit: workerIds.length,\n            query: `${workerIdFilter}&select=Id,WorkerId,PositionId,CustomAnnualRate`,\n            customEntityKey: \"workerposition\"\n        })\n    ]);\n\n    const employmentInfos = employmentInfoRes.entities || employmentInfoRes || [];\n    const workerPositions = workerPositionRes.entities || workerPositionRes || [];\n\n    $ctrl.tabStore.worker_position.data = workerPositions;\n\n    const positionIds = [...new Set(workerPositions.map(wp => wp.PositionId).filter(id => id))];\n    let positions = [];\n\n    if (positionIds.length > 0) {\n        const positionRes = await $ctrl.payrollApiService.get({\n            entity: \"position\",\n            limit: positionIds.length,\n            query: `Id_in=${positionIds.join(',')}&select=Id,Department,Title`\n        });\n        positions = positionRes.entities || positionRes || [];\n    }\n\n    const employmentMap = new Map(employmentInfos.map(ei => [ei.WorkerId, ei]));\n    const workerPositionMap = new Map(workerPositions.map(wp => [wp.WorkerId, wp]));\n    const positionMap = new Map(positions.map(p => [p.Id, p]));\n\n    $ctrl.tabStore.user.data.forEach(user => {\n        if (!user.WorkerId) return;\n\n        const empInfo = employmentMap.get(user.WorkerId);\n        if (empInfo) {\n            user.EmploymentStartDate = empInfo.EmploymentStartDate;\n        }\n\n        const wp = workerPositionMap.get(user.WorkerId);\n        if (wp && wp.PositionId) {\n            const pos = positionMap.get(wp.PositionId);\n            if (pos) {\n                user.Title = pos.Title;\n                user.Department = pos.Department;\n                user.PositionId = pos.Id;\n                user.CustomAnnualRate = wp.CustomAnnualRate;\n            }\n        }\n    });\n\n} catch (err) {\n    console.error(\"Failed to load additional user data\", err);\n    $ctrl.utils.toast(\"Failed to load complete user profiles\", \"ERROR\");\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadAdditionalUserData",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [
+        {
+          "description": "",
+          "name": "user",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "user_role",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "employment_info",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "bank_info",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker_position",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "user",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.userService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.userService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.userService"
+            },
+            {
+              "body": "return `${f.FirstName} ${f.LastName}`;",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "getName",
+              "parameters": [
+                "f"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "worker",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form1\""
+            },
+            {
+              "description": "",
+              "name": "isCompanyBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "isUserBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.workerService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "employment_info",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form2\""
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"employmentinfo\""
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.employmentInfoService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "bank_info",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form3\""
+            },
+            {
+              "description": "",
+              "name": "customEntityKey",
+              "type": "property",
+              "value": "\"bankinfo\""
+            },
+            {
+              "description": "",
+              "name": "isWorkerBound",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "description": "",
+              "name": "containsSensitiveInfo",
+              "type": "property",
+              "value": "true"
+            },
+            {
+              "children": [
+                {
+                  "description": "",
+                  "name": "0",
+                  "type": "property",
+                  "value": "\"AccountNumber\""
+                },
+                {
+                  "description": "",
+                  "name": "1",
+                  "type": "property",
+                  "value": "\"RoutingNumber\""
+                }
+              ],
+              "description": "",
+              "name": "sensitiveInfoFields",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.bankInfoService.getColumnDefaults()"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "userService",
+      "resourceIdentity": "services/entities/user-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "workerService",
+      "resourceIdentity": "services/entities/worker-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "employmentInfoService",
+      "resourceIdentity": "services/entities/employment-info-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "bankInfoService",
+      "resourceIdentity": "services/entities/bank-info-service",
+      "type": "service"
+    },
+    {
+      "description": "The visibility of the side panel.",
+      "name": "sidePanelVisible",
+      "type": "property",
+      "value": ""
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "form3",
+      "properties": [
+        {
+          "description": "",
+          "name": "bankName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "accountType",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "accountNumber",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "routingNumber",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form2",
+      "properties": [
+        {
+          "description": "",
+          "name": "employmentStartDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "employmentEndDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "regulatoryEstablishment",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "firstDay",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "lastDateWorked",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "terminationReason",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "terminationDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveFromDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "effectiveToDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "otherProjectedTaxableIncome",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "finalPayEligible",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form1",
+      "properties": [
+        {
+          "description": "",
+          "name": "originalHireDateTime",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "seniorityDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "birthDate",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isDisabled",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isFulltimeStudent",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "maritalStatus",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "numberOfDependents",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerType",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerStatus",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "worksFromHome",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "currencyId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "countryId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "stateId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "positionId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "customAnnualRate",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "form",
+      "properties": [
+        {
+          "description": "",
+          "name": "active",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "enabled",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "firstName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "lastName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "email",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isWorker",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isPayrollAdmin",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "workerGridControllerService",
+      "resourceIdentity": "services/core/worker-ui/worker-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "if (rowData.isMasked) {\n    rowData.value = rowData.originalValue;\n    rowData.isMasked = false;\n} else {\n    rowData.value = rowData.maskedValue;\n    rowData.isMasked = true;\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onUnmaskSensitiveInfo",
+          "parameters": [
+            "rowData"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const discard = await $ctrl.utils.handleUnsavedChanges($ctrl.isPanelOpen);\n\nif (discard) {\n    if($ctrl.uiState.isEditingTerminationInfo) {\n        $ctrl.uiState.isEditingTerminationInfo = false;\n    }\n\n    $ctrl.sidePanelVisible = false;\n    $ctrl.formManagementService.onFormClose($ctrl.uiState);\n    $ctrl.isPanelOpen = false;\n}\n\nreturn;\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSidePanelClose",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nif(action === \"add\") {\n    $ctrl.formManagementService.onFormOpen(\n        $ctrl.uiState,\n        $ctrl[$ctrl.tabConfig[$ctrl.entityType].form],\n        \"add\",\n        true\n    );\n    \n    $ctrl.isPanelOpen = true;\n    $ctrl.sidePanelVisible = true;\n    return;\n}\n\nif(action === \"edit\") {\n    $ctrl.formManagementService.onFormOpen(\n        $ctrl.uiState,\n        $ctrl[$ctrl.tabConfig[$ctrl.entityType].form],\n        \"edit\",\n        undefined,\n        $ctrl.uiState.selectedEntity\n    );\n\n    $ctrl.isPanelOpen = true;\n    $ctrl.sidePanelVisible = true;\n    return;   \n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onSidePanelOpen",
+          "parameters": [
+            "action"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\n$ctrl.formManagementService.onFormOpen(\n    $ctrl.uiState,\n    $ctrl[$ctrl.tabConfig[$ctrl.entityType].form],\n    \"edit\",\n    undefined,\n    $ctrl.uiState.selectedEntity\n)\n\n$ctrl.uiState.isEditingTerminationInfo = true;\n$ctrl.isPanelOpen = true;\n$ctrl.sidePanelVisible = true;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "onOpenTerminateForm",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nconst config = $ctrl.tabConfig[$ctrl.entityType];\nif (!config) {\n    console.error(\"No configuration found for current tab:\", $ctrl.entityType);\n    return;\n}\n\nconst isCreate = $ctrl.uiState.isCreatingNewEntity;\nconst isUpdate = $ctrl.uiState.isEditingExistingEntity;\nconst entityType = $ctrl.entityType;\n\nconst isWorker = entityType === \"worker\";\nconst isUser = entityType === \"user\";\n\nconst method = isCreate ? \"POST\" : \"PUT\";\nconst formData = $ctrl[config.form];\n\nlet displayName = \"Item\";\nif (config.getName) {\n    displayName = config.getName(formData);\n} else if (config.entityNameKey) {\n    displayName = formData[config.entityNameKey] || \"Item\";\n}\n\nconst additionalData = {};\nif (isCreate) {\n    if (config.isCompanyBound) {\n        additionalData.CompanyId = $ctrl.globalSelectedCompany.companyId;\n    }\n\n    if (config.isWorkerBound && $ctrl.workerId) {\n        additionalData.WorkerId = $ctrl.workerId;\n    }\n\n    if (config.isUserBound && $ctrl.userId) {\n        additionalData.UserId = $ctrl.userId;\n    }\n}\n\n$ctrl.uiState.isSaving = true;\n\nawait $ctrl.entityOperationsService.executeEntityOperation(\n    method,\n    (isUpdate || isWorker) ? $ctrl.helpers._excludeFieldsOnSave(formData) : formData,\n    async (result) => {\n        if (isWorker && isCreate) {\n            const newWorkerId = result.data.worker.Id;\n            if (newWorkerId) {\n                $ctrl.workerId = newWorkerId;\n                const userRecordToUpdate = $ctrl.tabStore.user.data.find(u => u.Id === $ctrl.userId);\n                if (userRecordToUpdate) {\n                    userRecordToUpdate.WorkerId = newWorkerId;\n                }\n            }\n        }\n\n        try {\n            if (isUser || isWorker) {\n                await $ctrl.handlers.handleSaveSideEffects(\n                    $ctrl.entityType,\n                    result.data || result,\n                    $ctrl.uiState.selectedEntity,\n                    formData\n                );\n            }\n        } catch (err) {\n            console.error(\"Side effects failed\", err);\n            $ctrl.utils.toast(\"Entity saved, but related data (Roles/Positions) failed to update.\", \"WARNING\");\n        }\n\n        if (entityType === \"worker\") {\n            $ctrl.positionId = formData.positionId ?? null;\n            $ctrl.uiState.customAnnualRate = formData.customAnnualRate ?? null;\n        }\n\n        if (isUpdate) {\n            if (entityType === \"user\") {\n                $ctrl.uiState.selectedEntityName = formData.firstName + \" \" + formData.lastName;\n                $ctrl.referenceDataService.clearCache(\"usersByWorkerId\");\n            }\n\n            const formToReset = document.querySelector('.form');\n            if (formToReset) {\n                formToReset.scrollTop = 0;\n            }\n\n            await $ctrl.loaders.loadActiveTabContent();\n\n            // Reopen panel\n            $ctrl.formManagementService.onFormOpen(\n                $ctrl.uiState,\n                $ctrl[config.form],\n                \"edit\",\n                undefined,\n                $ctrl.uiState.selectedEntity\n            );\n\n            $ctrl.isPanelOpen = true;\n            $ctrl.sidePanelVisible = true;\n\n            if ($ctrl.uiState.isEditingTerminationInfo) {\n                $ctrl.uiState.isEditingTerminationInfo = false;\n            }\n        } else {\n            $ctrl.loaders.loadActiveTabContent();\n            $ctrl.formManagementService.onFormClose($ctrl.uiState);\n            $ctrl.sidePanelVisible = false;\n            $ctrl.isPanelOpen = false;\n            $ctrl.utils.resetForm(formData);\n        }\n    },\n    null,\n    () => {\n        $ctrl.uiState.isSaving = false;\n    },\n    $ctrl.entityType,\n    displayName,\n    $ctrl.uiState.selectedEntity,\n    additionalData\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSave",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.utils.toast(\"You do not have permission to perform this action.\", \"ERROR\");\n    console.error(\"Forbidden\");\n    return;\n}\n\nconst entityName = $ctrl.entityType\n    ? $ctrl.entityType.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')\n    : \"Item\";\nconst entityType = $ctrl.entityType;\nconst entityToDelete = $ctrl.uiState.selectedEntity;\n\nif (!entityToDelete) return;\n\nawait $ctrl.entityOperationsService.confirmDelete(entityToDelete, entityName)\n    .then(confirmed => {\n        if (!confirmed) return;\n\n        $ctrl.uiState.isDeleting = true;\n\n        return $ctrl.entityOperationsService.executeEntityOperation(\n            \"DELETE\",\n            null,\n            () => {\n                if (entityType === 'worker') {\n                    $ctrl.workerId = null;\n                    $ctrl.positionId = null;\n                    $ctrl.uiState.customAnnualRate = null;\n                }\n\n                $ctrl.uiState.selectedEntity = null;\n                $ctrl.uiState.selectedEntityName = null;\n\n                if (entityType === 'user') {\n                    $ctrl.utils.toast(\"User deleted successfully.\", \"SUCCESS\");\n                    $ctrl.$state.go(\"people_management\");\n                    return;\n                }\n\n                $ctrl.loaders.loadActiveTabContent();\n            },\n            null,\n            () => {\n                $ctrl.uiState.isDeleting = false;\n            },\n            entityType,\n            entityName,\n            entityToDelete\n        );\n    });",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onDelete",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const promises = [];\nconst userRoleData = $ctrl.tabStore['user_role']?.data || [];\nconst workerPositionData = $ctrl.tabStore['worker_position']?.data || [];\n\nif (entityType === 'user') {\n    const userId = savedEntity?.user?.Id ?? $ctrl.uiState.selectedEntity.Id;\n    const ROLES = { WORKER: 1, ADMIN: 2 };\n\n    const processRoleChange = async (roleId, shouldHaveRole) => {\n        const existingRoleRecord = userRoleData.find(r => r.UserId === userId && r.RoleId === roleId);\n        const currentlyHasRole = !!existingRoleRecord;\n\n        if (shouldHaveRole && !currentlyHasRole) {\n            return $ctrl.payrollApiService.send('user_role', 'POST', {\n                RoleId: roleId,\n                UserId: userId\n            });\n        }\n\n        else if (!shouldHaveRole && currentlyHasRole) {\n            return $ctrl.payrollApiService.send(`user_role/${existingRoleRecord.Id}`, 'DELETE');\n        }\n    };\n\n    promises.push(processRoleChange(ROLES.WORKER, formData.isWorker));\n    promises.push(processRoleChange(ROLES.ADMIN, formData.isPayrollAdmin));\n}\n\nelse if (entityType === 'worker') {\n    const workerRecord = savedEntity?.worker;\n    const workerId = workerRecord?.Id ?? $ctrl?.workerId;\n\n    if (!$ctrl.uiState.selectedEntity && workerRecord) {\n        $ctrl.uiState.selectedEntity = { ...workerRecord };\n    }\n\n    const newPosId = formData.positionId;\n\n    let existingPositionRecord = workerPositionData.find(p => p.WorkerId === workerId);\n\n    if (!existingPositionRecord) {\n        try {\n            const res = await $ctrl.payrollApiService.get({\n                entity: \"worker_position\",\n                limit: 1,\n                query: `WorkerId_eq=${workerId}`,\n                customEntityKey: \"workerposition\"\n            });\n            const fetched = res.entities || res || [];\n            existingPositionRecord = fetched[0];\n        } catch (err) {\n            console.error(\"Failed to fetch existing worker_position record\", err);\n        }\n    }\n\n    const oldPosId = existingPositionRecord?.PositionId;\n\n    if (newPosId && !existingPositionRecord) {\n        promises.push($ctrl.payrollApiService.send('worker_position', 'POST', {\n            WorkerId: workerId,\n            PositionId: newPosId,\n            CustomAnnualRate: formData.customAnnualRate\n        }));\n    } else if (existingPositionRecord && (newPosId !== oldPosId || formData.customAnnualRate !== existingPositionRecord.CustomAnnualRate)) {\n        if (newPosId) {\n            promises.push($ctrl.payrollApiService.send('worker_position', 'PUT', {\n                Id: existingPositionRecord.Id,\n                PositionId: newPosId,\n                CustomAnnualRate: formData.customAnnualRate\n            }));\n        } else {\n            promises.push($ctrl.payrollApiService.send(`worker_position/${existingPositionRecord.Id}`, 'DELETE'));\n        }\n    }\n\n    if (promises.length > 0) {\n        await Promise.all(promises);\n    }\n\n    $ctrl.helpers._updatePositionData(newPosId, formData);\n    await $ctrl.loaders.loadAdditionalUserData();\n\n    return;\n}\n\nif (promises.length > 0) {\n    await Promise.all(promises);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "handleSaveSideEffects",
+          "parameters": [
+            "entityType",
+            "savedEntity",
+            "originalEntity",
+            "formData"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "entityOperationsService",
+      "resourceIdentity": "services/core/logic/entity-operations-service",
+      "type": "service"
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    }
+  ]
+}

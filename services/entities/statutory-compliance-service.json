@@ -1,0 +1,54 @@
+{
+  "description": "",
+  "name": "statutory-compliance-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Name\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"Name\",\n    \"EffectiveFromDate\",\n    \"EffectiveToDate\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n    },\n    type: {\n        \"EffectiveFromDate\": \"date\",\n        \"EffectiveToDate\": \"date\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n    },\n    {\n        label: \"Name\",\n        value: \"Name\",\n        type: \"string\",\n    },\n    {\n        label: \"Number\",\n        value: \"Number\",\n        type: \"string\",\n    },\n    {\n        label: \"Effective From\",\n        value: \"EffectiveFromDate\",\n        type: \"date\",\n    },\n    {\n        label: \"Effective To\",\n        value: \"EffectiveToDate\",\n        type: \"date\",\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getQuickSearchDefaults",
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "statutory"
+  ]
+}

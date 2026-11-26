@@ -1,0 +1,51 @@
+{
+  "description": "",
+  "name": "worker-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "let allWorkers = [];\nlet currentOffset = 0;\nconst fetchLimit = 1000;\nlet hasMore = true;\n\ntry {\n    while (hasMore) {\n        const {\n            entities: workers = [],\n            metadata: { hasNextPage = false } = {}\n        } = await this.payrollApiService.get({\n            entity: \"worker\",\n            query: `select=Id&CompanyId=${this.globalSelectedCompany.companyId}`,\n            offset: currentOffset,\n            limit: fetchLimit\n        });\n\n        allWorkers = allWorkers.concat(workers);\n\n        if (hasNextPage) {\n            currentOffset += fetchLimit;\n        } else {\n            hasMore = false;\n        }\n    }\n\n    return allWorkers.map(w => w.Id);\n\n} catch (e) {\n    console.error(\"Error fetching Company Workers. Please try again...\", e);\n    throw e;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "getCompanyWorkerIds",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Id\",\n    \"OriginalHireDateTime\",\n    \"SeniorityDate\",\n    \"BirthDate\",\n    \"IsDisabled\",\n    \"IsFulltimeStudent\",\n    \"MaritalStatus\",\n    \"NumberOfDependents\",\n    \"WorkerType\",\n    \"WorksFromHome\",\n];\n\nconst displayColumnOptions = {\n    type: {\n        \"OriginalHireDateTime\": \"date\",\n        \"SeniorityDate\": \"date\",\n        \"BirthDate\": \"date\",\n        \"IsDisabled\": \"boolean\",\n        \"IsFulltimeStudent\": \"boolean\",\n        \"WorksFromHome\": \"boolean\"\n    }\n}\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "getCompanyWorkerIds",
+    "getColumnDefaults"
+  ]
+}

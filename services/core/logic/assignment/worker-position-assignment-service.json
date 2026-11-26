@@ -1,0 +1,85 @@
+{
+  "description": "",
+  "name": "worker-position-assignment-service",
+  "parentDirectoryId": "1NBsPZByP0dbRboEFYU0f",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "BATCH_ENDPOINT",
+      "type": "property",
+      "value": "\"worker_position/batch\""
+    },
+    {
+      "body": "if (!items || items.length === 0) return;\n\nconst payload = items\n    .map(w => ({\n        PositionId: positionId,\n        WorkerId: w.WorkerId,\n        CustomAnnualRate: w.CustomAnnualRate || null\n    }))\n    .filter(p => p.PositionId && p.WorkerId);\n\nif (payload.length === 0) {\n    console.warn(\"Batch insert skipped: No valid WorkerIds found in items.\", items);\n    return;\n}\n\nawait apiService.send(`${this.BATCH_ENDPOINT}/insert`, \"POST\", payload, false);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "_batchInsert",
+      "parameters": [
+        "apiService",
+        "items",
+        "positionId"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!items || items.length === 0) return;\n\nconst payload = items;\n\nreturn apiService.send(`${this.BATCH_ENDPOINT}/update`, \"PUT\", payload, false);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_batchUpdate",
+      "parameters": [
+        "apiService",
+        "items"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!items || items.length === 0) return;\n\nconst payload = items\n    .filter(w => w.Id)\n    .map(w => ({ Id: w.Id }));\n\nif (payload.length === 0) return;\n\nawait apiService.send(`${this.BATCH_ENDPOINT}/delete`, \"POST\", payload, false);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "_batchDelete",
+      "parameters": [
+        "apiService",
+        "items"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!positionId) throw new Error(\"Target Position ID is missing\");\n\nconst originalMap = new Map(originalItems.map(w => [w.WorkerId, w]));\nconst originalSet = new Set(originalItems.map(w => w.WorkerId));\nconst finalSet = new Set(finalItems.map(w => w.WorkerId));\n\nconst toInsert = finalItems.filter(w => !originalSet.has(w.WorkerId));\nconst toDelete = originalItems\n    .filter(w => !finalSet.has(w.WorkerId))\n    .map(w => ({\n        Id: w._linkId\n    }));\n\nconst toUpdate = [];\nfinalItems.forEach(newItem => {\n    const oldItem = originalMap.get(newItem.WorkerId);\n\n    if (oldItem) {\n        const hasChanged = newItem.CustomAnnualRate != oldItem.CustomAnnualRate;\n\n        if (hasChanged) {\n            toUpdate.push({\n                Id: oldItem._linkId,\n                CustomAnnualRate: newItem.CustomAnnualRate || null\n            });\n        }\n    }\n});\n\nconst promises = [];\nif (toInsert.length > 0) promises.push(this._batchInsert(apiService, toInsert, positionId));\nif (toUpdate.length > 0) promises.push(this._batchUpdate(apiService, toUpdate));\nif (toDelete.length > 0) promises.push(this._batchDelete(apiService, toDelete));\n\nawait Promise.all(promises);\nreturn true;",
+      "description": "Synchronizes assignment data by comparing the current modal state against the original state. It identifies discrepancies to perform batch inserts for new assignments and deletions for removed ones.\n- **finalItems**: The array of items currently selected in the Modal (the desired state).\n- **originalItems**: The array of items as they currently exist in the database or state (the initial state).\n- **positionId**: The unique identifier of the Position record being updated.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "syncAssignments",
+      "parameters": [
+        "apiService",
+        "finalItems",
+        "originalItems",
+        "positionId"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "syncAssignments"
+  ]
+}

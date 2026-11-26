@@ -1,0 +1,1103 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "displayExpression": "$ctrl.authService.isCurrentUserAdmin",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "worker-nav",
+          "displayExpression": "!$ctrl.authService.isCurrentUserAdmin",
+          "expressions": [
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "false",
+              "to": "isCollapsed"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "$ctrl.uiState.workerNavs",
+              "to": "menuItems"
+            }
+          ],
+          "layout": {},
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "displayExpression": "$ctrl.authService.isCurrentUserAdmin\n&&\n($ctrl.uiState.links.length > 0)",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.links",
+                      "to": "links"
+                    }
+                  ],
+                  "name": "Breadcrumbs",
+                  "nodeName": "bln-breadcrumbs",
+                  "type": "core-component"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "evaluate": true,
+                              "name": "text",
+                              "textContent": "$ctrl.uiState.selectedEntityName"
+                            }
+                          ],
+                          "classList": [],
+                          "comments": "user-name",
+                          "name": "h3",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "margin",
+                              "value": "0%"
+                            }
+                          ]
+                        },
+                        {
+                          "children": [
+                            {
+                              "evaluate": true,
+                              "name": "text",
+                              "textContent": "$ctrl.uiState.displayedRole"
+                            }
+                          ],
+                          "classList": [],
+                          "comments": "displayed-role",
+                          "displayExpression": "$ctrl.authService.isCurrentUserAdmin",
+                          "name": "p",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "margin",
+                              "value": "0%"
+                            }
+                          ]
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "header-text",
+                      "name": "div"
+                    },
+                    {
+                      "children": [],
+                      "classList": [],
+                      "comments": "header-buttons",
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.refreshTab()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isLoadingTable",
+                          "to": "showLoading"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "profile-header",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "justify-content",
+                      "value": "space-between"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "align-items",
+                      "value": "center"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "displayExpression": "!$ctrl.authService.isCurrentUserAdmin",
+                  "name": "hr",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding-top",
+                      "value": "10px"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "displayExpression": "$ctrl.authService.isCurrentUserAdmin",
+                      "expressions": [
+                        {
+                          "expression": "[{\n        label: \"User\",\n        closable: false\n    },\n    {\n        label: \"Worker\",\n        closable: false\n    },\n    {\n        label: \"Employment Info\",\n        closable: false\n    },\n    {\n        label: \"Bank Info\",\n        closable: false\n    },\n    {\n        label: \"Statutory Compliances\",\n        closable: false\n    },\n    {\n        label: \"Leave Credits\",\n        closable: false\n    },\n    {\n        label: \"Pay Components\",\n        closable: false\n    },\n    {\n        label: \"Attendance Summaries\",\n        closable: false\n    },\n    {\n        label: \"Pay Slips\",\n        closable: false\n    },\n    {\n        label: \"YTD\",\n        closable: false\n    }\n]",
+                          "to": "tabItems"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.currentTab.id",
+                          "to": "selectedTab"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onTabChange(selectedTab)",
+                          "to": "onSelectedTabChange"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Tab Bar",
+                      "nodeName": "bln-tab-bar",
+                      "type": "core-component"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": [
+                                    {
+                                      "property": "core",
+                                      "value": ""
+                                    }
+                                  ],
+                                  "children": [],
+                                  "classList": [],
+                                  "displayExpression": "true",
+                                  "expressions": [],
+                                  "name": "Spinner",
+                                  "nodeName": "bln-spinner",
+                                  "type": "core-component"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "spinner",
+                              "displayExpression": "$ctrl.uiState.isLoadingTable",
+                              "layout": {
+                                "cell": {
+                                  "growFactor": 1,
+                                  "mainSize": "100%",
+                                  "shrinkFactor": 1,
+                                  "type": "box-item"
+                                }
+                              },
+                              "name": "div",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "display",
+                                  "value": "flex"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "align-items",
+                                  "value": "center"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "justify-content",
+                                  "value": "center"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "position",
+                                  "value": "absolute"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "top",
+                                  "value": "0"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "left",
+                                  "value": "0"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "right",
+                                  "value": "0"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "bottom",
+                                  "value": "0"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "background-color",
+                                  "value": "rgba(255, 255, 255, 0.7)"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "z-index",
+                                  "value": "10"
+                                }
+                              ]
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "classList": [],
+                                  "displayExpression": "($ctrl.uiState.entityType === 'user')\n||\n($ctrl.uiState.entityType === 'worker')\n||\n($ctrl.uiState.entityType === 'employment_info')\n||\n($ctrl.uiState.entityType === 'bank_info')",
+                                  "expressions": [
+                                    {
+                                      "expression": "$ctrl.uiState.links",
+                                      "to": "links"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.selectedEntityName",
+                                      "to": "workerName"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.entityType",
+                                      "to": "entityType"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.displayedRole",
+                                      "to": "workerRole"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.userId",
+                                      "to": "userId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.workerId",
+                                      "to": "workerId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isLoadingTable",
+                                      "to": "isLoadingTable"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isWorker",
+                                      "to": "isWorker"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.reloadTab",
+                                      "to": "reloadTab"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isPanelOpen",
+                                      "to": "isPanelOpen"
+                                    },
+                                    {
+                                      "expression": "$ctrl.referenceData",
+                                      "to": "referenceData"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.positionId",
+                                      "to": "positionId"
+                                    }
+                                  ],
+                                  "name": "static-table",
+                                  "ownerId": "6b07c72a48cd88e32d307a88",
+                                  "ownerType": "app",
+                                  "resourceIdentity": "components/worker-ui/static-table",
+                                  "styles": [
+                                    {
+                                      "enabled": true,
+                                      "property": "height",
+                                      "value": "100%"
+                                    }
+                                  ],
+                                  "type": "custom-component"
+                                },
+                                {
+                                  "children": [],
+                                  "classList": [],
+                                  "displayExpression": "($ctrl.uiState.entityType === 'statutory_compliance')\n||\n($ctrl.uiState.entityType === 'accrual_balance')\n||\n($ctrl.uiState.entityType === 'worker_pay_component')\n||\n($ctrl.uiState.entityType === 'attendance_summary')\n||\n($ctrl.uiState.entityType === 'pay_slip')",
+                                  "expressions": [
+                                    {
+                                      "expression": "$ctrl.uiState.isLoadingTable",
+                                      "to": "isLoadingTable"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.userId",
+                                      "to": "userId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.workerId",
+                                      "to": "workerId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isWorker",
+                                      "to": "isWorker"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.entityType",
+                                      "to": "entityType"
+                                    },
+                                    {
+                                      "expression": "$ctrl.referenceData",
+                                      "to": "referenceData"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.reloadTab",
+                                      "to": "reloadTab"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isPanelOpen",
+                                      "to": "isPanelOpen"
+                                    }
+                                  ],
+                                  "layout": {},
+                                  "name": "dynamic-table",
+                                  "ownerId": "6b07c72a48cd88e32d307a88",
+                                  "ownerType": "app",
+                                  "resourceIdentity": "components/worker-ui/dynamic-table",
+                                  "type": "custom-component"
+                                },
+                                {
+                                  "children": [],
+                                  "classList": [],
+                                  "displayExpression": "$ctrl.uiState.entityType === 'ytd'",
+                                  "expressions": [
+                                    {
+                                      "expression": "$ctrl.uiState.entityType",
+                                      "to": "entityType"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isLoadingTable",
+                                      "to": "isLoadingTable"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.isWorker",
+                                      "to": "isWorker"
+                                    },
+                                    {
+                                      "expression": "$ctrl.referenceData",
+                                      "to": "referenceData"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.userId",
+                                      "to": "userId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.workerId",
+                                      "to": "workerId"
+                                    },
+                                    {
+                                      "expression": "$ctrl.authService.isCurrentUserAdmin",
+                                      "to": "isCurrentUserAdmin"
+                                    },
+                                    {
+                                      "expression": "$ctrl.uiState.reloadTab",
+                                      "to": "reloadTab"
+                                    }
+                                  ],
+                                  "name": "ytd",
+                                  "ownerId": "6b07c72a48cd88e32d307a88",
+                                  "ownerType": "app",
+                                  "resourceIdentity": "components/worker-ui/ytd",
+                                  "type": "custom-component"
+                                }
+                              ],
+                              "classList": [],
+                              "comments": "section",
+                              "layout": {
+                                "cell": {
+                                  "growFactor": 1,
+                                  "mainSize": "100%",
+                                  "shrinkFactor": 1,
+                                  "type": "box-item"
+                                }
+                              },
+                              "name": "div",
+                              "styles": [
+                                {
+                                  "enabled": true,
+                                  "property": "position",
+                                  "value": "relative"
+                                },
+                                {
+                                  "enabled": true,
+                                  "property": "height",
+                                  "value": "100%"
+                                }
+                              ]
+                            }
+                          ],
+                          "classList": [],
+                          "layout": {
+                            "container": {
+                              "crossAxisAlignment": "stretch",
+                              "items": [],
+                              "orientation": "row",
+                              "type": "box"
+                            }
+                          },
+                          "name": "div",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "height",
+                              "value": "100% !important"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "width",
+                              "value": "100% !important"
+                            }
+                          ]
+                        }
+                      ],
+                      "classList": [],
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "display",
+                          "value": "flex"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "height",
+                          "value": "100%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "tab-bar-sections",
+                  "layout": {},
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "position",
+                      "value": "relative"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "padding-top",
+                      "value": "5px"
+                    },
+                    {
+                      "enabled": true,
+                      "property": "height",
+                      "value": "100%"
+                    }
+                  ]
+                }
+              ],
+              "classList": [],
+              "comments": "profile-tab-content",
+              "layout": {
+                "cell": {
+                  "growFactor": 1,
+                  "mainSize": "100%",
+                  "shrinkFactor": 1,
+                  "type": "box-item"
+                }
+              },
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "layout": {
+            "container": {
+              "crossAxisAlignment": "stretch",
+              "items": [],
+              "orientation": "row",
+              "type": "box"
+            }
+          },
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "height",
+              "value": "85% !important"
+            },
+            {
+              "enabled": true,
+              "property": "width",
+              "value": "100% !important"
+            }
+          ]
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    }
+  ],
+  "name": "user",
+  "params": {
+    "retainPage": "",
+    "userId": ""
+  },
+  "type": "page",
+  "url": "/user/:userId",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "name": "$sce",
+      "type": "service"
+    },
+    {
+      "name": "$timeout",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterOperationsService",
+      "resourceIdentity": "services/core/ui/filter-operations-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "// Append Font Awesome link if not already present\nif (!document.querySelector('link[href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css\"]')) {\n    const link = document.createElement('link');\n    link.rel = 'stylesheet';\n    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';\n    document.head.appendChild(link);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "loadFontAwesome",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if(!$ctrl.authService.isCurrentUserAdmin) {\n    return;\n}\n\ntry {\n\n    const companyOpts = await $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Company\");\n\n    if ($ctrl.globalSelectedCompany) {\n        $ctrl.globalSelectedCompany.companyMap = companyOpts;\n        $ctrl.globalSelectedCompany.setMenuItems();\n    }\n    \n    // Fetch formatted options directly from service\n    const [currencyOpts, countryOpts, stateOpts, accrualOpts, earningOpts, positionOpts, payPeriodOpts] = await Promise.all([\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Currency\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Country\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"State\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Accrual\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Earning\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Position\"),\n        $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"PayPeriod\"),\n    ]);\n\n    $ctrl.referenceData.companyMap = companyOpts;\n    $ctrl.referenceData.currencyMap = currencyOpts;\n    $ctrl.referenceData.countryMap = countryOpts;\n    $ctrl.referenceData.accrualMap = accrualOpts;\n    $ctrl.referenceData.earningMap = earningOpts;\n    $ctrl.referenceData.positionMap = positionOpts;\n    $ctrl.referenceData.payPeriodMap = payPeriodOpts;\n\n    $ctrl.referenceData.stateMap = stateOpts.reduce((acc, state) => {\n        if (!acc[state.CountryId]) acc[state.CountryId] = [];\n        acc[state.CountryId].push(state);\n        return acc;\n    }, {});\n\n} catch (e) {\n    console.warn(\"Background reference load failed\", e);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadReferenceMaps",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.workerNavs = [\n    {\n        label: \"User\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(1),  \n    },\n    {\n        label: \"Worker\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(2),  \n    },\n    {  \n        label: \"Employment Info\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(3),  \n    },\n    {\n        label: \"Bank Info\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(4),  \n    },\n    {\n        label: \"Statutory Compliance\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(5),  \n    },\n    {   label: \"Leave Credits\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(6),  \n    },\n    // Disabled until non admin users get access to Earning/Benefit Scope\n    // {\n    //     label: \"Pay Component\",\n    //     evaluateLabel: false,\n    //     onClick: \"function\",\n    //     function: () => $ctrl.handlers.onTabChange(7),  \n    // },\n    {\n        label: \"Attendance Summary\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(8),  \n    },\n    {\n        label: \"Pay Slip\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(9),  \n    },\n    {\n        label: \"YTD\",\n        evaluateLabel: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onTabChange(10),  \n    }\n];",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "loadWorkerNavTabs",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "children": [],
+          "description": "",
+          "name": "links",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "displayedRole",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "description": "",
+          "name": "entityType",
+          "type": "property",
+          "value": "\"user\""
+        },
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": "\"user\""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "workerNavs",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "userId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerId",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isLoadingTable",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isWorker",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "reloadTab",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isPanelOpen",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "positionId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabItemsMap",
+      "type": "property",
+      "value": "new Map([\n    [1, \"user\"],\n    [2, \"worker\"],\n    [3, \"employment_info\"],\n    [4, \"bank_info\"],\n    [5, \"statutory_compliance\"],\n    [6, \"accrual_balance\"],\n    [7, \"worker_pay_component\"],\n    [8, \"attendance_summary\"],\n    [9, \"pay_slip\"],\n    [10, \"ytd\"]\n]);"
+    },
+    {
+      "description": "",
+      "name": "referenceData",
+      "properties": [
+        {
+          "children": [],
+          "description": "",
+          "name": "companyMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "currencyMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "countryMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "stateMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "accrualMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "positionMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "earningMap",
+          "type": "array"
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "payPeriodMap",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "frequencyMap",
+          "type": "property",
+          "value": "[\n    {\n        label: \"WEEKLY\",\n        value: \"WEEKLY\"\n    },\n    {\n        label: \"BIWEEKLY\",\n        value: \"BIWEEKLY\"\n    },\n    {\n        label: \"SEMIMONTHLY\",\n        value: \"SEMIMONTHLY\"\n    },\n    {\n        label: \"MONTHLY\",\n        value: \"MONTHLY\"\n    }\n]"
+        },
+        {
+          "description": "",
+          "name": "unitsTypeMap",
+          "type": "property",
+          "value": "[\n    {\n        label: \"DAY\",\n        value: \"DAY\"\n    },\n    {\n        label: \"HOUR\",\n        value: \"HOUR\"\n    },\n    {\n        label: \"UNIT\",\n        value: \"UNIT\"\n    }\n]"
+        },
+        {
+          "description": "",
+          "name": "runTypeMap",
+          "type": "property",
+          "value": "[\n    {\n        label: \"REGULAR\",\n        value: \"REGULAR\"\n    },\n    {\n        label: \"OFFCYCLE\",\n        value: \"OFFCYCLE\"\n    },\n    {\n        label: \"TERMINATION\",\n        value: \"TERMINATION\"\n    }\n]"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "helpers",
+      "properties": [
+        {
+          "body": "try {\n    const { entities: [{ Id: fetchedWorkerId, CompanyId: companyId }] } = await $ctrl.payrollApiService.get({\n        entity: \"worker\",\n        limit: 1,\n        query: `Id=${workerId}&select=Id,CompanyId`\n    });\n\n    if (fetchedWorkerId === workerId) {\n        const companyLegalName = $ctrl.globalSelectedCompany.companyMap.find(company => company.value === companyId)?.label;\n\n        if (companyId && companyLegalName && companyId !== $ctrl.globalSelectedCompany.companyId) {\n            $ctrl.utils.toast(`Switching to Worker's Company ${companyLegalName ? `(${companyLegalName})` : \"\"}`, \"INFO\");\n            $ctrl.globalSelectedCompany.setCompany(companyId, companyLegalName);\n        }\n\n        await $ctrl.loaders.loadReferenceMaps();\n        $ctrl.globalSelectedCompany.clearCompanyMenuItems();\n    }\n} catch (e) {\n    console.error(\"Failed to fetch Worker's CompanyId for automatic switching: \", e);\n}\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "_switchToWorkerCompany",
+          "parameters": [
+            "workerId"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "$ctrl.uiState.currentTab.previousId = $ctrl.uiState.currentTab.id;\n$ctrl.uiState.currentTab.id = selectedTab;\n\nif($ctrl.uiState.isPanelOpen) {\n    const discardChanges = await $ctrl.utils.handleUnsavedChanges($ctrl.uiState.isPanelOpen);\n    if (!discardChanges) {\n        $ctrl.uiState.currentTab.id = $ctrl.uiState.currentTab.previousId; \n        $ctrl.utils.setSelectedBelliniTabBarTab($ctrl.uiState.currentTab.previousId);\n        return;\n    }\n}\n\nconst entityType = $ctrl.tabItemsMap.get(selectedTab);\n\n//Update Id for worker side panel nav as it is not indexed like tab navigation\n$ctrl.uiState.currentTab.name = $ctrl.uiState.entityType = entityType;\n$ctrl.uiState.isPanelOpen = false;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onTabChange",
+          "parameters": [
+            "selectedTab"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.uiState.reloadTab = !$ctrl.uiState.reloadTab",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "refreshTab",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "$ctrl.authCookies.setServerUrl($ctrl.$env.getProperty(\"payroll_api_base_url\"));\nawait $ctrl.authService.authReadyPromise; \n\nif(!$ctrl.pageParameters.userId && $ctrl.authService.isCurrentUserAdmin) {\n    if($ctrl.$env.current.name !== \"local\") {\n        $ctrl.utils.toast(`UserID not Found`, \"ERROR\");\n        $ctrl.$state.go(\"people_management\");\n    }\n}\n\n$ctrl.uiState.links = [\n    {\n        label: \"People Management\",\n        active: false,\n        onClick: \"function\",\n        function: () => $ctrl.handlers.onNavigateToPeopleManagement()\n    }\n]\n\nif(!$ctrl.authService.isCurrentUserAdmin) {\n    $ctrl.$state.go(\"user\", { userId: $ctrl.authService.saasAuth.userId }, { location: 'replace', notify: false });\n    $ctrl.pageParameters.userId = $ctrl.authService.saasAuth.userId;\n    $ctrl.uiState.workerId = $ctrl.authService.saasAuth.workerId;\n} else {\n    $ctrl.uiState.workerId = await $ctrl.authService.getUserWorkerId($ctrl.pageParameters.userId);\n}\n\n$ctrl.uiState.userId = $ctrl.pageParameters.userId;\nawait $ctrl.loaders.loadReferenceMaps();\n\nif($ctrl.uiState.workerId && $ctrl.authService.isCurrentUserAdmin) {\n    await $ctrl.helpers._switchToWorkerCompany($ctrl.uiState.workerId);\n}\n\n\n\n$ctrl.loaders.loadFontAwesome();\n$ctrl.loaders.loadWorkerNavTabs();\n",
+          "description": "",
+          "invokeOnLoad": true,
+          "isAsync": true,
+          "name": "onInit",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "if($ctrl.uiState.isPanelOpen) {\n    const confirmed = await $ctrl.utils.handleUnsavedChanges($ctrl.uiState.isPanelOpen);\n    if (!confirmed) return;\n}\n\n$ctrl.$state.go(\"people_management\", $ctrl.pageParameters.retainPage ? { page: $ctrl.pageParameters.retainPage } : {});",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onNavigateToPeopleManagement",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    }
+  ]
+}

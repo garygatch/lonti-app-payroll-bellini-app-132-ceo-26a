@@ -1,0 +1,60 @@
+{
+  "description": "",
+  "name": "tax-schedule-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Id\", // Default column to search\n    operation: \"eq\", // Default operator\n    label: \"ID\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Tax\",\n    \"LowerLimit\",\n    \"UpperLimit\",\n    \"BaseAmount\",\n    \"PercentDeduction\",\n    // \"EffectiveFromDate\",\n    // \"EffectiveToDate\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Id\": \"Id\"\n    },\n    type: {\n        \"EffectiveFromDate\": \"date\",\n        \"EffectiveToDate\": \"date\",\n        \"LowerLimit\": \"currency\",\n        \"UpperLimit\": \"currency\",\n        \"BaseAmount\": \"currency\",\n        \"PercentDeduction\": \"number\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        operators: [\"eq\"]\n    },\n\n    // --- Bracket Configuration ---\n    {\n        label: \"Lower Limit\",\n        value: \"LowerLimit\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Upper Limit\",\n        value: \"UpperLimit\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n\n    // --- Deduction Logic ---\n    {\n        label: \"Base Amount\",\n        value: \"BaseAmount\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Percent Deduction\",\n        value: \"PercentDeduction\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n\n    // --- Dates ---\n    {\n        label: \"Effective From\",\n        value: \"EffectiveFromDate\",\n        type: \"date\",\n        // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n    },\n    {\n        label: \"Effective To\",\n        value: \"EffectiveToDate\",\n        type: \"date\",\n        // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n    },\n\n    // --- Relationships ---\n    {\n        label: \"Tax\",\n        value: \"TaxId\",\n        type: \"dropdown\",\n        source: \"taxMap\",\n        operators: [\"eq\"]\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "taxSchedules",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "taxSchedules",
+    "getQuickSearchDefaults"
+  ]
+}

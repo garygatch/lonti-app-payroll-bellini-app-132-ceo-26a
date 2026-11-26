@@ -1,0 +1,62 @@
+{
+  "description": "",
+  "name": "payroll-run-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"DisplayName\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Name\",\n    \"RunType\",\n    \"Status\",\n    \"ProcessDate\",\n    \"TotalEmployees\",\n    \"TotalGrossPay\",\n    \"TotalNetPay\",\n    \"TotalDebit\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Name\": \"DisplayName\"\n    },\n    type: {\n        \"ProcessDate\": \"date\",\n        \"PostingDate\": \"date\",\n        \"DebitDate\": \"date\",\n        \"TotalEmployees\": \"number\"\n\n        // \"TotalGrossPay\": \"currency\",\n        // \"TotalNetPay\": \"currency\",\n        // \"TotalDebit\": \"currency\",\n        // \"TotalTaxDebit\": \"currency\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "return [\n    // --- Identifiers ---\n    {\n        label: \"ID\",\n        value: \"Id\",\n        type: \"number\",\n        // operators: [\"eq\"]\n    },\n\n    // --- Core Identity ---\n    {\n        label: \"Display Name\",\n        value: \"DisplayName\",\n        type: \"string\",\n        // operators: [\"contains\", \"eq\", \"startswith\"]\n    },\n    {\n        label: \"Description\",\n        value: \"Description\",\n        type: \"string\",\n        // operators: [\"contains\"]\n    },\n    {\n        label: \"Status\",\n        value: \"Status\",\n        type: \"string\",\n        // operators: [\"eq\"]\n    },\n    {\n        label: \"Off Cycle Reason\",\n        value: \"OffCycleReason\",\n        type: \"string\",\n        // operators: [\"contains\"]\n    },\n\n    // --- Financial Totals (Numeric) ---\n    {\n        label: \"Total Employees\",\n        value: \"TotalEmployees\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Total Gross Pay\",\n        value: \"TotalGrossPay\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Total Net Pay\",\n        value: \"TotalNetPay\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Total Tax Debit\",\n        value: \"TotalTaxDebit\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Total Cost (Debit)\",\n        value: \"TotalDebit\",\n        type: \"number\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n\n    // --- Dates ---\n    {\n        label: \"Process Date\",\n        value: \"ProcessDate\",\n        type: \"date\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Posting Date\",\n        value: \"PostingDate\",\n        type: \"date\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Debit Date\",\n        value: \"DebitDate\",\n        type: \"date\",\n        // operators: [\"eq\", \"gt\", \"lt\"]\n    },\n    {\n        label: \"Run Type\",\n        value: \"RunType\",\n        type: \"dropdown\",\n        source: \"runTypeMap\",\n        operators: [\"eq\"]\n    },\n\n    // --- Relationships ---\n    {\n        label: \"Pay Period\",\n        value: \"PayPeriodId\",\n        type: \"dropdown\",\n        source: \"payPeriodMap\", // Requires loading\n        operators: [\"eq\"]\n    },\n    // {\n    //     label: \"Pay Schedule\",\n    //     value: \"PayScheduleId\",\n    //     type: \"dropdown\",\n    //     source: \"payScheduleMap\",\n    //     operators: [\"eq\"]\n    // },\n    {\n        label: \"Currency\",\n        value: \"Currency\",\n        type: \"dropdown\",\n        source: \"currencyMap\",\n        operators: [\"eq\"]\n    }\n];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "payrollRuns",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "reviewPayrollRun",
+    "uiHandlers",
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "payrollRuns",
+    "getQuickSearchDefaults"
+  ]
+}

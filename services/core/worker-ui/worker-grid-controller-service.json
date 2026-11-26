@@ -1,0 +1,61 @@
+{
+  "description": "",
+  "name": "worker-grid-controller-service",
+  "parentDirectoryId": "WZrfeoX9i8W5vlACEU0fM",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "// Maps entityType -> how to find/extract its scoping id from the query string,\n// and how to build the composite path once extracted.\nconst EXCEPTION_ENTITY_CONFIG = {\n    pay_component_log:       { queryKey: 'PaySlipId',   build: v => `pay_component_log/pay_slip/${v}` },\n    pay_schedule:            { queryKey: 'Id',          build: v => `pay_schedule/${v}` },\n    position_pay_component:  { queryKey: 'PositionId',  build: v => `position_pay_component/position/${v}` },\n    user:                    { queryKey: 'Id',          build: v => `user/${v}` },\n    user_role:               { queryKey: 'UserId',      build: v => `user_role/user/${v}` },\n    worker:                  { queryKey: 'Id',          build: v => `worker/${v}` }\n};\n\nconst DEFAULT_QUERY_KEY = 'WorkerId'; // default {entityType}/worker/{id} shape\n\nconst {\n    entityType,\n    customEntityKey,\n    columnDefs,\n    page = 1,\n    limit = 25,\n    query = \"\",\n    hydrateOnLoad = false,\n    resetUiState = true,\n    touchLoadingStates = true,\n    reloadColumns = false\n} = options;\n\nconst exceptionConfig = EXCEPTION_ENTITY_CONFIG[entityType];\nconst queryKey = exceptionConfig?.queryKey ?? DEFAULT_QUERY_KEY;\n\nconst { value: idValue, remainingQuery } = this.extractIdFromQuery(query, queryKey);\n\nif (!idValue) {\n    console.error(`[WorkerGridController] Missing required '${queryKey}' filter in query for entityType: ${entityType}`);\n    context.utils.toast(`Missing required '${queryKey}' filter for ${entityType}`, \"ERROR\");\n    return;\n}\n\nconst builtEntityPath = exceptionConfig\n    ? exceptionConfig.build(idValue)\n    : `${entityType}/worker/${idValue}`;\n\nconst store = context.tabStore[entityType];\nif (!store) return;\n\n// Create unique request ID for each call\n// Attach it to each store so each tab tracks its own requests\nstore.currentRequestId = (store.currentRequestId ?? 0) + 1;\nconst currentRequestId = store.currentRequestId;\n\n// Prepare the UI\nif (touchLoadingStates) context.uiState.isLoadingTable = true;\nif (resetUiState) this.resetState(context.uiState);\n\ntry {\n    const result = await context.payrollApiService.get({\n        entity: builtEntityPath,\n        page,\n        limit,\n        query: remainingQuery,\n        customEntityKey\n    });\n\n    // Abort if newer request was triggered\n    if (store.currentRequestId !== currentRequestId) return;\n\n    const dataKey = customEntityKey || 'entities';\n    const rawEntities = result[dataKey] ?? result.entities ?? result[entityType] ?? [];\n\n    // Format API response for util processing\n    const entitiesArray = Array.isArray(rawEntities)\n        ? rawEntities\n        : (rawEntities ? [rawEntities] : []);\n    \n    // Normalize Data\n    const booleanKeys = context.utils.extractBooleanKeys(columnDefs);\n    const cleanEntities = context.utils.normalizeBooleans(entitiesArray, booleanKeys);\n\n    let finalData = cleanEntities;\n\n    if (context.referenceDataService && context.referenceDataService.hydrateEntity && hydrateOnLoad) {\n        finalData = await Promise.all(\n            cleanEntities.map(entity => context.referenceDataService.hydrateEntity(entity))\n        );\n\n        if (store.currentRequestId !== currentRequestId) return;\n    }\n\n    // Update Tab Store\n    store.data = finalData;\n    store.currentPage = result.metadata?.currentPage ?? page;\n    store.totalFiltered = result.metadata?.totalFiltered ?? entitiesArray.length;\n    store.totalCount = result.metadata?.totalCount ?? entitiesArray.length;\n    store.hasNextPage = result.metadata?.hasNextPage ?? (entitiesArray.length === limit);\n    store.pageCount = (result.metadata?.pageCount && result.metadata?.pageCount > 0)\n        ? result.metadata.pageCount\n        : (store.hasNextPage ? page + 1 : page);\n\n    // Lazy-load Column Definitions\n    if (!store.columns || store.columns.length === 0 || reloadColumns) {\n        store.columns = context.utils.generateColumnDefinitions(columnDefs);\n    }\n\n    return finalData;\n} catch (error) {\n    if (store.currentRequestId === currentRequestId) {\n        // Payroll api service get does not return the 404 error, used error message instead\n        const isNotFoundError = entityType === 'user' && /not found/i.test(error?.message ?? '');\n\n        if (isNotFoundError) {\n            context.utils.toast(`User not Found`, \"ERROR\");\n            context.$state.go(\"people_management\");\n        } else {\n            console.error(`[WorkerGridController] Error loading ${entityType}`, error);\n            context.utils.toast(`Failed to load ${entityType}`, \"ERROR\");\n        }\n\n        throw error;\n    }\n} finally {\n    if (store.currentRequestId === currentRequestId && touchLoadingStates) {\n        context.uiState.isLoadingTable = false;\n    }\n}",
+      "description": "Loads worker-bound sub-resource data for a grid tab using composite entity paths (e.g. `worker/{Id}`, `pay_slip/worker/{WorkerId}`). Entity types in EXCEPTION_ENTITY_CONFIG use their specific path template; all other entity types default to `{entityType}/worker/{workerId}`.",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "loadWorkerGridData",
+      "parameters": [
+        "context",
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "uiState.selectedEntity = null;\nuiState.selectedEntityName = \"\";\nuiState.detailsList = [];\nif (Object.hasOwn(uiState, 'isFormOpen')) {\n    uiState.isFormOpen = false;\n}\n\nif (Object.hasOwn(uiState, 'isAdding')) {\n    uiState.isAdding = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditing')) {\n    uiState.isEditing = false;\n}\n\nif (Object.hasOwn(uiState, 'isCreatingNewEntity')) {\n    uiState.isCreatingNewEntity = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditingExistingEntity')) {\n    uiState.isEditingExistingEntity = false;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "resetState",
+      "parameters": [
+        "uiState"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "/**\n * Extracts a filter value like \"WorkerId_eq=123\" or \"WorkerId=123\" from a\n * query string, and returns both the extracted value and the remaining\n * query string with that filter removed (so it isn't sent twice).\n */\nconst pattern = new RegExp(`(?:^|&)${queryKey}(?:_eq)?=([^&]+)`);\nconst match = query.match(pattern);\nif (!match) return { value: null, remainingQuery: query };\n\nconst value = decodeURIComponent(match[1]);\nconst remainingQuery = query.replace(pattern, '').replace(/^&/, '');\nreturn { value, remainingQuery };",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "extractIdFromQuery",
+      "parameters": [
+        "query",
+        "queryKey"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "loadWorkerGridData",
+    "resetState",
+    "extractIdFromQuery"
+  ]
+}

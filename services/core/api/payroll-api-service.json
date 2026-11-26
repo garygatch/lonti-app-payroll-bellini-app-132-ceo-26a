@@ -1,0 +1,92 @@
+{
+  "description": "",
+  "name": "payroll-api-service",
+  "parentDirectoryId": "D8D3o8N9R8U4NB4va4vap",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "description": "",
+      "name": "config",
+      "properties": [
+        {
+          "description": "",
+          "name": "baseUrl",
+          "type": "property",
+          "value": "this.$env.getProperty(\"payroll_api_base_url\") + \"/api/lonti_app_payroll/1.0\""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "body": "try {\n    let {\n        url = \"\",\n        query = \"\"\n    } = options;\n\n    if (!(url instanceof URL)) {\n        url = new URL(url);\n    }\n\n    const searchParams = new URLSearchParams(query);\n\n    searchParams.forEach((value, key) => {\n        if (key.endsWith('_in') || key.endsWith('_notin')) {\n            let currentUrlString = url.toString();\n            currentUrlString += currentUrlString.includes('?') ? '&' : '?';\n            currentUrlString += `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;\n            url = new URL(currentUrlString);\n        } else {\n            url.searchParams.append(key, value);\n        }\n    });\n\n    // Convert form-encoded spaces (+) to URI-encoded spaces (%20)\n    // Actual + signs in the text are safely encoded as %2B, so this won't break them.\n    url.search = url.search.replace(/\\+/g, '%20');\n\n    return url;\n\n} catch (e) {\n    console.error(\"Error building URL with query: \", e);\n    return options.url;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "_buildUrlWithQuery",
+      "parameters": [
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const {\n    entity,\n    page = 1,\n    limit = 25,\n    query = \"\",\n    customEntityKey = null,\n    silent = false\n} = options;\n\nlet {\n    offset\n} = options;\n\nif (!entity) throw new Error(\"Entity is required for Payroll API calls.\");\n\nlet url = new URL(`${this.config.baseUrl}/${entity}`);\nconst params = url.searchParams;\n\noffset = offset ?? (page - 1) * limit;\nparams.set('limit', limit);\nparams.set('offset', offset);\n\nif (query) {\n    url = this._buildUrlWithQuery({ url, query }); \n}\n\ntry {\n    const res = await this.httpService.request(url.toString(), 'GET');\n\n    if (!res) return [];\n\n    const entityKey = customEntityKey ?? entity.split(\"/\")[0];\n    const entities = res?.[entityKey] ?? res ?? [];\n\n    if (Array.isArray(entities)) {\n        return {\n            entities,\n            metadata: {\n                totalFiltered: res?.metadata?.totalFiltered,\n                totalCount: res?.metadata?.totalCount,\n                pageCount: res?.metadata?.pageCount,\n                currentPage: res?.metadata?.currentPage,\n                hasNextPage: res?.metadata?.hasNextPage\n            }\n        };\n    }\n\n    return res;\n\n} catch (error) {\n    const msg = error.message || \"An unexpected error occurred.\";\n\n    if (!silent) {\n        this.utils.toast(msg, \"ERROR\");\n    }\n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "get",
+      "parameters": [
+        "options"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "httpService",
+      "resourceIdentity": "services/core/api/http-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "body": "if (!path) throw new Error(\"Path is required for Payroll API POST calls.\");\n\nconst url = `${this.config.baseUrl}/${path}`;\n\ntry {\n    const res = await this.httpService.request(url, method, payload);\n    return res;\n\n} catch (error) {\n    const msg = error.message || \"An unexpected error occurred during save.\";\n\n    if (!silent) {\n        this.utils.toast(msg, \"ERROR\");\n    }\n    throw error;\n}",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": true,
+      "name": "send",
+      "parameters": [
+        "path",
+        "method",
+        "payload",
+        "silent"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    }
+  ],
+  "visible": [
+    "constructor",
+    "get",
+    "put",
+    "send"
+  ]
+}

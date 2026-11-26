@@ -1,0 +1,244 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "() => {}",
+      "description": "This function should be called to close the modal.",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "onClose",
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "The result of the modal that is returned after the modal is closed.",
+      "enumOptions": [
+        {
+          "value": "ok"
+        },
+        {
+          "value": "cancel"
+        }
+      ],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "result",
+      "propertyType": "enum",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "props",
+      "propertyType": "object",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "evaluate": true,
+              "name": "text",
+              "textContent": "\"Import \" + $ctrl.props.FileName + \"?\""
+            }
+          ],
+          "classList": [
+            "modal-title"
+          ],
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "evaluate": false,
+              "name": "text",
+              "textContent": "×"
+            }
+          ],
+          "classList": [
+            "modal-close"
+          ],
+          "events": {
+            "click": "$ctrl.onCancelClick()"
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [
+        "modal-header"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "classList": [],
+          "elementId": "confirm-preview",
+          "name": "div",
+          "styles": [
+            {
+              "enabled": true,
+              "property": "border-style",
+              "value": "solid"
+            },
+            {
+              "enabled": true,
+              "property": "overflow",
+              "value": "auto"
+            },
+            {
+              "enabled": true,
+              "property": "border-width",
+              "value": "thin"
+            },
+            {
+              "enabled": true,
+              "property": "max-height",
+              "value": "30vh"
+            }
+          ]
+        }
+      ],
+      "classList": [
+        "modal-body"
+      ],
+      "name": "div"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-cancel"
+          ],
+          "expressions": [
+            {
+              "expression": "\"default\"",
+              "to": "type"
+            },
+            {
+              "expression": "'Cancel'",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onCancelClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [
+            "btn-ok"
+          ],
+          "expressions": [
+            {
+              "expression": "\"primary\"",
+              "to": "type"
+            },
+            {
+              "expression": "\"Import\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.onOkClick()",
+              "to": "onClick"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        }
+      ],
+      "classList": [
+        "modal-footer"
+      ],
+      "name": "div"
+    }
+  ],
+  "description": null,
+  "formControl": null,
+  "localStylesheets": [
+    {
+      "path": "index.css"
+    }
+  ],
+  "modules": [],
+  "name": "confirm-csv-modal",
+  "nodeName": null,
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "body": "$ctrl.result = 'ok'\n$ctrl.onClose()",
+      "description": "This function is called when OK button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onOkClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "$ctrl.result = 'cancel'\n$ctrl.onClose()",
+      "description": "This function is called when Cancel button is clicked.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onCancelClick",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const previewBox = document.getElementById(\"confirm-preview\");\nconst errorDisplay = document.getElementById(\"errors-and-warnings\");\n\nif ($ctrl.props?.PreviewData) {\n    const maxLines = 100;\n    renderTable($ctrl.props.PreviewData, $ctrl.props.DataLength > maxLines);\n} else {\n    if (previewBox) previewBox.innerHTML = ``;\n    if (errorDisplay) errorDisplay.innerHTML = ``;\n    if ($ctrl.hasErrors) delete $ctrl.hasErrors;\n}\n\nfunction renderTable(data, isTruncated) {\n    if (!data || data.length === 0) {\n        previewBox.innerHTML = \"<p>No data to display.</p>\";\n        return;\n    }\n\n    // Create table element\n    let table = `<table style=\"width: 100%; \">`;\n    table += \"<thead><tr>\";\n\n    // Add header row\n    data[0].forEach(header => {\n        table += `<th style=\"text-align: left; \">${header}</th>`;\n    });\n    table += \"</tr></thead>\";\n\n    // Add data rows\n    table += \"<tbody>\";\n    for (let i = 1; i < data.length; i++) {\n        table += \"<tr>\";\n        data[i].forEach(cell => {\n            table += `<td style=\"text-align: left; \">${cell}</td>`;\n        });\n        table += \"</tr>\";\n    }\n    table += \"</tbody></table>\";\n\n    // Add truncation message if applicable\n    if (isTruncated) {\n        table += \"<p>... (preview truncated)</p>\";\n    }\n\n    waitForElementAndInject(table);\n}\n\nfunction waitForElementAndInject(table) {\n    let element = document.getElementById(\"confirm-preview\");\n\n    if (element) {\n        element.innerHTML = table;\n    } else {\n        $ctrl.$timeout(waitForElementAndInject(table), 100);\n    }\n}",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": false,
+      "name": "handleFileImport",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": [
+        "$ctrl.props.PreviewData"
+      ]
+    }
+  ]
+}

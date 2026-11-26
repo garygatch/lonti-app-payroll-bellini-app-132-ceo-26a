@@ -1,0 +1,1573 @@
+{
+  "authenticationRequired": true,
+  "children": [
+    {
+      "children": [],
+      "classList": [],
+      "expressions": [],
+      "name": "header-component",
+      "nodeName": "header-component",
+      "ownerId": "6b07c72a48cd88e32d307a88",
+      "ownerType": "app",
+      "resourceIdentity": "components/header-component",
+      "type": "custom-component"
+    },
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "side-nav",
+          "expressions": [
+            {
+              "expression": "\"Payroll Application\"",
+              "to": "label"
+            },
+            {
+              "expression": "\"vertical\"",
+              "to": "orientation"
+            },
+            {
+              "expression": "$ctrl.globalSelectedCompany.menuItems",
+              "to": "menuItems"
+            },
+            {
+              "expression": "true",
+              "to": "showMenuToggle"
+            },
+            {
+              "expression": "false",
+              "to": "visible"
+            },
+            {
+              "expression": "\"side-panel\"",
+              "to": "menuType"
+            }
+          ],
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "Navigation",
+          "nodeName": "bln-navigation",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.peopleManagement.title"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-name",
+                      "name": "h3",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "evaluate": true,
+                          "name": "text",
+                          "textContent": "$ctrl.en.pages.peopleManagement.description"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "section-description",
+                      "name": "p",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "margin",
+                          "value": "0%"
+                        }
+                      ]
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-text",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "padding",
+                      "value": "0.5rem"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add-entity",
+                      "expressions": [
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "false",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.formManagementService.onFormOpen(\n    $ctrl.uiState,\n    $ctrl[$ctrl.tabConfig[$ctrl.uiState.currentTab.name].form],\n    \"add\"\n)",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"plus\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "reload",
+                      "expressions": [
+                        {
+                          "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"redo\",\n  \"position\": \"left\"\n})",
+                          "to": "icon"
+                        },
+                        {
+                          "expression": "\"\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isDeleting",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.loaders.loadActiveTab()",
+                          "to": "onClick"
+                        }
+                      ],
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "--bln-button-padding",
+                          "value": "0.375rem 0.625rem"
+                        }
+                      ],
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "header-buttons",
+                  "name": "div",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "display",
+                      "value": "flex"
+                    }
+                  ]
+                }
+              ],
+              "classList": [
+                "main-header-container"
+              ],
+              "comments": "section-header",
+              "layout": {},
+              "name": "div"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.entityUiStateService.initializationError"
+                }
+              ],
+              "classList": [],
+              "comments": "initialization-error",
+              "displayExpression": "$ctrl.entityUiStateService.initializationError",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "classList": [],
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.quickSearchPlaceholder",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentTab.name",
+                      "to": "entityType"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onSearch(\n    $ctrl.uiState,\n    $ctrl.tabConfig,\n    $ctrl.loaders,\n    newValue\n)",
+                      "to": "onSearch"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.advancedFilters",
+                      "to": "appliedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.openAdvancedFilterModal(\n    $ctrl.uiState, \n    $ctrl.tabConfig,\n    $ctrl.referenceData,\n    $ctrl.loaders\n)",
+                      "to": "onAdvancedClick"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.usingAdvancedFilters",
+                      "to": "usingAdvancedFilters"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.chips",
+                      "to": "filterChips"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onReset(\n    $ctrl.uiState,\n    $ctrl.loaders,\n    true\n)",
+                      "to": "onReset"
+                    },
+                    {
+                      "expression": "$ctrl.filterOperationsService.onChipUpdate(\n    $ctrl.uiState,\n    $ctrl.tabConfig,\n    $ctrl.referenceData,\n    $ctrl.loaders,\n    remainingStrings\n)",
+                      "to": "onFilterUpdate"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.currentFilter.currentFilterString",
+                      "to": "searchText"
+                    }
+                  ],
+                  "name": "search-filter",
+                  "ownerId": "6b07c72a48cd88e32d307a88",
+                  "ownerType": "app",
+                  "resourceIdentity": "components/shared/search-filter/search-filter",
+                  "type": "custom-component"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [],
+                          "layout": {},
+                          "name": "Spinner",
+                          "nodeName": "bln-spinner",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-spinner-size",
+                              "value": "5rem"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [],
+                      "comments": "spinner",
+                      "displayExpression": "$ctrl.uiState.isLoadingTable",
+                      "name": "div",
+                      "styles": [
+                        {
+                          "enabled": true,
+                          "property": "display",
+                          "value": "flex"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "justify-content",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "align-items",
+                          "value": "center"
+                        },
+                        {
+                          "enabled": true,
+                          "property": "height",
+                          "value": "100%"
+                        }
+                      ]
+                    },
+                    {
+                      "children": [
+                        {
+                          "attributes": [
+                            {
+                              "property": "core",
+                              "value": ""
+                            }
+                          ],
+                          "children": [],
+                          "classList": [],
+                          "expressions": [
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].data",
+                              "to": "data"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "enableRowSelection"
+                            },
+                            {
+                              "expression": "$ctrl.handlers.onSelectRow(row)",
+                              "to": "onSelection"
+                            },
+                            {
+                              "expression": "true",
+                              "to": "resizableColumns"
+                            },
+                            {
+                              "expression": "$ctrl.currentPage",
+                              "to": "currentPage"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableFiltering"
+                            },
+                            {
+                              "expression": "false",
+                              "to": "enableCheckboxes"
+                            },
+                            {
+                              "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].columns",
+                              "to": "columns"
+                            }
+                          ],
+                          "name": "Table",
+                          "nodeName": "bln-table",
+                          "styles": [
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-height",
+                              "value": "100%"
+                            },
+                            {
+                              "enabled": true,
+                              "property": "--bln-table-secondary-bg-color",
+                              "value": "#f9f9f9"
+                            }
+                          ],
+                          "type": "core-component"
+                        }
+                      ],
+                      "classList": [
+                        "table-container"
+                      ],
+                      "comments": "tabs-filter-pagination-table",
+                      "displayExpression": "!$ctrl.uiState.isLoadingTable",
+                      "name": "div"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "expressions": [
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage",
+                          "to": "currentPage"
+                        },
+                        {
+                          "expression": "$ctrl.tabStore[$ctrl.uiState.currentTab.name].pageCount",
+                          "to": "totalPages"
+                        },
+                        {
+                          "expression": "$ctrl.tabManagementService.onPageChange(\n    $ctrl.uiState,\n    $ctrl.tabStore,\n    $ctrl.loaders,\n    currentPage\n)",
+                          "to": "onPageChange"
+                        }
+                      ],
+                      "name": "Pagination",
+                      "nodeName": "bln-pagination",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "table-pagination-container"
+                  ],
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "main-body-container"
+              ],
+              "comments": "tab-bar-filter-table-pagination",
+              "displayExpression": "!$ctrl.entityUiStateService.initializationError",
+              "name": "div"
+            }
+          ],
+          "classList": [],
+          "comments": "table",
+          "displayExpression": "true",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "height": "",
+              "mainSize": "100%",
+              "minimumHeight": "",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                },
+                {
+                  "property": "name",
+                  "value": "form"
+                }
+              ],
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "cancel",
+                  "expressions": [
+                    {
+                      "expression": "\"\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.formManagementService.onFormClose($ctrl.uiState)",
+                      "to": "onClick"
+                    },
+                    {
+                      "expression": "\"secondary\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                      "to": "isDisabled"
+                    },
+                    {
+                      "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+                      "to": "icon"
+                    }
+                  ],
+                  "name": "Button",
+                  "nodeName": "bln-button",
+                  "type": "core-component"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": true,
+                      "name": "text",
+                      "textContent": "($ctrl.uiState.isEditingExistingEntity) ? \"Edit \" + $ctrl.uiState.selectedEntityName + \"'s User Info\" : \"Add User\""
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-header",
+                  "name": "h3"
+                },
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "Fields marked with an asterisk (*) are required."
+                    }
+                  ],
+                  "classList": [],
+                  "comments": "form-description",
+                  "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                  "name": "p"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "active",
+                  "expressions": [
+                    {
+                      "expression": "\"Active\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"right\"",
+                      "to": "labelPosition"
+                    },
+                    {
+                      "expression": "$ctrl.form.active",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "enabled",
+                  "expressions": [
+                    {
+                      "expression": "\"Enabled\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "\"right\"",
+                      "to": "labelPosition"
+                    },
+                    {
+                      "expression": "$ctrl.form.enabled",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "first-name",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"First Name\" : \"* First Name\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.firstName",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.FirstName",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "last-name",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"Last Name\" : \"* Last Name\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.lastName",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.LastName",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "email",
+                  "expressions": [
+                    {
+                      "expression": "$ctrl.isEditingUser ? \"Email\" : \"* Email\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.email",
+                      "to": "value"
+                    },
+                    {
+                      "expression": "\"email\"",
+                      "to": "type"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.selectedEntity?.Email",
+                      "to": "placeholder"
+                    },
+                    {
+                      "expression": "$ctrl.uiState.isCreatingNewEntity",
+                      "to": "isRequired"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "value"
+                  },
+                  "name": "Text Input",
+                  "nodeName": "bln-text-input",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "is-worker",
+                  "expressions": [
+                    {
+                      "expression": "\"Worker\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.isWorker",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "comments": "is-payroll-admin",
+                  "expressions": [
+                    {
+                      "expression": "\"Payroll Admin\"",
+                      "to": "label"
+                    },
+                    {
+                      "expression": "$ctrl.form.isPayrollAdmin",
+                      "to": "checked"
+                    }
+                  ],
+                  "formControl": {
+                    "modelName": "checked"
+                  },
+                  "name": "Checkbox",
+                  "nodeName": "bln-checkbox",
+                  "type": "core-component"
+                },
+                {
+                  "children": [],
+                  "classList": [],
+                  "name": "hr"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "cancel",
+                      "expressions": [
+                        {
+                          "expression": "\"Cancel\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.formManagementService.onFormClose($ctrl.uiState)",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"secondary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || $ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "add",
+                      "displayExpression": "$ctrl.uiState.isCreatingNewEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Add\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving || !$ctrl.form.firstName || !$ctrl.form.lastName || !$ctrl.form.email",
+                          "to": "isDisabled"
+                        },
+                        {
+                          "expression": "$ctrl.utils.formValidation.generateTooltipMessage($ctrl, $ctrl.profileUiState)",
+                          "to": "tooltip"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    },
+                    {
+                      "attributes": [
+                        {
+                          "property": "core",
+                          "value": ""
+                        }
+                      ],
+                      "children": [],
+                      "classList": [],
+                      "comments": "edit",
+                      "displayExpression": "$ctrl.uiState.isEditingExistingEntity",
+                      "expressions": [
+                        {
+                          "expression": "\"Save\"",
+                          "to": "label"
+                        },
+                        {
+                          "expression": "$ctrl.handlers.onSave()",
+                          "to": "onClick"
+                        },
+                        {
+                          "expression": "\"primary\"",
+                          "to": "type"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "showLoading"
+                        },
+                        {
+                          "expression": "$ctrl.uiState.isSaving",
+                          "to": "isDisabled"
+                        }
+                      ],
+                      "layout": {},
+                      "name": "Button",
+                      "nodeName": "bln-button",
+                      "type": "core-component"
+                    }
+                  ],
+                  "classList": [
+                    "form-div"
+                  ],
+                  "comments": "buttons",
+                  "name": "div"
+                }
+              ],
+              "classList": [
+                "form"
+              ],
+              "comments": "user",
+              "displayExpression": "$ctrl.uiState.currentTab.name === \"user\"",
+              "elementId": "form",
+              "layout": {},
+              "name": "form"
+            }
+          ],
+          "classList": [],
+          "comments": "forms",
+          "displayExpression": "$ctrl.uiState.isFormOpen",
+          "layout": {
+            "cell": {
+              "growFactor": 1,
+              "mainSize": "0%",
+              "shrinkFactor": 1,
+              "type": "box-item"
+            }
+          },
+          "name": "div"
+        }
+      ],
+      "classList": [],
+      "comments": "horizontal-box",
+      "layout": {
+        "container": {
+          "crossAxisAlignment": "stretch",
+          "gap": "0rem",
+          "items": [],
+          "mainAxisAlignment": "center",
+          "orientation": "row",
+          "type": "box"
+        }
+      },
+      "name": "div",
+      "styles": [
+        {
+          "enabled": true,
+          "property": "width",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "display",
+          "value": "flex"
+        },
+        {
+          "enabled": true,
+          "property": "height",
+          "value": "100% !important"
+        },
+        {
+          "enabled": true,
+          "property": "padding-top",
+          "value": "50px"
+        }
+      ]
+    }
+  ],
+  "name": "people_management",
+  "params": {
+    "page": ""
+  },
+  "type": "page",
+  "url": "/people_management",
+  "variables": [
+    {
+      "id": "open-api",
+      "name": "payrollAppApi",
+      "resourceIdentity": "apis/payrollAppApi",
+      "type": "open-api"
+    },
+    {
+      "name": "$env",
+      "type": "service"
+    },
+    {
+      "name": "$modal",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "form",
+      "properties": [
+        {
+          "description": "",
+          "name": "active",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "enabled",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "firstName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "lastName",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "email",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isWorker",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "isPayrollAdmin",
+          "type": "property",
+          "value": ""
+        },
+        {
+          "description": "",
+          "name": "workerId",
+          "type": "property",
+          "value": ""
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "globalSelectedCompany",
+      "resourceIdentity": "services/global-selected-company",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "authCookies",
+      "resourceIdentity": "services/auth/auth-cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    },
+    {
+      "name": "$cookies",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "dataHandlers",
+      "resourceIdentity": "services/data-handlers",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityUiStateService",
+      "resourceIdentity": "services/entity-services/entity-ui-state-service",
+      "type": "service"
+    },
+    {
+      "body": "$ctrl.authCookies.setServerUrl($ctrl.$env.getProperty(\"payroll_api_base_url\"));\nconst usrIsAdmin = await $ctrl.authService.redirectWorker();\nif(!usrIsAdmin) return;\n\n$ctrl.uiState.currentTab.name = \"user\";\n\n// Restore retained page & filters\nconst savedFilter = $ctrl.userPreferenceService.get(\"peopleManagement\", \"userTabFilter\", null);\n\nif ($ctrl.pageParameters.page) {\n    $ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage = $ctrl.pageParameters.page;\n}\n\nif (savedFilter) {\n    $ctrl.uiState.currentFilter.advancedFilters = savedFilter.advancedFilters || [];\n    $ctrl.uiState.currentFilter.currentFilterString = savedFilter.currentFilterString || \"\";\n    $ctrl.uiState.currentFilter.usingAdvancedFilters = !!savedFilter.usingAdvancedFilters;\n\n    if ($ctrl.uiState.currentFilter.advancedFilters.length > 0) {\n        $ctrl.filterOperationsService.updateFilterChips(\n            $ctrl.uiState,\n            $ctrl.tabConfig,\n            $ctrl.referenceData\n        );\n    }\n}\n\n\n$ctrl.uiState.currentFilter.quickSearchPlaceholder = $ctrl.filterService.quickSearchConfig.getSearchPlaceholder(\n    $ctrl.uiState.currentTab.name,\n    $ctrl.tabConfig[$ctrl.uiState.currentTab.name].quickSearchDefaultConfig,\n    $ctrl.userPreferenceService\n);\n\n$ctrl.loaders.loadActiveTab();\n$ctrl.loaders.loadReferenceMaps();\n$ctrl.loaders.loadFontAwesome();",
+      "description": "",
+      "invokeOnLoad": true,
+      "isAsync": true,
+      "name": "onInit",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "description": "",
+      "name": "uiState",
+      "properties": [
+        {
+          "description": "",
+          "name": "currentTab",
+          "properties": [
+            {
+              "description": "",
+              "name": "id",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousId",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "name",
+              "type": "property",
+              "value": ""
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentFilter",
+          "properties": [
+            {
+              "children": [],
+              "description": "Array of active filter objects `{property, operation, value}`",
+              "name": "advancedFilters",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chips",
+              "type": "array"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "chipMap",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "quickSearchPlaceholder",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "currentFilterString",
+              "type": "property",
+              "value": "\"\""
+            },
+            {
+              "description": "",
+              "name": "usingAdvancedFilters",
+              "type": "property",
+              "value": "false"
+            }
+          ],
+          "type": "object"
+        },
+        {
+          "description": "",
+          "name": "currentRequestId",
+          "type": "property",
+          "value": "0"
+        },
+        {
+          "description": "",
+          "name": "selectedEntity",
+          "type": "property",
+          "value": "null"
+        },
+        {
+          "description": "",
+          "name": "selectedEntityName",
+          "type": "property",
+          "value": "\"\""
+        },
+        {
+          "children": [],
+          "description": "",
+          "name": "detailsList",
+          "type": "array"
+        },
+        {
+          "description": "",
+          "name": "isLoadingTable",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isLoadingDetails",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isFormOpen",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isSaving",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isDeleting",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isCreatingNewEntity",
+          "type": "property",
+          "value": "false"
+        },
+        {
+          "description": "",
+          "name": "isEditingExistingEntity",
+          "type": "property",
+          "value": "false"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabConfig",
+      "properties": [
+        {
+          "description": "",
+          "name": "user",
+          "properties": [
+            {
+              "description": "",
+              "name": "form",
+              "type": "property",
+              "value": "\"form\""
+            },
+            {
+              "description": "",
+              "name": "quickSearchDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.userService.getQuickSearchDefaults()"
+            },
+            {
+              "description": "",
+              "name": "columnDefaultConfig",
+              "type": "property",
+              "value": "$ctrl.userService.getColumnDefaults()"
+            },
+            {
+              "description": "",
+              "name": "service",
+              "type": "property",
+              "value": "$ctrl.userService"
+            },
+            {
+              "body": "return `${f.FirstName} ${f.LastName}`;",
+              "description": "",
+              "invokeOnLoad": false,
+              "isAsync": false,
+              "name": "getName",
+              "parameters": [
+                "f"
+              ],
+              "returnType": {
+                "name": "any"
+              },
+              "type": "method",
+              "watch": []
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "tabStore",
+      "properties": [
+        {
+          "description": "",
+          "name": "user",
+          "properties": [
+            {
+              "children": [],
+              "description": "",
+              "name": "data",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "totalFiltered",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "totalCount",
+              "type": "property",
+              "value": "0"
+            },
+            {
+              "description": "",
+              "name": "pageCount",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "previousPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "currentPage",
+              "type": "property",
+              "value": "1"
+            },
+            {
+              "description": "",
+              "name": "hasNextPage",
+              "type": "property",
+              "value": "false"
+            },
+            {
+              "description": "",
+              "name": "limit",
+              "type": "property",
+              "value": "25"
+            },
+            {
+              "children": [],
+              "description": "",
+              "name": "columns",
+              "type": "array"
+            },
+            {
+              "description": "",
+              "name": "currentRequestId",
+              "type": "property",
+              "value": "0"
+            }
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "loaders",
+      "properties": [
+        {
+          "body": "if (!params) params = {};\n\n// Manually set loading states since baseGridControllerService will not handle it here\n// This will be set to false either here or loadProfileTabContent (user table) or loadProfileGridData (profile mode)\n$ctrl.uiState.isLoadingTable = true;\n\n$ctrl.uiState.currentRequestId++;\nconst currentRequestId = $ctrl.uiState.currentRequestId;\n\nconst entityType = \"user\"; // Hardcoded main tab\nconst page = params.page || $ctrl.tabStore[entityType].currentPage;\nconst tabConfig = $ctrl.tabConfig[entityType];\n\nlet apiQuery = $ctrl.filterService.buildCombinedQuery({\n    advancedFilters: $ctrl.uiState.currentFilter.advancedFilters\n});\n\nif (tabConfig?.companyBound) {\n    apiQuery += `&CompanyId=${$ctrl.globalSelectedCompany.companyId}`;\n}\n\ntry {\n    // Wait for the primary grid data\n    await $ctrl.baseGridControllerService.loadGridData($ctrl, {\n        entityType,\n        customEntityKey: tabConfig?.customEntityKey,\n        columnDefs: tabConfig?.columnDefaultConfig,\n        page,\n        limit: $ctrl.tabStore[entityType].limit,\n        query: apiQuery,\n        resetUiState: !$ctrl.uiState.isViewingUserProfile,\n        touchLoadingStates: false,\n    });\n\n    // If the user clicked away or searched again while the grid was loading, abort\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    // Load secondary data only if this is still the active request\n    await $ctrl.loaders.loadAdditionalUserData();\n\n    // If the user clicked away or searched while loading additional user data, abort\n    if (currentRequestId !== $ctrl.uiState.currentRequestId) return;\n\n    // Only set loading state to false if user is not viewing a profile\n    if (!$ctrl.uiState.isViewingUserProfile) {\n        $ctrl.uiState.isLoadingTable = false;\n    }\n\n} catch (err) {\n    // Only log if it's the active request\n    if (currentRequestId === $ctrl.uiState.currentRequestId) {\n        console.error(\"Failed to load active tab data\", err);\n    }\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadActiveTab",
+          "parameters": [
+            "params"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const workerIds = $ctrl.tabStore.user.data\n    .map(u => u.WorkerId).filter(id => id);\n\nif (!workerIds || workerIds.length === 0) return;\n\ntry {\n    const workerIdFilter = `WorkerId_in=${workerIds.join(',')}`;\n    const [employmentInfoRes, workerPositionRes] = await Promise.all([\n        $ctrl.payrollApiService.get({\n            entity: \"employment_info\",\n            limit: workerIds.length,\n            query: `${workerIdFilter}&select=Id,WorkerId,EmploymentStartDate`,\n            customEntityKey: \"employmentinfo\"\n        }),\n        $ctrl.payrollApiService.get({\n            entity: \"worker_position\",\n            limit: workerIds.length,\n            query: `${workerIdFilter}&select=Id,WorkerId,PositionId,CustomAnnualRate`,\n            customEntityKey: \"workerposition\"\n        })\n    ]);\n\n    const employmentInfos = employmentInfoRes.entities || employmentInfoRes || [];\n    const workerPositions = workerPositionRes.entities || workerPositionRes || [];\n\n    // $ctrl.tabStore.worker_position.data = workerPositions;\n\n    const positionIds = [...new Set(workerPositions.map(wp => wp.PositionId).filter(id => id))];\n    let positions = [];\n\n    if (positionIds.length > 0) {\n        const positionRes = await $ctrl.payrollApiService.get({\n            entity: \"position\",\n            limit: positionIds.length,\n            query: `Id_in=${positionIds.join(',')}&select=Id,Department,Title`\n        });\n        positions = positionRes.entities || positionRes || [];\n    }\n\n    const employmentMap = new Map(employmentInfos.map(ei => [ei.WorkerId, ei]));\n    const workerPositionMap = new Map(workerPositions.map(wp => [wp.WorkerId, wp]));\n    const positionMap = new Map(positions.map(p => [p.Id, p]));\n\n    $ctrl.tabStore.user.data.forEach(user => {\n        if (!user.WorkerId) return;\n\n        const empInfo = employmentMap.get(user.WorkerId);\n        if (empInfo) {\n            user.EmploymentStartDate = empInfo.EmploymentStartDate;\n        }\n\n        const wp = workerPositionMap.get(user.WorkerId);\n        if (wp && wp.PositionId) {\n            const pos = positionMap.get(wp.PositionId);\n            if (pos) {\n                user.Title = pos.Title;\n                user.Department = pos.Department;\n                user.PositionId = pos.Id;\n                user.CustomAnnualRate = wp.CustomAnnualRate;\n            }\n        }\n    });\n\n} catch (err) {\n    console.error(\"Failed to load additional user data\", err);\n    $ctrl.utils.toast(\"Failed to load complete user profiles\", \"ERROR\");\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadAdditionalUserData",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// Append Font Awesome link if not already present\nif (!document.querySelector('link[href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css\"]')) {\n    const link = document.createElement('link');\n    link.rel = 'stylesheet';\n    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';\n    document.head.appendChild(link);\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "loadFontAwesome",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "// Fetch formatted options directly from service\nconst companyOpts = await $ctrl.referenceDataService.dropdownOptionsGetters.getOptions(\"Company\");\n    \n// Update Global Menu\nif ($ctrl.globalSelectedCompany) {\n    $ctrl.globalSelectedCompany.companyMap = companyOpts;\n    $ctrl.globalSelectedCompany.setMenuItems();\n}",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "loadReferenceMaps",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "description": "",
+      "name": "handlers",
+      "properties": [
+        {
+          "body": "const config = $ctrl.tabConfig[$ctrl.uiState.currentTab.name];\nif (!config) {\n    console.error(\"No configuration found for current tab:\", $ctrl.uiState.currentTab.name);\n    return;\n}\n\nconst isCreate = $ctrl.uiState.isCreatingNewEntity;\nconst entityType = $ctrl.uiState.currentTab.name;\n\nconst isUser = entityType === \"user\";\n\nconst method = \"POST\";\nconst formData = $ctrl[config.form];\n\nlet displayName = \"Item\";\nif (config.getName) {\n    displayName = config.getName(formData);\n} else if (config.entityNameKey) {\n    displayName = formData[config.entityNameKey] || \"Item\";\n}\n\nconst additionalData = {};\n\n$ctrl.uiState.isSaving = true;\n\nawait $ctrl.entityOperationsService.executeEntityOperation(\n    method,\n    formData,\n    async (result) => {\n        if (isUser) {\n            const newUserId = result?.data?.user?.Id;\n\n            if (newUserId) {\n                const ROLES = { WORKER: 1, ADMIN: 2 };\n                const rolePromises = [];\n\n                if (formData.isWorker) {\n                    rolePromises.push($ctrl.payrollApiService.send('user_role', 'POST', {\n                        RoleId: ROLES.WORKER,\n                        UserId: newUserId\n                    }));\n                }\n\n                if (formData.isPayrollAdmin) {\n                    rolePromises.push($ctrl.payrollApiService.send('user_role', 'POST', {\n                        RoleId: ROLES.ADMIN,\n                        UserId: newUserId\n                    }));\n                }\n\n                if (rolePromises.length > 0) {\n                    try {\n                        await Promise.all(rolePromises);\n                    } catch (err) {\n                        console.error(\"Failed to assign user roles\", err);\n                        $ctrl.utils.toast(\"User created, but failed to assign one or more roles.\", \"WARNING\");\n                    }\n                }\n            } else {\n                console.error(\"Could not determine new user Id to assign roles.\");\n            }\n        }\n\n        $ctrl.loaders.loadActiveTab();\n        $ctrl.formManagementService.onFormClose($ctrl.uiState);\n        $ctrl.utils.resetForm(formData);\n    },\n    null,\n    () => {\n        $ctrl.uiState.isSaving = false;\n    },\n    $ctrl.uiState.currentTab.name,\n    displayName,\n    $ctrl.uiState.selectedEntity\n);",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSave",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        },
+        {
+          "body": "const formStatus = $ctrl.uiState.isCreatingNewEntity || $ctrl.uiState.isEditingExistingEntity;\nif (formStatus) {    \n    const discardChanges = await $ctrl.utils.handleUnsavedChanges(formStatus);\n    if (!discardChanges) return;\n}\n\n$ctrl.$state.go(\"user\", {userId: row.Id, retainPage: $ctrl.tabStore[$ctrl.uiState.currentTab.name].currentPage});\nreturn;",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": true,
+          "name": "onSelectRow",
+          "parameters": [
+            "row"
+          ],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": []
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "userService",
+      "resourceIdentity": "services/entities/user-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "userPreferenceService",
+      "resourceIdentity": "services/core/storage/user-preference-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterService",
+      "resourceIdentity": "services/core/ui/filter-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "baseGridControllerService",
+      "resourceIdentity": "services/core/ui/base-grid-controller-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "payrollApiService",
+      "resourceIdentity": "services/core/api/payroll-api-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "en",
+      "resourceIdentity": "services/i18n/en",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "filterOperationsService",
+      "resourceIdentity": "services/core/ui/filter-operations-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityViewService",
+      "resourceIdentity": "services/core/ui/entity-view-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "formManagementService",
+      "resourceIdentity": "services/core/ui/form-management-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "entityOperationsService",
+      "resourceIdentity": "services/core/logic/entity-operations-service",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "tabManagementService",
+      "resourceIdentity": "services/core/ui/tab-management-service",
+      "type": "service"
+    },
+    {
+      "description": "",
+      "name": "watchers",
+      "properties": [
+        {
+          "body": "$ctrl.userPreferenceService.set(\"peopleManagement\", \"userTabFilter\", $ctrl.uiState.currentFilter);\n",
+          "description": "",
+          "invokeOnLoad": false,
+          "isAsync": false,
+          "name": "retainFilters",
+          "parameters": [],
+          "returnType": {
+            "name": "any"
+          },
+          "type": "method",
+          "watch": [
+            "$ctrl.uiState.currentFilter",
+            "$ctrl.uiState.currentFilter.currentFilterString",
+            "$ctrl.uiState.currentFilter.advancedFilters"
+          ]
+        }
+      ],
+      "type": "object"
+    },
+    {
+      "id": "service",
+      "name": "authService",
+      "resourceIdentity": "services/auth/auth-service",
+      "type": "service"
+    },
+    {
+      "name": "$state",
+      "type": "service"
+    },
+    {
+      "id": "service",
+      "name": "referenceDataService",
+      "resourceIdentity": "services/core/api/reference-data-service",
+      "type": "service"
+    }
+  ]
+}

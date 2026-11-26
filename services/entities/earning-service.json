@@ -1,0 +1,60 @@
+{
+  "description": "",
+  "name": "earning-service",
+  "parentDirectoryId": "GPjdgRBAOx4d7njh31B_x",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "body": "return {\n    property: \"Name\", // Default column to search\n    operation: \"contains\", // Default operator\n    label: \"Name\" // Human readable label for the placeholder\n}",
+      "description": "Defines the default Quick Search behavior.\nUsed if the user hasn't customized their preferences yet.",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getQuickSearchDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const displayColumnNames = [\n    \"Name\",\n    \"Code\",\n    \"Type\",\n    // \"EffectiveFromDate\",\n    // \"EffectiveToDate\",\n    // \"Frequency\",\n    \"Amount\",\n    \"Active\",\n    \"IsTaxable\"\n];\n\nconst displayColumnOptions = {\n    valueKey: {\n        \"Name\": \"Name\"\n    },\n    type: {\n        \"Active\": \"boolean\",\n        \"IsTaxable\": \"boolean\",\n        \"NeedAttendance\": \"boolean\",\n        \"EffectiveFromDate\": \"date\",\n        \"EffectiveToDate\": \"date\",\n        \"Amount\": \"currency\"\n    }\n};\n\nreturn {\n    columnKeys: displayColumnNames,\n    options: displayColumnOptions\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getColumnDefaults",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "    return [\n        // --- Identifiers ---\n        {\n            label: \"ID\",\n            value: \"Id\",\n            type: \"number\",\n            // operators: [\"eq\"]\n        },\n        {\n            label: \"Code\",\n            value: \"Code\",\n            type: \"string\",\n            // operators: [\"eq\", \"contains\", \"startswith\"]\n        },\n\n        // --- Core Identity ---\n        {\n            label: \"Name\",\n            value: \"Name\",\n            type: \"string\",\n            // operators: [\"contains\", \"eq\", \"startswith\"]\n        },\n        {\n            label: \"Description\",\n            value: \"Description\",\n            type: \"string\",\n            // operators: [\"contains\"]\n        },\n        {\n            label: \"Type\",\n            value: \"Type\",\n            type: \"dropdown\",\n            source: \"typeMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Active\",\n            value: \"Active\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n\n        // --- Configuration ---\n        {\n            label: \"Frequency\",\n            value: \"Frequency\",\n            type: \"dropdown\",\n            source: \"frequencyMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Calculation Method\",\n            value: \"CalculationMethodId\",\n            type: \"dropdown\",\n            source: \"calculationMethodMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Need Attendance\",\n            value: \"NeedAttendance\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n\n        // --- Financials ---\n        {\n            label: \"Amount\",\n            value: \"Amount\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n        {\n            label: \"Is Taxable\",\n            value: \"IsTaxable\",\n            type: \"boolean\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Tax Exemption Amount\",\n            value: \"TaxExemptionAmount\",\n            type: \"number\",\n            // operators: [\"eq\", \"gt\", \"lt\"]\n        },\n\n        // --- Dates ---\n        {\n            label: \"Effective From\",\n            value: \"EffectiveFromDate\",\n            type: \"date\",\n            // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n        },\n        {\n            label: \"Effective To\",\n            value: \"EffectiveToDate\",\n            type: \"date\",\n            // operators: [\"eq\", \"gt\", \"lt\", \"ge\", \"le\"]\n        },\n\n        // --- Relationships ---\n        {\n            label: \"Accrual\",\n            value: \"AccrualId\",\n            type: \"dropdown\",\n            source: \"accrualMap\",\n            operators: [\"eq\"]\n        },\n        {\n            label: \"Currency\",\n            value: \"CurrencyId\",\n            type: \"dropdown\",\n            source: \"currencyMap\",\n            operators: [\"eq\"]\n        }\n    ];",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFilterDefinitions",
+      "parameters": [],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "children": [],
+      "description": "",
+      "name": "earnings",
+      "type": "array"
+    }
+  ],
+  "visible": [
+    "getColumnDefaults",
+    "getFilterDefinitions",
+    "earnings",
+    "getQuickSearchDefaults"
+  ]
+}

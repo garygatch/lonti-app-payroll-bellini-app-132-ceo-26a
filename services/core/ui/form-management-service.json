@@ -1,0 +1,251 @@
+{
+  "description": "",
+  "name": "form-management-service",
+  "parentDirectoryId": "vDKKKdLlPtVUPPQVeoP7c",
+  "singleton": true,
+  "type": "app-service",
+  "variables": [
+    {
+      "children": [
+        {
+          "description": "",
+          "name": "0",
+          "type": "property",
+          "value": "\"effectiveFromDate\""
+        },
+        {
+          "description": "",
+          "name": "1",
+          "type": "property",
+          "value": "\"effectiveToDate\""
+        }
+      ],
+      "description": "",
+      "name": "FIELDS_TO_SKIP_POPULATION",
+      "type": "array"
+    },
+    {
+      "body": "const tableCtrl = angular.element(document.querySelector('bln-table')).isolateScope()?.$ctrl;\n\nif (form) {\n    this.clearForm(form);\n}\n\nif (mode === \"add\") {\n    if (!keepSelectedEntity) {\n        uiState.selectedEntity = null;\n    }\n\n    if (Object.hasOwn(uiState, 'isAdding')) {\n        uiState.isAdding = true;\n    }\n\n    if (Object.hasOwn(uiState, 'isCreatingNewEntity')) {\n        uiState.isCreatingNewEntity = true;\n    }\n\n    // Clear selection if a table on the page supports row selection\n    if (tableCtrl?.gridApi?.selection) {\n        tableCtrl.gridApi.selection.clearSelectedRows();\n    }\n    \n} else if (mode === \"edit\") {\n    if (Object.hasOwn(uiState, 'isEditing')) {\n        uiState.isEditing = true;\n    }\n\n    if (Object.hasOwn(uiState, 'isEditingExistingEntity')) {\n        uiState.isEditingExistingEntity = true;\n    }\n    \n    this.populateFormForEdit(uiState, form, selectedEntity);\n}\n\nuiState.isFormOpen = true;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onFormOpen",
+      "parameters": [
+        "uiState",
+        "form",
+        "mode",
+        "keepSelectedEntity",
+        "selectedEntity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "uiState.isFormOpen = false;\n\nif (Object.hasOwn(uiState, 'isAdding')) {\n    uiState.isAdding = false;\n}\n\nif (Object.hasOwn(uiState, 'isCreatingNewEntity')) {\n    uiState.isCreatingNewEntity = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditing')) {\n    uiState.isEditing = false;\n}\n\nif (Object.hasOwn(uiState, 'isEditingExistingEntity')) {\n    uiState.isEditingExistingEntity = false;\n}\n\n\n\n",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "onFormClose",
+      "parameters": [
+        "uiState"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!selectedEntity && !uiState.selectedEntity) {\n    return;\n}\n\nconst entity = selectedEntity ?? uiState.selectedEntity;\n\nif (!form) {\n    return;\n}\n\nfor (let key in form) {\n    if (form.hasOwnProperty(key)) {\n        if (this.FIELDS_TO_SKIP_POPULATION.includes(key)) continue;\n        \n        const adjustedKey = key.charAt(0).toUpperCase() + key.slice(1);\n        form[key] = entity.hasOwnProperty(adjustedKey) ? entity[adjustedKey] : undefined;\n    }\n}\n\nthis.handleSpecialFields(uiState, form, entity);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "populateFormForEdit",
+      "parameters": [
+        "uiState",
+        "form",
+        "selectedEntity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "// Handle working days conversion for pay schedules\nif (uiState.currentTab.name === \"pay_schedule\" && entity.WorkingDays) {\n    form.workingDays = this.convertStringToWorkingDays(entity.WorkingDays);\n}\n\n// Handle date fields\nthis.convertDateFields(form, entity);\n\n// Handle boolean fields\nthis.convertBooleanFields(form, entity);",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "handleSpecialFields",
+      "parameters": [
+        "uiState",
+        "form",
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!workingDaysString || typeof workingDaysString !== 'string') {\n    return {};\n}\n\nconst daysArray = workingDaysString.split(\",\").map(day => day.trim());\nreturn daysArray.reduce((acc, day) => {\n    if (day) {\n        acc[day] = true;\n    }\n    return acc;\n}, {});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "convertStringToWorkingDays",
+      "parameters": [
+        "workingDaysString"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "Object.keys(form)\n    .filter(key => !this.FIELDS_TO_SKIP_POPULATION.includes(key))\n    .forEach(key => {\n        if (key.toLowerCase().includes('date')) {\n            const titleCasedKey = key.charAt(0).toUpperCase() + key.slice(1);\n            const entityValue = entity[titleCasedKey];\n            \n            if (entityValue) {\n                form[key] = this.utils.parseDate(entityValue);\n            }\n        }\n    });",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "convertDateFields",
+      "parameters": [
+        "form",
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const booleanPattern = /^(is|need|with|can|allow|active|salaried|enabled|final)/i;\n\nObject.keys(form).forEach(key => {\n    if (booleanPattern.test(key)) {\n        const entityKey = key.charAt(0).toUpperCase() + key.slice(1);\n        form[key] = entity[entityKey] === true || entity[entityKey] === \"true\";\n    }\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "convertBooleanFields",
+      "parameters": [
+        "form",
+        "entity"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "const errors = [];\n\nrequiredFields.forEach(field => {\n    if (!form[field] || form[field].toString().trim() === '') {\n        errors.push(`${field} is required`);\n    }\n});\n\nreturn {\n    isValid: errors.length === 0,\n    errors: errors\n};",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "validateForm",
+      "parameters": [
+        "form",
+        "requiredFields"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!form || typeof form !== 'object') {\n    return;\n}\n\nObject.keys(form).forEach(key => {\n    form[key] = undefined;\n});",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "clearForm",
+      "parameters": [
+        "form"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "if (!form || typeof form !== 'object') {\n    return {};\n}\n\nconst formData = {};\nObject.keys(form).forEach(key => {\n    if (!excludeFields.includes(key) && form[key] !== '' && form[key] !== null && form[key] !== undefined) {\n        formData[key] = form[key];\n    }\n});\n\nreturn formData;",
+      "description": "",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "getFormData",
+      "parameters": [
+        "form",
+        "excludeFields"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "// TO DO\n// const defaults = {\n//     worker: { active: true },\n//     company: { active: true },\n//     position: { active: true },\n//     pay_schedule: { active: true }\n// };\n\n// const entityDefaults = defaults[entityType];\n// if (entityDefaults && form) {\n//     Object.keys(entityDefaults).forEach(key => {\n//         if (form[key] === undefined || form[key] === null) {\n//             form[key] = entityDefaults[key];\n//         }\n//     });\n// }\n",
+      "description": "TO DO",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "initializeDefaultValues",
+      "parameters": [
+        "form",
+        "entityType"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "body": "// TO DO\n// const currentTab = uiState.currentTab.name;\n\n// // Initialize position-specific fields\n// if (currentTab === \"position\" && form.tabStore && form.tabStore.position.data) {\n//     const uniqueDepartments = [...new Set(form.tabStore.position.data.map(p => p.Department))];\n//     form.departmentMap = uniqueDepartments.map(dept => ({\n//         label: dept,\n//         value: dept\n//     }));\n// }\n\n// // Initialize other entity-specific fields as needed\n// this.initializeDefaultValues(form, currentTab);\n",
+      "description": "TO DO",
+      "invokeOnLoad": false,
+      "isAsync": false,
+      "name": "initializeEntitySpecificFields",
+      "parameters": [
+        "uiState",
+        "tabConfig",
+        "form"
+      ],
+      "returnType": {
+        "name": "any"
+      },
+      "type": "method",
+      "watch": []
+    },
+    {
+      "id": "service",
+      "name": "utils",
+      "resourceIdentity": "services/utils",
+      "type": "service"
+    }
+  ],
+  "visible": [
+    "buildRequestBody",
+    "executeEntityOperation",
+    "confirmDelete",
+    "getActionText",
+    "convertWorkingDaysToString",
+    "convertStringToWorkingDays",
+    "resetAllForms",
+    "handleSpecialFields",
+    "convertDateFields",
+    "convertBooleanFields",
+    "validateForm",
+    "clearForm",
+    "getFormData",
+    "onAdd",
+    "onEdit",
+    "onFormOpen",
+    "onFormClose",
+    "initializeDefaultValues",
+    "initializeEntitySpecificFields",
+    "populateFormForEdit"
+  ]
+}
