@@ -1,0 +1,155 @@
+{
+  "config": {
+    "auth": {
+      "enabled": true,
+      "mockedUserAccounts": []
+    },
+    "config": {
+      "parameters": [],
+      "script": ""
+    },
+    "defaultEnvironment": {
+      "active": false,
+      "description": "",
+      "name": "Default",
+      "properties": [
+        {
+          "name": "payroll_api_base_url",
+          "value": "http://localhost:8080"
+        }
+      ]
+    },
+    "environments": [
+      {
+        "active": true,
+        "description": "",
+        "name": "local",
+        "properties": [
+          {
+            "name": "payroll_api_base_url",
+            "value": "http://localhost:8080"
+          }
+        ]
+      },
+      {
+        "active": false,
+        "description": "",
+        "name": "staging",
+        "properties": [
+          {
+            "name": "payroll_api_base_url",
+            "value": "https://toro292.et.martiniserver.com"
+          }
+        ]
+      },
+      {
+        "active": false,
+        "description": "",
+        "name": "prod",
+        "properties": [
+          {
+            "name": "payroll_api_base_url",
+            "value": "https://toro287.et.martiniserver.com"
+          }
+        ]
+      }
+    ],
+    "properties": {
+      "description": "",
+      "title": "Lonti Payroll App",
+      "version": "1.3.0-SNAPSHOT"
+    },
+    "themes": []
+  },
+  "defaultPage": "dashboard",
+  "directories": {
+    "assets": [
+      {
+        "id": "-M1xQM3y6McsPl-DHMMo4",
+        "name": "button"
+      },
+      {
+        "id": "Sy-3VG3LqoLQnYsmYZVuC",
+        "name": "reset-filter",
+        "parentDirectoryId": "-M1xQM3y6McsPl-DHMMo4"
+      }
+    ],
+    "components": [
+      {
+        "id": "Ey7Kvb_PF6vtYN86bcoS8",
+        "name": "shared"
+      },
+      {
+        "id": "KduFRaC4OxguxOdfYSKQg",
+        "name": "search-filter",
+        "parentDirectoryId": "Ey7Kvb_PF6vtYN86bcoS8"
+      },
+      {
+        "id": "8qA4cKVWgi3986MOTgCWg",
+        "name": "modals",
+        "parentDirectoryId": "Ey7Kvb_PF6vtYN86bcoS8"
+      },
+      {
+        "id": "6dBwzCfV1ckz9mpRF36mm",
+        "name": "worker-ui"
+      }
+    ],
+    "pages": [],
+    "scripts": [],
+    "services": [
+      {
+        "id": "kcdUV1Sa8bi6_YmNRXnUB",
+        "name": "i18n"
+      },
+      {
+        "id": "0uOAfhszKVOJANC4YMNsC",
+        "name": "entity-services"
+      },
+      {
+        "id": "GPjdgRBAOx4d7njh31B_x",
+        "name": "entities"
+      },
+      {
+        "id": "8I6RhIvEb5gSXUHAZqwx_",
+        "name": "core"
+      },
+      {
+        "id": "D8D3o8N9R8U4NB4va4vap",
+        "name": "api",
+        "parentDirectoryId": "8I6RhIvEb5gSXUHAZqwx_"
+      },
+      {
+        "id": "vDKKKdLlPtVUPPQVeoP7c",
+        "name": "ui",
+        "parentDirectoryId": "8I6RhIvEb5gSXUHAZqwx_"
+      },
+      {
+        "id": "QVbFpH5KyEMuegmOjEpLN",
+        "name": "storage",
+        "parentDirectoryId": "8I6RhIvEb5gSXUHAZqwx_"
+      },
+      {
+        "id": "-l8Dc962A69QwbOyG9aAq",
+        "name": "logic",
+        "parentDirectoryId": "8I6RhIvEb5gSXUHAZqwx_"
+      },
+      {
+        "id": "1NBsPZByP0dbRboEFYU0f",
+        "name": "assignment",
+        "parentDirectoryId": "-l8Dc962A69QwbOyG9aAq"
+      },
+      {
+        "id": "plukWBhIlQsdGDE67dxNA",
+        "name": "auth"
+      },
+      {
+        "id": "WZrfeoX9i8W5vlACEU0fM",
+        "name": "worker-ui",
+        "parentDirectoryId": "8I6RhIvEb5gSXUHAZqwx_"
+      }
+    ],
+    "stylesheets": []
+  },
+  "name": "lonti-app-payroll",
+  "type": "app"
+}

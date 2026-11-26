@@ -1,0 +1,818 @@
+{
+  "bindings": [
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "header",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "[\n    \"Description 1\",\n    \"Description 2\",\n    \"Description 3\"\n]",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "descriptions",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "tableData",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "tableColumns",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "selectedRows",
+      "propertyType": "array",
+      "type": "=",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "assignmentOnClick",
+      "parameters": [],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "cancelOnClick",
+      "parameters": [],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "cancelDisabled",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "cancelShowLoading",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "assignmentDisabled",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "dropdownLabel",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "assignmentShowLoading",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "dropdownIcon",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "dropdownMenuItems",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayDropdown",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "true",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayTable",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "false",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "tableLoading",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "true",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayPagination",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "true",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayAssignButton",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "calculateDisabled",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "calculateShowLoading",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "calculateOnClick",
+      "parameters": [],
+      "propertyType": "function",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "false",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayCalculateButton",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "false",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "displayInformationTable",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "elementsProperties": [],
+      "enumOptions": [],
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "informationTableData",
+      "propertyType": "array",
+      "type": "<",
+      "visibleWhen": ""
+    },
+    {
+      "actions": [],
+      "default": "",
+      "description": "",
+      "example": "",
+      "group": "",
+      "label": "",
+      "name": "assignmentTooltip",
+      "propertyType": "property",
+      "type": "<",
+      "visibleWhen": ""
+    }
+  ],
+  "children": [
+    {
+      "children": [
+        {
+          "attributes": [
+            {
+              "property": "core",
+              "value": ""
+            }
+          ],
+          "children": [],
+          "classList": [],
+          "comments": "cancel",
+          "expressions": [
+            {
+              "expression": "\"\"",
+              "to": "label"
+            },
+            {
+              "expression": "$ctrl.cancelOnClick()",
+              "to": "onClick"
+            },
+            {
+              "expression": "\"secondary\"",
+              "to": "type"
+            },
+            {
+              "expression": "({\n  \"type\": \"font-icon\",\n  \"style\": \"solid\",\n  \"name\": \"times-circle\",\n  \"position\": \"left\"\n})",
+              "to": "icon"
+            },
+            {
+              "expression": "$ctrl.cancelShowLoading",
+              "to": "showLoading"
+            },
+            {
+              "expression": "$ctrl.cancelDisabled",
+              "to": "isDisabled"
+            }
+          ],
+          "name": "Button",
+          "nodeName": "bln-button",
+          "type": "core-component"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "$ctrl.header || \"Header\""
+                }
+              ],
+              "classList": [],
+              "comments": "form-header",
+              "name": "h3"
+            },
+            {
+              "children": [
+                {
+                  "evaluate": true,
+                  "name": "text",
+                  "textContent": "description"
+                }
+              ],
+              "classList": [],
+              "comments": "form-description",
+              "iterate": {
+                "array": "$ctrl.descriptions",
+                "variable": "description"
+              },
+              "name": "p"
+            }
+          ],
+          "classList": [],
+          "comments": "section-header",
+          "name": "div"
+        },
+        {
+          "children": [],
+          "classList": [],
+          "name": "hr"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "displayExpression": "$ctrl.displayDropdown",
+              "expressions": [
+                {
+                  "expression": "$ctrl.dropdownIcon",
+                  "to": "icon"
+                },
+                {
+                  "expression": "$ctrl.dropdownLabel",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.dropdownMenuItems",
+                  "to": "menuItems"
+                }
+              ],
+              "name": "Dropdown Menu",
+              "nodeName": "bln-dropdown-menu",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "displayExpression": "$ctrl.displayInformationTable",
+              "expressions": [
+                {
+                  "expression": "$ctrl.informationTableData",
+                  "to": "data"
+                },
+                {
+                  "expression": "$ctrl.$scope.gridOptions = {\n    \"minRowsToShow\": 5,\n    \"maxRowsToShow\": 5\n}",
+                  "to": "configuration"
+                },
+                {
+                  "expression": "[{\n        name: \"key\",\n        hide: false,\n        valueKey: \"key\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'WARN'\",\n            propertyName: \"color\",\n            value: \"orange\"\n        }, {\n            condition: \"value === 'INFO'\",\n            propertyName: \"color\",\n            value: \"blue\"\n        }, {\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value\",\n        hide: false,\n        valueKey: \"value\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"key2\",\n        hide: false,\n        valueKey: \"key2\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'WARN'\",\n            propertyName: \"color\",\n            value: \"orange\"\n        }, {\n            condition: \"value === 'INFO'\",\n            propertyName: \"color\",\n            value: \"blue\"\n        }, {\n            condition: \"true\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    },\n    {\n        name: \"value2\",\n        hide: false,\n        valueKey: \"value2\",\n        textAlign: \"left\",\n        enableSorting: true,\n        sortBy: \"none\",\n        enableFiltering: false,\n        enablePinning: false,\n        type: \"string\",\n        cellTemplate: \"default\",\n        cellTooltip: \"\",\n        cellConditionalStyle: [{\n            condition: \"value === 'YES'\",\n            propertyName: \"color\",\n            value: \"#006747\"\n        }, {\n            condition: \"value === 'NO'\",\n            propertyName: \"color\",\n            value: \"#D10000\"\n        }, {\n            condition: \"value === 'YES' || value2 === 'NO'\",\n            propertyName: \"font-weight\",\n            value: \"bold\"\n        }],\n        cellActions: [],\n        classes: [],\n        conditionalClasses: []\n    }\n]",
+                  "to": "columns"
+                },
+                {
+                  "expression": "false",
+                  "to": "showTableHeader"
+                },
+                {
+                  "expression": "false",
+                  "to": "enableSorting"
+                }
+              ],
+              "name": "Table",
+              "nodeName": "bln-table",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "--bln-table-secondary-bg-color",
+                  "value": "#f9f9f9"
+                }
+              ],
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "comments": "dropdown-information",
+          "name": "div"
+        },
+        {
+          "children": [],
+          "classList": [],
+          "name": "hr"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "attributes": [
+                    {
+                      "property": "core",
+                      "value": ""
+                    }
+                  ],
+                  "children": [],
+                  "classList": [],
+                  "expressions": [],
+                  "layout": {},
+                  "name": "Spinner",
+                  "nodeName": "bln-spinner",
+                  "styles": [
+                    {
+                      "enabled": true,
+                      "property": "--bln-spinner-size",
+                      "value": "5rem"
+                    }
+                  ],
+                  "type": "core-component"
+                }
+              ],
+              "classList": [],
+              "comments": "spinner",
+              "displayExpression": "$ctrl.tableLoading",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "height",
+                  "value": "100%"
+                }
+              ]
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "evaluate": false,
+                      "name": "text",
+                      "textContent": "No Data"
+                    }
+                  ],
+                  "classList": [],
+                  "name": "h3"
+                },
+                {
+                  "evaluate": false,
+                  "name": "text",
+                  "textContent": ""
+                }
+              ],
+              "classList": [],
+              "comments": "no-data-info",
+              "displayExpression": "false",
+              "name": "div",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "display",
+                  "value": "flex"
+                },
+                {
+                  "enabled": true,
+                  "property": "justify-content",
+                  "value": "center"
+                },
+                {
+                  "enabled": true,
+                  "property": "align-items",
+                  "value": "center"
+                }
+              ]
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "displayExpression": "$ctrl.displayTable",
+              "expressions": [
+                {
+                  "expression": "true",
+                  "to": "enableRowSelection"
+                },
+                {
+                  "expression": "true",
+                  "to": "resizableColumns"
+                },
+                {
+                  "expression": "true",
+                  "to": "enablePagination"
+                },
+                {
+                  "expression": "$ctrl.currentPage",
+                  "to": "currentPage"
+                },
+                {
+                  "expression": "true",
+                  "to": "enableFiltering"
+                },
+                {
+                  "expression": "false",
+                  "to": "enableCheckboxes"
+                },
+                {
+                  "expression": "true",
+                  "to": "enableSorting"
+                },
+                {
+                  "expression": "true",
+                  "to": "enableMultiSelection"
+                },
+                {
+                  "expression": "true",
+                  "to": "enableEditing"
+                },
+                {
+                  "expression": "$ctrl.tableData",
+                  "to": "data"
+                },
+                {
+                  "expression": "$ctrl.selectedRows",
+                  "to": "selectedRow"
+                },
+                {
+                  "expression": "$ctrl.tableColumns",
+                  "to": "columns"
+                }
+              ],
+              "name": "Table",
+              "nodeName": "bln-table",
+              "styles": [
+                {
+                  "enabled": true,
+                  "property": "flex",
+                  "value": "1"
+                },
+                {
+                  "enabled": true,
+                  "property": "--bln-table-secondary-bg-color",
+                  "value": "#f9f9f9"
+                }
+              ],
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "table-pagination",
+              "displayExpression": "$ctrl.displayPagination",
+              "expressions": [
+                {
+                  "expression": "$ctrl.currentPage",
+                  "to": "currentPage"
+                },
+                {
+                  "expression": "$ctrl.tableData?.length ? Math.ceil($ctrl.tableData.length / 25) : 1",
+                  "to": "totalPages"
+                }
+              ],
+              "name": "Pagination",
+              "nodeName": "bln-pagination",
+              "type": "core-component"
+            }
+          ],
+          "classList": [],
+          "comments": "table-pagination",
+          "name": "div"
+        },
+        {
+          "children": [],
+          "classList": [],
+          "displayExpression": "$ctrl.displayAssignButton",
+          "name": "hr"
+        },
+        {
+          "children": [
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "save",
+              "displayExpression": "$ctrl.displayAssignButton",
+              "expressions": [
+                {
+                  "expression": "\"Save\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.assignmentOnClick()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"primary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.assignmentDisabled",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "$ctrl.assignmentShowLoading",
+                  "to": "showLoading"
+                },
+                {
+                  "expression": "$ctrl.assignmentTooltip",
+                  "to": "tooltip"
+                }
+              ],
+              "layout": {},
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            },
+            {
+              "attributes": [
+                {
+                  "property": "core",
+                  "value": ""
+                }
+              ],
+              "children": [],
+              "classList": [],
+              "comments": "calculate\n",
+              "displayExpression": "$ctrl.displayCalculateButton",
+              "expressions": [
+                {
+                  "expression": "\"Calculate\"",
+                  "to": "label"
+                },
+                {
+                  "expression": "$ctrl.calculateOnClick()",
+                  "to": "onClick"
+                },
+                {
+                  "expression": "\"secondary\"",
+                  "to": "type"
+                },
+                {
+                  "expression": "$ctrl.calculateDisabled",
+                  "to": "isDisabled"
+                },
+                {
+                  "expression": "$ctrl.calculateShowLoading",
+                  "to": "showLoading"
+                }
+              ],
+              "layout": {},
+              "name": "Button",
+              "nodeName": "bln-button",
+              "type": "core-component"
+            }
+          ],
+          "classList": [
+            "form-div"
+          ],
+          "comments": "buttons",
+          "name": "div"
+        }
+      ],
+      "classList": [],
+      "layout": {
+        "cell": {
+          "growFactor": 1,
+          "mainSize": "100%",
+          "shrinkFactor": 1,
+          "type": "box-item"
+        }
+      },
+      "name": "form"
+    }
+  ],
+  "modules": [],
+  "name": "assignment-form-component",
+  "styles": [],
+  "type": "custom-component",
+  "variables": [
+    {
+      "description": "",
+      "name": "currentPage",
+      "type": "property",
+      "value": "1"
+    }
+  ]
+}
